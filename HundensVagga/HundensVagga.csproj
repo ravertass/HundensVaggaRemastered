@@ -56,17 +56,20 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MainGameState.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="ExitJson.cs" />
+    <Compile Include="ExploreState.cs" />
+    <Compile Include="IGameState.cs" />
     <Compile Include="Interactable.cs" />
     <Compile Include="InteractableJson.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Music.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="Rooms.cs" />
     <Compile Include="RoomJson.cs" />
+    <Compile Include="StateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

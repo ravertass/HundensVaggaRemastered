@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    enum SongEnum {
-        Outside,
-        Inside
+    class StateManager {
+        public IGameState CurrentState { get; set; }
     }
 }

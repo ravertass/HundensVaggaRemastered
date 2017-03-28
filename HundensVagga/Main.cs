@@ -11,6 +11,7 @@ namespace HundensVagga {
         SpriteBatch spriteBatch;
 
         Rooms rooms;
+        StateManager stateManager;
 
         public Main() {
             graphics = new GraphicsDeviceManager(this);
@@ -30,6 +31,10 @@ namespace HundensVagga {
             rooms = new Rooms("rooms.json", Content);
 
             base.Initialize();
+
+            stateManager = new StateManager();
+            IGameState startState = new MainGameState(stateManager, Content, rooms);
+            stateManager.CurrentState = startState;
         }
 
         /// <summary>
@@ -60,7 +65,7 @@ namespace HundensVagga {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            stateManager.CurrentState.Update();
 
             base.Update(gameTime);
         }
@@ -73,10 +78,7 @@ namespace HundensVagga {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-
-            Room room = rooms.GetRoom("front");
-            spriteBatch.Draw(room.Background, new Vector2(0f, 0f), Color.White);
-
+            stateManager.CurrentState.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
