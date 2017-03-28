@@ -10,12 +10,21 @@ namespace HundensVagga {
 
     public class Exit {
         private readonly Rectangle rectangle;
-        private readonly string room;
+        public Rectangle Rectangle {
+            get { return rectangle; }
+        }
+        private readonly string roomName;
+        public string RoomName {
+            get { return roomName; }
+        }
         private readonly Direction direction;
+        public Direction Direction {
+            get { return direction; }
+        }
 
         public Exit(Rectangle rectangle, string room, Direction direction) {
             this.rectangle = rectangle;
-            this.room = room;
+            this.roomName = room;
             this.direction = direction;
         }
     }

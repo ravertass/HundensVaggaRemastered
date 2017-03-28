@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C2FD89AE-2328-4FA0-9758-18BCE5367260}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HundensVagga</RootNamespace>
     <AssemblyName>HundensVagga</AssemblyName>
@@ -55,7 +55,12 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CursorManager.cs" />
+    <Compile Include="InputManager.cs" />
     <Compile Include="MainGameState.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="ExitJson.cs" />

@@ -11,18 +11,38 @@ namespace HundensVagga {
     class MainGameState : IGameState {
         private StateManager stateManager;
         private ContentManager content;
+        private CursorManager cursorManager;
         private readonly Rooms rooms;
         private Room currentRoom;
 
-        public MainGameState(StateManager stateManager, ContentManager content, Rooms rooms) {
+        public MainGameState(StateManager stateManager, ContentManager content, 
+                CursorManager cursorManager, Rooms rooms) {
             this.stateManager = stateManager;
             this.content = content;
+            this.cursorManager = cursorManager;
             this.rooms = rooms;
-            this.currentRoom = rooms.GetRoom("front");
+            currentRoom = rooms.GetRoom("front");
         }
 
-        public void Update() {
-            // not implemented
+        public void Update(InputManager inputManager) {
+            cursorManager.SetToDefault();
+
+            Interactable interactable = currentRoom.GetInteractableAt(inputManager.GetMousePosition());
+            if (interactable != null) {
+                if (interactable.IsLookable() && interactable.IsUsable())
+                    cursorManager.SetToUseLook();
+                else if (interactable.IsLookable())
+                    cursorManager.SetToLookOnly();
+                else if (interactable.IsUsable())
+                    cursorManager.SetToUseOnly();
+            }
+
+            Exit exit = currentRoom.GetExitAt(inputManager.GetMousePosition());
+            if (exit != null) {
+                cursorManager.SetToDirection(exit.Direction);
+                if (inputManager.IsLeftButtonPressed())
+                    currentRoom = rooms.GetRoom(exit.RoomName);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {

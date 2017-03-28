@@ -28,12 +28,14 @@ namespace HundensVagga {
         public Interactable GetInteractableInstance(ContentManager content) {
             Interactable interactable;
 
-            SoundEffectInstance lookSound = content.Load<SoundEffect>(RoomJson.VOICE_DIR + Path.DirectorySeparatorChar + Look).CreateInstance();
+            SoundEffectInstance lookSound = content.Load<SoundEffect>(Main.VOICE_DIR 
+                + Path.DirectorySeparatorChar + Look).CreateInstance();
             if (Image == null) {
                 Rectangle rect = new Rectangle(X, Y, Width, Height);
                 interactable = new Interactable(rect, lookSound);
             } else {
-                Texture2D texture = content.Load<Texture2D>(RoomJson.INTERACTABLES_DIR + Path.DirectorySeparatorChar + Image);
+                Texture2D texture = content.Load<Texture2D>(Main.INTERACTABLES_DIR 
+                    + Path.DirectorySeparatorChar + Image);
                 Rectangle rect = new Rectangle(X, Y, texture.Width, texture.Height);
                 interactable = new Interactable(rect, lookSound, texture);
             }

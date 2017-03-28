@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HundensVagga {
     interface IGameState {
 
-        void Update();
+        void Update(InputManager inputManager);
 
         void Draw(SpriteBatch spriteBatch);
     }

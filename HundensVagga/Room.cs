@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,22 @@ namespace HundensVagga {
             this.background = background;
             this.exits = exits;
             this.interactables = interactables;
+        }
+
+        public Interactable GetInteractableAt(Vector2 coords) {
+            foreach (Interactable interactable in interactables)
+                if (interactable.Rectangle.Contains(coords))
+                    return interactable;
+
+            return null;
+        }
+
+        public Exit GetExitAt(Vector2 coords) {
+            foreach (Exit exit in exits)
+                if (exit.Rectangle.Contains(coords))
+                    return exit;
+
+            return null;
         }
     }
 }

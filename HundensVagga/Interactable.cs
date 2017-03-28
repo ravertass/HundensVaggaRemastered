@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HundensVagga {
     public class Interactable {
         private readonly Rectangle rectangle;
+        public Rectangle Rectangle {
+            get { return rectangle; }
+        }
         private readonly Texture2D image;
         private readonly SoundEffectInstance lookSound;
 
@@ -12,6 +15,14 @@ namespace HundensVagga {
             this.rectangle = rectangle;
             this.lookSound = lookSound;
             this.image = image;
+        }
+
+        public bool IsLookable() {
+            return lookSound != null;
+        }
+
+        public bool IsUsable() {
+            return false;
         }
     }
 }

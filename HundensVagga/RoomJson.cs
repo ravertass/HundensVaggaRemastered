@@ -13,11 +13,6 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     class RoomJson {
-        public const string BACKGROUND_DIR = "backgrounds";
-        public const string INTERACTABLES_DIR = "interactables";
-        public const string SONG_DIR = "songs";
-        public const string VOICE_DIR = "voice";
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -63,11 +58,11 @@ namespace HundensVagga {
         }
 
         private Song GetSong(ContentManager content) {
-            return content.Load<Song>(SONG_DIR + Path.DirectorySeparatorChar + Song);
+            return content.Load<Song>(Main.SONG_DIR + Path.DirectorySeparatorChar + Song);
         }
 
         private Texture2D GetBackground(ContentManager content) {
-            return content.Load<Texture2D>(BACKGROUND_DIR + Path.DirectorySeparatorChar + Background);
+            return content.Load<Texture2D>(Main.BACKGROUND_DIR + Path.DirectorySeparatorChar + Background);
         }
     }
 }

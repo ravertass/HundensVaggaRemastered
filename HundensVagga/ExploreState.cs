@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
     class ExploreState : IGameState {
-        public void Update() {
+        public void Update(InputManager inputManager) {
             throw new NotImplementedException();
         }
 

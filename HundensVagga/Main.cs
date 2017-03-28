@@ -7,11 +7,19 @@ namespace HundensVagga {
     /// This is the main type for your game.
     /// </summary>
     public class Main : Game {
+        public const string BACKGROUND_DIR = "backgrounds";
+        public const string INTERACTABLES_DIR = "interactables";
+        public const string SONG_DIR = "songs";
+        public const string VOICE_DIR = "voice";
+        public const string CURSOR_DIR = "cursors";
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         Rooms rooms;
         StateManager stateManager;
+        InputManager inputManager;
+        CursorManager cursorManager;
 
         public Main() {
             graphics = new GraphicsDeviceManager(this);
@@ -29,11 +37,13 @@ namespace HundensVagga {
         /// </summary>
         protected override void Initialize() {
             rooms = new Rooms("rooms.json", Content);
+            inputManager = new InputManager();
 
             base.Initialize();
 
+            cursorManager = new CursorManager(Content, inputManager);
             stateManager = new StateManager();
-            IGameState startState = new MainGameState(stateManager, Content, rooms);
+            IGameState startState = new MainGameState(stateManager, Content, cursorManager, rooms);
             stateManager.CurrentState = startState;
         }
 
@@ -65,7 +75,7 @@ namespace HundensVagga {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            stateManager.CurrentState.Update();
+            stateManager.CurrentState.Update(inputManager);
 
             base.Update(gameTime);
         }
@@ -79,6 +89,7 @@ namespace HundensVagga {
 
             spriteBatch.Begin();
             stateManager.CurrentState.Draw(spriteBatch);
+            cursorManager.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
