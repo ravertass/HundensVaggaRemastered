@@ -1,0 +1,61 @@
+[{
+  "name": "front",
+  "song": "outside",
+  "background": "front",
+  "exits": [
+    {
+      "x": 519,
+      "y": 247,
+      "width": 84,
+      "height": 103,
+      "room": "entrance",
+      "dir": "up"
+    },
+    {
+      "x": 62,
+      "y": 230,
+      "width": 172,
+      "height": 181,
+      "room": "outhouse_outside",
+      "dir": "left"
+    },
+    {
+      "x": 274,
+      "y": 262,
+      "width": 145,
+      "height": 84,
+      "room": "hatch_outside",
+      "dir": "up"
+    },
+    {
+      "x": 0,
+      "y": 485,
+      "width": 800,
+      "height": 84,
+      "room": "car_outside",
+      "dir": "down"
+    },
+  ],
+  "interactables": [
+    {
+      "x": 175,
+      "y": 297,
+      "image": "frozen_front",
+      "look": "frozen"
+    },
+    {
+      "x": 405,
+      "y": 355,
+      "width": 229,
+      "height": 93,
+      "look": "footsteps"
+    },
+    {
+      "x": 621,
+      "y": 216,
+      "width": 143,
+      "height": 95,
+      "look": "house",
+    }
+  ]
+}]
