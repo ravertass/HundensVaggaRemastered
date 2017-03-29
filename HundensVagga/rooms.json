@@ -58,4 +58,42 @@
       "look": "house",
     }
   ]
+},
+{
+  "name": "entrance",
+  "song": "outside",
+  "background": "entrance",
+  "exits": [ 
+    { // prereq på att ta sig igenom dörren
+      "x": 308,
+      "y": 81,
+      "width": 173,
+      "height": 401,
+      "room": "hall",
+      "dir": "up"
+    },
+    {
+      "x": 0,
+      "y": 541,
+      "width": 800,
+      "height": 27,
+      "room": "front",
+      "dir": "down"
+    },
+    {
+      "x": 0,
+      "y": 150,
+      "width": 108,
+      "height": 391,
+      "room": "coffee",
+      "dir": "left"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 294,
+      "y": 479,
+      "image": "doormat"
+    },// dörr och nyckel med prereqs...
+  ]
 }]

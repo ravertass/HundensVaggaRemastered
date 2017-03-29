@@ -35,6 +35,9 @@ namespace HundensVagga {
                     cursorManager.SetToLookOnly();
                 else if (interactable.IsUsable())
                     cursorManager.SetToUseOnly();
+
+                if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
+                    interactable.PlayLookSound();
             }
 
             Exit exit = currentRoom.GetExitAt(inputManager.GetMousePosition());

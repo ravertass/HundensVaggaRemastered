@@ -28,8 +28,13 @@ namespace HundensVagga {
         public Interactable GetInteractableInstance(ContentManager content) {
             Interactable interactable;
 
-            SoundEffectInstance lookSound = content.Load<SoundEffect>(Main.VOICE_DIR 
-                + Path.DirectorySeparatorChar + Look).CreateInstance();
+            SoundEffectInstance lookSound;
+            if (Look != null)
+                lookSound = content.Load<SoundEffect>(Main.VOICE_DIR
+                    + Path.DirectorySeparatorChar + Look).CreateInstance();
+            else
+                lookSound = null;
+
             if (Image == null) {
                 Rectangle rect = new Rectangle(X, Y, Width, Height);
                 interactable = new Interactable(rect, lookSound);

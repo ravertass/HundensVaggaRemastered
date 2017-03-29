@@ -77,6 +77,7 @@ namespace HundensVagga {
 
             stateManager.CurrentState.Update(inputManager);
 
+            inputManager.Update();
             base.Update(gameTime);
         }
 

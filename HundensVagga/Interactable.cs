@@ -21,6 +21,10 @@ namespace HundensVagga {
             return lookSound != null;
         }
 
+        public void PlayLookSound() {
+            lookSound.Play();
+        }
+
         public bool IsUsable() {
             return false;
         }
