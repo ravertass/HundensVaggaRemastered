@@ -12,6 +12,7 @@ namespace HundensVagga {
         public const string SONG_DIR = "songs";
         public const string VOICE_DIR = "voice";
         public const string CURSOR_DIR = "cursors";
+        public const string MISC_DIR = "misc";
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -37,7 +38,7 @@ namespace HundensVagga {
         /// </summary>
         protected override void Initialize() {
             rooms = new Rooms("rooms.json", Content);
-            inputManager = new InputManager();
+            inputManager = new InputManager(this);
 
             base.Initialize();
 

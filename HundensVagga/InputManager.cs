@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 namespace HundensVagga {
     public class InputManager {
         private MouseState lastMouseState;
+        private Game game;
+
+        public InputManager(Game game) {
+            this.game = game;
+        }
 
         public Vector2 GetMousePosition() {
             return Mouse.GetState().Position.ToVector2();
@@ -16,12 +21,14 @@ namespace HundensVagga {
 
         public bool IsLeftButtonPressed() {
             return Mouse.GetState().LeftButton == ButtonState.Pressed
-                && lastMouseState.LeftButton == ButtonState.Released;
+                && lastMouseState.LeftButton == ButtonState.Released
+                && game.IsActive;
         }
 
         public bool IsRightButtonPressed() {
             return Mouse.GetState().RightButton == ButtonState.Pressed
-                && lastMouseState.RightButton == ButtonState.Released;
+                && lastMouseState.RightButton == ButtonState.Released
+                && game.IsActive;
         }
 
         public void Update() {

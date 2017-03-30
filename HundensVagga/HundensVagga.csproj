@@ -61,6 +61,10 @@
   <ItemGroup>
     <Compile Include="CursorManager.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="InventoryUI.cs" />
+    <Compile Include="InventoryState.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="MainGameState.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="ExitJson.cs" />
