@@ -28,5 +28,9 @@ namespace HundensVagga {
         public bool IsUsable() {
             return false;
         }
+
+        public bool IsItemUsable(Item item) {
+            return false; // TODO
+        }
     }
 }

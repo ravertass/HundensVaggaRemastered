@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,19 @@ namespace HundensVagga {
         public Texture2D Texture {
             get { return texture; }
         }
+        public Vector2 Coords { get; set; }
+
+        public Rectangle Rectangle {
+            get {
+                return new Rectangle((int)Coords.X, (int)Coords.Y,
+                    Texture.Width, Texture.Height);
+            }
+        }
 
         public Item(string name, Texture2D texture) {
             this.name = name;
             this.texture = texture;
+            Coords = new Vector2(0, 0);
         }
     }
 }

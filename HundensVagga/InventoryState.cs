@@ -1,47 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
-    public abstract class IInventoryState {
-        abstract public void Update(InventoryUI inventory, InputManager inputManager);
+    internal class InventoryState : IInGameState {
+        private MainGameState mainGameState;
 
-        protected bool IsBagClicked(InventoryUI inventory, InputManager inputManager) {
-            return inputManager.IsLeftButtonPressed() && inventory.BagRectangle().Contains(inputManager.GetMousePosition());
+        public InventoryState(MainGameState mainGameState) {
+            this.mainGameState = mainGameState;
         }
-    }
 
-    public class InventoryStateUp : IInventoryState {
-        public override void Update(InventoryUI inventory, InputManager inputManager) {
-            if (IsBagClicked(inventory, inputManager))
-                inventory.State = new InventoryStateGoingDown();
-        }
-    }
+        public void Update(InputManager inputManager) {
+            Inventory inventory = mainGameState.Inventory;
+            inventory.SetItemCoords();
 
-    public class InventoryStateDown : IInventoryState {
-        public override void Update(InventoryUI inventory, InputManager inputManager) {
-            if (IsBagClicked(inventory, inputManager))
-                inventory.State = new InventoryStateGoingUp();
-        }
-    }
+            if (mainGameState.Inventory.IsBagClicked(inputManager)) {
+                inventory.GoUp();
+                mainGameState.CurrentState = new ExploreState(mainGameState);
+            }
 
-    public class InventoryStateGoingUp : IInventoryState {
-        public override void Update(InventoryUI inventory, InputManager inputManager) {
-            if (inventory.IsUp())
-                inventory.State = new InventoryStateUp();
-            else
-                inventory.Y -= InventoryUI.Y_SPEED;
-        }
-    }
-
-    public class InventoryStateGoingDown : IInventoryState {
-        public override void Update(InventoryUI inventory, InputManager inputManager) {
-            if (inventory.IsDown())
-                inventory.State = new InventoryStateDown();
-            else
-                inventory.Y += InventoryUI.Y_SPEED;
+            Item clickedItem = inventory.GetItemAt(inputManager.GetMousePosition());
+            if (inputManager.IsLeftButtonPressed() && clickedItem != null) {
+                inventory.GoUp();
+                mainGameState.CurrentState = new UseItemState(mainGameState, clickedItem);
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    class Rooms {
+    public class Rooms {
         private readonly Dictionary<string, Room> roomsMap = new Dictionary<string, Room>();
 
         public Rooms(string path, ContentManager content) {

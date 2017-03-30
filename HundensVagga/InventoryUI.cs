@@ -13,16 +13,12 @@ namespace HundensVagga {
         private const int X = 0;
         private const int BAG_Y_OFFSET = 100;
 
-        private const int ITEM_X_OFFSET = 25;
-        private const int ITEM_X_DIFF = 100;
-        private const int ITEM_Y_OFFSET = 25;
-
         private const int Y_MIN = -BAG_Y_OFFSET;
         private const int Y_MAX = 0;
         public const int Y_SPEED = 5;
         public int Y { get; set; }
 
-        public IInventoryState State { get; set; }
+        public IInventoryUIState State { get; set; }
 
         private const string BAG_PATH = "bag";
         private Texture2D bagTexture;
@@ -32,7 +28,7 @@ namespace HundensVagga {
 
         public InventoryUI(ContentManager content) {
             Y = Y_MIN;
-            State = new InventoryStateUp();
+            State = new InventoryUIStill();
 
             bagTexture = content.Load<Texture2D>(Main.MISC_DIR 
                 + Path.DirectorySeparatorChar + BAG_PATH);
@@ -52,8 +48,16 @@ namespace HundensVagga {
             return Y >= Y_MAX;
         }
 
+        public void GoUp() {
+            State = new InventoryGoingUp();
+        }
+
+        public void GoDown() {
+            State = new InventoryGoingDown();
+        }
+
         public void Update(InputManager inputManager) {
-            State.Update(this, inputManager);
+            State.Update(this);
         }
 
         public void Draw(SpriteBatch spriteBatch, IList<Item> items) {
@@ -65,10 +69,9 @@ namespace HundensVagga {
         }
 
         private void DrawItems(SpriteBatch spriteBatch, IList<Item> items) {
-            int x = X + ITEM_X_OFFSET;
             foreach (Item item in items) {
-                spriteBatch.Draw(item.Texture, new Vector2(x, Y + ITEM_Y_OFFSET), Color.White);
-                x += ITEM_X_DIFF;
+                spriteBatch.Draw(item.Texture, 
+                    new Vector2(item.Coords.X, Y + item.Coords.Y), Color.White);
             }
         }
     }

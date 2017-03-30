@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    class StateManager {
+    public class StateManager {
         public IGameState CurrentState { get; set; }
     }
 }

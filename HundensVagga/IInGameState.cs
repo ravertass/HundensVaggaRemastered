@@ -6,9 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    public interface IGameState {
+    public interface IInGameState {
         void Update(InputManager inputManager);
-
-        void Draw(SpriteBatch spriteBatch);
     }
 }

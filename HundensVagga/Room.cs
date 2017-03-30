@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    class Room {
+    public class Room {
         private readonly string name;
         public string Name {
             get { return this.name; }

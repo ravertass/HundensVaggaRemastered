@@ -60,10 +60,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CursorManager.cs" />
+    <Compile Include="IInGameState.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="InventoryUI.cs" />
     <Compile Include="InventoryState.cs" />
+    <Compile Include="InventoryUI.cs" />
+    <Compile Include="InventoryUIState.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="MainGameState.cs" />
     <Compile Include="Exit.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Rooms.cs" />
     <Compile Include="RoomJson.cs" />
     <Compile Include="StateManager.cs" />
+    <Compile Include="UseItemState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
