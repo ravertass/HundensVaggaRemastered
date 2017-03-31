@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Manages all game input (mostly mouse input).
+    /// </summary>
     public class InputManager {
         private MouseState lastMouseState;
         private Game game;
@@ -33,6 +36,12 @@ namespace HundensVagga {
 
         public void Update() {
             lastMouseState = Mouse.GetState();
+            CheckForExit();
+        }
+
+        private void CheckForExit() {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                game.Exit();
         }
     }
 }

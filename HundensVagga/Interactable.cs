@@ -3,6 +3,11 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Models everything in a room that is not the background image or an exit.
+    /// Typically interactable (e.g. you can look at the interactable or use it, 
+    /// or use an item on it).
+    /// </summary>
     public class Interactable {
         private readonly Rectangle rectangle;
         public Rectangle Rectangle {

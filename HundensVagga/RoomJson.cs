@@ -12,6 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// For deserialization of JSON game room data. Used to create a Room instance.
+    /// </summary>
     class RoomJson {
         [JsonProperty("name")]
         public string Name { get; set; }

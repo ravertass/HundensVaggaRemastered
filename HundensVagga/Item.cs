@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// An item in the inventory.
+    /// </summary>
     public class Item {
         private readonly string name;
         public string Name {

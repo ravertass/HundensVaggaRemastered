@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// The in-game inventory. Keeps track of its items, and delegates
+    /// UI-related stuff to an InventoryUI instance.
+    /// </summary>
     public class Inventory {
         private const int ITEM_X_OFFSET = 25;
         private const int ITEM_X_DIFF = 100;

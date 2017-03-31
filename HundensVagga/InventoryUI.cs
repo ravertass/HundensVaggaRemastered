@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Manages the inventory UI. Delegates Update() to an IInventoryUIState, which 
+    /// manages when the inventory UI moves up and down.
+    /// </summary>
     public class InventoryUI {
         private const int X = 0;
         private const int BAG_Y_OFFSET = 100;

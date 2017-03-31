@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 using System.IO;
 
 namespace HundensVagga {
+    /// <summary>
+    /// For deserialization of JSON data regarding interactables. Used to create an Interactable instance.
+    /// </summary>
     public class InteractableJson {
         [JsonProperty("x")]
         public int X { get; set; }

@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 using System;
 
 namespace HundensVagga {
+    /// <summary>
+    /// For deserialization of JSON data regarding exits. Used to create an Exit instance.
+    /// </summary>
     public class ExitJson {
         [JsonProperty("x")]
         public int X { get; set; }

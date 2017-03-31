@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// The in-game state when the player can use an item picked from the inventory.
+    /// </summary>
     public class UseItemState : IInGameState {
         private MainGameState mainGameState;
         private Item currentItem;
@@ -17,14 +20,18 @@ namespace HundensVagga {
 
         public void Update(InputManager inputManager) {
             mainGameState.CursorManager.SetToItem();
+            CheckInteractables(inputManager);
+        }
 
+        private void CheckInteractables(InputManager inputManager) {
             Interactable interactable = mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed()) {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
                     Console.WriteLine("hej");
+                    // TODO: do something
                 } else {
                     Console.WriteLine("nej");
-                    // play fail sound
+                    // TODO: play fail sound
                 }
                 mainGameState.CurrentState = new ExploreState(mainGameState);
             }

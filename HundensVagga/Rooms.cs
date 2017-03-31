@@ -12,6 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Reads and deserializes the JSON file containing all game room data.
+    /// Keeps track of all game rooms afterward.
+    /// </summary>
     public class Rooms {
         private readonly Dictionary<string, Room> roomsMap = new Dictionary<string, Room>();
 

@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace HundensVagga {
     /// <summary>
-    /// This is the main type for your game.
+    /// The main type of the game. Initializes stuff, and calls Update() and Draw() repeatedly 
+    /// (as defined by the MonoGame Game class). Mainly delegates work to the current state 
+    /// (e.g. if we're in a menu or in the main game) in the stateManager.
     /// </summary>
     public class Main : Game {
         public const string BACKGROUND_DIR = "backgrounds";
@@ -50,13 +52,14 @@ namespace HundensVagga {
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// all of your content...
+        /// 
+        /// ... according to prewritten MonoGame comments. I have not put any content
+        /// loading here, and I don't know if I should. TODO!
         /// </summary>
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace HundensVagga {
         /// game-specific content.
         /// </summary>
         protected override void UnloadContent() {
-            // TODO: Unload any non ContentManager content here
+            // TODO: Unload any non ContentManager content here (if important?)
         }
 
         /// <summary>
@@ -73,12 +76,11 @@ namespace HundensVagga {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
+            // Delegate most update work to the current game state (e.g. if we're in a menu or in the main game)
             stateManager.CurrentState.Update(inputManager);
-
+            // But always keep track of input
             inputManager.Update();
+
             base.Update(gameTime);
         }
 
@@ -90,8 +92,12 @@ namespace HundensVagga {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
+            // Delegate most draw work to the current game state (e.g. if we're in a menu or in the main game)
             stateManager.CurrentState.Draw(spriteBatch);
+            // But always draw the cursor (TODO: for now?)
             cursorManager.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

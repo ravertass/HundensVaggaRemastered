@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// An in-game state (e.g. using inventory, exploring) that MainGameState delegates work to.
+    /// </summary>
     public interface IInGameState {
         void Update(InputManager inputManager);
     }

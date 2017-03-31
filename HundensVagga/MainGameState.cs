@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
+    /// <summary>
+    /// The main class for handling everything in-game (e.g. not in the start menu, credits etc.).
+    /// This class also delegates to a current in-game state, which controls if we're using the 
+    /// inventory, exploring rooms, etc.
+    /// </summary>
     public class MainGameState : IGameState {
         private StateManager stateManager;
         private ContentManager content;
@@ -36,7 +41,7 @@ namespace HundensVagga {
             CurrentRoom = rooms.GetRoom("front");
             this.inventory = new Inventory(content);
 
-            // TODO ta bort
+            // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
             inventory.AddItem(new Item("flashlight", content.Load<Texture2D>("inventory/flashlight")));
             inventory.AddItem(new Item("saucepan_hot", content.Load<Texture2D>("inventory/saucepan_hot")));

@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// An in-game room.
+    /// </summary>
     public class Room {
         private readonly string name;
         public string Name {

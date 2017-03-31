@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Manages the appearance of the cursor (not the input; for that, see the InputManager).
+    /// </summary>
     public class CursorManager {
         private const string DEFAULT = "0_0";
         private const string USE_ONLY = "0_1";

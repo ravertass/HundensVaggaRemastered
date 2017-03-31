@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Contains most of the game logic. Used to handle different states (e.g. the main menu, or in-game).
+    /// </summary>
     public interface IGameState {
         void Update(InputManager inputManager);
 

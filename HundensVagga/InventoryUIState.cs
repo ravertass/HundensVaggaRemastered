@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    /// <summary>
+    /// Used to manage when the inventory UI moves up and down.
+    /// </summary>
     public abstract class IInventoryUIState {
         abstract public void Update(InventoryUI ui);
     }
