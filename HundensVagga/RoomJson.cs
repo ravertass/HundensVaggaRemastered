@@ -50,7 +50,8 @@ namespace HundensVagga {
             return exits;
         }
 
-        private List<Interactable> GetInteractables(ContentManager content, StateOfTheWorld worldState) {
+        private List<Interactable> GetInteractables(ContentManager content, 
+                StateOfTheWorld worldState) {
             List<Interactable> interactables = new List<Interactable>();
 
             foreach (InteractableJson interactableJson in Interactables)
@@ -64,7 +65,8 @@ namespace HundensVagga {
         }
 
         private Texture2D GetBackground(ContentManager content) {
-            return content.Load<Texture2D>(Main.BACKGROUND_DIR + Path.DirectorySeparatorChar + Background);
+            return content.Load<Texture2D>(Main.BACKGROUND_DIR + 
+                Path.DirectorySeparatorChar + Background);
         }
     }
 }

@@ -76,7 +76,8 @@ namespace HundensVagga {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            // Delegate most update work to the current game state (e.g. if we're in a menu or in the main game)
+            // Delegate most update work to the current game state
+            // (e.g. if we're in a menu or in the main game)
             stateManager.CurrentState.Update(inputManager);
             // But always keep track of input
             inputManager.Update();
@@ -93,7 +94,8 @@ namespace HundensVagga {
 
             spriteBatch.Begin();
 
-            // Delegate most draw work to the current game state (e.g. if we're in a menu or in the main game)
+            // Delegate most draw work to the current game state
+            // (e.g. if we're in a menu or in the main game)
             stateManager.CurrentState.Draw(spriteBatch);
             // But always draw the cursor (TODO: for now?)
             cursorManager.Draw(spriteBatch);

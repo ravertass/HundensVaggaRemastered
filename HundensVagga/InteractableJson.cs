@@ -32,7 +32,8 @@ namespace HundensVagga {
         [JsonProperty("prereqs")]
         public List<PrereqJson> Prereqs { get; set; }
 
-        public Interactable GetInteractableInstance(ContentManager content, StateOfTheWorld worldState) {
+        public Interactable GetInteractableInstance(ContentManager content, 
+                StateOfTheWorld worldState) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
             IList<Prereq> prereqs = GetPrereqs(worldState);
 

@@ -24,7 +24,8 @@ namespace HundensVagga {
         }
 
         private void CheckInteractables(InputManager inputManager) {
-            Interactable interactable = mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
+            Interactable interactable = 
+                mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed()) {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
                     Console.WriteLine("hej");

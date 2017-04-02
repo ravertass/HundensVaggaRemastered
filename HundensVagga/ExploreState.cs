@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
     /// <summary>
-    /// The in-game state when the player can interact with interactables in the room, or move between rooms.
+    /// The in-game state when the player can interact with interactables in the room, 
+    /// or move between rooms.
     /// </summary>
     internal class ExploreState : IInGameState {
         private MainGameState mainGameState;
@@ -25,7 +26,8 @@ namespace HundensVagga {
 
 
         private void CheckInteractables(InputManager inputManager) {
-            Interactable interactable = mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
+            Interactable interactable = 
+                mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (interactable != null) {
                 ChangeCursorInteractable(interactable);
                 HandleClicksInteractable(inputManager, interactable);
@@ -41,7 +43,8 @@ namespace HundensVagga {
                 mainGameState.CursorManager.SetToUseOnly();
         }
 
-        private static void HandleClicksInteractable(InputManager inputManager, Interactable interactable) {
+        private static void HandleClicksInteractable(InputManager inputManager, 
+                Interactable interactable) {
             if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
                 interactable.PlayLookSound();
         }

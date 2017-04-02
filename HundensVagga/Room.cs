@@ -24,7 +24,8 @@ namespace HundensVagga {
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
-        public Room(string name, Song song, Texture2D background, List<Exit> exits, List<Interactable> interactables) {
+        public Room(string name, Song song, Texture2D background, List<Exit> exits, 
+                List<Interactable> interactables) {
             this.name = name;
             this.song = song;
             this.background = background;

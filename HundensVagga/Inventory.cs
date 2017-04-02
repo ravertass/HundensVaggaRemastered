@@ -54,7 +54,8 @@ namespace HundensVagga {
         }
 
         public bool IsBagClicked(InputManager inputManager) {
-            return inputManager.IsLeftButtonPressed() && ui.BagRectangle().Contains(inputManager.GetMousePosition());
+            return inputManager.IsLeftButtonPressed() 
+                && ui.BagRectangle().Contains(inputManager.GetMousePosition());
         }
 
         public void GoUp() {
