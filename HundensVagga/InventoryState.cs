@@ -5,7 +5,7 @@ namespace HundensVagga {
     /// <summary>
     /// The in-game state when the player can pick among the items in the inventory.
     /// </summary>
-    public class InventoryState : IInGameState {
+    internal class InventoryState : IInGameState {
         private MainGameState mainGameState;
 
         public InventoryState(MainGameState mainGameState) {

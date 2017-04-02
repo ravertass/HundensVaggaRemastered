@@ -9,7 +9,7 @@ namespace HundensVagga {
     /// <summary>
     /// The in-game state when the player can use an item picked from the inventory.
     /// </summary>
-    public class UseItemState : IInGameState {
+    internal class UseItemState : IInGameState {
         private MainGameState mainGameState;
         private Item currentItem;
 

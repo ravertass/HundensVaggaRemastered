@@ -31,9 +31,9 @@ namespace HundensVagga {
         [JsonProperty("interactables")]
         public List<InteractableJson> Interactables { get; set; }
 
-        public Room GetRoomInstance(ContentManager content) {
+        public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState) {
             List<Exit> exits = GetExits();
-            List<Interactable> interactables = GetInteractables(content);
+            List<Interactable> interactables = GetInteractables(content, worldState);
             Song song = GetSong(content);
             Texture2D background = GetBackground(content);
 
@@ -50,12 +50,11 @@ namespace HundensVagga {
             return exits;
         }
 
-        private List<Interactable> GetInteractables(ContentManager content) {
+        private List<Interactable> GetInteractables(ContentManager content, StateOfTheWorld worldState) {
             List<Interactable> interactables = new List<Interactable>();
 
-            foreach (InteractableJson interactableJson in Interactables) {
-                interactables.Add(interactableJson.GetInteractableInstance(content));
-            }
+            foreach (InteractableJson interactableJson in Interactables)
+                interactables.Add(interactableJson.GetInteractableInstance(content, worldState));
 
             return interactables;
         }

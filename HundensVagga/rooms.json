@@ -41,7 +41,7 @@
       "x": 175,
       "y": 297,
       "image": "frozen_front",
-	  "prereqs": [{"var": "st_frozen_melted", "val": false}],
+      "prereqs": [{"var": "st_frozen_melted", "val": false}],
     },
     {
       "x": 405,
@@ -94,12 +94,12 @@
       "x": 444,
       "y": 325,
       "image": "frozen_outhouse",
-	  "prereqs": [{"var": "st_frozen_melted", "val": false}],
-	  "items":[{
-	            "item": "saucepan_hot", 
-	            "effect": {"var": "st_frozen_melted", 
-			               "sound": "melt"}
-			  }]
+      "prereqs": [{"var": "st_frozen_melted", "val": false}],
+      "items":[{
+                "item": "saucepan_hot", 
+                "effect": {"var": "st_frozen_melted", 
+                           "sound": "melt"}
+              }]
     },
     {
       "x": 254,

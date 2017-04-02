@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 
 namespace HundensVagga {
     /// <summary>
     /// For deserialization of JSON data regarding interactables. Used to create an Interactable instance.
     /// </summary>
-    public class InteractableJson {
+    internal class InteractableJson {
         [JsonProperty("x")]
         public int X { get; set; }
 
@@ -28,9 +29,36 @@ namespace HundensVagga {
         [JsonProperty("look")]
         public string Look { get; set; }
 
-        public Interactable GetInteractableInstance(ContentManager content) {
-            Interactable interactable;
+        [JsonProperty("prereqs")]
+        public List<PrereqJson> Prereqs { get; set; }
 
+        public Interactable GetInteractableInstance(ContentManager content, StateOfTheWorld worldState) {
+            SoundEffectInstance lookSound = GetLookSoundEffect(content);
+            IList<Prereq> prereqs = GetPrereqs(worldState);
+
+            Texture2D texture = null;
+            Rectangle rect;
+            if (Image == null)
+                rect = new Rectangle(X, Y, Width, Height);
+            else {
+                texture = content.Load<Texture2D>(Main.INTERACTABLES_DIR
+                    + Path.DirectorySeparatorChar + Image);
+                rect = new Rectangle(X, Y, texture.Width, texture.Height);
+            }
+
+            return new Interactable(rect, lookSound, prereqs, texture);
+        }
+
+        private IList<Prereq> GetPrereqs(StateOfTheWorld worldState) {
+            IList<Prereq> prereqs = new List<Prereq>();
+            if (Prereqs != null)
+                foreach (PrereqJson prereqJson in Prereqs)
+                    prereqs.Add(prereqJson.GetPrereqInstance(worldState));
+
+            return prereqs;
+        }
+
+        private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
             SoundEffectInstance lookSound;
             if (Look != null)
                 lookSound = content.Load<SoundEffect>(Main.VOICE_DIR
@@ -38,17 +66,7 @@ namespace HundensVagga {
             else
                 lookSound = null;
 
-            if (Image == null) {
-                Rectangle rect = new Rectangle(X, Y, Width, Height);
-                interactable = new Interactable(rect, lookSound);
-            } else {
-                Texture2D texture = content.Load<Texture2D>(Main.INTERACTABLES_DIR 
-                    + Path.DirectorySeparatorChar + Image);
-                Rectangle rect = new Rectangle(X, Y, texture.Width, texture.Height);
-                interactable = new Interactable(rect, lookSound, texture);
-            }
-
-            return interactable;
+            return lookSound;
         }
     }
 }

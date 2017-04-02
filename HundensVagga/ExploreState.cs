@@ -9,7 +9,7 @@ namespace HundensVagga {
     /// <summary>
     /// The in-game state when the player can interact with interactables in the room, or move between rooms.
     /// </summary>
-    public class ExploreState : IInGameState {
+    internal class ExploreState : IInGameState {
         private MainGameState mainGameState;
 
         public ExploreState(MainGameState mainGameState) {

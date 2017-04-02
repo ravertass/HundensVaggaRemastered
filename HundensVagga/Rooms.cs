@@ -16,7 +16,7 @@ namespace HundensVagga {
     /// Reads and deserializes the JSON file containing all game room data.
     /// Keeps track of all game rooms afterward.
     /// </summary>
-    public class Rooms {
+    internal class Rooms {
         private readonly Dictionary<string, Room> roomsMap = new Dictionary<string, Room>();
 
         public Rooms(string path, ContentManager content) {
@@ -30,8 +30,9 @@ namespace HundensVagga {
         }
 
         private void AddRoomsFromJsonToMap(ContentManager content, List<RoomJson> roomsJson) {
+            StateOfTheWorld worldState = new StateOfTheWorld();
             foreach (RoomJson roomJson in roomsJson) {
-                roomsMap.Add(roomJson.Name, roomJson.GetRoomInstance(content));
+                roomsMap.Add(roomJson.Name, roomJson.GetRoomInstance(content, worldState));
             }
         }
 

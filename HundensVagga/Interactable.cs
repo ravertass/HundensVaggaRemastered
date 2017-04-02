@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace HundensVagga {
     /// <summary>
@@ -8,18 +9,28 @@ namespace HundensVagga {
     /// Typically interactable (e.g. you can look at the interactable or use it, 
     /// or use an item on it).
     /// </summary>
-    public class Interactable {
+    internal class Interactable {
         private readonly Rectangle rectangle;
         public Rectangle Rectangle {
             get { return rectangle; }
         }
-        private readonly Texture2D image;
+        private readonly Texture2D texture;
         private readonly SoundEffectInstance lookSound;
+        private IList<Prereq> prereqs;
 
-        public Interactable(Rectangle rectangle, SoundEffectInstance lookSound, Texture2D image = null) {
+        public Interactable(Rectangle rectangle, SoundEffectInstance lookSound, 
+                IList<Prereq> prereqs, Texture2D texture = null) {
             this.rectangle = rectangle;
             this.lookSound = lookSound;
-            this.image = image;
+            this.prereqs = prereqs;
+            this.texture = texture;
+        }
+
+        public bool IsActive() {
+            foreach (Prereq prereq in prereqs)
+                if (!prereq.IsMet())
+                    return false;
+            return true;
         }
 
         public bool IsLookable() {
@@ -36,6 +47,11 @@ namespace HundensVagga {
 
         public bool IsItemUsable(Item item) {
             return false; // TODO
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            if (texture != null)
+                spriteBatch.Draw(texture, rectangle, Color.White);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace HundensVagga {
     /// This class also delegates to a current in-game state, which controls if we're using the 
     /// inventory, exploring rooms, etc.
     /// </summary>
-    public class MainGameState : IGameState {
+    internal class MainGameState : IGameState {
         private StateManager stateManager;
         private ContentManager content;
         private CursorManager cursorManager;
@@ -56,7 +56,7 @@ namespace HundensVagga {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(CurrentRoom.Background, new Vector2(0f, 0f), Color.White);
+            CurrentRoom.Draw(spriteBatch);
             inventory.Draw(spriteBatch);
         }
     }
