@@ -15,7 +15,7 @@ namespace HundensVagga {
     /// <summary>
     /// For deserialization of JSON game room data. Used to create a Room instance.
     /// </summary>
-    class RoomJson {
+    internal class RoomJson {
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -31,9 +31,10 @@ namespace HundensVagga {
         [JsonProperty("interactables")]
         public List<InteractableJson> Interactables { get; set; }
 
-        public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState) {
+        public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
+                Items items) {
             List<Exit> exits = GetExits(worldState);
-            List<Interactable> interactables = GetInteractables(content, worldState);
+            List<Interactable> interactables = GetInteractables(content, worldState, items);
             Song song = GetSong(content);
             Texture2D background = GetBackground(content);
 
@@ -50,21 +51,22 @@ namespace HundensVagga {
         }
 
         private List<Interactable> GetInteractables(ContentManager content, 
-                StateOfTheWorld worldState) {
+                StateOfTheWorld worldState, Items items) {
             List<Interactable> interactables = new List<Interactable>();
 
             foreach (InteractableJson interactableJson in Interactables)
-                interactables.Add(interactableJson.GetInteractableInstance(content, worldState));
+                interactables.Add(
+                    interactableJson.GetInteractableInstance(content, worldState, items));
 
             return interactables;
         }
 
         private Song GetSong(ContentManager content) {
-            return content.Load<Song>(Main.SONG_DIR + Path.DirectorySeparatorChar + Song);
+            return content.Load<Song>(Main.SONGS_DIR + Path.DirectorySeparatorChar + Song);
         }
 
         private Texture2D GetBackground(ContentManager content) {
-            return content.Load<Texture2D>(Main.BACKGROUND_DIR + 
+            return content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
                 Path.DirectorySeparatorChar + Background);
         }
     }

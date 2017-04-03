@@ -1,0 +1,64 @@
+﻿[{
+  "name": "cat",
+  "icon": "cat"
+},
+{
+  "name": "flashlight",
+  "icon": "flashlight"
+},
+{
+  "name": "fuse",
+  "icon": "fuse"
+},
+{
+  "name": "handle",
+  "icon": "handle"
+},
+{
+  "name": "letter",
+  "icon": "letter"
+},
+{
+  "name": "mainkey",
+  "icon": "mainkey"
+},
+{
+  "name": "musicbox",
+  "icon": "musicbox"
+},
+{
+  "name": "notebook",
+  "icon": "notebook"
+},
+{
+  "name": "notebook_drawn",
+  "icon": "notebook_drawn"
+},
+{
+  "name": "saucepan",
+  "icon": "saucepan"
+},
+{
+  "name": "saucepan_filled",
+  "icon": "saucepan_filled"
+},
+{
+  "name": "saucepan_hot",
+  "icon": "saucepan_hot"
+},
+{
+  "name": "shovel",
+  "icon": "shovel"
+},
+{
+  "name": "toykey",
+  "icon": "toykey"
+},
+{
+  "name": "typewriterkey",
+  "icon": "typewriterkey"
+},
+{
+  "name": "wrench",
+  "icon": "wrench"
+}]

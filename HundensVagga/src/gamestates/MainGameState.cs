@@ -43,9 +43,6 @@ namespace HundensVagga {
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
-            inventory.AddItem(new Item("flashlight", content.Load<Texture2D>("inventory/flashlight")));
-            inventory.AddItem(new Item("saucepan_hot", content.Load<Texture2D>("inventory/saucepan_hot")));
-            inventory.AddItem(new Item("mainkey", content.Load<Texture2D>("inventory/mainkey")));
 
             CurrentState = new ExploreState(this);
         }

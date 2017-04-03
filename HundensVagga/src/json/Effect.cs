@@ -10,17 +10,23 @@ namespace HundensVagga {
     /// An effect from using/using an item on an interactable.
     /// </summary>
     internal class Effect : IEffect {
-        private IList<VarVal> varVals;
-        private SoundEffectInstance sound;
+        private readonly IList<VarVal> varVals;
+        private readonly SoundEffectInstance sound;
+        private readonly Item item;
+        private readonly Inventory inventory;
 
-        public Effect(IList<VarVal> varVals, SoundEffectInstance sound) {
+        public Effect(IList<VarVal> varVals, SoundEffectInstance sound, Item item, 
+                Inventory inventory) {
             this.varVals = varVals;
             this.sound = sound;
+            this.item = item;
+            this.inventory = inventory;
         }
 
         public void Perform() {
             SetVarVals();
             PlaySound();
+            AddItemToInventory();
         }
 
         private void SetVarVals() {
@@ -31,6 +37,11 @@ namespace HundensVagga {
         private void PlaySound() {
             if (sound != null)
                 sound.Play();
+        }
+
+        private void AddItemToInventory() {
+            if (item != null)
+                inventory.AddItem(item);
         }
     }
 }

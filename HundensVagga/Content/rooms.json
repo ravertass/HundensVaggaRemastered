@@ -161,7 +161,10 @@
       "y": 508,
       "image": "mainkey",
       "look": "key1",
-      "prereqs": [{"var": "st_doormat_moved", "val": true}],
+      "use": {"var": "st_mainkey_taken",
+              "item": "mainkey"},
+      "prereqs": [{"var": "st_doormat_moved", "val": true},
+                  {"var": "st_mainkey_taken", "val": false}],
     },
     {
       "x": 308,

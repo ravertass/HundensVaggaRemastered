@@ -15,9 +15,9 @@ namespace HundensVagga {
         public string Name {
             get { return name; }
         }
-        private readonly Texture2D texture;
+        private readonly Texture2D icon;
         public Texture2D Texture {
-            get { return texture; }
+            get { return icon; }
         }
         public Vector2 Coords { get; set; }
 
@@ -28,9 +28,9 @@ namespace HundensVagga {
             }
         }
 
-        public Item(string name, Texture2D texture) {
+        public Item(string name, Texture2D icon) {
             this.name = name;
-            this.texture = texture;
+            this.icon = icon;
             Coords = new Vector2(0, 0);
         }
     }

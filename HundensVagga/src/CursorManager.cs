@@ -38,7 +38,7 @@ namespace HundensVagga {
         }
 
         private void SetTo(string cursorPath) {
-            texture = content.Load<Texture2D>(Main.CURSOR_DIR 
+            texture = content.Load<Texture2D>(Main.CURSORS_DIR 
                 + Path.DirectorySeparatorChar + cursorPath);
         }
 

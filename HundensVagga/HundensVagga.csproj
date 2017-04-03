@@ -70,10 +70,12 @@
     <Compile Include="src\gamestates\InventoryUIState.cs" />
     <Compile Include="src\inventory\Item.cs" />
     <Compile Include="src\gamestates\MainGameState.cs" />
+    <Compile Include="src\inventory\Items.cs" />
     <Compile Include="src\json\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
     <Compile Include="src\json\IEffect.cs" />
     <Compile Include="src\json\ItemEffectJson.cs" />
+    <Compile Include="src\json\ItemJson.cs" />
     <Compile Include="src\rooms\Exit.cs" />
     <Compile Include="src\json\ExitJson.cs" />
     <Compile Include="src\gamestates\ExploreState.cs" />
@@ -104,6 +106,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\items.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

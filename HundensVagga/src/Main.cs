@@ -12,20 +12,23 @@ namespace HundensVagga {
     public class Main : Game {
         public const string CONTENT_DIR = "content";
 
-        public const string BACKGROUND_DIR = "backgrounds";
+        public const string BACKGROUNDS_DIR = "backgrounds";
+        public const string INVENTORY_DIR = "inventory";
         public const string INTERACTABLES_DIR = "interactables";
-        public const string SONG_DIR = "songs";
+        public const string SONGS_DIR = "songs";
         public const string VOICE_DIR = "voice";
         public const string SOUND_EFFECTS_DIR = "sound_effects";
-        public const string CURSOR_DIR = "cursors";
+        public const string CURSORS_DIR = "cursors";
         public const string MISC_DIR = "misc";
 
         public const string ROOMS_JSON_PATH = "rooms.json";
+        public const string ITEMS_JSON_PATH = "items.json";
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         Rooms rooms;
+        Items items;
         StateManager stateManager;
         InputManager inputManager;
         CursorManager cursorManager;
@@ -45,15 +48,18 @@ namespace HundensVagga {
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
-            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + 
-                ROOMS_JSON_PATH, Content);
-            inputManager = new InputManager(this);
-
             base.Initialize();
 
+            inputManager = new InputManager(this);
             cursorManager = new CursorManager(Content, inputManager);
-            stateManager = new StateManager();
+
             Inventory inventory = new Inventory(Content);
+            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
+                ITEMS_JSON_PATH, Content, inventory);
+            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
+                ROOMS_JSON_PATH, Content, items);
+
+            stateManager = new StateManager();
             IGameState startState = new MainGameState(stateManager, Content, cursorManager, 
                 rooms, inventory);
             stateManager.CurrentState = startState;

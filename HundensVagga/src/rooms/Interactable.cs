@@ -40,6 +40,10 @@ namespace HundensVagga {
             return true;
         }
 
+        public bool IsInteractive() {
+            return IsLookable() || IsUsable() || itemEffects.Count > 0;
+        }
+
         public bool IsLookable() {
             return lookSound != null;
         }

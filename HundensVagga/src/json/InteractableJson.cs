@@ -35,16 +35,16 @@ namespace HundensVagga {
         public EffectJson Use { get; set; }
 
         [JsonProperty("items")]
-        public List<ItemEffectJson> Items { get; set; }
+        public List<ItemEffectJson> ItemEffects { get; set; }
 
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
         public Interactable GetInteractableInstance(ContentManager content, 
-                StateOfTheWorld worldState) {
+                StateOfTheWorld worldState, Items items) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
-            IEffect useEffect = GetUseEffect(content, worldState);
-            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState); 
+            IEffect useEffect = GetUseEffect(content, worldState, items);
+            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items);
             IList<VarVal> prereqs = GetPrereqs(worldState);
 
             Texture2D texture = null;
@@ -68,21 +68,22 @@ namespace HundensVagga {
                 return null;
         }
 
-        private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState) {
+        private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState, 
+                Items items) {
             if (Use != null)
-                return Use.GetEffectInstance(content, worldState);
+                return Use.GetEffectInstance(content, worldState, items);
             else
                 return null;
 
         }
 
         private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
-                StateOfTheWorld worldState) {
+                StateOfTheWorld worldState, Items items) {
             Dictionary<string, IEffect> itemEffects = new Dictionary<string, IEffect>();
-            if (Items != null)
-                foreach (ItemEffectJson itemEffectJson in Items)
+            if (ItemEffects != null)
+                foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
-                        itemEffectJson.Effect.GetEffectInstance(content, worldState));
+                        itemEffectJson.Effect.GetEffectInstance(content, worldState, items));
             return itemEffects;
         }
 

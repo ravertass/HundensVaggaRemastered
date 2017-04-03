@@ -46,7 +46,7 @@ namespace HundensVagga {
 
         public Interactable GetInteractableAt(Vector2 coords) {
             foreach (Interactable interactable in ActiveInteractables())
-                if (interactable.Rectangle.Contains(coords))
+                if (interactable.Rectangle.Contains(coords) && interactable.IsInteractive())
                     return interactable;
 
             return null;
