@@ -14,20 +14,22 @@ namespace HundensVagga {
         public Rectangle Rectangle {
             get { return rectangle; }
         }
-        private readonly Texture2D texture;
         private readonly SoundEffectInstance lookSound;
-        private IList<Prereq> prereqs;
+        private readonly IEffect useEffect;
+        private IList<VarVal> prereqs;
+        private readonly Texture2D texture;
 
-        public Interactable(Rectangle rectangle, SoundEffectInstance lookSound, 
-                IList<Prereq> prereqs, Texture2D texture = null) {
+        public Interactable(Rectangle rectangle, SoundEffectInstance lookSound,
+                IEffect useEffect, IList<VarVal> prereqs, Texture2D texture = null) {
             this.rectangle = rectangle;
             this.lookSound = lookSound;
+            this.useEffect = useEffect;
             this.prereqs = prereqs;
             this.texture = texture;
         }
 
         public bool IsActive() {
-            foreach (Prereq prereq in prereqs)
+            foreach (VarVal prereq in prereqs)
                 if (!prereq.IsMet())
                     return false;
             return true;
@@ -42,7 +44,11 @@ namespace HundensVagga {
         }
 
         public bool IsUsable() {
-            return false;
+            return useEffect != null;
+        }
+
+        public void PerformUseEffect() {
+            useEffect.Perform();
         }
 
         public bool IsItemUsable(Item item) {

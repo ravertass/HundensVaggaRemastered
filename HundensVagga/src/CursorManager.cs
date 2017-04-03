@@ -7,7 +7,7 @@ namespace HundensVagga {
     /// <summary>
     /// Manages the appearance of the cursor (not the input; for that, see the InputManager).
     /// </summary>
-    public class CursorManager {
+    internal class CursorManager {
         private const string DEFAULT = "0_0";
         private const string USE_ONLY = "0_1";
         private const string LOOK_ONLY = "1_0";

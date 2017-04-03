@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace HundensVagga {
     /// <summary>
     /// For knowing which direction the cursor should point when hovering over an exit.
     /// </summary>
-    public enum Direction {
+    internal enum Direction {
         up,
         down,
         left,
@@ -14,7 +15,7 @@ namespace HundensVagga {
     /// <summary>
     /// An exit in a room.
     /// </summary>
-    public class Exit {
+    internal class Exit {
         private readonly Rectangle rectangle;
         public Rectangle Rectangle {
             get { return rectangle; }
@@ -24,14 +25,25 @@ namespace HundensVagga {
             get { return roomName; }
         }
         private readonly Direction direction;
+        private IList<VarVal> prereqs;
+
         public Direction Direction {
             get { return direction; }
         }
 
-        public Exit(Rectangle rectangle, string room, Direction direction) {
+        public Exit(Rectangle rectangle, string room, Direction direction, IList<VarVal> prereqs) {
             this.rectangle = rectangle;
             this.roomName = room;
             this.direction = direction;
+            this.prereqs = prereqs;
+        }
+
+
+        public bool IsActive() {
+            foreach (VarVal prereq in prereqs)
+                if (!prereq.IsMet())
+                    return false;
+            return true;
         }
     }
 }

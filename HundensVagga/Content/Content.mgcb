@@ -1303,3 +1303,21 @@
 /processorParam:TextureFormat=Color
 /build:inventory/wrench.png
 
+#begin voice/key1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:voice/key1.wav
+
+#begin voice/key2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:voice/key2.wav
+
+#begin voice/key3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:voice/key3.wav
+

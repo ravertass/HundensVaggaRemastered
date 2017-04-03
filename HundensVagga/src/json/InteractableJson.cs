@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 namespace HundensVagga {
     /// <summary>
@@ -29,13 +30,17 @@ namespace HundensVagga {
         [JsonProperty("look")]
         public string Look { get; set; }
 
+        [JsonProperty("use")]
+        public EffectJson Use { get; set; }
+
         [JsonProperty("prereqs")]
-        public List<PrereqJson> Prereqs { get; set; }
+        public List<VarValJson> Prereqs { get; set; }
 
         public Interactable GetInteractableInstance(ContentManager content, 
                 StateOfTheWorld worldState) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
-            IList<Prereq> prereqs = GetPrereqs(worldState);
+            IEffect useEffect = GetUseEffect(content, worldState);
+            IList<VarVal> prereqs = GetPrereqs(worldState);
 
             Texture2D texture = null;
             Rectangle rect;
@@ -47,27 +52,32 @@ namespace HundensVagga {
                 rect = new Rectangle(X, Y, texture.Width, texture.Height);
             }
 
-            return new Interactable(rect, lookSound, prereqs, texture);
-        }
-
-        private IList<Prereq> GetPrereqs(StateOfTheWorld worldState) {
-            IList<Prereq> prereqs = new List<Prereq>();
-            if (Prereqs != null)
-                foreach (PrereqJson prereqJson in Prereqs)
-                    prereqs.Add(prereqJson.GetPrereqInstance(worldState));
-
-            return prereqs;
+            return new Interactable(rect, lookSound, useEffect, prereqs, texture);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
-            SoundEffectInstance lookSound;
             if (Look != null)
-                lookSound = content.Load<SoundEffect>(Main.VOICE_DIR
+                return content.Load<SoundEffect>(Main.VOICE_DIR
                     + Path.DirectorySeparatorChar + Look).CreateInstance();
             else
-                lookSound = null;
+                return null;
+        }
 
-            return lookSound;
+        private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState) {
+            if (Use != null)
+                return Use.GetEffectInstance(content, worldState);
+            else
+                return null;
+                
+        }
+
+        private IList<VarVal> GetPrereqs(StateOfTheWorld worldState) {
+            IList<VarVal> prereqs = new List<VarVal>();
+            if (Prereqs != null)
+                foreach (VarValJson prereqJson in Prereqs)
+                    prereqs.Add(prereqJson.GetVarValInstance(worldState));
+
+            return prereqs;
         }
     }
 }

@@ -70,6 +70,9 @@
     <Compile Include="src\gamestates\InventoryUIState.cs" />
     <Compile Include="src\inventory\Item.cs" />
     <Compile Include="src\gamestates\MainGameState.cs" />
+    <Compile Include="src\json\Effect.cs" />
+    <Compile Include="src\json\EffectJson.cs" />
+    <Compile Include="src\json\IEffect.cs" />
     <Compile Include="src\rooms\Exit.cs" />
     <Compile Include="src\json\ExitJson.cs" />
     <Compile Include="src\gamestates\ExploreState.cs" />
@@ -77,8 +80,8 @@
     <Compile Include="src\rooms\Interactable.cs" />
     <Compile Include="src\json\InteractableJson.cs" />
     <Compile Include="src\Main.cs" />
-    <Compile Include="src\rooms\Prereq.cs" />
-    <Compile Include="src\json\PrereqJson.cs" />
+    <Compile Include="src\rooms\VarVal.cs" />
+    <Compile Include="src\json\VarValJson.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\rooms\Room.cs" />

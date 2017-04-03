@@ -31,7 +31,17 @@ namespace HundensVagga {
         }
 
         private List<Interactable> ActiveInteractables() {
-            return interactables;
+            return (from interactable 
+                    in interactables
+                    where interactable.IsActive()
+                    select interactable).ToList<Interactable>();
+        }
+
+        private List<Exit> ActiveExits() {
+            return (from exit
+                    in exits
+                    where exit.IsActive()
+                    select exit).ToList<Exit>();
         }
 
         public Interactable GetInteractableAt(Vector2 coords) {
@@ -43,7 +53,7 @@ namespace HundensVagga {
         }
 
         public Exit GetExitAt(Vector2 coords) {
-            foreach (Exit exit in exits)
+            foreach (Exit exit in ActiveExits())
                 if (exit.Rectangle.Contains(coords))
                     return exit;
 
