@@ -16,6 +16,7 @@ namespace HundensVagga {
         public const string INTERACTABLES_DIR = "interactables";
         public const string SONG_DIR = "songs";
         public const string VOICE_DIR = "voice";
+        public const string SOUND_EFFECTS_DIR = "sound_effects";
         public const string CURSOR_DIR = "cursors";
         public const string MISC_DIR = "misc";
 
@@ -52,7 +53,9 @@ namespace HundensVagga {
 
             cursorManager = new CursorManager(Content, inputManager);
             stateManager = new StateManager();
-            IGameState startState = new MainGameState(stateManager, Content, cursorManager, rooms);
+            Inventory inventory = new Inventory(Content);
+            IGameState startState = new MainGameState(stateManager, Content, cursorManager, 
+                rooms, inventory);
             stateManager.CurrentState = startState;
         }
 

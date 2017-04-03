@@ -73,6 +73,7 @@
     <Compile Include="src\json\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
     <Compile Include="src\json\IEffect.cs" />
+    <Compile Include="src\json\ItemEffectJson.cs" />
     <Compile Include="src\rooms\Exit.cs" />
     <Compile Include="src\json\ExitJson.cs" />
     <Compile Include="src\gamestates\ExploreState.cs" />

@@ -1321,3 +1321,15 @@
 /processorParam:Quality=Best
 /build:voice/key3.wav
 
+#begin sound_effects/melt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/melt.wav
+
+#begin sound_effects/unlock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/unlock.wav
+

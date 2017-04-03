@@ -28,8 +28,7 @@ namespace HundensVagga {
                 mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed()) {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
-                    Console.WriteLine("hej");
-                    // TODO: do something
+                    interactable.UseItem(currentItem);
                 } else {
                     Console.WriteLine("nej");
                     // TODO: play fail sound

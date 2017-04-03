@@ -46,9 +46,9 @@ namespace HundensVagga {
         private static void HandleClicksInteractable(InputManager inputManager, 
                 Interactable interactable) {
             if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
-                interactable.PlayLookSound();
+                interactable.Look();
             if (inputManager.IsRightButtonPressed() && interactable.IsUsable())
-                interactable.PerformUseEffect();
+                interactable.Use();
         }
 
 

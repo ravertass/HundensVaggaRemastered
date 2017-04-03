@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Collections;
 
 namespace HundensVagga {
     /// <summary>
@@ -33,6 +34,9 @@ namespace HundensVagga {
         [JsonProperty("use")]
         public EffectJson Use { get; set; }
 
+        [JsonProperty("items")]
+        public List<ItemEffectJson> Items { get; set; }
+
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
@@ -40,6 +44,7 @@ namespace HundensVagga {
                 StateOfTheWorld worldState) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
             IEffect useEffect = GetUseEffect(content, worldState);
+            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState); 
             IList<VarVal> prereqs = GetPrereqs(worldState);
 
             Texture2D texture = null;
@@ -52,7 +57,7 @@ namespace HundensVagga {
                 rect = new Rectangle(X, Y, texture.Width, texture.Height);
             }
 
-            return new Interactable(rect, lookSound, useEffect, prereqs, texture);
+            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
@@ -68,7 +73,17 @@ namespace HundensVagga {
                 return Use.GetEffectInstance(content, worldState);
             else
                 return null;
-                
+
+        }
+
+        private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
+                StateOfTheWorld worldState) {
+            Dictionary<string, IEffect> itemEffects = new Dictionary<string, IEffect>();
+            if (Items != null)
+                foreach (ItemEffectJson itemEffectJson in Items)
+                    itemEffects.Add(itemEffectJson.ItemName,
+                        itemEffectJson.Effect.GetEffectInstance(content, worldState));
+            return itemEffects;
         }
 
         private IList<VarVal> GetPrereqs(StateOfTheWorld worldState) {

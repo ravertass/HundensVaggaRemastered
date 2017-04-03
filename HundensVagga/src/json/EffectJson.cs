@@ -32,7 +32,7 @@ namespace HundensVagga {
         private SoundEffectInstance GetSoundEffect(ContentManager content) {
             SoundEffectInstance sound;
             if (Sound != null)
-                sound = content.Load<SoundEffect>(Main.VOICE_DIR
+                sound = content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
                     + Path.DirectorySeparatorChar + Sound).CreateInstance();
             else
                 sound = null;
