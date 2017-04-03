@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace HundensVagga {
     /// <summary>
@@ -9,12 +10,16 @@ namespace HundensVagga {
     /// (e.g. if we're in a menu or in the main game) in the stateManager.
     /// </summary>
     public class Main : Game {
+        public const string CONTENT_DIR = "content";
+
         public const string BACKGROUND_DIR = "backgrounds";
         public const string INTERACTABLES_DIR = "interactables";
         public const string SONG_DIR = "songs";
         public const string VOICE_DIR = "voice";
         public const string CURSOR_DIR = "cursors";
         public const string MISC_DIR = "misc";
+
+        public const string ROOMS_JSON_PATH = "rooms.json";
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -29,7 +34,7 @@ namespace HundensVagga {
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600; 
             graphics.ApplyChanges();
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = CONTENT_DIR;
         }
 
         /// <summary>
@@ -39,7 +44,8 @@ namespace HundensVagga {
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
-            rooms = new Rooms("rooms.json", Content);
+            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + 
+                ROOMS_JSON_PATH, Content);
             inputManager = new InputManager(this);
 
             base.Initialize();

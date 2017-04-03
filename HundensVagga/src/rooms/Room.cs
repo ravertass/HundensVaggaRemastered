@@ -18,9 +18,6 @@ namespace HundensVagga {
         }
         private readonly Song song;
         private readonly Texture2D background;
-        //public Texture2D Background {
-        //    get { return this.background; }
-        //}
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
