@@ -31,12 +31,6 @@
 /processorParam:Quality=Best
 /build:voice/house.wav
 
-#begin songs/outside.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:songs/outside.wav
-
 #begin interactables/frozen_front.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1333,9 +1327,15 @@
 /processorParam:Quality=Best
 /build:sound_effects/unlock.wav
 
-#begin songs/inside.wav
-/importer:WavImporter
+#begin songs/inside.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:songs/inside.wav
+/build:songs/inside.ogg
+
+#begin songs/outside.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:songs/outside.ogg
 
