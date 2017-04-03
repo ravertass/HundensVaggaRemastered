@@ -83,6 +83,7 @@
     <Compile Include="src\rooms\Interactable.cs" />
     <Compile Include="src\json\InteractableJson.cs" />
     <Compile Include="src\Main.cs" />
+    <Compile Include="src\rooms\Songs.cs" />
     <Compile Include="src\rooms\VarVal.cs" />
     <Compile Include="src\json\VarValJson.cs" />
     <Compile Include="src\Program.cs" />

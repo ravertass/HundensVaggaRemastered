@@ -1333,3 +1333,9 @@
 /processorParam:Quality=Best
 /build:sound_effects/unlock.wav
 
+#begin songs/inside.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:songs/inside.wav
+

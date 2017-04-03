@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace HundensVagga {
     /// <summary>
@@ -14,17 +15,20 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class MainGameState : IGameState {
+        private const string START_ROOM_NAME = "front";
+
         private StateManager stateManager;
         private ContentManager content;
+
         private CursorManager cursorManager;
         public CursorManager CursorManager {
             get { return cursorManager; }
         }
+
         private readonly Rooms rooms;
-        public Rooms Rooms {
-            get { return rooms; }
-        }
         public Room CurrentRoom { get; set; }
+        private Song currentSong;
+
         private Inventory inventory;
         public Inventory Inventory {
             get { return inventory; }
@@ -38,8 +42,10 @@ namespace HundensVagga {
             this.content = content;
             this.cursorManager = cursorManager;
             this.rooms = rooms;
-            CurrentRoom = rooms.GetRoom("front");
             this.inventory = inventory;
+
+            GoToRoom(START_ROOM_NAME);
+            MediaPlayer.IsRepeating = true;
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
@@ -56,6 +62,18 @@ namespace HundensVagga {
         public void Draw(SpriteBatch spriteBatch) {
             CurrentRoom.Draw(spriteBatch);
             inventory.Draw(spriteBatch);
+        }
+
+        public void GoToRoom(string roomName) {
+            CurrentRoom = rooms.GetRoom(roomName);
+            if (currentSong != CurrentRoom.Song)
+                PlaySong(CurrentRoom.Song);
+        }
+
+        public void PlaySong(Song song) {
+            // TODO lägg till fejdande med hjälp av en update-funktion, och tillstånd osv
+            currentSong = song;
+            MediaPlayer.Play(currentSong);
         }
     }
 }

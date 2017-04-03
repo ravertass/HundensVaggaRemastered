@@ -67,7 +67,7 @@ namespace HundensVagga {
 
         private void HandleClicksExit(InputManager inputManager, Exit exit) {
             if (inputManager.IsLeftButtonPressed())
-                mainGameState.CurrentRoom = mainGameState.Rooms.GetRoom(exit.RoomName);
+                mainGameState.GoToRoom(exit.RoomName);
         }
 
 

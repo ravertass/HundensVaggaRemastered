@@ -32,10 +32,10 @@ namespace HundensVagga {
         public List<InteractableJson> Interactables { get; set; }
 
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
-                Items items) {
+                Items items, Songs songs) {
             List<Exit> exits = GetExits(worldState);
             List<Interactable> interactables = GetInteractables(content, worldState, items);
-            Song song = GetSong(content);
+            Song song = GetSong(songs);
             Texture2D background = GetBackground(content);
 
             return new Room(Name, song, background, exits, interactables);
@@ -61,8 +61,8 @@ namespace HundensVagga {
             return interactables;
         }
 
-        private Song GetSong(ContentManager content) {
-            return content.Load<Song>(Main.SONGS_DIR + Path.DirectorySeparatorChar + Song);
+        private Song GetSong(Songs songs) {
+            return songs.GetSong(Song);
         }
 
         private Texture2D GetBackground(ContentManager content) {

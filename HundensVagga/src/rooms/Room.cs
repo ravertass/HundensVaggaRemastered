@@ -14,9 +14,14 @@ namespace HundensVagga {
     internal class Room {
         private readonly string name;
         public string Name {
-            get { return this.name; }
+            get { return name; }
         }
+
         private readonly Song song;
+        public Song Song {
+            get { return song; }
+        }
+
         private readonly Texture2D background;
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;

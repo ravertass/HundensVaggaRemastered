@@ -179,4 +179,13 @@
                }]
     }
   ]
+},
+{
+  "name": "hall",
+  "song": "inside",
+  "background": "hall",
+  "exits": [
+  ],
+  "interactables": [
+  ]
 }]
