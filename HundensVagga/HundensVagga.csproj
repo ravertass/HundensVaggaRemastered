@@ -65,9 +65,9 @@
     <Compile Include="src\gamestates\IInGameState.cs" />
     <Compile Include="src\InputManager.cs" />
     <Compile Include="src\inventory\Inventory.cs" />
-    <Compile Include="src\inventory\InventoryState.cs" />
+    <Compile Include="src\gamestates\InventoryState.cs" />
     <Compile Include="src\inventory\InventoryUI.cs" />
-    <Compile Include="src\gamestates\InventoryUIState.cs" />
+    <Compile Include="src\inventory\InventoryUIState.cs" />
     <Compile Include="src\inventory\Item.cs" />
     <Compile Include="src\gamestates\MainGameState.cs" />
     <Compile Include="src\inventory\Items.cs" />
@@ -95,6 +95,8 @@
     <Compile Include="src\rooms\StateOfTheWorld.cs" />
     <Compile Include="src\gamestates\UseItemState.cs" />
     <Compile Include="src\rooms\WorldStateVariable.cs" />
+    <Compile Include="src\SongManager.cs" />
+    <Compile Include="src\SongManagerState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -27,7 +27,7 @@ namespace HundensVagga {
 
         private readonly Rooms rooms;
         public Room CurrentRoom { get; set; }
-        private Song currentSong;
+        private SongManager songManager;
 
         private Inventory inventory;
         public Inventory Inventory {
@@ -44,8 +44,9 @@ namespace HundensVagga {
             this.rooms = rooms;
             this.inventory = inventory;
 
+            songManager = new SongManager();
+
             GoToRoom(START_ROOM_NAME);
-            MediaPlayer.IsRepeating = true;
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
@@ -57,6 +58,7 @@ namespace HundensVagga {
             cursorManager.SetToDefault();
             inventory.Update(inputManager);
             CurrentState.Update(inputManager);
+            songManager.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch) {
@@ -65,15 +67,17 @@ namespace HundensVagga {
         }
 
         public void GoToRoom(string roomName) {
-            CurrentRoom = rooms.GetRoom(roomName);
-            if (currentSong != CurrentRoom.Song)
-                PlaySong(CurrentRoom.Song);
+            ChangeRoom(roomName);
+            songManager.NewRoomSong(CurrentRoom.Song);
         }
 
-        public void PlaySong(Song song) {
-            // TODO lägg till fejdande med hjälp av en update-funktion, och tillstånd osv
-            currentSong = song;
-            MediaPlayer.Play(currentSong);
+        public void StartAtRoom(string roomName) {
+            ChangeRoom(roomName);
+            songManager.FadeIntoSong(CurrentRoom.Song);
+        }
+
+        private void ChangeRoom(string roomName) {
+            CurrentRoom = rooms.GetRoom(roomName);
         }
     }
 }

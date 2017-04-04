@@ -185,6 +185,81 @@
   "song": "inside",
   "background": "hall",
   "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 87,
+      "height": 537,
+      "room": "showers",
+      "dir": "left"
+    },
+    {
+      "x": 155,
+      "y": 100,
+      "width": 168,
+      "height": 387,
+      "room": "typewriter_room",
+      "dir": "up",
+      "prereqs": [{"var": "st_typewriter_room_open", "val": true}]
+    },
+    {
+      "x": 489,
+      "y": 101,
+      "width": 152,
+      "height": 381,
+      "room": "maps",
+      "dir": "up",
+      "prereqs": [{"var": "st_maps_open", "val": true}]
+    },
+    {
+      "x": 712,
+      "y": 70,
+      "width": 88,
+      "height": 498,
+      "room": "living_room",
+      "dir": "right"
+    },
+    {
+      "x": 162,
+      "y": 508,
+      "width": 478,
+      "height": 59,
+      "room": "view",
+      "dir": "down"
+    },
+  ],
+  "interactables": [//Lägg till
+  ]
+},
+{
+  "name": "view",
+  "song": "outside",
+  "background": "view",
+  "exits": [
+    {
+      "x": 101,
+      "y": 200,
+      "width": 319,
+      "height": 219,
+      "room": "front",
+      "dir": "up"
+    },
+    {
+      "x": 682,
+      "y": 219,
+      "width": 118,
+      "height": 239,
+      "room": "coffee",
+      "dir": "right"
+    },
+    {
+      "x": 100,
+      "y": 506,
+      "width": 700,
+      "height": 62,
+      "room": "entrance",
+      "dir": "down"
+    }
   ],
   "interactables": [
   ]
