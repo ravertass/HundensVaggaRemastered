@@ -40,6 +40,12 @@ namespace HundensVagga {
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
+        [JsonProperty("type")]
+        public string SpecialType { get; set; }
+
+        [JsonProperty("number")]
+        public int Number { get; set; }
+
         public Interactable GetInteractableInstance(ContentManager content, 
                 StateOfTheWorld worldState, Items items) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
@@ -57,7 +63,20 @@ namespace HundensVagga {
                 rect = new Rectangle(X, Y, texture.Width, texture.Height);
             }
 
+            if (SpecialType != null)
+                return GetSpecialInteractable(rect, lookSound, useEffect, itemEffects, 
+                    prereqs, texture);
             return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+        }
+
+        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound, 
+            IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs, 
+            Texture2D texture) {
+            if (Type.GetType(SpecialType).Equals(typeof(TelephoneInteractable)))
+                return new TelephoneInteractable(rect, lookSound, useEffect, itemEffects,
+                    prereqs, Number, texture);
+            else
+                throw new Exception("Unknown interactable type: " + SpecialType);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {

@@ -22,17 +22,23 @@ namespace HundensVagga {
             get { return song; }
         }
 
+        private readonly Type specialStateType;
+        public Type SpecialStateType {
+            get { return specialStateType; }
+        }
+
         private readonly Texture2D background;
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
         public Room(string name, Song song, Texture2D background, List<Exit> exits, 
-                List<Interactable> interactables) {
+                List<Interactable> interactables, Type specialStateType) {
             this.name = name;
             this.song = song;
             this.background = background;
             this.exits = exits;
             this.interactables = interactables;
+            this.specialStateType = specialStateType;
         }
 
         private List<Interactable> ActiveInteractables() {
@@ -74,6 +80,10 @@ namespace HundensVagga {
             foreach (Interactable interactable in ActiveInteractables())
                 if (interactable.IsActive())
                     interactable.Draw(spriteBatch);
+        }
+
+        public bool HasSpecialState() {
+            return specialStateType != null;
         }
     }
 }

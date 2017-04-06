@@ -263,4 +263,22 @@
   ],
   "interactables": [
   ]
+},
+{
+  "name": "telephone_open",
+  "song": "inside",
+  "background": "telephone_open",
+  "state": "HundensVagga.TelephoneExploreState",
+  "exits": [
+  ],
+  "interactables": [
+    {
+      "x": 294,
+      "y": 479,
+      "image": "doormat",
+      "use": {},
+      "type": "HundensVagga.TelephoneInteractable",
+      "number": 2
+    }
+  ]
 }]

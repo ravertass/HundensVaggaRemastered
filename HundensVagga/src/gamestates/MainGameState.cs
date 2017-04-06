@@ -15,7 +15,7 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class MainGameState : IGameState {
-        private const string START_ROOM_NAME = "front";
+        private const string START_ROOM_NAME = "telephone_open";
 
         private StateManager stateManager;
         private ContentManager content;
@@ -50,8 +50,6 @@ namespace HundensVagga {
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
-
-            CurrentState = new ExploreState(this);
         }
 
         public void Update(InputManager inputManager) {
@@ -71,13 +69,18 @@ namespace HundensVagga {
             songManager.NewRoomSong(CurrentRoom.Song);
         }
 
-        public void StartAtRoom(string roomName) {
-            ChangeRoom(roomName);
-            songManager.FadeIntoSong(CurrentRoom.Song);
-        }
-
         private void ChangeRoom(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
+            if (CurrentRoom.HasSpecialState())
+                CurrentState = (IInGameState)Activator.CreateInstance(
+                    CurrentRoom.SpecialStateType, this);
+            else
+                CurrentState = new ExploreState(this);
+        }
+
+        public void Win() {
+            // TODO go to win state
+            Console.WriteLine("Tired of winning");
         }
     }
 }

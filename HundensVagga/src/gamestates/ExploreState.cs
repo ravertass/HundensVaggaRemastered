@@ -11,7 +11,7 @@ namespace HundensVagga {
     /// or move between rooms.
     /// </summary>
     internal class ExploreState : IInGameState {
-        private MainGameState mainGameState;
+        protected MainGameState mainGameState;
 
         public ExploreState(MainGameState mainGameState) {
             this.mainGameState = mainGameState;
@@ -43,14 +43,17 @@ namespace HundensVagga {
                 mainGameState.CursorManager.SetToUseOnly();
         }
 
-        private static void HandleClicksInteractable(InputManager inputManager, 
+        private void HandleClicksInteractable(InputManager inputManager, 
                 Interactable interactable) {
             if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
                 interactable.Look();
             if (inputManager.IsRightButtonPressed() && interactable.IsUsable())
-                interactable.Use();
+                UseInteractable(interactable);
         }
 
+        protected virtual void UseInteractable(Interactable interactable) {
+            interactable.Use();
+        }
 
 
         private void CheckExits(InputManager inputManager) {
@@ -67,9 +70,12 @@ namespace HundensVagga {
 
         private void HandleClicksExit(InputManager inputManager, Exit exit) {
             if (inputManager.IsLeftButtonPressed())
-                mainGameState.GoToRoom(exit.RoomName);
+                UseExit(exit);
         }
 
+        protected virtual void UseExit(Exit exit) {
+            mainGameState.GoToRoom(exit.RoomName);
+        }
 
 
         private void CheckInventoryBag(InputManager inputManager) {

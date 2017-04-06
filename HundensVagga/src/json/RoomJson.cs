@@ -31,14 +31,18 @@ namespace HundensVagga {
         [JsonProperty("interactables")]
         public List<InteractableJson> Interactables { get; set; }
 
+        [JsonProperty("state")]
+        public string State { get; set; }
+
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
                 Items items, Songs songs) {
             List<Exit> exits = GetExits(worldState);
             List<Interactable> interactables = GetInteractables(content, worldState, items);
             Song song = GetSong(songs);
             Texture2D background = GetBackground(content);
+            Type stateType = GetStateType();
 
-            return new Room(Name, song, background, exits, interactables);
+            return new Room(Name, song, background, exits, interactables, stateType);
         }
 
         private List<Exit> GetExits(StateOfTheWorld worldState) {
@@ -68,6 +72,16 @@ namespace HundensVagga {
         private Texture2D GetBackground(ContentManager content) {
             return content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
                 Path.DirectorySeparatorChar + Background);
+        }
+
+        private Type GetStateType() {
+            if (State != null) {
+                Type stateType = Type.GetType(State);
+                if (!stateType.GetInterfaces().Contains(typeof(IInGameState)))
+                    throw new Exception("Non-existing state type: " + State);
+                return stateType;
+            } else
+                return null;
         }
     }
 }
