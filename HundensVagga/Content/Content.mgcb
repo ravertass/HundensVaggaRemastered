@@ -1339,3 +1339,15 @@
 /processorParam:Quality=Best
 /build:songs/outside.ogg
 
+#begin sound_effects/phone_button.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/phone_button.wav
+
+#begin sound_effects/phone_wrong_number.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/phone_wrong_number.ogg
+

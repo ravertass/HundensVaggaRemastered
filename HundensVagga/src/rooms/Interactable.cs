@@ -52,7 +52,7 @@ namespace HundensVagga {
             lookSound.Play();
         }
 
-        public bool IsUsable() {
+        public virtual bool IsUsable() {
             return useEffect != null;
         }
 

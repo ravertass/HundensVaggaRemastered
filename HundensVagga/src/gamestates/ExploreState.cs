@@ -80,7 +80,8 @@ namespace HundensVagga {
 
         private void CheckInventoryBag(InputManager inputManager) {
             if (mainGameState.Inventory.IsBagClicked(inputManager)) {
-                mainGameState.CurrentState = new InventoryState(mainGameState);
+                mainGameState.InGameStateManager.PushState();
+                mainGameState.InGameStateManager.CurrentState = new InventoryState(mainGameState);
                 mainGameState.Inventory.GoDown();
             }
         }

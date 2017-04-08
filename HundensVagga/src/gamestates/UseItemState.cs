@@ -33,7 +33,7 @@ namespace HundensVagga {
                     Console.WriteLine("nej");
                     // TODO: play fail sound
                 }
-                mainGameState.CurrentState = new ExploreState(mainGameState);
+                mainGameState.InGameStateManager.PopState();
             }
         }
     }

@@ -18,7 +18,11 @@ namespace HundensVagga {
         private const string START_ROOM_NAME = "telephone_open";
 
         private StateManager stateManager;
+
         private ContentManager content;
+        public ContentManager Content {
+            get { return content; }
+        }
 
         private CursorManager cursorManager;
         public CursorManager CursorManager {
@@ -34,7 +38,10 @@ namespace HundensVagga {
             get { return inventory; }
         }
 
-        public IInGameState CurrentState { get; set; }
+        private InGameStateManager inGameStateManager;
+        public InGameStateManager InGameStateManager {
+            get { return inGameStateManager; }
+        }
 
         public MainGameState(StateManager stateManager, ContentManager content, 
                 CursorManager cursorManager, Rooms rooms, Inventory inventory) {
@@ -43,6 +50,7 @@ namespace HundensVagga {
             this.cursorManager = cursorManager;
             this.rooms = rooms;
             this.inventory = inventory;
+            inGameStateManager = new InGameStateManager();
 
             songManager = new SongManager();
 
@@ -55,7 +63,7 @@ namespace HundensVagga {
         public void Update(InputManager inputManager) {
             cursorManager.SetToDefault();
             inventory.Update(inputManager);
-            CurrentState.Update(inputManager);
+            inGameStateManager.CurrentState.Update(inputManager);
             songManager.Update();
         }
 
@@ -72,10 +80,10 @@ namespace HundensVagga {
         private void ChangeRoom(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
             if (CurrentRoom.HasSpecialState())
-                CurrentState = (IInGameState)Activator.CreateInstance(
+                inGameStateManager.CurrentState = (IInGameState)Activator.CreateInstance(
                     CurrentRoom.SpecialStateType, this);
             else
-                CurrentState = new ExploreState(this);
+                inGameStateManager.CurrentState = new ExploreState(this);
         }
 
         public void Win() {

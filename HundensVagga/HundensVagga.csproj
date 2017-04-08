@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="src\CursorManager.cs" />
     <Compile Include="src\gamestates\IInGameState.cs" />
+    <Compile Include="src\gamestates\InGameStateManager.cs" />
     <Compile Include="src\gamestates\TelephoneExploreState.cs" />
     <Compile Include="src\InputManager.cs" />
     <Compile Include="src\inventory\Inventory.cs" />

@@ -9,6 +9,10 @@ using System;
 using System.Collections;
 
 namespace HundensVagga {
+    internal enum SpecialInteractableEnum {
+        telephone
+    }
+
     /// <summary>
     /// For deserialization of JSON data regarding interactables. Used to create an Interactable instance.
     /// </summary>
@@ -52,31 +56,10 @@ namespace HundensVagga {
             IEffect useEffect = GetUseEffect(content, worldState, items);
             IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items);
             IList<VarVal> prereqs = GetPrereqs(worldState);
+            Texture2D texture = GetTexture(content);
+            Rectangle rect = GetRectangle(texture);
 
-            Texture2D texture = null;
-            Rectangle rect;
-            if (Image == null)
-                rect = new Rectangle(X, Y, Width, Height);
-            else {
-                texture = content.Load<Texture2D>(Main.INTERACTABLES_DIR
-                    + Path.DirectorySeparatorChar + Image);
-                rect = new Rectangle(X, Y, texture.Width, texture.Height);
-            }
-
-            if (SpecialType != null)
-                return GetSpecialInteractable(rect, lookSound, useEffect, itemEffects, 
-                    prereqs, texture);
-            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
-        }
-
-        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound, 
-            IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs, 
-            Texture2D texture) {
-            if (Type.GetType(SpecialType).Equals(typeof(TelephoneInteractable)))
-                return new TelephoneInteractable(rect, lookSound, useEffect, itemEffects,
-                    prereqs, Number, texture);
-            else
-                throw new Exception("Unknown interactable type: " + SpecialType);
+            return GetInteractable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
@@ -113,6 +96,46 @@ namespace HundensVagga {
                     prereqs.Add(prereqJson.GetVarValInstance(worldState));
 
             return prereqs;
+        }
+
+        private Texture2D GetTexture(ContentManager content) {
+            if (Image != null)
+                return content.Load<Texture2D>(Main.INTERACTABLES_DIR
+                    + Path.DirectorySeparatorChar + Image);
+
+            return null;
+        }
+
+        private Rectangle GetRectangle(Texture2D texture) {
+            if (texture != null)
+                return new Rectangle(X, Y, texture.Width, texture.Height);
+
+            return new Rectangle(X, Y, Width, Height);
+        }
+
+        private Interactable GetInteractable(Rectangle rect, SoundEffectInstance lookSound,
+            IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+            Texture2D texture) {
+            if (SpecialType != null)
+                return GetSpecialInteractable(rect, lookSound, useEffect, itemEffects, prereqs,
+                                              texture);
+
+            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+        }
+
+        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound,
+                IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+                Texture2D texture) {
+            SpecialInteractableEnum type = 
+                (SpecialInteractableEnum)Enum.Parse(typeof(SpecialInteractableEnum), SpecialType);
+
+            switch (type) {
+                case SpecialInteractableEnum.telephone:
+                    return new TelephoneInteractable(rect, lookSound, useEffect, itemEffects,
+                                                     prereqs, Number, texture);
+                default:
+                    throw new TypeLoadException("No such interactable: " + SpecialType);
+            }
         }
     }
 }

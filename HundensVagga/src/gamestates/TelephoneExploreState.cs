@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Audio;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,15 +15,19 @@ namespace HundensVagga {
 
         private IList<int> numbersPressed;
 
+        private const string WRONG_NUMBER_SOUND_PATH = "phone_wrong_number";
+        private SoundEffectInstance wrongNumberSound;
+
         public TelephoneExploreState(MainGameState mainGameState) : base(mainGameState) {
             numbersPressed = new List<int>();
+            wrongNumberSound = mainGameState.Content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR +
+                    Path.DirectorySeparatorChar + WRONG_NUMBER_SOUND_PATH).CreateInstance();
         }
 
         protected override void UseInteractable(Interactable interactable) {
+            base.UseInteractable(interactable);
             if (interactable.GetType() == typeof(TelephoneInteractable))
                 PressTelephoneButton(((TelephoneInteractable)interactable).Number);
-            else
-                base.UseInteractable(interactable);
         }
 
         private void PressTelephoneButton(int number) {
@@ -35,7 +41,7 @@ namespace HundensVagga {
                 // byt till ett InGameState där vinstsnacket dras, sedan körs Win()
                 mainGameState.Win();
             else {
-                // spela fail-ljudet
+                wrongNumberSound.Play();
                 numbersPressed.Clear();
             }
         }
