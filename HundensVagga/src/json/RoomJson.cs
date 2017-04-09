@@ -36,7 +36,7 @@ namespace HundensVagga {
 
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
                 Items items, Songs songs) {
-            List<Exit> exits = GetExits(worldState);
+            List<Exit> exits = GetExits(content, worldState);
             List<Interactable> interactables = GetInteractables(content, worldState, items);
             Song song = GetSong(songs);
             Texture2D background = GetBackground(content);
@@ -45,11 +45,11 @@ namespace HundensVagga {
             return new Room(Name, song, background, exits, interactables, stateType);
         }
 
-        private List<Exit> GetExits(StateOfTheWorld worldState) {
+        private List<Exit> GetExits(ContentManager content, StateOfTheWorld worldState) {
             List<Exit> exits = new List<Exit>();
 
             foreach (ExitJson exitJson in Exits)
-                exits.Add(exitJson.GetExitInstance(worldState));
+                exits.Add(exitJson.GetExitInstance(content, worldState));
 
             return exits;
         }

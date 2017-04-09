@@ -17,16 +17,47 @@ namespace HundensVagga {
             this.mainGameState = mainGameState;
         }
 
-        public void Update(InputManager inputManager) {
+        public virtual void Update(InputManager inputManager) {
+            // inventory has priority over exits and interactables
+            if (CheckInventoryBag(inputManager))
+                return;
+
+            // exits have priority over interactables
+            if (CheckExits(inputManager))
+                return;
+
             CheckInteractables(inputManager);
-            CheckExits(inputManager);
-            CheckInventoryBag(inputManager);
         }
 
 
+        private bool CheckExits(InputManager inputManager) {
+            Exit exit = mainGameState.CurrentRoom.GetExitAt(inputManager.GetMousePosition());
+            if (exit != null) {
+                ChangeCursorExit(exit);
+                HandleClicksExit(inputManager, exit);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void ChangeCursorExit(Exit exit) {
+            mainGameState.CursorManager.SetToDirection(exit.Direction);
+        }
+
+        private void HandleClicksExit(InputManager inputManager, Exit exit) {
+            if (inputManager.IsLeftButtonPressed())
+                UseExit(exit);
+        }
+
+        protected virtual void UseExit(Exit exit) {
+            exit.PlaySound();
+            mainGameState.GoToRoom(exit.RoomName);
+        }
+
 
         private void CheckInteractables(InputManager inputManager) {
-            Interactable interactable = 
+            Interactable interactable =
                 mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (interactable != null) {
                 ChangeCursorInteractable(interactable);
@@ -43,7 +74,7 @@ namespace HundensVagga {
                 mainGameState.CursorManager.SetToUseOnly();
         }
 
-        private void HandleClicksInteractable(InputManager inputManager, 
+        private void HandleClicksInteractable(InputManager inputManager,
                 Interactable interactable) {
             if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
                 interactable.Look();
@@ -52,38 +83,19 @@ namespace HundensVagga {
         }
 
         protected virtual void UseInteractable(Interactable interactable) {
-            interactable.Use();
+            interactable.Use(mainGameState);
         }
 
 
-        private void CheckExits(InputManager inputManager) {
-            Exit exit = mainGameState.CurrentRoom.GetExitAt(inputManager.GetMousePosition());
-            if (exit != null) {
-                ChangeCursorExit(exit);
-                HandleClicksExit(inputManager, exit);
-            }
-        }
-
-        private void ChangeCursorExit(Exit exit) {
-            mainGameState.CursorManager.SetToDirection(exit.Direction);
-        }
-
-        private void HandleClicksExit(InputManager inputManager, Exit exit) {
-            if (inputManager.IsLeftButtonPressed())
-                UseExit(exit);
-        }
-
-        protected virtual void UseExit(Exit exit) {
-            mainGameState.GoToRoom(exit.RoomName);
-        }
-
-
-        private void CheckInventoryBag(InputManager inputManager) {
+        private bool CheckInventoryBag(InputManager inputManager) {
             if (mainGameState.Inventory.IsBagClicked(inputManager)) {
                 mainGameState.InGameStateManager.PushState();
                 mainGameState.InGameStateManager.CurrentState = new InventoryState(mainGameState);
                 mainGameState.Inventory.GoDown();
+                return true;
             }
+
+            return false;
         }
     }
 }

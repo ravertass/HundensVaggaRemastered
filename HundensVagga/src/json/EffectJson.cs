@@ -29,13 +29,17 @@ namespace HundensVagga {
         [JsonProperty("item")]
         public string ItemName { get; set; }
 
+        // Room to go to
+        [JsonProperty("exit")]
+        public string Exit { get; set; }
+
         public IEffect GetEffectInstance(ContentManager content,
                 StateOfTheWorld worldState, Items items) {
             SoundEffectInstance sound = GetSoundEffect(content);
             IList<VarVal> varVals = GetVarVals(worldState);
             Item item = GetItem(items);
 
-            return new Effect(varVals, sound, item, items.Inventory);
+            return new Effect(varVals, sound, item, items.Inventory, Exit);
         }
 
         private SoundEffectInstance GetSoundEffect(ContentManager content) {

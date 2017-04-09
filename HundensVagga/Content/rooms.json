@@ -24,7 +24,7 @@
       "y": 262,
       "width": 145,
       "height": 84,
-      "room": "hatch_outside",
+      "room": "crawlspace_outside",
       "dir": "up"
     },
     {
@@ -86,7 +86,7 @@
       "y": 205,
       "width": 87,
       "height": 282,
-      "room": "hatch_outside",
+      "room": "crawlspace_outside",
       "dir": "right"
     }
   ],
@@ -108,6 +108,113 @@
       "width": 69,
       "height": 159,
       "look": "broken_door"
+    }
+  ]
+},
+{
+  "name": "crawlspace_outside",
+  "song": "outside",
+  "background": "crawlspace_outside",
+  "exits": [
+    {
+      "x": 182,
+      "y": 210,
+      "width": 130,
+      "height": 190,
+      "room": "back",
+      "dir": "up"
+    },
+    {
+      "x": 441,
+      "y": 394,
+      "width": 46,
+      "height": 79,
+      "room": "crawlspace",
+      "dir": "up",
+      "prereqs": [{"var": "st_crawlspace_open", "val": true}],
+    },
+    {
+      "x": 681,
+      "y": 349,
+      "width": 119,
+      "height": 219,
+      "room": "front",
+      "dir": "right"
+    },
+    {
+      "x": 0,
+      "y": 287,
+      "width": 114,
+      "height": 281,
+      "room": "outhouse_outside",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 443,
+      "y": 396,
+      "image": "hatch",
+      "prereqs": [{"var": "st_crawlspace_open", "val": false}],
+      "look": "hatch",
+      "use": {"var": "st_crawlspace_open"}
+    },
+    {
+      "x": 375,
+      "y": 382,
+      "image": "hatch_open",
+      "prereqs": [{"var": "st_crawlspace_open", "val": true}]
+    },
+    {
+      "x": 318,
+      "y": 331,
+      "width": 23,
+      "height": 52,
+      "look": "broken_tap1"
+    }
+  ]
+},
+{
+  "name": "crawlspace",
+  "song": "outside",
+  "background": "crawlspace",
+  "exits": [
+    {
+      "x": 0,
+      "y": 468,
+      "width": 800,
+      "height": 100,
+      "room": "crawlspace_outside",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 0,
+      "y": 0,
+      "image": "crawlspace_darkness",
+      "prereqs": [{"var": "st_crawlspace_illuminated", "val": false}],
+      "look": "darkness",
+      "items": [
+                 {
+                   "item": "flashlight", 
+                   "effect": {"var": "st_crawlspace_illuminated"}
+                 }
+               ]
+    },
+    {
+      "x": 369,
+      "y": 295,
+      "width": 91,
+      "height": 65,
+      "look": "pipes",
+      "prereqs": [{"var": "st_crawlspace_illuminated", "val": true}],
+      "items": [
+                 {
+                    "item": "wrench", 
+                    "effect": {"var": "st_pipes_running"}
+                 }
+               ]
     }
   ]
 },
@@ -171,6 +278,7 @@
       "y": 81,
       "width": 173,
       "height": 401,
+      "look": "locked_door",
       "prereqs": [{"var": "st_maindoor_open", "val": false}],
       "items": [{
                  "item": "mainkey", 
@@ -178,6 +286,39 @@
                             "sound": "unlock"}
                }]
     }
+  ]
+},
+{
+  "name": "view",
+  "song": "outside",
+  "background": "view",
+  "exits": [
+    {
+      "x": 101,
+      "y": 200,
+      "width": 319,
+      "height": 219,
+      "room": "front",
+      "dir": "up"
+    },
+    {
+      "x": 682,
+      "y": 219,
+      "width": 118,
+      "height": 239,
+      "room": "coffee",
+      "dir": "right"
+    },
+    {
+      "x": 100,
+      "y": 506,
+      "width": 700,
+      "height": 62,
+      "room": "entrance",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
   ]
 },
 {
@@ -228,40 +369,132 @@
       "dir": "down"
     },
   ],
+  "interactables": [
+    {
+      "x": 155,
+      "y": 100,
+      "width": 168,
+      "height": 387,
+      "look": "locked_door",
+      "prereqs": [{"var": "st_typewriter_room_open", "val": false}],
+      "items": [{
+                 "item": "typewriterkey", 
+                 "effect": {"var": "st_typewriter_room_open", 
+                            "sound": "unlock"}
+               }]
+    },
+    {
+      "x": 489,
+      "y": 101,
+      "width": 152,
+      "height": 381,
+      "look": "no_handle",
+      "prereqs": [{"var": "st_maps_open", "val": false}],
+      "items": [{
+                 "item": "mapskey", 
+                 "effect": {"var": "st_maps_open", 
+                            "sound": "unlock"}
+               }]
+    },
+  ]
+},
+{
+  "name": "living_room",
+  "song": "inside",
+  "background": "living_room",
+  "exits": [
+    {
+      "x": 41,
+      "y": 138,
+      "width": 73,
+      "height": 377,
+      "room": "kitchen",
+      "dir": "left"
+    },
+    {
+      "x": 684,
+      "y": 405,
+      "width": 116,
+      "height": 113,
+      "room": "drawers",
+      "dir": "right",
+    },
+    {
+      "x": 187,
+      "y": 238,
+      "width": 113,
+      "height": 129,
+      "room": "bookcase",
+      "dir": "up",
+    },
+    {
+      "x": 0,
+      "y": 524,
+      "width": 800,
+      "height": 44,
+      "room": "hall",
+      "dir": "down"
+    },
+    {
+      "x": 343,
+      "y": 286,
+      "width": 82,
+      "height": 84,
+      "room": "mrtn",
+      "dir": "up"
+    },
+  ],
   "interactables": [//Lägg till
   ]
 },
 {
-  "name": "view",
-  "song": "outside",
-  "background": "view",
+  "name": "drawers",
+  "song": "inside",
+  "background": "drawers",
   "exits": [
     {
-      "x": 101,
-      "y": 200,
-      "width": 319,
-      "height": 219,
-      "room": "front",
-      "dir": "up"
-    },
-    {
-      "x": 682,
-      "y": 219,
-      "width": 118,
-      "height": 239,
-      "room": "coffee",
-      "dir": "right"
-    },
-    {
-      "x": 100,
-      "y": 506,
-      "width": 700,
-      "height": 62,
-      "room": "entrance",
+      "x": 0,
+      "y": 514,
+      "width": 800,
+      "height": 54,
+      "room": "living_room",
       "dir": "down"
+    },
+    {
+      "x": 535,
+      "y": 179,
+      "width": 236,
+      "height": 185,
+      "room": "telephone",
+      "dir": "up",
     }
   ],
+  "interactables": [//Lägg till
+  ]
+},
+{
+  "name": "telephone",
+  "song": "inside",
+  "background": "telephone",
+  "exits": [
+    {
+      "x": 0,
+      "y": 500,
+      "width": 800,
+      "height": 68,
+      "room": "drawers",
+      "dir": "down"
+    },
+  ],
   "interactables": [
+    {
+      "x": 354,
+      "y": 233,
+      "width": 302,
+      "height": 88,
+      "use": { "sound": "phone_open", "exit": "telephone_open"},
+      "dir": "up",
+    }
   ]
 },
 {
@@ -270,6 +503,15 @@
   "background": "telephone_open",
   "state": "HundensVagga.TelephoneExploreState",
   "exits": [
+    {
+      "x": 0,
+      "y": 500,
+      "width": 800,
+      "height": 68,
+      "room": "drawers",
+      "sound": "phone_close",
+      "dir": "down"
+    },
   ],
   "interactables": [
     {

@@ -66,17 +66,16 @@ namespace HundensVagga {
             if (Look != null)
                 return content.Load<SoundEffect>(Main.VOICE_DIR
                     + Path.DirectorySeparatorChar + Look).CreateInstance();
-            else
-                return null;
+
+            return null;
         }
 
         private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState, 
                 Items items) {
             if (Use != null)
                 return Use.GetEffectInstance(content, worldState, items);
-            else
-                return null;
 
+            return null;
         }
 
         private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
@@ -86,6 +85,7 @@ namespace HundensVagga {
                 foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
                         itemEffectJson.Effect.GetEffectInstance(content, worldState, items));
+
             return itemEffects;
         }
 
