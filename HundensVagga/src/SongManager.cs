@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class SongManager {
-        public bool IsRepeating { get; set; }
         public ISongManagerState State { get; set; }
         public Song CurrentSong { get; set; }
 
         public SongManager() {
-            IsRepeating = true;
+            MediaPlayer.IsRepeating = true;
             State = new SongManagerIdle();
             CurrentSong = null;
         }

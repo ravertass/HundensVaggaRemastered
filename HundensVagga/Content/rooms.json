@@ -94,6 +94,7 @@
     {
       "x": 444,
       "y": 325,
+      "look": "frozen",
       "image": "frozen_outhouse",
       "prereqs": [{"var": "st_frozen_melted", "val": false}],
       "items": [{
@@ -109,6 +110,32 @@
       "height": 159,
       "look": "broken_door"
     }
+  ]
+},
+{
+  "name": "outhouse",
+  "song": "outside",
+  "background": "outhouse",
+  "exits": [
+    {
+      "x": 0,
+      "y": 468,
+      "width": 800,
+      "height": 100,
+      "room": "outhouse_outside",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 284,
+      "y": 50,
+      "image": "shovel",
+      "look": "shovel",
+      "use": {"var": "st_shovel_taken",
+              "item": "shovel"},
+      "prereqs": [{"var": "st_shovel_taken", "val": false}]
+    },
   ]
 },
 {
@@ -219,6 +246,98 @@
   ]
 },
 {
+  "name": "back",
+  "song": "outside",
+  "background": "back",
+  "exits": [
+    {
+      "x": 732,
+      "y": 163,
+      "width": 68,
+      "height": 224,
+      "room": "crawlspace_outside",
+      "dir": "right"
+    },
+    {
+      "x": 517,
+      "y": 216,
+      "width": 58,
+      "height": 66,
+      "room": "horror",
+      "dir": "up",
+      "prereqs": [{"var": "st_window_open", "val": true}]
+    }
+  ],
+  "interactables": [
+    {
+      "x": 331,
+      "y": 260,
+      "width": 15,
+      "height": 79,
+      "look": "locked_door"
+    },
+    {
+      "x": 742,
+      "y": 398,
+      "width": 49,
+      "height": 77,
+      "look": "broken_tap1"
+    }
+  ]
+},
+{
+  "name": "horror",
+  "song": "horror",
+  "background": "horror",
+  "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 800,
+      "height": 536,
+      "room": "back",
+      "dir": "down",
+      "use": {"vars": [{"var": "window_open", "val": false}]},
+      "prereqs": [{"var": "st_handle_taken", "val": true}]
+    }
+  ],
+  "interactables": [
+    {
+      "x": 471,
+      "y": 34,
+      "image": "handle",
+      "look": "wilhelm",
+      "use": {"var": "st_handle_taken",
+              "item": "handle"},
+      "prereqs": [{"var": "st_handle_taken", "val": false}]
+    },
+  ]
+},
+{
+  "name": "coffee",
+  "song": "outside",
+  "background": "coffee",
+  "exits": [
+    {
+      "x": 0,
+      "y": 486,
+      "width": 800,
+      "height": 82,
+      "room": "entrance",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 264,
+      "y": 342,
+      "width": 113,
+      "height": 74,
+      "look": "coffee"
+    }
+  ]
+},
+{
   "name": "entrance",
   "song": "outside",
   "background": "entrance",
@@ -319,6 +438,92 @@
     }
   ],
   "interactables": [
+    {
+      "x": 702,
+      "y": 171,
+      "image": "frozen_view",
+      "prereqs": [{"var": "st_frozen_melted", "val": false}]
+    },
+  ]
+},
+{
+  "name": "car_outside",
+  "song": "outside",
+  "background": "car_outside",
+  "exits": [
+    {
+      "x": 289,
+      "y": 287,
+      "width": 50,
+      "height": 98,
+      "room": "car",
+      "dir": "left"
+    },
+    {
+      "x": 0,
+      "y": 130,
+      "width": 75,
+      "height": 438,
+      "room": "front",
+      "dir": "left"
+    },
+    {
+      "x": 433,
+      "y": 256,
+      "width": 109,
+      "height": 125,
+      "room": "walk_down",
+      "dir": "up"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 105,
+      "y": 300,
+      "width": 162,
+      "height": 111,
+      "look": "car"
+    },
+  ]
+},
+{
+  "name": "car",
+  "song": "outside",
+  "background": "car",
+  "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 266,
+      "height": 373,
+      "room": "car_outside",
+      "dir": "up"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 306,
+      "y": 296,
+      "width": 168,
+      "height": 155,
+      "look": "car_leave"
+    },
+    {
+      "x": 194,
+      "y": 456,
+      "image": "flashlight",
+      "look": "flashlight",
+      "use": {"var": "st_flashlight_taken",
+              "item": "flashlight"},
+      "prereqs": [{"var": "st_flashlight_taken", "val": false}],
+    },
+    {
+      "x": 508,
+      "y": 342,
+      "width": 69,
+      "height": 43,
+      "use": {"song": "radio"}
+    }
   ]
 },
 {
@@ -396,6 +601,13 @@
                             "sound": "unlock"}
                }]
     },
+    {
+      "x": 350,
+      "y": 93,
+      "width": 88,
+      "height": 194,
+      "look": "mirror",
+    }
   ]
 },
 {
