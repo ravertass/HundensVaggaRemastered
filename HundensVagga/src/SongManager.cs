@@ -20,9 +20,10 @@ namespace HundensVagga {
             State.Update(this);
         }
 
-        public void NewRoomSong(Song song) {
-            if (song != CurrentSong)
-                FadeOutThenIntoSong(song);
+        public void NewRoom(Room room) {
+            if (room.Song != CurrentSong)
+                FadeOutThenIntoSong(room.Song);
+            MediaPlayer.Volume = room.Volume;
         }
 
         private void FadeOutThenIntoSong(Song song) {

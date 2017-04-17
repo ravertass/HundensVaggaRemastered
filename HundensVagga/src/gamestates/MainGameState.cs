@@ -74,7 +74,7 @@ namespace HundensVagga {
 
         public void GoToRoom(string roomName) {
             ChangeRoom(roomName);
-            songManager.NewRoomSong(CurrentRoom.Song);
+            songManager.NewRoom(CurrentRoom);
         }
 
         private void ChangeRoom(string roomName) {

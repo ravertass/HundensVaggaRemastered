@@ -32,12 +32,15 @@ namespace HundensVagga {
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
+        [JsonProperty("var")]
+        public string Var { get; set; }
+
         [JsonProperty("sound")]
         public string Sound { get; set; }
 
         public Exit GetExitInstance(ContentManager content, StateOfTheWorld worldState) {
             return new Exit(GetRectangle(), Room, GetDirectionEnum(), GetPrereqs(worldState), 
-                            GetSoundEffect(content));
+                            GetSoundEffect(content), GetVarVal(worldState));
         }
 
         private Rectangle GetRectangle() {
@@ -63,6 +66,10 @@ namespace HundensVagga {
                         + Path.DirectorySeparatorChar + Sound).CreateInstance();
 
             return null;
+        }
+
+        private VarVal GetVarVal(StateOfTheWorld worldState) {
+            return (Var != null) ? new VarVal(worldState.Get(Var), true) : null;
         }
     }
 }

@@ -22,6 +22,9 @@ namespace HundensVagga {
         [JsonProperty("song")]
         public string Song { get; set; }
 
+        [JsonProperty("volume")]
+        public float Volume { get; set; }
+
         [JsonProperty("background")]
         public string Background { get; set; }
 
@@ -39,10 +42,11 @@ namespace HundensVagga {
             List<Exit> exits = GetExits(content, worldState);
             List<Interactable> interactables = GetInteractables(content, worldState, items);
             Song song = GetSong(songs);
+            float volume = GetVolume();
             Texture2D background = GetBackground(content);
             Type stateType = GetStateType();
 
-            return new Room(Name, song, background, exits, interactables, stateType);
+            return new Room(Name, song, volume, background, exits, interactables, stateType);
         }
 
         private List<Exit> GetExits(ContentManager content, StateOfTheWorld worldState) {
@@ -67,6 +71,10 @@ namespace HundensVagga {
 
         private Song GetSong(Songs songs) {
             return songs.GetSong(Song);
+        }
+
+        private float GetVolume() {
+            return (Volume == 0.0f) ? 1.0f : Volume;
         }
 
         private Texture2D GetBackground(ContentManager content) {

@@ -239,7 +239,8 @@
       "items": [
                  {
                     "item": "wrench", 
-                    "effect": {"var": "st_pipes_running"}
+                    "effect": {"sound": "wrench",
+                               "var": "st_water_running"}
                  }
                ]
     }
@@ -265,10 +266,18 @@
       "height": 66,
       "room": "horror",
       "dir": "up",
-      "prereqs": [{"var": "st_window_open", "val": true}]
+      "prereqs": [{"var": "st_window_open", "val": true},
+                  {"var": "st_handle_taken", "val": false}]
     }
   ],
   "interactables": [
+    {
+      "x": 0,
+      "y": 0,
+      "image": "back_open",
+      "prereqs": [{"var": "st_window_open", "val": true},
+                  {"var": "st_handle_taken", "val": false}]
+    },
     {
       "x": 331,
       "y": 260,
@@ -571,7 +580,8 @@
       "width": 478,
       "height": 59,
       "room": "view",
-      "dir": "down"
+      "dir": "down",
+      "var": "st_window_open"
     },
   ],
   "interactables": [
@@ -608,6 +618,288 @@
       "height": 194,
       "look": "mirror",
     }
+  ]
+},
+{
+  "name": "typewriter_room",
+  "song": "inside",
+  "background": "typewriter_room",
+  "exits": [
+    {
+      "x": 261,
+      "y": 516,
+      "width": 307,
+      "height": 52,
+      "room": "hall",
+      "dir": "down"
+    },
+    {
+      "x": 378,
+      "y": 367,
+      "width": 91,
+      "height": 55,
+      "room": "typewriter",
+      "dir": "up"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 146,
+      "y": 440,
+      "image": "notebook",
+      "look": "notebook",
+      "prereqs": [{"var": "st_notebook_taken", "val": false}],
+      "use": {"var": "st_notebook_taken", "item": "notebook"}
+    }
+  ]
+},
+{
+  "name": "typewriter",
+  "song": "inside",
+  "background": "typewriter",
+  "exits": [
+    {
+      "x": 377,
+      "y": 56,
+      "width": 304,
+      "height": 138,
+      "room": "underwear",
+      "dir": "up"
+    },
+    {
+      "x": 0,
+      "y": 525,
+      "width": 800,
+      "height": 43,
+      "room": "typewriter_room",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 146,
+      "y": 373,
+      "image": "toykey",
+      "look": "key3",
+      "prereqs": [{"var": "st_toykey_taken", "val": false}],
+      "use": {"var": "st_toykey_taken", "item": "toykey"}
+    }
+  ]
+},
+{
+  "name": "underwear",
+  "song": "inside",
+  "background": "underwear",
+  "exits": [
+    {
+      "x": 0,
+      "y": 450,
+      "width": 800,
+      "height": 113,
+      "room": "typewriter",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+  ]
+},
+{
+  "name": "maps",
+  "song": "inside",
+  "background": "maps",
+  "exits": [
+    {
+      "x": 85,
+      "y": 510,
+      "width": 596,
+      "height": 58,
+      "room": "hall",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 198,
+      "y": 243,
+      "width": 395,
+      "height": 241,
+      "look": "maps",
+      "items": [{
+                 "sound": "draw_map",
+                 "item": "notebook",
+                 "effect": {"item": "notebook_drawn",
+                            "remove_item": "notebook"}
+               }]
+    }
+  ]
+},
+{
+  "name": "showers",
+  "song": "inside",
+  "background": "showers",
+  "exits": [
+    {
+      "x": 401,
+      "y": 212,
+      "width": 57,
+      "height": 247,
+      "room": "toilet",
+      "dir": "up"
+    },
+    {
+      "x": 620,
+      "y": 32,
+      "width": 180,
+      "height": 300,
+      "room": "fusebox",
+      "dir": "right"
+    },
+    {
+      "x": 207,
+      "y": 528,
+      "width": 593,
+      "height": 40,
+      "room": "hall",
+      "dir": "down",
+    }
+  ],
+  "interactables": [
+    {
+      "x": 484,
+      "y": 186,
+      "width": 137,
+      "height": 311,
+      "look": "locked_door",
+    }
+  ]
+},
+{
+  "name": "toilet",
+  "song": "inside",
+  "background": "toilet",
+  "exits": [
+    {
+      "x": 280,
+      "y": 546,
+      "width": 239,
+      "height": 22,
+      "room": "showers",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 429,
+      "y": 456,
+      "image": "paper",
+      "use": {"exit": "paper"},
+    },
+    {
+      "x": 336,
+      "y": 346,
+      "image": "wrench",
+      "look": "tool_box",
+      "use": {"var": "st_wrench_taken",
+              "item": "wrench"},
+      "prereqs": [{"var": "st_wrench_taken", "val": false}],
+    },
+    {
+      "x": 383,
+      "y": 271,
+      "width": 80,
+      "height": 175,
+      "look": "toilet"
+    },
+    {
+      "x": 630,
+      "y": 205,
+      "width": 59,
+      "height": 64,
+      "look": "toilet_lamp"
+    },
+    {
+      "x": 214,
+      "y": 370,
+      "width": 69,
+      "height": 56,
+      "look": "broken_tap2"
+    },
+  ]
+},
+{
+  "name": "paper",
+  "song": "inside",
+  "background": "paper",
+  "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 800,
+      "height": 536,
+      "room": "toilet",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+  ]
+},
+{
+  "name": "fusebox",
+  "song": "inside",
+  "background": "fusebox",
+  "exits": [
+    {
+      "x": 726,
+      "y": 32,
+      "width": 52,
+      "height": 537,
+      "room": "showers",
+      "dir": "right"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 491,
+      "y": 251,
+      "image": "fuse_up",
+      "prereqs": [{"var": "st_electricity_on", "val": true}]
+    },
+    {
+      "x": 390,
+      "y": 53,
+      "width": 164,
+      "height": 267,
+      "look": "no_fuse",
+      "prereqs": [{"var": "st_electricity_on", "val": false}],
+      "items": [{
+                 "item": "fuse", 
+                 "effect": {"var": "st_electricity_on",
+                           "remove_item": "fuse"}
+               }]
+    },
+    {
+      "x": 486,
+      "y": 330,
+      "image": "postcard",
+      "use": {"exit": "postcard"},
+    },
+  ]
+},
+{
+  "name": "postcard",
+  "song": "inside",
+  "background": "postcard",
+  "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 800,
+      "height": 536,
+      "room": "fusebox",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
   ]
 },
 {
@@ -656,7 +948,102 @@
       "dir": "up"
     },
   ],
-  "interactables": [//Lägg till
+  "interactables": [
+    {
+      "x": 467,
+      "y": 368,
+      "image": "diary",
+      "use": {"exit": "diary_1"}
+    },
+    {
+      "x": 393,
+      "y": 297,
+      "image": "saucepan_livingroom",
+      "prereqs": [{"var": "st_saucepan_taken", "val": false}],
+    }
+  ]
+},
+{
+  "name": "diary_1",
+  "song": "inside",
+  "background": "diary_1",
+  "exits": [
+    {
+      "x": 93,
+      "y": 534,
+      "width": 621,
+      "height": 33,
+      "room": "living_room",
+      "dir": "down"
+    },
+    {
+      "x": 407,
+      "y": 83,
+      "width": 304,
+      "height": 430,
+      "room": "diary_2",
+      "dir": "right"
+    }
+  ],
+  "interactables": [
+  ]
+},
+{
+  "name": "diary_2",
+  "song": "inside",
+  "background": "diary_2",
+  "exits": [
+    {
+      "x": 98,
+      "y": 81,
+      "width": 310,
+      "height": 440,
+      "room": "diary_1",
+      "dir": "left"
+    },
+    {
+      "x": 93,
+      "y": 534,
+      "width": 621,
+      "height": 33,
+      "room": "living_room",
+      "dir": "down"
+    },
+    {
+      "x": 407,
+      "y": 83,
+      "width": 304,
+      "height": 430,
+      "room": "diary_3",
+      "dir": "right"
+    }
+  ],
+  "interactables": [
+  ]
+},
+{
+  "name": "diary_3",
+  "song": "inside",
+  "background": "diary_3",
+  "exits": [
+    {
+      "x": 98,
+      "y": 81,
+      "width": 310,
+      "height": 440,
+      "room": "diary_2",
+      "dir": "left"
+    },
+    {
+      "x": 93,
+      "y": 534,
+      "width": 621,
+      "height": 33,
+      "room": "living_room",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
   ]
 },
 {
@@ -681,7 +1068,38 @@
       "dir": "up",
     }
   ],
-  "interactables": [//Lägg till
+  "interactables": [
+    {
+      "x": 0,
+      "y": 0,
+      "image": "drawers_open",
+      "prereqs": [{"var": "st_drawers_open", "val": true}],
+    },
+    {
+      "x": 324,
+      "y": 323,
+      "width": 80,
+      "height": 98,
+      "use": {"var": "st_drawers_open"},
+      "prereqs": [{"var": "st_drawers_open", "val": false}],
+    },
+    {
+      "x": 232,
+      "y": 391,
+      "width": 53,
+      "height": 53,
+      "use": {"vars": [{"var": "st_drawers_open", "val": false}]},
+      "prereqs": [{"var": "st_drawers_open", "val": true}],
+    },
+    {
+      "x": 260,
+      "y": 344,
+      "image": "fuse",
+      "look": "fuse",
+      "use": {"var": "st_fuse_taken", "item": "fuse"},
+      "prereqs": [{"var": "st_drawers_open", "val": true},
+                  {"var": "st_fuse_taken", "val": false}]
+    }
   ]
 },
 {
@@ -704,7 +1122,7 @@
       "y": 233,
       "width": 302,
       "height": 88,
-      "use": { "sound": "phone_open", "exit": "telephone_open"},
+      "use": {"sound": "phone_open", "exit": "telephone_open"},
       "dir": "up",
     }
   ]
@@ -731,7 +1149,7 @@
       "y": 349,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 1
     },
@@ -740,7 +1158,7 @@
       "y": 344,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 2
     },
@@ -749,7 +1167,7 @@
       "y": 350,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 3
     },
@@ -758,7 +1176,7 @@
       "y": 366,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 4
     },
@@ -767,7 +1185,7 @@
       "y": 388,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 5
     },
@@ -776,7 +1194,7 @@
       "y": 413,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 6
     },
@@ -785,7 +1203,7 @@
       "y": 432,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 7
     },
@@ -794,7 +1212,7 @@
       "y": 443,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 8
     },
@@ -803,7 +1221,7 @@
       "y": 442,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 9
     },
@@ -812,9 +1230,426 @@
       "y": 365,
       "width": 17,
       "height": 17,
-      "use": { "sound": "phone_button"},
+      "use": {"sound": "phone_button"},
       "type": "telephone",
       "number": 0
     },
+  ]
+},
+{
+  "name": "kitchen",
+  "song": "inside",
+  "background": "kitchen",
+  "exits": [
+    {
+      "x": 0,
+      "y": 509,
+      "width": 800,
+      "height": 60,
+      "room": "living_room",
+      "dir": "down"
+    },
+    {
+      "x": 563,
+      "y": 275,
+      "width": 237,
+      "height": 234,
+      "room": "kitchen_right",
+      "dir": "right"
+    },
+    {
+      "x": 154,
+      "y": 253,
+      "width": 128,
+      "height": 186,
+      "room": "kitchen_left",
+      "dir": "left"
+    },
+  ],
+  "interactables": [
+    {
+      "x": 316,
+      "y": 196,
+      "width": 80,
+      "height": 241,
+      "look": "locked_door"
+    }
+  ]
+},
+{
+  "name": "kitchen_right",
+  "song": "inside",
+  "background": "kitchen_right",
+  "exits": [
+    {
+      "x": 710,
+      "y": 290,
+      "width": 90,
+      "height": 278,
+      "room": "kitchen",
+      "dir": "right"
+    },
+    {
+      "x": 63,
+      "y": 530,
+      "width": 616,
+      "height": 38,
+      "room": "kitchen_left",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 305,
+      "y": 302,
+      "width": 61,
+      "height": 57,
+      "look": "tap_no_water",
+      "prereqs": [{"var": "st_water_running", "val": false}]
+    },
+    {
+      "x": 305,
+      "y": 302,
+      "width": 61,
+      "height": 57,
+      "look": "tap_water",
+      "prereqs": [{"var": "st_water_running", "val": true}],
+      "items": [{"item": "saucepan", 
+                 "effect": {"sound": "fill_saucepan",
+                            "remove_item": "saucepan",
+                            "item": "saucepan_filled"}}]
+    },
+    {
+      "x": 455,
+      "y": 342,
+      "width": 185,
+      "height": 91,
+      "look": "stove_off",
+      "prereqs": [{"var": "st_electricity_on", "val": false}]
+    },
+    {
+      "x": 455,
+      "y": 342,
+      "width": 185,
+      "height": 91,
+      "look": "stove_on",
+      "prereqs": [{"var": "st_electricity_on", "val": true}],
+      "items": [{"item": "saucepan_filled", 
+                 "effect": {"sound": "heat_water",
+                            "remove_item": "saucepan_filled",
+                            "item": "saucepan_hot"}}]
+    }
+  ]
+},
+{
+  "name": "kitchen_left",
+  "song": "inside",
+  "background": "kitchen_left",
+  "exits": [
+    {
+      "x": 0,
+      "y": 290,
+      "width": 90,
+      "height": 278,
+      "room": "kitchen",
+      "dir": "left"
+    },
+    {
+      "x": 95,
+      "y": 530,
+      "width": 616,
+      "height": 38,
+      "room": "kitchen_right",
+      "dir": "down"
+    },
+    {
+      "x": 441,
+      "y": 233,
+      "width": 163,
+      "height": 136,
+      "room": "microwave",
+      "dir": "up"
+    },
+  ],
+  "interactables": [
+    {
+      "x": 386,
+      "y": 285,
+      "width": 32,
+      "height": 74,
+      "look": "rat_poison"
+    }
+  ]
+},
+{
+  "name": "microwave",
+  "song": "inside",
+  "background": "microwave",
+  "exits": [
+    {
+      "x": 0,
+      "y": 509,
+      "width": 800,
+      "height": 60,
+      "room": "kitchen_left",
+      "dir": "down",
+      "prereqs": [{"var": "st_microwave_open", "val": false}]
+    }
+  ],
+  "interactables": [
+    {
+      "x": 0,
+      "y": 0,
+      "image": "microwave_open",
+      "prereqs": [{"var": "st_microwave_open", "val": true}],
+    },
+    {
+      "x": 158,
+      "y": 238,
+      "width": 428,
+      "height": 311,
+      "prereqs": [{"var": "st_microwave_open", "val": false}],
+      "use": {"var": "st_microwave_open"}
+    },
+    {
+      "x": 170,
+      "y": 499,
+      "width": 405,
+      "height": 70,
+      "prereqs": [{"var": "st_microwave_open", "val": true}],
+      "use": {"vars": [{"var": "st_microwave_open", "val": false}]}
+    },
+    {
+      "x": 358,
+      "y": 432,
+      "image": "typewriterkey",
+      "look": "key2",
+      "prereqs": [{"var": "st_microwave_open", "val": true},
+                  {"var": "st_typewriterkey_taken", "val": false}],
+      "use": {"var": "st_typewriterkey_taken",
+              "item": "typewriterkey"}
+    }
+  ]
+},
+{
+  "name": "bookcase",
+  "song": "inside",
+  "background": "bookcase",
+  "exits": [
+    {
+      "x": 97,
+      "y": 526,
+      "width": 565,
+      "height": 42,
+      "room": "living_room",
+      "dir": "down"
+    },
+    {
+      "x": 705,
+      "y": 282,
+      "width": 95,
+      "height": 286,
+      "room": "mrtn",
+      "dir": "right"
+    },
+    {
+      "x": 322,
+      "y": 195,
+      "width": 91,
+      "height": 277,
+      "room": "toys",
+      "dir": "up",
+      "prereqs": [{"var": "st_toys_open", "val": true}]
+    }
+  ],
+  "interactables": [
+    {
+      "x": 452,
+      "y": 244,
+      "width": 130,
+      "height": 147,
+      "look": "bookcase"
+    },
+    {
+      "x": 322,
+      "y": 195,
+      "width": 91,
+      "height": 277,
+      "look": "locked_door",
+      "prereqs": [{"var": "st_toys_open", "val": false}],
+      "items": [{"item": "toykey",
+                 "effect": {"var": "st_toys_open",
+                            "sound": "unlock"}}]
+    }
+  ]
+},
+{
+  "name": "toys",
+  "song": "inside",
+  "background": "toys",
+  "exits": [
+    {
+      "x": 281,
+      "y": 517,
+      "width": 375,
+      "height": 51,
+      "room": "bookcase",
+      "dir": "down"
+    },
+    {
+      "x": 313,
+      "y": 180,
+      "width": 124,
+      "height": 74,
+      "room": "keyboard",
+      "dir": "up"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 494,
+      "y": 367,
+      "image": "diary_lost",
+      "use": {"exit": "diary_lost"}
+    },
+    {
+      "x": 76,
+      "y": 250,
+      "width": 304,
+      "height": 244,
+      "look": "toys"
+    }
+  ]
+},
+{
+  "name": "diary_lost",
+  "song": "inside",
+  "background": "diary_lost",
+  "exits": [
+    {
+      "x": 0,
+      "y": 32,
+      "width": 800,
+      "height": 536,
+      "room": "toys",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+  ]
+},
+{
+  "name": "keyboard",
+  "song": "inside",
+  "volume": 0.3,
+  "background": "keyboard",
+  "exits": [
+    {
+      "x": 0,
+      "y": 517,
+      "width": 800,
+      "height": 51,
+      "room": "toys",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 294,
+      "y": 331,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_1"}
+    },
+    {
+      "x": 323,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_2"}
+    },
+    {
+      "x": 351,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_3"}
+    },
+    {
+      "x": 379,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_4"}
+    },
+    {
+      "x": 408,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_5"}
+    },
+    {
+      "x": 437,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_6"}
+    },
+    {
+      "x": 465,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_7"}
+    },
+    {
+      "x": 494,
+      "y": 332,
+      "width": 21,
+      "height": 28,
+      "use": {"sound": "keyboard_8"}
+    }
+  ]
+},
+{
+  "name": "mrtn",
+  "song": "inside",
+  "background": "mrtn",
+  "exits": [
+    {
+      "x": 686,
+      "y": 246,
+      "width": 114,
+      "height": 322,
+      "room": "living_room",
+      "dir": "right"
+    },
+    {
+      "x": 40,
+      "y": 524,
+      "width": 599,
+      "height": 44,
+      "room": "bookcase",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 236,
+      "y": 311,
+      "width": 352,
+      "height": 182,
+      "look": "mrtn"
+    },
+    {
+      "x": 285,
+      "y": 207,
+      "image": "saucepan",
+      "look": "mrtn",
+      "prereqs": [{"var": "st_saucepan_taken", "val": false}],
+      "use": {"var": "st_saucepan_taken",
+              "item": "saucepan"}
+    }
   ]
 }]

@@ -1,18 +1,8 @@
-State variables
-  st_hatch_open = false
-  st_window_open = false
-  st_illuminated = false
-  st_water = false
-  st_maindoor_open = false
-  st_doormat_moved = false
-  
-  st_mainkey_taken = false
-
-front
+front X
   inter: frozen
   prereq: !st_frozen_melted
 
-outhouse_outside
+outhouse_outside X
   inter: frozen
   prereq: !st_frozen_melted
   effect on item(saucepan_hot): st_frozen_melted && sound(melt)
@@ -20,12 +10,12 @@ outhouse_outside
   exit: outhouse
   prereq: st_frozen_melted
 
-outhouse
+outhouse X
   inter: shovel
   prereq: !st_shovel_taken
   effect on use: st_shovel_taken && inventory_add(shovel)
 
-crawlspace_outside
+crawlspace_outside X
   inter: hatch
   prereq: !st_hatch_open
   effect on use: st_hatch_open
@@ -36,11 +26,11 @@ crawlspace_outside
   exit: crawlspace
   prereq: st_hatch_open
  
-back
+back X
   exit: horror
   prereq: st_window_open && !st_handle_taken
 
-crawlspace
+crawlspace X
   inter: pipes
   prereq: st_illuminated && !st_water
   effect on item(wrench): st_water && sound(crank)
@@ -55,7 +45,7 @@ crawlspace
   background: crawlspace_illuminated
   prereq: st_illuminated
 
-entrance
+entrance X
   exit: hall
   prereq: st_maindoor_open
   effect on go: sound(door)
@@ -75,7 +65,7 @@ entrance
   prereq: st_doormat_moved && !st_mainkey_taken
   effect on use: st_mainkey_taken && inventory_add(mainkey)
 
-hall
+hall X
   exit: typewriterroom
   prereq: st_typewriterroom_open
   effect on go: sound(door)
@@ -90,10 +80,10 @@ hall
   exit: view
   effect on go: st_window_open
 
-shower
+shower X
   -
 
-fusebox
+fusebox X
   inter: fusebox
   prereq: !st_fuse_inserted
   effect on item(fuse): st_fuse_inserted
@@ -104,7 +94,7 @@ fusebox
   inter: postcard
   effect on use: exit(postcard)
 
-toilette
+toilet X
   inter: paper
   effect on use: exit(paper)
 
@@ -112,14 +102,14 @@ toilette
   prereq: !st_wrench_taken
   effect on use: st_wrench_taken && inventory_add(wrench)
 
-livingroom
+livingroom X
   inter: saucepan
   prereq: !st_saucepan_taken
 
   inter: diary
   effect on use: exit(diary)
 
-drawers
+drawers X
   inter: drawer
   prereq: !st_drawer_open
   effect on use: st_drawer_open
@@ -135,19 +125,19 @@ drawers
   prereq: st_drawer_open && !st_fuse_taken
   effect on use: st_fuse_taken && inventory_add(fuse)
 
-phone
+phone X
   inter: phone
   effect on use: exit(phone_picked)
 
-phone_picked
+phone_picked X
   TODO: Very special indeed yes
 
-mrtn
+mrtn X
   inter: saucepan
   prereq: !st_saucepan_taken
   effect on use: st_saucepan_taken && inventory_add(saucepan)
 
-bookcase
+bookcase X
   inter: door
   prereq: !st_toyroom_open
   effect on item(toykey): st_toyroom_open && sound(lock)
@@ -155,10 +145,10 @@ bookcase
   exit: toyroom
   prereq: st_toyroom_open
 
-toyroom
+toyroom X
   -
 
-keyboard
+keyboard X
   volume lower!
 
   inter: 1
@@ -185,13 +175,13 @@ keyboard
   inter: 8
   effect on use: sound(8)
 
-kitchen
+kitchen X
   -
 
-kitchen_left
+kitchen_left X
   -
 
-microwave
+microwave X
   inter: microwave
   prereq: !st_microwave_open
   effect: st_microwave_open
@@ -206,7 +196,7 @@ microwave
   exit: kitchen_left
   prereq: !st_microwave_open
 
-kitchen_right
+kitchen_right X
   inter: tap
   prereq: !st_water
 
@@ -225,7 +215,7 @@ kitchen_right
                                   && inventory_add(saucepan_hot)
                                   && sound(boil)
 
-typewriterroom
+typewriterroom X
   inter: notebook
   prereq: !st_notebook_taken
   effect: st_notebook_taken && inventory_add(notebook)
@@ -233,25 +223,25 @@ typewriterroom
   exit: hall
   effect on go: sound(door_close)
 
-typewriter
+typewriter X
   inter: toykey
   prereq: !st_toykey_taken
   effect: st_toykey_taken && inventory_add(toykey)
 
-underwear
+underwear X
   -
 
-maps
+maps X
   inter: map
   effect on item(notebook): inventory_remove(notebook) 
                             && inventory_add(notebook_drawn)
                             && sound(draw)
   
-view
+view X
   inter: frozen
   prereq: !st_frozen_melted
 
-horror
+horror X
   inter: handle
   prereq: !st_handle_taken
   effect: st_handle_taken && inventory_add(handle)
@@ -259,10 +249,10 @@ horror
   exit: back
   prereq: st_handle_taken
 
-car_outside
+car_outside X
   -
 
-car
+car /
   inter: flashlight
   prereq: !st_flashlight_taken
   effect: st_flashlight_taken && inventory_add(flashlight)

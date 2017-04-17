@@ -13,14 +13,16 @@ namespace HundensVagga {
         private readonly IList<VarVal> varVals;
         private readonly SoundEffectInstance sound;
         private readonly Item item;
+        private readonly Item removeItem;
         private readonly Inventory inventory;
         private readonly string exit;
 
-        public Effect(IList<VarVal> varVals, SoundEffectInstance sound, Item item, 
+        public Effect(IList<VarVal> varVals, SoundEffectInstance sound, Item item, Item removeItem,
                 Inventory inventory, String exit) {
             this.varVals = varVals;
             this.sound = sound;
             this.item = item;
+            this.removeItem = removeItem;
             this.inventory = inventory;
             this.exit = exit;
         }
@@ -29,6 +31,7 @@ namespace HundensVagga {
             SetVarVals();
             PlaySound();
             AddItemToInventory();
+            RemoveItemFromInventory();
             GoToExit(mainGameState);
         }
 
@@ -45,6 +48,11 @@ namespace HundensVagga {
         private void AddItemToInventory() {
             if (item != null)
                 inventory.AddItem(item);
+        }
+
+        private void RemoveItemFromInventory() {
+            if (removeItem != null)
+                inventory.RemoveItem(removeItem);
         }
 
         private void GoToExit(MainGameState mainGameState) {

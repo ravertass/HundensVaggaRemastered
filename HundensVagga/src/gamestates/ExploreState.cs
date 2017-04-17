@@ -51,7 +51,7 @@ namespace HundensVagga {
         }
 
         protected virtual void UseExit(Exit exit) {
-            exit.PlaySound();
+            exit.DoEffects();
             mainGameState.GoToRoom(exit.RoomName);
         }
 

@@ -29,6 +29,10 @@ namespace HundensVagga {
         [JsonProperty("item")]
         public string ItemName { get; set; }
 
+        // Item that is removed from the inventory
+        [JsonProperty("remove_item")]
+        public string RemoveItemName { get; set; }
+
         // Room to go to
         [JsonProperty("exit")]
         public string Exit { get; set; }
@@ -37,9 +41,10 @@ namespace HundensVagga {
                 StateOfTheWorld worldState, Items items) {
             SoundEffectInstance sound = GetSoundEffect(content);
             IList<VarVal> varVals = GetVarVals(worldState);
-            Item item = GetItem(items);
+            Item item = GetItem(items, ItemName);
+            Item removeItem = GetItem(items, RemoveItemName);
 
-            return new Effect(varVals, sound, item, items.Inventory, Exit);
+            return new Effect(varVals, sound, item, removeItem, items.Inventory, Exit);
         }
 
         private SoundEffectInstance GetSoundEffect(ContentManager content) {
@@ -64,9 +69,9 @@ namespace HundensVagga {
             return varVals;
         }
 
-        private Item GetItem(Items items) {
-            if (ItemName != null)
-                return items.GetItem(ItemName);
+        private Item GetItem(Items items, string itemName) {
+            if (itemName != null)
+                return items.GetItem(itemName);
             else
                 return null;
         }

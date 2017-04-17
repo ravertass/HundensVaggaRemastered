@@ -21,6 +21,10 @@ namespace HundensVagga {
         public Song Song {
             get { return song; }
         }
+        private readonly float volume;
+        public float Volume {
+            get { return volume; }
+        }
 
         private readonly Type specialStateType;
         public Type SpecialStateType {
@@ -31,10 +35,11 @@ namespace HundensVagga {
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
-        public Room(string name, Song song, Texture2D background, List<Exit> exits, 
+        public Room(string name, Song song, float volume, Texture2D background, List<Exit> exits, 
                 List<Interactable> interactables, Type specialStateType) {
             this.name = name;
             this.song = song;
+            this.volume = volume;
             this.background = background;
             this.exits = exits;
             this.interactables = interactables;
