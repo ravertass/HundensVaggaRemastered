@@ -100,7 +100,9 @@
       "items": [{
                  "item": "saucepan_hot", 
                  "effect": {"var": "st_frozen_melted", 
-                            "sound": "melt"}
+                            "sound": "melt",
+                            "remove_item": "saucepan_hot",
+                            "item": "saucepan"}
                }]
     },
     {
@@ -606,10 +608,16 @@
       "look": "no_handle",
       "prereqs": [{"var": "st_maps_open", "val": false}],
       "items": [{
-                 "item": "mapskey", 
+                 "item": "handle",
                  "effect": {"var": "st_maps_open", 
                             "sound": "unlock"}
                }]
+    },
+    {
+      "x": 602,
+      "y": 291,
+      "image": "handle_hall",
+      "prereqs": [{"var": "st_maps_open", "val": true}],
     },
     {
       "x": 350,
