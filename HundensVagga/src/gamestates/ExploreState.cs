@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
     /// <summary>
@@ -17,7 +18,7 @@ namespace HundensVagga {
             this.mainGameState = mainGameState;
         }
 
-        public virtual void Update(InputManager inputManager) {
+        public virtual void Update(InputManager inputManager, GameTime gameTime) {
             // inventory has priority over exits and interactables
             if (CheckInventoryBag(inputManager))
                 return;

@@ -483,7 +483,7 @@
       "y": 256,
       "width": 109,
       "height": 125,
-      "room": "walk_down",
+      "room": "walk_towards_beach",
       "dir": "up"
     }
   ],
@@ -1658,6 +1658,127 @@
       "prereqs": [{"var": "st_saucepan_taken", "val": false}],
       "use": {"var": "st_saucepan_taken",
               "item": "saucepan"}
+    }
+  ]
+},
+{
+  "name": "walk_towards_beach",
+  "song": "outside",
+  "type": "walk",
+  "backgrounds_dir": "walk_towards_beach",
+  "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  "exit": "beach",
+  //"exit": "beach_panorama",
+  "state": "HundensVagga.WalkState"
+},
+{
+  "name": "walk_from_beach",
+  "song": "outside",
+  "type": "walk",
+  "backgrounds_dir": "walk_from_beach",
+  "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  "exit": "car_outside",
+  "state": "HundensVagga.WalkState"
+},
+{
+  "name": "walk_towards_treasure",
+  "song": "outside",
+  "type": "walk",
+  "backgrounds_dir": "walk_towards_treasure",
+  "backgrounds": ["1", "2"],
+  "exit": "treasure",
+  "state": "HundensVagga.WalkState"
+},
+{
+  "name": "walk_from_treasure",
+  "song": "outside",
+  "type": "walk",
+  "backgrounds_dir": "walk_from_treasure",
+  "backgrounds": ["1", "2"],
+  "exit": "walk_from_beach",
+  "state": "HundensVagga.WalkState"
+},
+//{
+//  "name": "beach_panorama",
+//  "song": "outside",
+//  "type": "panorama",
+//  "background": "beach_panorama",
+//  "exit": "beach",
+//},
+{
+  "name": "beach",
+  "song": "outside",
+  "background": "beach",
+  "exits": [
+    {
+      "x": 0,
+      "y": 473,
+      "width": 800,
+      "height": 96,
+      "room": "walk_from_beach",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 223,
+      "y": 218,
+      "width": 368,
+      "height": 218,
+      "look": "sea",
+      "items": [{"item": "notebook_drawn",
+                 "effect": {"exit": "walk_towards_treasure"}}]
+    },
+    {
+      "x": 0,
+      "y": 32,
+      "width": 800,
+      "height": 500,
+      "items": [{"item": "notebook_drawn",
+                 "effect": {"exit": "walk_towards_treasure"}}]
+    }
+  ]
+},
+{
+  "name": "treasure",
+  "song": "outside",
+  "background": "treasure",
+  "exits": [
+    {
+      "x": 0,
+      "y": 465,
+      "width": 800,
+      "height": 104,
+      "room": "walk_from_treasure",
+      "dir": "down"
+    }
+  ],
+  "interactables": [
+    {
+      "x": 0,
+      "y": 0,
+      "image": "treasure_dug",
+      "prereqs": [{"var": "st_treasure_dug", "val": true}],
+    },
+    {
+      "x": 284,
+      "y": 216,
+      "width": 276,
+      "height": 235,
+      "look": "treasure",
+      "prereqs": [{"var": "st_treasure_dug", "val": false}],
+      "items": [{"item": "shovel",
+                 "effect": {"var": "st_treasure_dug"}}]
+    },
+    {
+      "x": 342,
+      "y": 270,
+      "image": "musicbox",
+      "look": "music_box",
+      "prereqs": [{"var": "st_treasure_dug", "val": true},
+                  {"var": "st_musicbox_taken", "val": false}],
+      "use": {"var": "st_musicbox_taken",
+              "item": "musicbox"}
     }
   ]
 }]

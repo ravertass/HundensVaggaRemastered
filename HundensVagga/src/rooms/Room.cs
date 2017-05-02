@@ -31,7 +31,7 @@ namespace HundensVagga {
             get { return specialStateType; }
         }
 
-        private readonly Texture2D background;
+        protected Texture2D background;
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
@@ -60,6 +60,10 @@ namespace HundensVagga {
                     select exit).ToList<Exit>();
         }
 
+        public virtual void Update(GameTime gameTime) {
+            // do nothing
+        }
+
         public Interactable GetInteractableAt(Vector2 coords) {
             foreach (Interactable interactable in ActiveInteractables())
                 if (interactable.Rectangle.Contains(coords) && interactable.IsInteractive())
@@ -85,6 +89,10 @@ namespace HundensVagga {
             foreach (Interactable interactable in ActiveInteractables())
                 if (interactable.IsActive())
                     interactable.Draw(spriteBatch);
+        }
+
+        public virtual void GoTo() {
+            // do nothing
         }
 
         public bool HasSpecialState() {

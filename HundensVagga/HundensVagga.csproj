@@ -65,6 +65,7 @@
     <Compile Include="src\gamestates\IInGameState.cs" />
     <Compile Include="src\gamestates\InGameStateManager.cs" />
     <Compile Include="src\gamestates\TelephoneExploreState.cs" />
+    <Compile Include="src\gamestates\WalkState.cs" />
     <Compile Include="src\InputManager.cs" />
     <Compile Include="src\inventory\Inventory.cs" />
     <Compile Include="src\gamestates\InventoryState.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="src\gamestates\StateManager.cs" />
     <Compile Include="src\rooms\StateOfTheWorld.cs" />
     <Compile Include="src\gamestates\UseItemState.cs" />
+    <Compile Include="src\rooms\WalkRoom.cs" />
     <Compile Include="src\rooms\WorldStateVariable.cs" />
     <Compile Include="src\SongManager.cs" />
     <Compile Include="src\SongManagerState.cs" />

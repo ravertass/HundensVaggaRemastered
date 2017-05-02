@@ -58,12 +58,17 @@ namespace HundensVagga {
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
+            // TODO remove
+            inventory.AddItem(new Item("notebook_drawn", content.Load<Texture2D>("inventory/notebook_drawn")));
+            // TODO remove
+            inventory.AddItem(new Item("shovel", content.Load<Texture2D>("inventory/shovel")));
         }
 
-        public void Update(InputManager inputManager) {
+        public void Update(InputManager inputManager, GameTime gameTime) {
             cursorManager.SetToDefault();
             inventory.Update(inputManager);
-            inGameStateManager.CurrentState.Update(inputManager);
+            inGameStateManager.CurrentState.Update(inputManager, gameTime);
+            CurrentRoom.Update(gameTime);
             songManager.Update();
         }
 
@@ -79,11 +84,13 @@ namespace HundensVagga {
 
         private void ChangeRoom(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
+            CurrentRoom.GoTo();
             if (CurrentRoom.HasSpecialState())
                 inGameStateManager.CurrentState = (IInGameState)Activator.CreateInstance(
                     CurrentRoom.SpecialStateType, this);
             else
                 inGameStateManager.CurrentState = new ExploreState(this);
+            inGameStateManager.PushState();
         }
 
         public void Win() {

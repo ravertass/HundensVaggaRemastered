@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
     /// <summary>
@@ -12,7 +13,7 @@ namespace HundensVagga {
             this.mainGameState = mainGameState;
         }
 
-        public void Update(InputManager inputManager) {
+        public void Update(InputManager inputManager, GameTime gameTime) {
             Inventory inventory = mainGameState.Inventory;
 
             inventory.SetItemCoords();

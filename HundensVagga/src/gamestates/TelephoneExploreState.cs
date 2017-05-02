@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,12 +32,12 @@ namespace HundensVagga {
             idleSound.Play();
         }
 
-        public override void Update(InputManager inputManager) {
+        public override void Update(InputManager inputManager, GameTime gameTime) {
             if (wrongNumberSound.State == SoundState.Stopped &&
                 idleSound.State == SoundState.Stopped)
                 idleSound.Play();
 
-            base.Update(inputManager);
+            base.Update(inputManager, gameTime);
         }
 
         protected override void UseInteractable(Interactable interactable) {

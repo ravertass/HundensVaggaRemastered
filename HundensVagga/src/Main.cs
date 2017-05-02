@@ -93,7 +93,7 @@ namespace HundensVagga {
         protected override void Update(GameTime gameTime) {
             // Delegate most update work to the current game state
             // (e.g. if we're in a menu or in the main game)
-            stateManager.CurrentState.Update(inputManager);
+            stateManager.CurrentState.Update(inputManager, gameTime);
             // But always keep track of input
             inputManager.Update();
 
