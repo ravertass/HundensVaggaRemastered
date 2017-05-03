@@ -62,10 +62,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src\CursorManager.cs" />
+    <Compile Include="src\gamestates\CutsceneState.cs" />
     <Compile Include="src\gamestates\IInGameState.cs" />
     <Compile Include="src\gamestates\InGameStateManager.cs" />
     <Compile Include="src\gamestates\TelephoneExploreState.cs" />
-    <Compile Include="src\gamestates\WalkState.cs" />
     <Compile Include="src\InputManager.cs" />
     <Compile Include="src\inventory\Inventory.cs" />
     <Compile Include="src\gamestates\InventoryState.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="src\inventory\Items.cs" />
     <Compile Include="src\rooms\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
+    <Compile Include="src\rooms\ICutsceneRoom.cs" />
     <Compile Include="src\rooms\IEffect.cs" />
     <Compile Include="src\json\ItemEffectJson.cs" />
     <Compile Include="src\json\ItemJson.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="src\rooms\Interactable.cs" />
     <Compile Include="src\json\InteractableJson.cs" />
     <Compile Include="src\Main.cs" />
+    <Compile Include="src\rooms\IRoom.cs" />
+    <Compile Include="src\rooms\PanoramaRoom.cs" />
     <Compile Include="src\rooms\Songs.cs" />
     <Compile Include="src\rooms\TelephoneInteractable.cs" />
     <Compile Include="src\rooms\VarVal.cs" />

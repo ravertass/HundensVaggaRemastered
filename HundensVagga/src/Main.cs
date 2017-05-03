@@ -34,9 +34,10 @@ namespace HundensVagga {
         CursorManager cursorManager;
 
         public Main() {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600; 
+            graphics = new GraphicsDeviceManager(this) {
+                PreferredBackBufferWidth = 800,
+                PreferredBackBufferHeight = 600
+            };
             graphics.ApplyChanges();
             Content.RootDirectory = CONTENT_DIR;
         }

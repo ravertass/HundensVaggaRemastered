@@ -74,6 +74,9 @@ namespace HundensVagga {
                 case SpecialRoomTypeEnum.walk:
                     List<Texture2D> backgrounds = GetBackgrounds(content);
                     return new WalkRoom(Name, song, volume, backgrounds, Exit, stateType);
+                case SpecialRoomTypeEnum.panorama:
+                    Texture2D background = GetBackground(content, Background);
+                    return new PanoramaRoom(Name, song, volume, background, Exit, stateType);
                 default:
                     throw new TypeLoadException("No such room: " + RoomType);
             }

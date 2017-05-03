@@ -11,7 +11,7 @@ namespace HundensVagga {
     /// <summary>
     /// An in-game room.
     /// </summary>
-    internal class Room {
+    internal class Room : IRoom {
         private readonly string name;
         public string Name {
             get { return name; }
@@ -80,7 +80,7 @@ namespace HundensVagga {
             return null;
         }
 
-        public void Draw(SpriteBatch spriteBatch) {
+        public virtual void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(background, new Vector2(0f, 0f), Color.White);
             DrawInteractables(spriteBatch);
         }

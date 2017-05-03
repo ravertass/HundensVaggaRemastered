@@ -1667,9 +1667,8 @@
   "type": "walk",
   "backgrounds_dir": "walk_towards_beach",
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  "exit": "beach",
-  //"exit": "beach_panorama",
-  "state": "HundensVagga.WalkState"
+  "exit": "beach_panorama",
+  "state": "HundensVagga.CutsceneState"
 },
 {
   "name": "walk_from_beach",
@@ -1678,7 +1677,7 @@
   "backgrounds_dir": "walk_from_beach",
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   "exit": "car_outside",
-  "state": "HundensVagga.WalkState"
+  "state": "HundensVagga.CutsceneState"
 },
 {
   "name": "walk_towards_treasure",
@@ -1687,7 +1686,7 @@
   "backgrounds_dir": "walk_towards_treasure",
   "backgrounds": ["1", "2"],
   "exit": "treasure",
-  "state": "HundensVagga.WalkState"
+  "state": "HundensVagga.CutsceneState"
 },
 {
   "name": "walk_from_treasure",
@@ -1696,15 +1695,16 @@
   "backgrounds_dir": "walk_from_treasure",
   "backgrounds": ["1", "2"],
   "exit": "walk_from_beach",
-  "state": "HundensVagga.WalkState"
+  "state": "HundensVagga.CutsceneState"
 },
-//{
-//  "name": "beach_panorama",
-//  "song": "outside",
-//  "type": "panorama",
-//  "background": "beach_panorama",
-//  "exit": "beach",
-//},
+{
+  "name": "beach_panorama",
+  "song": "outside",
+  "type": "panorama",
+  "background": "beach_panorama",
+  "exit": "beach",
+  "state": "HundensVagga.CutsceneState"
+},
 {
   "name": "beach",
   "song": "outside",

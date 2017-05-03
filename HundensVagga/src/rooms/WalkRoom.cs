@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
-    internal class WalkRoom : Room {
+    internal class WalkRoom : Room, ICutsceneRoom {
 
         private List<Texture2D> backgrounds;
 
         private int backgroundIndex;
         private double elapsedTime;
-        private static readonly double TIME_STEP = 1.0;
+        private static readonly double TIME_STEP = 1.5;
 
         private String exitRoomName;
         public String ExitRoomName {
@@ -22,8 +22,8 @@ namespace HundensVagga {
         }
 
         public WalkRoom(string name, Song song, float volume, List<Texture2D> backgrounds, 
-            String exitRoomName, Type specialStateType) : 
-            base(name, song, volume, GetFirstBackground(backgrounds), new List<Exit>(), 
+            String exitRoomName, Type specialStateType) 
+            : base(name, song, volume, GetFirstBackground(backgrounds), new List<Exit>(), 
                 new List<Interactable>(), specialStateType) {
             this.backgrounds = backgrounds;
             this.exitRoomName = exitRoomName;

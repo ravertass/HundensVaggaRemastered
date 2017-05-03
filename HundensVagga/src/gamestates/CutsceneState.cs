@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
-    internal class WalkState : IInGameState {
+    internal class CutsceneState : IInGameState {
 
         private MainGameState mainGameState;
 
-        public WalkState(MainGameState mainGameState) {
+        public CutsceneState(MainGameState mainGameState) {
             this.mainGameState = mainGameState;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            if (mainGameState.CurrentRoom is WalkRoom room) {
+            mainGameState.CursorManager.SetToDirection(Direction.up);
+
+            if (mainGameState.CurrentRoom is ICutsceneRoom room) {
                 room.Update(gameTime);
-                if (room.ShouldGoToExit()) {
+                if (room.ShouldGoToExit() || inputManager.IsLeftButtonPressed())
                     mainGameState.GoToRoom(room.ExitRoomName);
-                }
+            } else {
+                throw new Exception("At cutscene state without cutscene room.");
             }
         }
     }
