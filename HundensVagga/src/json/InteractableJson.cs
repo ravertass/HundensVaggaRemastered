@@ -9,6 +9,10 @@ using System;
 using System.Collections;
 
 namespace HundensVagga {
+    internal enum SpecialInteractableEnum {
+        telephone
+    }
+
     /// <summary>
     /// For deserialization of JSON data regarding interactables. Used to create an Interactable instance.
     /// </summary>
@@ -40,41 +44,38 @@ namespace HundensVagga {
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
+        [JsonProperty("type")]
+        public string SpecialType { get; set; }
+
+        [JsonProperty("number")]
+        public int Number { get; set; }
+
         public Interactable GetInteractableInstance(ContentManager content, 
                 StateOfTheWorld worldState, Items items) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
             IEffect useEffect = GetUseEffect(content, worldState, items);
             IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items);
             IList<VarVal> prereqs = GetPrereqs(worldState);
+            Texture2D texture = GetTexture(content);
+            Rectangle rect = GetRectangle(texture);
 
-            Texture2D texture = null;
-            Rectangle rect;
-            if (Image == null)
-                rect = new Rectangle(X, Y, Width, Height);
-            else {
-                texture = content.Load<Texture2D>(Main.INTERACTABLES_DIR
-                    + Path.DirectorySeparatorChar + Image);
-                rect = new Rectangle(X, Y, texture.Width, texture.Height);
-            }
-
-            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+            return GetInteractable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
             if (Look != null)
                 return content.Load<SoundEffect>(Main.VOICE_DIR
                     + Path.DirectorySeparatorChar + Look).CreateInstance();
-            else
-                return null;
+
+            return null;
         }
 
         private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState, 
                 Items items) {
             if (Use != null)
                 return Use.GetEffectInstance(content, worldState, items);
-            else
-                return null;
 
+            return null;
         }
 
         private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
@@ -84,6 +85,7 @@ namespace HundensVagga {
                 foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
                         itemEffectJson.Effect.GetEffectInstance(content, worldState, items));
+
             return itemEffects;
         }
 
@@ -94,6 +96,46 @@ namespace HundensVagga {
                     prereqs.Add(prereqJson.GetVarValInstance(worldState));
 
             return prereqs;
+        }
+
+        private Texture2D GetTexture(ContentManager content) {
+            if (Image != null)
+                return content.Load<Texture2D>(Main.INTERACTABLES_DIR
+                    + Path.DirectorySeparatorChar + Image);
+
+            return null;
+        }
+
+        private Rectangle GetRectangle(Texture2D texture) {
+            if (texture != null)
+                return new Rectangle(X, Y, texture.Width, texture.Height);
+
+            return new Rectangle(X, Y, Width, Height);
+        }
+
+        private Interactable GetInteractable(Rectangle rect, SoundEffectInstance lookSound,
+            IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+            Texture2D texture) {
+            if (SpecialType != null)
+                return GetSpecialInteractable(rect, lookSound, useEffect, itemEffects, prereqs,
+                                              texture);
+
+            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+        }
+
+        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound,
+                IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+                Texture2D texture) {
+            SpecialInteractableEnum type = 
+                (SpecialInteractableEnum)Enum.Parse(typeof(SpecialInteractableEnum), SpecialType);
+
+            switch (type) {
+                case SpecialInteractableEnum.telephone:
+                    return new TelephoneInteractable(rect, lookSound, useEffect, itemEffects,
+                                                     prereqs, Number, texture);
+                default:
+                    throw new TypeLoadException("No such interactable: " + SpecialType);
+            }
         }
     }
 }

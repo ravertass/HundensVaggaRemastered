@@ -34,9 +34,10 @@ namespace HundensVagga {
         CursorManager cursorManager;
 
         public Main() {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600; 
+            graphics = new GraphicsDeviceManager(this) {
+                PreferredBackBufferWidth = 800,
+                PreferredBackBufferHeight = 600
+            };
             graphics.ApplyChanges();
             Content.RootDirectory = CONTENT_DIR;
         }
@@ -93,7 +94,7 @@ namespace HundensVagga {
         protected override void Update(GameTime gameTime) {
             // Delegate most update work to the current game state
             // (e.g. if we're in a menu or in the main game)
-            stateManager.CurrentState.Update(inputManager);
+            stateManager.CurrentState.Update(inputManager, gameTime);
             // But always keep track of input
             inputManager.Update();
 

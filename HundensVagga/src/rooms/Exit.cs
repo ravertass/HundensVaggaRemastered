@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 
 namespace HundensVagga {
@@ -31,19 +32,39 @@ namespace HundensVagga {
             get { return direction; }
         }
 
-        public Exit(Rectangle rectangle, string room, Direction direction, IList<VarVal> prereqs) {
+        private SoundEffectInstance soundEffect;
+        private VarVal varVal;
+
+        public Exit(Rectangle rectangle, string room, Direction direction, IList<VarVal> prereqs,
+                SoundEffectInstance soundEffect, VarVal varVal) {
             this.rectangle = rectangle;
             this.roomName = room;
             this.direction = direction;
             this.prereqs = prereqs;
+            this.soundEffect = soundEffect;
+            this.varVal = varVal;
         }
-
 
         public bool IsActive() {
             foreach (VarVal prereq in prereqs)
                 if (!prereq.IsMet())
                     return false;
             return true;
+        }
+
+        public void DoEffects() {
+            PlaySound();
+            SetVarVal();
+        }
+
+        private void PlaySound() {
+            if (soundEffect != null)
+                soundEffect.Play();
+        }
+
+        private void SetVarVal() {
+            if (varVal != null)
+                varVal.Set();
         }
     }
 }

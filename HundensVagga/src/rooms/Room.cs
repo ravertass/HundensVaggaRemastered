@@ -11,7 +11,7 @@ namespace HundensVagga {
     /// <summary>
     /// An in-game room.
     /// </summary>
-    internal class Room {
+    internal class Room : IRoom {
         private readonly string name;
         public string Name {
             get { return name; }
@@ -21,18 +21,29 @@ namespace HundensVagga {
         public Song Song {
             get { return song; }
         }
+        private readonly float volume;
+        public float Volume {
+            get { return volume; }
+        }
 
-        private readonly Texture2D background;
+        private readonly Type specialStateType;
+        public Type SpecialStateType {
+            get { return specialStateType; }
+        }
+
+        protected Texture2D background;
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
-        public Room(string name, Song song, Texture2D background, List<Exit> exits, 
-                List<Interactable> interactables) {
+        public Room(string name, Song song, float volume, Texture2D background, List<Exit> exits, 
+                List<Interactable> interactables, Type specialStateType) {
             this.name = name;
             this.song = song;
+            this.volume = volume;
             this.background = background;
             this.exits = exits;
             this.interactables = interactables;
+            this.specialStateType = specialStateType;
         }
 
         private List<Interactable> ActiveInteractables() {
@@ -47,6 +58,10 @@ namespace HundensVagga {
                     in exits
                     where exit.IsActive()
                     select exit).ToList<Exit>();
+        }
+
+        public virtual void Update(GameTime gameTime) {
+            // do nothing
         }
 
         public Interactable GetInteractableAt(Vector2 coords) {
@@ -65,7 +80,7 @@ namespace HundensVagga {
             return null;
         }
 
-        public void Draw(SpriteBatch spriteBatch) {
+        public virtual void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(background, new Vector2(0f, 0f), Color.White);
             DrawInteractables(spriteBatch);
         }
@@ -74,6 +89,14 @@ namespace HundensVagga {
             foreach (Interactable interactable in ActiveInteractables())
                 if (interactable.IsActive())
                     interactable.Draw(spriteBatch);
+        }
+
+        public virtual void GoTo() {
+            // do nothing
+        }
+
+        public bool HasSpecialState() {
+            return specialStateType != null;
         }
     }
 }

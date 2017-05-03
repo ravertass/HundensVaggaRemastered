@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace HundensVagga {
             this.currentItem = currentItem;
         }
 
-        public void Update(InputManager inputManager) {
+        public void Update(InputManager inputManager, GameTime gameTime) {
             mainGameState.CursorManager.SetToItem();
             CheckInteractables(inputManager);
         }
@@ -28,12 +29,12 @@ namespace HundensVagga {
                 mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed()) {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
-                    interactable.UseItem(currentItem);
+                    interactable.UseItem(currentItem, mainGameState);
                 } else {
-                    Console.WriteLine("nej");
+                    Console.WriteLine("nej: " + currentItem.Name);
                     // TODO: play fail sound
                 }
-                mainGameState.CurrentState = new ExploreState(mainGameState);
+                mainGameState.InGameStateManager.PopState();
             }
         }
     }

@@ -12,6 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
+    internal enum SpecialRoomTypeEnum {
+        walk, panorama
+    }
+
     /// <summary>
     /// For deserialization of JSON game room data. Used to create a Room instance.
     /// </summary>
@@ -22,6 +26,9 @@ namespace HundensVagga {
         [JsonProperty("song")]
         public string Song { get; set; }
 
+        [JsonProperty("volume")]
+        public float Volume { get; set; }
+
         [JsonProperty("background")]
         public string Background { get; set; }
 
@@ -31,21 +38,72 @@ namespace HundensVagga {
         [JsonProperty("interactables")]
         public List<InteractableJson> Interactables { get; set; }
 
+        [JsonProperty("state")]
+        public string State { get; set; }
+
+        [JsonProperty("type")]
+        public string RoomType { get; set; }
+
+        [JsonProperty("backgrounds_dir")]
+        public string BackgroundsDirectory { get; set; }
+
+        [JsonProperty("backgrounds")]
+        public List<string> Backgrounds { get; set; }
+
+        [JsonProperty("exit")]
+        public string Exit { get; set; }
+
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
                 Items items, Songs songs) {
-            List<Exit> exits = GetExits(worldState);
-            List<Interactable> interactables = GetInteractables(content, worldState, items);
             Song song = GetSong(songs);
-            Texture2D background = GetBackground(content);
+            float volume = GetVolume();
+            Type stateType = GetStateType();
 
-            return new Room(Name, song, background, exits, interactables);
+            if (RoomType == null)
+                return CreateRoom(content, worldState, items, song, volume, stateType);
+
+            return CreateSpecialRoom(content, worldState, items, song, volume, stateType);
         }
 
-        private List<Exit> GetExits(StateOfTheWorld worldState) {
+        private Room CreateSpecialRoom(ContentManager content, StateOfTheWorld worldState, 
+                Items items, Song song, float volume, Type stateType) {
+            SpecialRoomTypeEnum type =
+                (SpecialRoomTypeEnum)Enum.Parse(typeof(SpecialRoomTypeEnum), RoomType);
+
+            switch (type) {
+                case SpecialRoomTypeEnum.walk:
+                    List<Texture2D> backgrounds = GetBackgrounds(content);
+                    return new WalkRoom(Name, song, volume, backgrounds, Exit, stateType);
+                case SpecialRoomTypeEnum.panorama:
+                    Texture2D background = GetBackground(content, Background);
+                    return new PanoramaRoom(Name, song, volume, background, Exit, stateType);
+                default:
+                    throw new TypeLoadException("No such room: " + RoomType);
+            }
+        }
+
+        private List<Texture2D> GetBackgrounds(ContentManager content) {
+            List<Texture2D> backgrounds = new List<Texture2D>();
+            foreach (string backgroundName in Backgrounds)
+                backgrounds.Add(GetBackground(content, 
+                    BackgroundsDirectory + Path.DirectorySeparatorChar + backgroundName));
+            return backgrounds;
+        }
+
+        private Room CreateRoom(ContentManager content, StateOfTheWorld worldState,
+                Items items, Song song, float volume, Type stateType) {
+            List<Exit> exits = GetExits(content, worldState);
+            List<Interactable> interactables = GetInteractables(content, worldState, items);
+            Texture2D background = GetBackground(content, Background);
+
+            return new Room(Name, song, volume, background, exits, interactables, stateType);
+        }
+
+        private List<Exit> GetExits(ContentManager content, StateOfTheWorld worldState) {
             List<Exit> exits = new List<Exit>();
 
             foreach (ExitJson exitJson in Exits)
-                exits.Add(exitJson.GetExitInstance(worldState));
+                exits.Add(exitJson.GetExitInstance(content, worldState));
 
             return exits;
         }
@@ -65,9 +123,23 @@ namespace HundensVagga {
             return songs.GetSong(Song);
         }
 
-        private Texture2D GetBackground(ContentManager content) {
+        private float GetVolume() {
+            return (Volume == 0.0f) ? 1.0f : Volume;
+        }
+
+        private Texture2D GetBackground(ContentManager content, string backgroundName) {
             return content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
-                Path.DirectorySeparatorChar + Background);
+                Path.DirectorySeparatorChar + backgroundName);
+        }
+
+        private Type GetStateType() {
+            if (State != null) {
+                Type stateType = Type.GetType(State);
+                if (!stateType.GetInterfaces().Contains(typeof(IInGameState)))
+                    throw new Exception("Non-existing state type: " + State);
+                return stateType;
+            } else
+                return null;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HundensVagga {
     /// </summary>
     public class Inventory {
         private const int ITEM_X_OFFSET = 25;
-        private const int ITEM_X_DIFF = 100;
+        private const int ITEM_X_DIFF = 75;
         public const int ITEM_Y_OFFSET = 25;
 
         private InventoryUI ui;
@@ -27,6 +27,10 @@ namespace HundensVagga {
 
         public void AddItem(Item item) {
             items.Add(item);
+        }
+
+        public void RemoveItem(Item item) {
+            items.Remove(item);
         }
 
         public void Update(InputManager inputManager) {

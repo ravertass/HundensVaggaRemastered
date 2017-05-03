@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace HundensVagga {
     /// <summary>
@@ -12,7 +13,7 @@ namespace HundensVagga {
             this.mainGameState = mainGameState;
         }
 
-        public void Update(InputManager inputManager) {
+        public void Update(InputManager inputManager, GameTime gameTime) {
             Inventory inventory = mainGameState.Inventory;
 
             inventory.SetItemCoords();
@@ -23,7 +24,7 @@ namespace HundensVagga {
         private void CheckInventoryBag(InputManager inputManager, Inventory inventory) {
             if (mainGameState.Inventory.IsBagClicked(inputManager)) {
                 inventory.GoUp();
-                mainGameState.CurrentState = new ExploreState(mainGameState);
+                mainGameState.InGameStateManager.PopState();
             }
         }
 
@@ -31,7 +32,8 @@ namespace HundensVagga {
             Item clickedItem = inventory.GetItemAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed() && clickedItem != null) {
                 inventory.GoUp();
-                mainGameState.CurrentState = new UseItemState(mainGameState, clickedItem);
+                mainGameState.InGameStateManager.CurrentState = 
+                    new UseItemState(mainGameState, clickedItem);
             }
         }
     }

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class SongManager {
-        public bool IsRepeating { get; set; }
         public ISongManagerState State { get; set; }
         public Song CurrentSong { get; set; }
 
         public SongManager() {
-            IsRepeating = true;
+            MediaPlayer.IsRepeating = true;
             State = new SongManagerIdle();
             CurrentSong = null;
         }
@@ -21,9 +20,10 @@ namespace HundensVagga {
             State.Update(this);
         }
 
-        public void NewRoomSong(Song song) {
-            if (song != CurrentSong)
-                FadeOutThenIntoSong(song);
+        public void NewRoom(Room room) {
+            if (room.Song != CurrentSong)
+                FadeOutThenIntoSong(room.Song);
+            MediaPlayer.Volume = room.Volume;
         }
 
         private void FadeOutThenIntoSong(Song song) {

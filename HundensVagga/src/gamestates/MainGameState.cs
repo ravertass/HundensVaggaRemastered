@@ -18,7 +18,11 @@ namespace HundensVagga {
         private const string START_ROOM_NAME = "front";
 
         private StateManager stateManager;
+
         private ContentManager content;
+        public ContentManager Content {
+            get { return content; }
+        }
 
         private CursorManager cursorManager;
         public CursorManager CursorManager {
@@ -34,7 +38,10 @@ namespace HundensVagga {
             get { return inventory; }
         }
 
-        public IInGameState CurrentState { get; set; }
+        private InGameStateManager inGameStateManager;
+        public InGameStateManager InGameStateManager {
+            get { return inGameStateManager; }
+        }
 
         public MainGameState(StateManager stateManager, ContentManager content, 
                 CursorManager cursorManager, Rooms rooms, Inventory inventory) {
@@ -43,6 +50,7 @@ namespace HundensVagga {
             this.cursorManager = cursorManager;
             this.rooms = rooms;
             this.inventory = inventory;
+            inGameStateManager = new InGameStateManager();
 
             songManager = new SongManager();
 
@@ -50,14 +58,17 @@ namespace HundensVagga {
 
             // TODO remove
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
-
-            CurrentState = new ExploreState(this);
+            // TODO remove
+            inventory.AddItem(new Item("notebook_drawn", content.Load<Texture2D>("inventory/notebook_drawn")));
+            // TODO remove
+            inventory.AddItem(new Item("shovel", content.Load<Texture2D>("inventory/shovel")));
         }
 
-        public void Update(InputManager inputManager) {
+        public void Update(InputManager inputManager, GameTime gameTime) {
             cursorManager.SetToDefault();
             inventory.Update(inputManager);
-            CurrentState.Update(inputManager);
+            inGameStateManager.CurrentState.Update(inputManager, gameTime);
+            CurrentRoom.Update(gameTime);
             songManager.Update();
         }
 
@@ -68,16 +79,23 @@ namespace HundensVagga {
 
         public void GoToRoom(string roomName) {
             ChangeRoom(roomName);
-            songManager.NewRoomSong(CurrentRoom.Song);
-        }
-
-        public void StartAtRoom(string roomName) {
-            ChangeRoom(roomName);
-            songManager.FadeIntoSong(CurrentRoom.Song);
+            songManager.NewRoom(CurrentRoom);
         }
 
         private void ChangeRoom(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
+            CurrentRoom.GoTo();
+            if (CurrentRoom.HasSpecialState())
+                inGameStateManager.CurrentState = (IInGameState)Activator.CreateInstance(
+                    CurrentRoom.SpecialStateType, this);
+            else
+                inGameStateManager.CurrentState = new ExploreState(this);
+            inGameStateManager.PushState();
+        }
+
+        public void Win() {
+            // TODO go to win state
+            Console.WriteLine("Tired of winning");
         }
     }
 }

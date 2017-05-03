@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace HundensVagga {
     /// An in-game state (e.g. using inventory, exploring) that MainGameState delegates work to.
     /// </summary>
     public interface IInGameState {
-        void Update(InputManager inputManager);
+        void Update(InputManager inputManager, GameTime gameTime);
     }
 }

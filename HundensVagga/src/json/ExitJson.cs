@@ -2,6 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using System.IO;
 
 namespace HundensVagga {
     /// <summary>
@@ -29,8 +32,15 @@ namespace HundensVagga {
         [JsonProperty("prereqs")]
         public List<VarValJson> Prereqs { get; set; }
 
-        public Exit GetExitInstance(StateOfTheWorld worldState) {
-            return new Exit(GetRectangle(), Room, GetDirectionEnum(), GetPrereqs(worldState));
+        [JsonProperty("var")]
+        public string Var { get; set; }
+
+        [JsonProperty("sound")]
+        public string Sound { get; set; }
+
+        public Exit GetExitInstance(ContentManager content, StateOfTheWorld worldState) {
+            return new Exit(GetRectangle(), Room, GetDirectionEnum(), GetPrereqs(worldState), 
+                            GetSoundEffect(content), GetVarVal(worldState));
         }
 
         private Rectangle GetRectangle() {
@@ -48,6 +58,18 @@ namespace HundensVagga {
                     prereqs.Add(prereqJson.GetVarValInstance(worldState));
 
             return prereqs;
+        }
+
+        private SoundEffectInstance GetSoundEffect(ContentManager content) {
+            if (Sound != null)
+                return content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
+                        + Path.DirectorySeparatorChar + Sound).CreateInstance();
+
+            return null;
+        }
+
+        private VarVal GetVarVal(StateOfTheWorld worldState) {
+            return (Var != null) ? new VarVal(worldState.Get(Var), true) : null;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace HundensVagga {
         public override void Update(SongManager songManager) {
             MediaPlayer.Volume += VOLUME_SPEED;
 
-            if (MediaPlayer.Volume == MIN_VOLUME)
+            if (MediaPlayer.Volume == MAX_VOLUME)
                 songManager.State = new SongManagerIdle();
         }
     }

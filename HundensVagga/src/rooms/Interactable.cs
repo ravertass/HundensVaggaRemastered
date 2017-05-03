@@ -52,20 +52,20 @@ namespace HundensVagga {
             lookSound.Play();
         }
 
-        public bool IsUsable() {
+        public virtual bool IsUsable() {
             return useEffect != null;
         }
 
-        public void Use() {
-            useEffect.Perform();
+        public void Use(MainGameState mainGameState) {
+            useEffect.Perform(mainGameState);
         }
 
         public bool IsItemUsable(Item item) {
             return itemEffects.ContainsKey(item.Name);
         }
 
-        public void UseItem(Item item) {
-            itemEffects[item.Name].Perform();
+        public void UseItem(Item item, MainGameState mainGameState) {
+            itemEffects[item.Name].Perform(mainGameState);
         }
 
         public void Draw(SpriteBatch spriteBatch) {
