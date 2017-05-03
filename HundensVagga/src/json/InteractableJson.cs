@@ -51,10 +51,11 @@ namespace HundensVagga {
         public int Number { get; set; }
 
         public Interactable GetInteractableInstance(ContentManager content, 
-                StateOfTheWorld worldState, Items items) {
+                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
-            IEffect useEffect = GetUseEffect(content, worldState, items);
-            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items);
+            IEffect useEffect = GetUseEffect(content, worldState, items, songs, songManager);
+            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items,
+                songs, songManager);
             IList<VarVal> prereqs = GetPrereqs(worldState);
             Texture2D texture = GetTexture(content);
             Rectangle rect = GetRectangle(texture);
@@ -71,20 +72,21 @@ namespace HundensVagga {
         }
 
         private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState, 
-                Items items) {
+                Items items, Songs songs, SongManager songManager) {
             if (Use != null)
-                return Use.GetEffectInstance(content, worldState, items);
+                return Use.GetEffectInstance(content, worldState, items, songs, songManager);
 
             return null;
         }
 
         private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
-                StateOfTheWorld worldState, Items items) {
+                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             Dictionary<string, IEffect> itemEffects = new Dictionary<string, IEffect>();
             if (ItemEffects != null)
                 foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
-                        itemEffectJson.Effect.GetEffectInstance(content, worldState, items));
+                        itemEffectJson.Effect.GetEffectInstance(content, worldState, items,
+                            songs, songManager));
 
             return itemEffects;
         }

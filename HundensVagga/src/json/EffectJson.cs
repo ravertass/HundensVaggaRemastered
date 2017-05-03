@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,29 +34,37 @@ namespace HundensVagga {
         [JsonProperty("remove_item")]
         public string RemoveItemName { get; set; }
 
+        // Song to play
+        [JsonProperty("song")]
+        public string Song { get; set; }
+
         // Room to go to
         [JsonProperty("exit")]
         public string Exit { get; set; }
 
         public IEffect GetEffectInstance(ContentManager content,
-                StateOfTheWorld worldState, Items items) {
+                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             SoundEffectInstance sound = GetSoundEffect(content);
             IList<VarVal> varVals = GetVarVals(worldState);
             Item item = GetItem(items, ItemName);
             Item removeItem = GetItem(items, RemoveItemName);
+            Song song = GetSong(songs);
 
-            return new Effect(varVals, sound, item, removeItem, items.Inventory, Exit);
+            return new Effect(varVals, sound, item, removeItem, items.Inventory, song, 
+                songManager, Exit);
+        }
+
+        private Song GetSong(Songs songs) {
+            return (Song != null) 
+                   ? songs.GetSong(Song)
+                   : null;
         }
 
         private SoundEffectInstance GetSoundEffect(ContentManager content) {
-            SoundEffectInstance sound;
-            if (Sound != null)
-                sound = content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
-                    + Path.DirectorySeparatorChar + Sound).CreateInstance();
-            else
-                sound = null;
-
-            return sound;
+            return (Sound != null)
+                    ? content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
+                        + Path.DirectorySeparatorChar + Sound).CreateInstance()
+                    : null;
         }
 
         private IList<VarVal> GetVarVals(StateOfTheWorld worldState) {

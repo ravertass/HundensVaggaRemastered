@@ -32,6 +32,7 @@ namespace HundensVagga {
         StateManager stateManager;
         InputManager inputManager;
         CursorManager cursorManager;
+        SongManager songManager;
 
         public Main() {
             graphics = new GraphicsDeviceManager(this) {
@@ -53,16 +54,18 @@ namespace HundensVagga {
 
             inputManager = new InputManager(this);
             cursorManager = new CursorManager(Content, inputManager);
+            songManager = new SongManager();
+            
 
             Inventory inventory = new Inventory(Content);
             items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
                 ITEMS_JSON_PATH, Content, inventory);
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
-                ROOMS_JSON_PATH, Content, items);
+                ROOMS_JSON_PATH, Content, items, songManager);
 
             stateManager = new StateManager();
             IGameState startState = new MainGameState(stateManager, Content, cursorManager, 
-                rooms, inventory);
+                rooms, inventory, songManager);
             stateManager.CurrentState = startState;
         }
 

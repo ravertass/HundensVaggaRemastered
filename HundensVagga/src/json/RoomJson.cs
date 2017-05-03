@@ -54,13 +54,14 @@ namespace HundensVagga {
         public string Exit { get; set; }
 
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
-                Items items, Songs songs) {
+                Items items, Songs songs, SongManager songManager) {
             Song song = GetSong(songs);
             float volume = GetVolume();
             Type stateType = GetStateType();
 
             if (RoomType == null)
-                return CreateRoom(content, worldState, items, song, volume, stateType);
+                return CreateRoom(content, worldState, items, song, volume, stateType, songs, 
+                    songManager);
 
             return CreateSpecialRoom(content, worldState, items, song, volume, stateType);
         }
@@ -91,9 +92,11 @@ namespace HundensVagga {
         }
 
         private Room CreateRoom(ContentManager content, StateOfTheWorld worldState,
-                Items items, Song song, float volume, Type stateType) {
+                Items items, Song song, float volume, Type stateType, Songs songs, 
+                SongManager songManager) {
             List<Exit> exits = GetExits(content, worldState);
-            List<Interactable> interactables = GetInteractables(content, worldState, items);
+            List<Interactable> interactables = GetInteractables(content, worldState, items,
+                songs, songManager);
             Texture2D background = GetBackground(content, Background);
 
             return new Room(Name, song, volume, background, exits, interactables, stateType);
@@ -109,12 +112,13 @@ namespace HundensVagga {
         }
 
         private List<Interactable> GetInteractables(ContentManager content, 
-                StateOfTheWorld worldState, Items items) {
+                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             List<Interactable> interactables = new List<Interactable>();
 
             foreach (InteractableJson interactableJson in Interactables)
                 interactables.Add(
-                    interactableJson.GetInteractableInstance(content, worldState, items));
+                    interactableJson.GetInteractableInstance(content, worldState, items,
+                        songs, songManager));
 
             return interactables;
         }
