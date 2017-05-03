@@ -13,9 +13,9 @@ namespace HundensVagga {
     /// UI-related stuff to an InventoryUI instance.
     /// </summary>
     public class Inventory {
-        private const int ITEM_X_OFFSET = 25;
+        private const int ITEM_X_OFFSET = 20;
         private const int ITEM_X_DIFF = 75;
-        public const int ITEM_Y_OFFSET = 25;
+        public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;
         private IList<Item> items;
