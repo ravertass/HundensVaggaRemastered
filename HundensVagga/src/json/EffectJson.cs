@@ -46,8 +46,8 @@ namespace HundensVagga {
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             SoundEffectInstance sound = GetSoundEffect(content);
             IList<VarVal> varVals = GetVarVals(worldState);
-            Item item = GetItem(items, ItemName);
-            Item removeItem = GetItem(items, RemoveItemName);
+            IItem item = GetItem(items, ItemName);
+            IItem removeItem = GetItem(items, RemoveItemName);
             Song song = GetSong(songs);
 
             return new Effect(varVals, sound, item, removeItem, items.Inventory, song, 
@@ -78,7 +78,7 @@ namespace HundensVagga {
             return varVals;
         }
 
-        private Item GetItem(Items items, string itemName) {
+        private IItem GetItem(Items items, string itemName) {
             if (itemName != null)
                 return items.GetItem(itemName);
             else

@@ -13,7 +13,7 @@ namespace HundensVagga {
     /// Manages the inventory UI. Delegates Update() to an IInventoryUIState, which 
     /// manages when the inventory UI moves up and down.
     /// </summary>
-    public class InventoryUI {
+    internal class InventoryUI {
         private const int X = 0;
         private const int BAG_Y_OFFSET = 100;
 
@@ -69,7 +69,7 @@ namespace HundensVagga {
             State.Update(this);
         }
 
-        public void Draw(SpriteBatch spriteBatch, IList<Item> items) {
+        public void Draw(SpriteBatch spriteBatch, IList<IItem> items) {
             if (!IsUp()) {
                 spriteBatch.Draw(backgroundTexture, new Vector2(X, Y), Color.White);
                 DrawItems(spriteBatch, items);
@@ -78,7 +78,7 @@ namespace HundensVagga {
             spriteBatch.Draw(bagTexture, new Vector2(X, Y + BAG_Y_OFFSET), Color.White);
         }
 
-        private void DrawItems(SpriteBatch spriteBatch, IList<Item> items) {
+        private void DrawItems(SpriteBatch spriteBatch, IList<IItem> items) {
             foreach (Item item in items) {
                 spriteBatch.Draw(item.Texture, 
                     new Vector2(item.Coords.X, Y + item.Coords.Y - Y_MAX), Color.White);

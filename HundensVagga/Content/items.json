@@ -16,7 +16,9 @@
 },
 {
   "name": "letter",
-  "icon": "letter"
+  "icon": "letter",
+  "type": "letter",
+  "image": "letter"
 },
 {
   "name": "mainkey",
@@ -24,7 +26,9 @@
 },
 {
   "name": "musicbox",
-  "icon": "musicbox"
+  "icon": "musicbox",
+  "type": "sound",
+  "sound": "music_box"
 },
 {
   "name": "notebook",

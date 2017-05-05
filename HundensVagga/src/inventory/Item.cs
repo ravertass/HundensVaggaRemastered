@@ -10,7 +10,7 @@ namespace HundensVagga {
     /// <summary>
     /// An item in the inventory.
     /// </summary>
-    public class Item {
+    internal class Item : IItem {
         private readonly string name;
         public string Name {
             get { return name; }
@@ -32,6 +32,14 @@ namespace HundensVagga {
             this.name = name;
             this.icon = icon;
             Coords = new Vector2(0, 0);
+        }
+
+        public virtual void PerformEffect() {
+            // do nothing
+        }
+
+        public virtual bool HasEffect() {
+            return false;
         }
     }
 }

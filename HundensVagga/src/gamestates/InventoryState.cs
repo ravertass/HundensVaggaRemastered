@@ -29,11 +29,16 @@ namespace HundensVagga {
         }
 
         private void CheckItems(InputManager inputManager, Inventory inventory) {
-            Item clickedItem = inventory.GetItemAt(inputManager.GetMousePosition());
+            IItem clickedItem = inventory.GetItemAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed() && clickedItem != null) {
                 inventory.GoUp();
-                mainGameState.InGameStateManager.CurrentState = 
-                    new UseItemState(mainGameState, clickedItem);
+
+                if (clickedItem.HasEffect()) {
+                    clickedItem.PerformEffect();
+                    mainGameState.InGameStateManager.PopState();
+                } else
+                    mainGameState.InGameStateManager.CurrentState =
+                        new UseItemState(mainGameState, clickedItem);
             }
         }
     }

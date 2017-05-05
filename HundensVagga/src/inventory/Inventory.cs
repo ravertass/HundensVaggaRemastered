@@ -12,24 +12,24 @@ namespace HundensVagga {
     /// The in-game inventory. Keeps track of its items, and delegates
     /// UI-related stuff to an InventoryUI instance.
     /// </summary>
-    public class Inventory {
+    internal class Inventory {
         private const int ITEM_X_OFFSET = 20;
         private const int ITEM_X_DIFF = 75;
         public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;
-        private IList<Item> items;
+        private IList<IItem> items;
 
         public Inventory(ContentManager content) {
             ui = new InventoryUI(content);
-            items = new List<Item>();
+            items = new List<IItem>();
         }
 
-        public void AddItem(Item item) {
+        public void AddItem(IItem item) {
             items.Add(item);
         }
 
-        public void RemoveItem(Item item) {
+        public void RemoveItem(IItem item) {
             items.Remove(item);
         }
 
@@ -49,8 +49,8 @@ namespace HundensVagga {
             }
         }
 
-        public Item GetItemAt(Vector2 coords) {
-            foreach (Item item in items)
+        public IItem GetItemAt(Vector2 coords) {
+            foreach (IItem item in items)
                 if (item.Rectangle.Contains(coords))
                     return item;
 

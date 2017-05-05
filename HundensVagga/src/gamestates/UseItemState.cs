@@ -12,9 +12,9 @@ namespace HundensVagga {
     /// </summary>
     internal class UseItemState : IInGameState {
         private MainGameState mainGameState;
-        private Item currentItem;
+        private IItem currentItem;
 
-        public UseItemState(MainGameState mainGameState, Item currentItem) {
+        public UseItemState(MainGameState mainGameState, IItem currentItem) {
             this.mainGameState = mainGameState;
             this.currentItem = currentItem;
         }

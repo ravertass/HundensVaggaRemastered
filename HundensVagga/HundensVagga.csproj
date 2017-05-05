@@ -67,6 +67,7 @@
     <Compile Include="src\gamestates\InGameStateManager.cs" />
     <Compile Include="src\gamestates\TelephoneExploreState.cs" />
     <Compile Include="src\InputManager.cs" />
+    <Compile Include="src\inventory\IItem.cs" />
     <Compile Include="src\inventory\Inventory.cs" />
     <Compile Include="src\gamestates\InventoryState.cs" />
     <Compile Include="src\inventory\InventoryUI.cs" />
@@ -74,6 +75,8 @@
     <Compile Include="src\inventory\Item.cs" />
     <Compile Include="src\gamestates\MainGameState.cs" />
     <Compile Include="src\inventory\Items.cs" />
+    <Compile Include="src\inventory\LetterItem.cs" />
+    <Compile Include="src\inventory\SoundItem.cs" />
     <Compile Include="src\rooms\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
     <Compile Include="src\rooms\ICutsceneRoom.cs" />

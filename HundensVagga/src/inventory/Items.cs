@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class Items {
-        private readonly Dictionary<string, Item> itemsMap = new Dictionary<string, Item>();
+        private readonly Dictionary<string, IItem> itemsMap = new Dictionary<string, IItem>();
 
         // It's a little stupid that this class contains the inventory, but it makes things easier
         private readonly Inventory inventory;
@@ -35,7 +35,7 @@ namespace HundensVagga {
             }
         }
 
-        public Item GetItem(string itemName) {
+        public IItem GetItem(string itemName) {
             return itemsMap[itemName];
         }
 

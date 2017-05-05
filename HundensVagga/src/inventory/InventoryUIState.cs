@@ -8,17 +8,17 @@ namespace HundensVagga {
     /// <summary>
     /// Used to manage when the inventory UI moves up and down.
     /// </summary>
-    public abstract class IInventoryUIState {
+    internal abstract class IInventoryUIState {
         abstract public void Update(InventoryUI ui);
     }
 
-    public class InventoryUIStill : IInventoryUIState {
+    internal class InventoryUIStill : IInventoryUIState {
         public override void Update(InventoryUI ui) {
             // do nothing
         }
     }    
 
-    public class InventoryGoingUp : IInventoryUIState {
+    internal class InventoryGoingUp : IInventoryUIState {
         public override void Update(InventoryUI ui) {
             if (ui.IsUp())
                 ui.State = new InventoryUIStill();
@@ -27,7 +27,7 @@ namespace HundensVagga {
         }
     }
 
-    public class InventoryGoingDown : IInventoryUIState {
+    internal class InventoryGoingDown : IInventoryUIState {
         public override void Update(InventoryUI ui) {
             if (ui.IsDown())
                 ui.State = new InventoryUIStill();

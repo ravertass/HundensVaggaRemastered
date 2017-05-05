@@ -60,11 +60,11 @@ namespace HundensVagga {
             useEffect.Perform(mainGameState);
         }
 
-        public bool IsItemUsable(Item item) {
+        public bool IsItemUsable(IItem item) {
             return itemEffects.ContainsKey(item.Name);
         }
 
-        public void UseItem(Item item, MainGameState mainGameState) {
+        public void UseItem(IItem item, MainGameState mainGameState) {
             itemEffects[item.Name].Perform(mainGameState);
         }
 

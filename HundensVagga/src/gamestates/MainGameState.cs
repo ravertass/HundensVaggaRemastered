@@ -58,6 +58,10 @@ namespace HundensVagga {
 
             // TODO remove, add letter
             inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
+            // TODO remove, add letter
+            inventory.AddItem(new Item("notebook_drawn", content.Load<Texture2D>("inventory/notebook_drawn")));
+            // TODO remove, add letter
+            inventory.AddItem(new Item("shovel", content.Load<Texture2D>("inventory/shovel")));
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
