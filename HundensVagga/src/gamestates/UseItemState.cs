@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,10 @@ namespace HundensVagga {
                 }
                 mainGameState.InGameStateManager.PopState();
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            // nothing to draw
         }
     }
 }

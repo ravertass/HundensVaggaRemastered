@@ -41,5 +41,9 @@ namespace HundensVagga {
         public virtual bool HasEffect() {
             return false;
         }
+
+        public virtual IInGameState GetItemState(MainGameState mainGameState) {
+            return null;
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace HundensVagga {
 
         public MainGameState(StateManager stateManager, ContentManager content, 
                 CursorManager cursorManager, Rooms rooms, Inventory inventory,
-                SongManager songManager) {
+                SongManager songManager, Items items) {
             this.stateManager = stateManager;
             this.content = content;
             this.cursorManager = cursorManager;
@@ -56,12 +56,7 @@ namespace HundensVagga {
 
             GoToRoom(START_ROOM_NAME);
 
-            // TODO remove, add letter
-            inventory.AddItem(new Item("cat", content.Load<Texture2D>("inventory/cat")));
-            // TODO remove, add letter
-            inventory.AddItem(new Item("notebook_drawn", content.Load<Texture2D>("inventory/notebook_drawn")));
-            // TODO remove, add letter
-            inventory.AddItem(new Item("shovel", content.Load<Texture2D>("inventory/shovel")));
+            inventory.AddItem(items.GetItem("letter"));
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
@@ -75,6 +70,7 @@ namespace HundensVagga {
         public void Draw(SpriteBatch spriteBatch) {
             CurrentRoom.Draw(spriteBatch);
             inventory.Draw(spriteBatch);
+            inGameStateManager.CurrentState.Draw(spriteBatch);
         }
 
         public void GoToRoom(string roomName) {

@@ -13,13 +13,13 @@ namespace HundensVagga {
         public LetterItem(string name, Texture2D icon, Texture2D letterImage) : base(name, icon) {
             this.letterImage = letterImage;
         }
-
-        public override void PerformEffect() {
-            // TODO
-        }
-
+        
         public override bool HasEffect() {
             return true;
+        }
+
+        public override IInGameState GetItemState(MainGameState mainGameState) {
+            return new LetterItemState(mainGameState, letterImage);
         }
     }
 }

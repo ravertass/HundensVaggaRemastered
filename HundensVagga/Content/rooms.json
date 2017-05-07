@@ -610,7 +610,8 @@
       "items": [{
                  "item": "handle",
                  "effect": {"var": "st_maps_open", 
-                            "sound": "unlock"}
+                            "sound": "unlock",
+                            "remove_item": "handle"}
                }]
     },
     {

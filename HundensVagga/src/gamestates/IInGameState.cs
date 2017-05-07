@@ -12,5 +12,6 @@ namespace HundensVagga {
     /// </summary>
     public interface IInGameState {
         void Update(InputManager inputManager, GameTime gameTime);
+        void Draw(SpriteBatch spriteBatch);
     }
 }

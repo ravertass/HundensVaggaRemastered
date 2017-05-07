@@ -25,6 +25,9 @@ namespace HundensVagga {
         public const string ROOMS_JSON_PATH = "rooms.json";
         public const string ITEMS_JSON_PATH = "items.json";
 
+        public const int SCREEN_WIDTH = 800;
+        public const int SCREEN_HEIGHT = 600;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -37,8 +40,8 @@ namespace HundensVagga {
 
         public Main() {
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth = 800,
-                PreferredBackBufferHeight = 600
+                PreferredBackBufferWidth = SCREEN_WIDTH,
+                PreferredBackBufferHeight = SCREEN_HEIGHT
             };
             graphics.ApplyChanges();
             Content.RootDirectory = CONTENT_DIR;
@@ -66,7 +69,7 @@ namespace HundensVagga {
 
             stateManager = new StateManager();
             IGameState startState = new MainGameState(stateManager, Content, cursorManager, 
-                rooms, inventory, songManager);
+                rooms, inventory, songManager, items);
             stateManager.CurrentState = startState;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
     internal class CutsceneState : IInGameState {
@@ -24,6 +25,10 @@ namespace HundensVagga {
             } else {
                 throw new Exception("At cutscene state without cutscene room.");
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            // nothing to draw
         }
     }
 }

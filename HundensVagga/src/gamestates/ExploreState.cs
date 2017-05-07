@@ -94,9 +94,16 @@ namespace HundensVagga {
                 mainGameState.InGameStateManager.CurrentState = new InventoryState(mainGameState);
                 mainGameState.Inventory.GoDown();
                 return true;
+            } else if (mainGameState.Inventory.IsCursorOnBag(inputManager)) {
+                mainGameState.CursorManager.SetToDefault();
+                return true;
             }
 
             return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            // nothing to draw
         }
     }
 }
