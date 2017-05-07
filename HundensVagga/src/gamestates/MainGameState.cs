@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace HundensVagga {
     /// <summary>
@@ -16,6 +17,7 @@ namespace HundensVagga {
     /// </summary>
     internal class MainGameState : IGameState {
         private const string START_ROOM_NAME = "front";
+        public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
         private StateManager stateManager;
 
@@ -60,11 +62,18 @@ namespace HundensVagga {
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
+            UpdateCurrentPlayingLookSound();
             cursorManager.SetToDefault();
             inventory.Update(inputManager);
             inGameStateManager.CurrentState.Update(inputManager, gameTime);
             CurrentRoom.Update(gameTime);
             songManager.Update();
+        }
+
+        private void UpdateCurrentPlayingLookSound() {
+            if (CurrentPlayingLookSound != null
+                && CurrentPlayingLookSound.State == SoundState.Stopped)
+                CurrentPlayingLookSound = null;
         }
 
         public void Draw(SpriteBatch spriteBatch) {

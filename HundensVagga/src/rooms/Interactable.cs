@@ -16,6 +16,10 @@ namespace HundensVagga {
         }
 
         private readonly SoundEffectInstance lookSound;
+        public SoundEffectInstance LookSound {
+            get { return lookSound; }
+        }
+
         private readonly IEffect useEffect;
         private IDictionary<string, IEffect> itemEffects;
 

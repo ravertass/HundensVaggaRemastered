@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace HundensVagga {
     /// <summary>
@@ -19,6 +20,7 @@ namespace HundensVagga {
         }
 
         public virtual void Update(InputManager inputManager, GameTime gameTime) {
+
             // inventory has priority over exits and interactables
             if (CheckInventoryBag(inputManager))
                 return;
@@ -29,7 +31,6 @@ namespace HundensVagga {
 
             CheckInteractables(inputManager);
         }
-
 
         private bool CheckExits(InputManager inputManager) {
             Exit exit = mainGameState.CurrentRoom.GetExitAt(inputManager.GetMousePosition());
@@ -78,9 +79,19 @@ namespace HundensVagga {
         private void HandleClicksInteractable(InputManager inputManager,
                 Interactable interactable) {
             if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
-                interactable.Look();
+                LookAt(interactable);
             if (inputManager.IsRightButtonPressed() && interactable.IsUsable())
                 UseInteractable(interactable);
+        }
+
+        private void LookAt(Interactable interactable) {
+            if (mainGameState.CurrentPlayingLookSound != interactable.LookSound) {
+                if (mainGameState.CurrentPlayingLookSound != null)
+                    mainGameState.CurrentPlayingLookSound.Stop();
+
+                mainGameState.CurrentPlayingLookSound = interactable.LookSound;
+                mainGameState.CurrentPlayingLookSound.Play();
+            }
         }
 
         protected virtual void UseInteractable(Interactable interactable) {
