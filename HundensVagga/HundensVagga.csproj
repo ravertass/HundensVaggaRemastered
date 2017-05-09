@@ -63,9 +63,12 @@
   <ItemGroup>
     <Compile Include="src\CursorManager.cs" />
     <Compile Include="src\gamestates\CutsceneState.cs" />
+    <Compile Include="src\gamestates\ExitMenuState.cs" />
     <Compile Include="src\gamestates\IInGameState.cs" />
     <Compile Include="src\gamestates\InGameStateManager.cs" />
     <Compile Include="src\gamestates\LetterItemState.cs" />
+    <Compile Include="src\json\MiscContentJson.cs" />
+    <Compile Include="src\json\RectJson.cs" />
     <Compile Include="src\gamestates\TelephoneExploreState.cs" />
     <Compile Include="src\InputManager.cs" />
     <Compile Include="src\inventory\IItem.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="src\inventory\Items.cs" />
     <Compile Include="src\inventory\LetterItem.cs" />
     <Compile Include="src\inventory\SoundItem.cs" />
+    <Compile Include="src\MiscContent.cs" />
     <Compile Include="src\rooms\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
     <Compile Include="src\rooms\ICutsceneRoom.cs" />
@@ -129,6 +133,9 @@
   <ItemGroup>
     <MonoGameContentReference Include="content\Content.mgcb" />
     <None Include="app.manifest" />
+    <Content Include="content\misc.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="content\rooms.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

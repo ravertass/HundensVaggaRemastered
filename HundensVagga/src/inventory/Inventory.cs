@@ -13,15 +13,17 @@ namespace HundensVagga {
     /// UI-related stuff to an InventoryUI instance.
     /// </summary>
     internal class Inventory {
-        private const int ITEM_X_OFFSET = 20;
+        public const int EXIT_ICON_X = 16;
+
+        private const int ITEM_X_OFFSET = EXIT_ICON_X + 32;
         private const int ITEM_X_DIFF = 75;
         public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;
         private IList<IItem> items;
 
-        public Inventory(ContentManager content) {
-            ui = new InventoryUI(content);
+        public Inventory(MiscContent miscContent) {
+            ui = new InventoryUI(miscContent);
             items = new List<IItem>();
         }
 
@@ -57,13 +59,22 @@ namespace HundensVagga {
             return null;
         }
 
+        public bool IsBagClicked(InputManager inputManager) {
+            return inputManager.IsLeftButtonPressed()
+                && IsCursorOnBag(inputManager);
+        }
+
         public bool IsCursorOnBag(InputManager inputManager) {
             return ui.BagRectangle().Contains(inputManager.GetMousePosition());
         }
 
-        public bool IsBagClicked(InputManager inputManager) {
-            return inputManager.IsLeftButtonPressed()
-                && IsCursorOnBag(inputManager);
+        internal bool IsExitIconClicked(InputManager inputManager) {
+            return ui.IsDown() && inputManager.IsLeftButtonPressed()
+                && IsCursorOnExitIcon(inputManager);
+        }
+
+        public bool IsCursorOnExitIcon(InputManager inputManager) {
+            return ui.ExitIconRectangle().Contains(inputManager.GetMousePosition());
         }
 
         public void GoUp() {

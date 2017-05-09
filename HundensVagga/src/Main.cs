@@ -24,6 +24,7 @@ namespace HundensVagga {
 
         public const string ROOMS_JSON_PATH = "rooms.json";
         public const string ITEMS_JSON_PATH = "items.json";
+        public const string MISC_CONTENT_JSON_PATH = "misc.json";
 
         public const int SCREEN_WIDTH = 800;
         public const int SCREEN_HEIGHT = 600;
@@ -37,6 +38,7 @@ namespace HundensVagga {
         InputManager inputManager;
         CursorManager cursorManager;
         SongManager songManager;
+        MiscContent miscContent;
 
         public Main() {
             graphics = new GraphicsDeviceManager(this) {
@@ -59,17 +61,19 @@ namespace HundensVagga {
             inputManager = new InputManager(this);
             cursorManager = new CursorManager(Content, inputManager);
             songManager = new SongManager();
-            
 
-            Inventory inventory = new Inventory(Content);
+            miscContent = new MiscContent(CONTENT_DIR + Path.DirectorySeparatorChar +
+                MISC_CONTENT_JSON_PATH, Content);
+
+            Inventory inventory = new Inventory(miscContent);
             items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
                 ITEMS_JSON_PATH, Content, inventory);
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
                 ROOMS_JSON_PATH, Content, items, songManager);
 
             stateManager = new StateManager();
-            IGameState startState = new MainGameState(stateManager, Content, cursorManager, 
-                rooms, inventory, songManager, items);
+            IGameState startState = new MainGameState(this, stateManager, Content, cursorManager, 
+                rooms, inventory, songManager, items, miscContent);
             stateManager.CurrentState = startState;
         }
 

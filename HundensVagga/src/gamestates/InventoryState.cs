@@ -17,8 +17,15 @@ namespace HundensVagga {
             Inventory inventory = mainGameState.Inventory;
 
             inventory.SetItemCoords();
+            CheckExitIcon(inputManager, inventory);
             CheckInventoryBag(inputManager, inventory);
             CheckItems(inputManager, inventory);
+        }
+
+        private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
+            if (mainGameState.Inventory.IsExitIconClicked(inputManager)) {
+                mainGameState.InGameStateManager.CurrentState = new ExitMenuState(mainGameState);
+            }
         }
 
         private void CheckInventoryBag(InputManager inputManager, Inventory inventory) {

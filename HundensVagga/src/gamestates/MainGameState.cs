@@ -19,6 +19,9 @@ namespace HundensVagga {
         private const string START_ROOM_NAME = "front";
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
+
+        private Game game;
+
         private StateManager stateManager;
 
         private ContentManager content;
@@ -45,9 +48,16 @@ namespace HundensVagga {
             get { return inGameStateManager; }
         }
 
-        public MainGameState(StateManager stateManager, ContentManager content, 
+        private MiscContent miscContent;
+
+        public MiscContent MiscContent {
+            get { return miscContent; }
+        }
+
+        public MainGameState(Game game, StateManager stateManager, ContentManager content, 
                 CursorManager cursorManager, Rooms rooms, Inventory inventory,
-                SongManager songManager, Items items) {
+                SongManager songManager, Items items, MiscContent miscContent) {
+            this.game = game;
             this.stateManager = stateManager;
             this.content = content;
             this.cursorManager = cursorManager;
@@ -55,6 +65,7 @@ namespace HundensVagga {
             this.inventory = inventory;
             this.songManager = songManager;
             inGameStateManager = new InGameStateManager();
+            this.miscContent = miscContent;
 
             GoToRoom(START_ROOM_NAME);
 
@@ -96,6 +107,10 @@ namespace HundensVagga {
             else
                 inGameStateManager.CurrentState = new ExploreState(this);
             inGameStateManager.PushState();
+        }
+
+        public void ExitGame() {
+            game.Exit();
         }
 
         public void Win() {

@@ -1,0 +1,19 @@
+﻿{
+  "inventory_bag_image": "bag",
+  "inventory_background_image": "inventory",
+  "exit_icon_image": "exit_icon",
+
+  "exit_menu_image": "exit_menu",
+  "exit_menu_yes": {
+    "x": 100,
+    "y": 175,
+    "width": 100,
+    "height": 70
+  },
+  "exit_menu_no": {
+    "x": 220,
+    "y": 175,
+    "width": 100,
+    "height": 70
+  },
+}
