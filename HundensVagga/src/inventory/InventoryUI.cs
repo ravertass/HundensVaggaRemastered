@@ -90,7 +90,7 @@ namespace HundensVagga {
 
         private void DrawUpperBorder(SpriteBatch spriteBatch) {
             Texture2D blackTexture =
-                new Texture2D(spriteBatch.GraphicsDevice, Main.SCREEN_WIDTH, 32);
+                new Texture2D(spriteBatch.GraphicsDevice, Main.WINDOW_WIDTH, 32);
             blackTexture.Dispose();
             spriteBatch.Draw(blackTexture, new Vector2(0f, 0f), Color.Black);
         }

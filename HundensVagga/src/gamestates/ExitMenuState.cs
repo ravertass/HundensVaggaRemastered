@@ -45,16 +45,16 @@ namespace HundensVagga {
         }
 
         private int MenuX() {
-            return (Main.SCREEN_WIDTH - menuImage.Width) / 2;
+            return (Main.WINDOW_WIDTH - menuImage.Width) / 2;
         }
 
         private int MenuY() {
-            return (Main.SCREEN_HEIGHT - menuImage.Height) / 2;
+            return (Main.WINDOW_HEIGHT - menuImage.Height) / 2;
         }
 
         private static void DrawTransparentBlackBackground(SpriteBatch spriteBatch) {
             Texture2D blackTexture =
-                new Texture2D(spriteBatch.GraphicsDevice, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+                new Texture2D(spriteBatch.GraphicsDevice, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
             blackTexture.Dispose();
             spriteBatch.Draw(blackTexture, new Vector2(0f, 0f), new Color(0, 0, 0, 150));
         }

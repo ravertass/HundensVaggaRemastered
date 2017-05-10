@@ -12,10 +12,11 @@ namespace HundensVagga {
     /// </summary>
     public class InputManager {
         private MouseState lastMouseState;
-        private Game game;
+        private Main main;
+        private bool justToggled = false;
 
-        public InputManager(Game game) {
-            this.game = game;
+        public InputManager(Main main) {
+            this.main = main;
         }
 
         public Vector2 GetMousePosition() {
@@ -25,23 +26,41 @@ namespace HundensVagga {
         public bool IsLeftButtonPressed() {
             return Mouse.GetState().LeftButton == ButtonState.Pressed
                 && lastMouseState.LeftButton == ButtonState.Released
-                && game.IsActive;
+                && main.IsActive;
         }
 
         public bool IsRightButtonPressed() {
             return Mouse.GetState().RightButton == ButtonState.Pressed
                 && lastMouseState.RightButton == ButtonState.Released
-                && game.IsActive;
+                && main.IsActive;
         }
 
         public void Update() {
             lastMouseState = Mouse.GetState();
             CheckForExit();
+            CheckForFullScreen();
         }
 
         private void CheckForExit() {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                game.Exit();
+                main.Exit();
+        }
+
+        private void CheckForFullScreen() {
+            if (!justToggled && IsAltEnterPressed()) {
+                main.ToggleFullScreen();
+                justToggled = true;
+            }
+
+            if (!IsAltEnterPressed()) {
+                justToggled = false;
+            }
+        }
+
+        private bool IsAltEnterPressed() {
+            return (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) ||
+                    Keyboard.GetState().IsKeyDown(Keys.RightAlt)) &&
+                   Keyboard.GetState().IsKeyDown(Keys.Enter);
         }
     }
 }

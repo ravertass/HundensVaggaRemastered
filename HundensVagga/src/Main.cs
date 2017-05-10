@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using System;
 
 namespace HundensVagga {
     /// <summary>
@@ -26,8 +27,11 @@ namespace HundensVagga {
         public const string ITEMS_JSON_PATH = "items.json";
         public const string MISC_CONTENT_JSON_PATH = "misc.json";
 
-        public const int SCREEN_WIDTH = 800;
-        public const int SCREEN_HEIGHT = 600;
+        public const int WINDOW_WIDTH = 800;
+        public const int WINDOW_HEIGHT = 600;
+
+        private int fullScreenWidth;
+        private int fullScreenHeight;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -40,12 +44,15 @@ namespace HundensVagga {
         SongManager songManager;
         MiscContent miscContent;
 
+        private RenderTarget2D renderTarget;
+        private Rectangle renderTargetRect;
+
         public Main() {
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth = SCREEN_WIDTH,
-                PreferredBackBufferHeight = SCREEN_HEIGHT
+                PreferredBackBufferWidth = WINDOW_WIDTH,
+                PreferredBackBufferHeight = WINDOW_HEIGHT
             };
-            graphics.ApplyChanges();
+            renderTargetRect = RenderTargetWindowRect();
             Content.RootDirectory = CONTENT_DIR;
         }
 
@@ -57,6 +64,10 @@ namespace HundensVagga {
         /// </summary>
         protected override void Initialize() {
             base.Initialize();
+
+            renderTarget = new RenderTarget2D(GraphicsDevice, WINDOW_WIDTH, WINDOW_HEIGHT);
+            SetFullScreenResolution();
+            SetToFullScreen();
 
             inputManager = new InputManager(this);
             cursorManager = new CursorManager(Content, inputManager);
@@ -72,9 +83,14 @@ namespace HundensVagga {
                 ROOMS_JSON_PATH, Content, items, songManager);
 
             stateManager = new StateManager();
-            IGameState startState = new MainGameState(this, stateManager, Content, cursorManager, 
+            IGameState startState = new MainGameState(this, stateManager, Content, cursorManager,
                 rooms, inventory, songManager, items, miscContent);
             stateManager.CurrentState = startState;
+        }
+
+        private void SetFullScreenResolution() {
+            fullScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            fullScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         }
 
         /// <summary>
@@ -117,7 +133,20 @@ namespace HundensVagga {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            DrawToRenderTarget();
+
+            GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw((Texture2D)renderTarget, renderTargetRect, Color.White);
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        private void DrawToRenderTarget() {
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
@@ -129,7 +158,47 @@ namespace HundensVagga {
 
             spriteBatch.End();
 
-            base.Draw(gameTime);
+            GraphicsDevice.SetRenderTarget(null);
+        }
+
+        public void ToggleFullScreen() {
+            if (!Window.IsBorderless) 
+                SetToFullScreen();
+            else
+                SetToWindowed();
+        }
+
+        private void SetToFullScreen() {
+            renderTargetRect = RenderTargetFullScreenRect();
+            graphics.PreferredBackBufferWidth = fullScreenWidth;
+            graphics.PreferredBackBufferHeight = fullScreenHeight;
+            Window.IsBorderless = true;
+            Window.Position = new Point(0, 0);
+
+            graphics.ApplyChanges();
+        }
+
+        private void SetToWindowed() {
+            renderTargetRect = RenderTargetWindowRect();
+            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            Window.IsBorderless = false;
+            Window.Position = new Point((fullScreenWidth - WINDOW_WIDTH) / 2,
+                                        (fullScreenHeight - WINDOW_HEIGHT) / 2);
+
+            graphics.ApplyChanges();
+        }
+
+        private Rectangle RenderTargetFullScreenRect() {
+            int newWindowWidth = (int)Math.Ceiling(
+                ((float)fullScreenHeight / (float)WINDOW_HEIGHT) * WINDOW_WIDTH);
+
+            return new Rectangle((fullScreenWidth - newWindowWidth) / 2,
+                0, newWindowWidth, fullScreenHeight);
+        }
+
+        private Rectangle RenderTargetWindowRect() {
+            return new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         }
     }
 }
