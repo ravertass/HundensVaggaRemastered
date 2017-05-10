@@ -2095,3 +2095,9 @@
 /processorParam:Quality=Best
 /build:sound_effects/item_fail.wav
 
+#begin sound_effects/door_open_close.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/door_open_close.ogg
+

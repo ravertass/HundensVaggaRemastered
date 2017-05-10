@@ -80,6 +80,7 @@
       "room": "outhouse",
       "dir": "up",
       "prereqs": [{"var": "st_frozen_melted", "val": true}],
+      "sound": "door_open"
     },
     {
       "x": 713,
@@ -125,7 +126,8 @@
       "width": 800,
       "height": 100,
       "room": "outhouse_outside",
-      "dir": "down"
+      "dir": "down",
+      "sound": "door_close"
     }
   ],
   "interactables": [
@@ -361,6 +363,7 @@
       "room": "hall",
       "dir": "up",
       "prereqs": [{"var": "st_maindoor_open", "val": true}],
+      "sound": "door_open_close"
     },
     {
       "x": 0,
@@ -557,7 +560,8 @@
       "height": 387,
       "room": "typewriter_room",
       "dir": "up",
-      "prereqs": [{"var": "st_typewriter_room_open", "val": true}]
+      "prereqs": [{"var": "st_typewriter_room_open", "val": true}],
+      "sound": "door_open"
     },
     {
       "x": 489,
@@ -566,7 +570,8 @@
       "height": 381,
       "room": "maps",
       "dir": "up",
-      "prereqs": [{"var": "st_maps_open", "val": true}]
+      "prereqs": [{"var": "st_maps_open", "val": true}],
+      "sound": "door_open"
     },
     {
       "x": 712,
@@ -583,7 +588,8 @@
       "height": 59,
       "room": "view",
       "dir": "down",
-      "var": "st_window_open"
+      "var": "st_window_open",
+      "sound": "door_open_close"
     },
   ],
   "interactables": [
@@ -640,7 +646,8 @@
       "width": 307,
       "height": 52,
       "room": "hall",
-      "dir": "down"
+      "dir": "down",
+      "sound": "door_close"
     },
     {
       "x": 378,
@@ -723,7 +730,8 @@
       "width": 596,
       "height": 58,
       "room": "hall",
-      "dir": "down"
+      "dir": "down",
+      "sound": "door_close"
     }
   ],
   "interactables": [
@@ -1469,7 +1477,8 @@
       "height": 277,
       "room": "toys",
       "dir": "up",
-      "prereqs": [{"var": "st_toys_open", "val": true}]
+      "prereqs": [{"var": "st_toys_open", "val": true}],
+      "sound": "door_open"
     }
   ],
   "interactables": [
@@ -1504,7 +1513,8 @@
       "width": 375,
       "height": 51,
       "room": "bookcase",
-      "dir": "down"
+      "dir": "down",
+      "sound": "door_close"
     },
     {
       "x": 313,
@@ -1678,7 +1688,7 @@
   "type": "walk",
   "backgrounds_dir": "walk_from_beach",
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  "exit": "car_outside",
+  "exit": "front",
   "state": "HundensVagga.CutsceneState"
 },
 {
