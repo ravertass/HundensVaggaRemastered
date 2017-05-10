@@ -1579,12 +1579,6 @@
 /processorParam:Quality=Best
 /build:sound_effects/wrench.wav
 
-#begin sound_effects/wrong_item.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sound_effects/wrong_item.wav
-
 #begin songs/horror.ogg
 /importer:OggImporter
 /processor:SongProcessor
@@ -2094,4 +2088,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:misc/exit_menu.png
+
+#begin sound_effects/item_fail.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/item_fail.wav
 

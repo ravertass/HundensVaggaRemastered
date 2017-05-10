@@ -737,7 +737,8 @@
                  "sound": "draw_map",
                  "item": "notebook",
                  "effect": {"item": "notebook_drawn",
-                            "remove_item": "notebook"}
+                            "remove_item": "notebook",
+                            "sound": "draw_map"}
                }]
     }
   ]

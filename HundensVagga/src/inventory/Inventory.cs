@@ -16,7 +16,7 @@ namespace HundensVagga {
         public const int EXIT_ICON_X = 16;
 
         private const int ITEM_X_OFFSET = EXIT_ICON_X + 32;
-        private const int ITEM_X_DIFF = 75;
+        private const int ITEM_X_DIFF = 64;
         public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;

@@ -16,4 +16,6 @@
     "width": 100,
     "height": 70
   },
+
+  "item_fail_sound": "item_fail"
 }

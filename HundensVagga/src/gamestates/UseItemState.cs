@@ -14,10 +14,12 @@ namespace HundensVagga {
     internal class UseItemState : IInGameState {
         private MainGameState mainGameState;
         private IItem currentItem;
+        private SoundEffectInstance failSound;
 
         public UseItemState(MainGameState mainGameState, IItem currentItem) {
             this.mainGameState = mainGameState;
             this.currentItem = currentItem;
+            this.failSound = mainGameState.MiscContent.ItemFailSound;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
@@ -32,8 +34,7 @@ namespace HundensVagga {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
                     interactable.UseItem(currentItem, mainGameState);
                 } else {
-                    Console.WriteLine("nej: " + currentItem.Name);
-                    // TODO: play fail sound
+                    failSound.Play();
                 }
                 mainGameState.InGameStateManager.PopState();
             }

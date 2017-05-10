@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
@@ -37,6 +38,11 @@ namespace HundensVagga {
             get { return exitMenuNoRect; }
         }
 
+        private SoundEffectInstance itemFailSound;
+        public SoundEffectInstance ItemFailSound {
+            get { return itemFailSound; }
+        }
+
         public MiscContent(string jsonFilePath, ContentManager content) {
             MiscContentJson json = DeserializeJson(jsonFilePath);
             InitializeData(json, content);
@@ -55,6 +61,8 @@ namespace HundensVagga {
             exitMenuImage = json.GetExitMenuImage(content);
             exitMenuYesRect = json.ExitMenuYesRect.GetInstance();
             exitMenuNoRect = json.ExitMenuNoRect.GetInstance();
+
+            itemFailSound = json.GetItemFailSound(content);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System;
@@ -24,6 +25,9 @@ namespace HundensVagga {
         [JsonProperty("exit_menu_no")]
         public RectJson ExitMenuNoRect { get; set; }
 
+        [JsonProperty("item_fail_sound")]
+        public string ItemFailSoundPath { get; set; }
+
         public Texture2D GetInventoryBagImage(ContentManager content) {
             return GetImage(content, InventoryBagImagePath);
         }
@@ -40,8 +44,17 @@ namespace HundensVagga {
             return GetImage(content, ExitMenuImagePath);
         }
 
+        public SoundEffectInstance GetItemFailSound(ContentManager content) {
+            return GetSoundEffect(content, ItemFailSoundPath);
+        }
+
         private Texture2D GetImage(ContentManager content, string imagePath) {
             return content.Load<Texture2D>(Main.MISC_DIR + Path.DirectorySeparatorChar + imagePath);
+        }
+
+        private SoundEffectInstance GetSoundEffect(ContentManager content, string soundPath) {
+            return content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR + 
+                Path.DirectorySeparatorChar + soundPath).CreateInstance();
         }
     }
 }
