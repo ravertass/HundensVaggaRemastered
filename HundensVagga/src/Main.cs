@@ -36,13 +36,50 @@ namespace HundensVagga {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Rooms rooms;
-        Items items;
-        StateManager stateManager;
-        InputManager inputManager;
-        CursorManager cursorManager;
-        SongManager songManager;
-        MiscContent miscContent;
+        private Rooms rooms;
+        internal Rooms Rooms {
+            get { return rooms; }
+        }
+
+        private Items items;
+        internal Items Items {
+            get { return items; }
+        }
+
+        private Inventory inventory;
+        internal Inventory Inventory {
+            get { return inventory; }
+        }
+
+        private StateManager stateManager;
+        internal StateManager StateManager {
+            get { return stateManager; }
+        }
+
+        private ExitGameManager exitGameManager;
+        internal ExitGameManager ExitGameManager {
+            get { return exitGameManager; }
+        }
+
+        private InputManager inputManager;
+        internal InputManager InputManager {
+            get { return inputManager; }
+        }
+
+        private CursorManager cursorManager;
+        internal CursorManager CursorManager {
+            get { return cursorManager; }
+        }
+
+        private SongManager songManager;
+        internal SongManager SongManager {
+            get { return songManager; }
+        }
+
+        private MiscContent miscContent;
+        internal MiscContent MiscContent {
+            get { return miscContent; }
+        }
 
         private RenderTarget2D renderTarget;
         private Rectangle renderTargetRect;
@@ -73,19 +110,10 @@ namespace HundensVagga {
             cursorManager = new CursorManager(Content, inputManager);
             songManager = new SongManager();
 
-            miscContent = new MiscContent(CONTENT_DIR + Path.DirectorySeparatorChar +
-                MISC_CONTENT_JSON_PATH, Content);
+            exitGameManager = new ExitGameManager(this);
+            stateManager = new StateManager(this);
 
-            Inventory inventory = new Inventory(miscContent);
-            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
-                ITEMS_JSON_PATH, Content, inventory);
-            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
-                ROOMS_JSON_PATH, Content, items, songManager);
-
-            stateManager = new StateManager();
-            IGameState startState = new MainGameState(this, stateManager, Content, cursorManager,
-                rooms, inventory, songManager, items, miscContent);
-            stateManager.CurrentState = startState;
+            stateManager.GoToStartState();
         }
 
         private void SetFullScreenResolution() {
@@ -103,6 +131,16 @@ namespace HundensVagga {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            miscContent = new MiscContent(CONTENT_DIR + Path.DirectorySeparatorChar +
+                MISC_CONTENT_JSON_PATH, Content);
+
+            inventory = new Inventory(miscContent);
+            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
+                ITEMS_JSON_PATH, Content, inventory);
+
+            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
+                ROOMS_JSON_PATH, Content, items, songManager);
         }
 
         /// <summary>
@@ -121,7 +159,7 @@ namespace HundensVagga {
         protected override void Update(GameTime gameTime) {
             // Delegate most update work to the current game state
             // (e.g. if we're in a menu or in the main game)
-            stateManager.CurrentState.Update(inputManager, gameTime);
+            stateManager.UpdateCurrentState(inputManager, gameTime);
             // But always keep track of input
             inputManager.Update();
 
@@ -152,7 +190,7 @@ namespace HundensVagga {
 
             // Delegate most draw work to the current game state
             // (e.g. if we're in a menu or in the main game)
-            stateManager.CurrentState.Draw(spriteBatch);
+            stateManager.DrawCurrentState(spriteBatch);
             // But always draw the cursor (TODO: for now?)
             cursorManager.Draw(spriteBatch);
 

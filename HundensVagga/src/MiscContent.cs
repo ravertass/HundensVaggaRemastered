@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,28 @@ namespace HundensVagga {
             get { return itemFailSound; }
         }
 
+        private IList<Texture2D> companyLogos;
+        public IList<Texture2D> CompanyLogos {
+            get { return companyLogos; }
+        }
+
+        private Texture2D mainMenuBackgroundImage;
+        public Texture2D MainMenuBackgroundImage {
+            get { return mainMenuBackgroundImage; }
+        }
+        private Rectangle mainMenuStartRect;
+        public Rectangle MainMenuStartRect {
+            get { return mainMenuStartRect; }
+        }
+        private Rectangle mainMenuExitRect;
+        public Rectangle MainMenuExitRect {
+            get { return mainMenuExitRect; }
+        }
+        private Song mainMenuSong;
+        public Song MainMenuSong {
+            get { return mainMenuSong; }
+        }
+
         public MiscContent(string jsonFilePath, ContentManager content) {
             MiscContentJson json = DeserializeJson(jsonFilePath);
             InitializeData(json, content);
@@ -63,6 +86,13 @@ namespace HundensVagga {
             exitMenuNoRect = json.ExitMenuNoRect.GetInstance();
 
             itemFailSound = json.GetItemFailSound(content);
+
+            companyLogos = json.GetCompanyLogos(content);
+
+            mainMenuBackgroundImage = json.GetMainMenuBackgroundImage(content);
+            mainMenuStartRect = json.MainMenuStartRect.GetInstance();
+            mainMenuExitRect = json.MainMenuExitRect.GetInstance();
+            mainMenuSong = json.GetMainMenuSong(content);
         }
     }
 }

@@ -20,8 +20,7 @@ namespace HundensVagga {
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
 
-        private Game game;
-
+        private ExitGameManager exitGameManager;
         private StateManager stateManager;
 
         private ContentManager content;
@@ -54,22 +53,20 @@ namespace HundensVagga {
             get { return miscContent; }
         }
 
-        public MainGameState(Game game, StateManager stateManager, ContentManager content, 
-                CursorManager cursorManager, Rooms rooms, Inventory inventory,
-                SongManager songManager, Items items, MiscContent miscContent) {
-            this.game = game;
+        public MainGameState(StateManager stateManager, Main main) {
             this.stateManager = stateManager;
-            this.content = content;
-            this.cursorManager = cursorManager;
-            this.rooms = rooms;
-            this.inventory = inventory;
-            this.songManager = songManager;
+            exitGameManager = main.ExitGameManager;
+            content = main.Content;
+            cursorManager = main.CursorManager;
+            rooms = main.Rooms;
+            inventory = main.Inventory;
+            songManager = main.SongManager;
+            miscContent = main.MiscContent;
             inGameStateManager = new InGameStateManager();
-            this.miscContent = miscContent;
 
             GoToRoom(START_ROOM_NAME);
 
-            inventory.AddItem(items.GetItem("letter"));
+            inventory.AddItem(main.Items.GetItem("letter"));
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
@@ -110,7 +107,7 @@ namespace HundensVagga {
         }
 
         public void ExitGame() {
-            game.Exit();
+            exitGameManager.Exit();
         }
 
         public void Win() {

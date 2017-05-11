@@ -547,18 +547,6 @@
 /processorParam:TextureFormat=Color
 /build:backgrounds/postcard.jpg
 
-#begin backgrounds/startmenu.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:backgrounds/startmenu.jpg
-
 #begin backgrounds/telephone.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2100,4 +2088,16 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound_effects/door_open_close.ogg
+
+#begin misc/start_menu.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:misc/start_menu.jpg
 

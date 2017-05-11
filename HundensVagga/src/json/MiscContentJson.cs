@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,18 @@ namespace HundensVagga {
         [JsonProperty("item_fail_sound")]
         public string ItemFailSoundPath { get; set; }
 
+        [JsonProperty("company_logos")]
+        public IList<string> CompanyLogoPaths { get; set; }
+        [JsonProperty("main_menu_start")]
+        public RectJson MainMenuStartRect { get; set; }
+        [JsonProperty("main_menu_exit")]
+        public RectJson MainMenuExitRect { get; set; }
+        [JsonProperty("main_menu_song")]
+        public string MainMenuSongPath { get; set; }
+
+        [JsonProperty("main_menu_background")]
+        public string MainMenuBackgroundImagePath { get; set; }
+
         public Texture2D GetInventoryBagImage(ContentManager content) {
             return GetImage(content, InventoryBagImagePath);
         }
@@ -44,8 +57,24 @@ namespace HundensVagga {
             return GetImage(content, ExitMenuImagePath);
         }
 
+        public Song GetMainMenuSong(ContentManager content) {
+            return GetSong(content, MainMenuSongPath);
+        }
+
         public SoundEffectInstance GetItemFailSound(ContentManager content) {
             return GetSoundEffect(content, ItemFailSoundPath);
+        }
+
+        public IList<Texture2D> GetCompanyLogos(ContentManager content) {
+            IList<Texture2D> companyLogos = new List<Texture2D>();
+            foreach (string companyLogoPath in CompanyLogoPaths)
+                companyLogos.Add(GetImage(content, companyLogoPath));
+
+            return companyLogos;
+        }
+
+        public Texture2D GetMainMenuBackgroundImage(ContentManager content) {
+            return GetImage(content, MainMenuBackgroundImagePath);
         }
 
         private Texture2D GetImage(ContentManager content, string imagePath) {
@@ -55,6 +84,10 @@ namespace HundensVagga {
         private SoundEffectInstance GetSoundEffect(ContentManager content, string soundPath) {
             return content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR + 
                 Path.DirectorySeparatorChar + soundPath).CreateInstance();
+        }
+
+        private Song GetSong(ContentManager content, string songPath) {
+            return content.Load<Song>(Main.SONGS_DIR + Path.DirectorySeparatorChar + songPath);
         }
     }
 }
