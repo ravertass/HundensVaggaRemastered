@@ -1,4 +1,25 @@
 ﻿{
+  "company_logos": ["logo"],
+
+  "main_menu_background": "start_menu",
+  "main_menu_start": {
+    "x": 185,
+    "y": 170,
+    "width": 395,
+    "height": 65
+  },
+  "main_menu_exit": {
+    "x": 250,
+    "y": 360,
+    "width": 270,
+    "height": 65
+  },
+  "main_menu_song": "menu",
+
+  "intro_song": "intro1",
+  "intro_monologue": "intro",
+  "intro_piano_sound": "intro_piano",
+
   "inventory_bag_image": "bag",
   "inventory_background_image": "inventory",
   "exit_icon_image": "exit_icon",
@@ -18,21 +39,4 @@
   },
 
   "item_fail_sound": "item_fail",
-
-  "main_menu_background": "start_menu",
-  "main_menu_start": {
-    "x": 185,
-    "y": 170,
-    "width": 395,
-    "height": 65
-  },
-  "main_menu_exit": {
-    "x": 250,
-    "y": 360,
-    "width": 270,
-    "height": 65
-  },
-  "main_menu_song": "menu",
-
-  "company_logos": ["logo"],
 }

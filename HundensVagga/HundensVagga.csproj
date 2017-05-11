@@ -63,6 +63,9 @@
   <ItemGroup>
     <Compile Include="src\CursorManager.cs" />
     <Compile Include="src\ExitGameManager.cs" />
+    <Compile Include="src\gamestates\EndOfIntroState.cs" />
+    <Compile Include="src\ingamestates\FadeInState.cs" />
+    <Compile Include="src\gamestates\IntroState.cs" />
     <Compile Include="src\gamestates\LogoState.cs" />
     <Compile Include="src\gamestates\MainMenuFadeInState.cs" />
     <Compile Include="src\gamestates\MainMenuState.cs" />

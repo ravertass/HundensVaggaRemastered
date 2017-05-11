@@ -26,13 +26,23 @@ namespace HundensVagga {
             MediaPlayer.Volume = room.Volume;
         }
 
-        private void FadeOutThenIntoSong(Song song) {
+        public void FadeOutThenIntoSong(Song song) {
             State = new SongManagerFadeOut(song);
+        }
+
+        public void FadeOut() {
+            State = new SongManagerFadeOut(null);
         }
 
         public void FadeIntoSong(Song song) {
             CurrentSong = song;
             State = new SongManagerFadeIn(song);
+        }
+
+        public void Stop() {
+            MediaPlayer.Stop();
+            State = new SongManagerIdle();
+            CurrentSong = null;
         }
     }
 }

@@ -1345,12 +1345,6 @@
 /processorParam:Quality=Best
 /build:voice/fuse.wav
 
-#begin voice/intro.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/intro.wav
-
 #begin voice/locked_door.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
@@ -1578,12 +1572,6 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:songs/intro1.ogg
-
-#begin songs/intro2.ogg
-/importer:OggImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:songs/intro2.ogg
 
 #begin songs/last_song.ogg
 /importer:OggImporter
@@ -2100,4 +2088,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:misc/start_menu.jpg
+
+#begin sound_effects/intro.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/intro.wav
+
+#begin sound_effects/intro_piano.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/intro_piano.ogg
 

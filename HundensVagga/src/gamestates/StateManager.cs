@@ -43,8 +43,12 @@ namespace HundensVagga {
             currentState = new MainMenuState(this, main);
         }
 
-        public void GoToIntroState() {
+        public void GoToEndOfIntroState() {
+            currentState = new EndOfIntroState(this, main);
+        }
 
+        public void GoToIntroState() {
+            currentState = new IntroState(this, main);
         }
 
         public void GoToMainGameState() {
@@ -52,19 +56,19 @@ namespace HundensVagga {
         }
 
         public void GoToCreditsFadeInState() {
-
+            throw new NotImplementedException();
         }
 
         public void GoToCreditsState() {
-
+            throw new NotImplementedException();
         }
 
         public void GoToCreditsFadeOutState() {
-
+            throw new NotImplementedException();
         }
 
         public void GoToLastMelodyState() {
-
+            throw new NotImplementedException();
         }
     }
 }

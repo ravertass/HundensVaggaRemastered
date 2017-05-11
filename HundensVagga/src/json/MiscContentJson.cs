@@ -41,6 +41,13 @@ namespace HundensVagga {
         [JsonProperty("main_menu_background")]
         public string MainMenuBackgroundImagePath { get; set; }
 
+        [JsonProperty("intro_song")]
+        public string IntroSongPath { get; set; }
+        [JsonProperty("intro_monologue")]
+        public string IntroMonologuePath { get; set; }
+        [JsonProperty("intro_piano_sound")]
+        public string IntroPianoSoundPath { get; set; }
+
         public Texture2D GetInventoryBagImage(ContentManager content) {
             return GetImage(content, InventoryBagImagePath);
         }
@@ -59,6 +66,18 @@ namespace HundensVagga {
 
         public Song GetMainMenuSong(ContentManager content) {
             return GetSong(content, MainMenuSongPath);
+        }
+
+        public Song GetIntroSong(ContentManager content) {
+            return GetSong(content, IntroSongPath);
+        }
+
+        public SoundEffectInstance GetIntroMonologue(ContentManager content) {
+            return GetSoundEffect(content, IntroMonologuePath);
+        }
+
+        public SoundEffectInstance GetIntroPianoSound(ContentManager content) {
+            return GetSoundEffect(content, IntroPianoSoundPath);
         }
 
         public SoundEffectInstance GetItemFailSound(ContentManager content) {

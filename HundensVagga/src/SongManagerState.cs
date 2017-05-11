@@ -35,9 +35,21 @@ namespace HundensVagga {
             MediaPlayer.Volume -= VOLUME_SPEED;
 
             if (MediaPlayer.Volume == MIN_VOLUME) {
-                songManager.State = new SongManagerFadeIn(nextSong);
-                songManager.CurrentSong = nextSong;
+                if (nextSong != null)
+                    NextSong(songManager);
+                else
+                    Stop(songManager);
             }
+        }
+
+        private void NextSong(SongManager songManager) {
+            songManager.State = new SongManagerFadeIn(nextSong);
+            songManager.CurrentSong = nextSong;
+        }
+
+        private static void Stop(SongManager songManager) {
+            MediaPlayer.Stop();
+            songManager.State = new SongManagerIdle();
         }
     }
 

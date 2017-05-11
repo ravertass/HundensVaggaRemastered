@@ -66,6 +66,19 @@ namespace HundensVagga {
             get { return mainMenuSong; }
         }
 
+        private Song introSong;
+        public Song IntroSong {
+            get { return introSong; }
+        }
+        private SoundEffectInstance introMonologue;
+        public SoundEffectInstance IntroMonologue {
+            get { return introMonologue; }
+        }
+        private SoundEffectInstance introPianoSound;
+        public SoundEffectInstance IntroPianoSound {
+            get { return introPianoSound; }
+        }
+
         public MiscContent(string jsonFilePath, ContentManager content) {
             MiscContentJson json = DeserializeJson(jsonFilePath);
             InitializeData(json, content);
@@ -93,6 +106,11 @@ namespace HundensVagga {
             mainMenuStartRect = json.MainMenuStartRect.GetInstance();
             mainMenuExitRect = json.MainMenuExitRect.GetInstance();
             mainMenuSong = json.GetMainMenuSong(content);
+
+            introSong = json.GetIntroSong(content);
+            introMonologue = json.GetIntroMonologue(content);
+
+            introPianoSound = json.GetIntroPianoSound(content);
         }
     }
 }

@@ -65,6 +65,7 @@ namespace HundensVagga {
             inGameStateManager = new InGameStateManager();
 
             GoToRoom(START_ROOM_NAME);
+            inGameStateManager.CurrentState = new FadeInState(this);
 
             inventory.AddItem(main.Items.GetItem("letter"));
         }
