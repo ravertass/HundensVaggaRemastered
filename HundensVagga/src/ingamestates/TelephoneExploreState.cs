@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HundensVagga {
     internal class TelephoneExploreState : ExploreState {
         private static readonly IList<int> CORRECT_NUMBER = new ReadOnlyCollection<int>(
-            new List<int> {5, 4, 7, 2, 3, 1}
+            new List<int> {6, 5, 8, 2, 3, 1}
          );
 
         private IList<int> numbersPressed;
@@ -55,9 +55,8 @@ namespace HundensVagga {
         }
 
         private void MakePhoneCall() {
-            if (numbersPressed.Equals(CORRECT_NUMBER))
-                // byt till ett InGameState där vinstsnacket dras, sedan körs Win()
-                mainGameState.Win();
+            if (numbersPressed.Equals(CORRECT_NUMBER)) { mainGameState.Win(); }
+            //mainGameState.InGameStateManager.CurrentState = new ...TODO
             else {
                 idleSound.Stop();
                 wrongNumberSound.Play();

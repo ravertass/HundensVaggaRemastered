@@ -108,7 +108,6 @@ namespace HundensVagga {
 
             inputManager = new InputManager(this);
             cursorManager = new CursorManager(Content, inputManager);
-            songManager = new SongManager();
 
             exitGameManager = new ExitGameManager(this);
             stateManager = new StateManager(this);
@@ -139,6 +138,7 @@ namespace HundensVagga {
             items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
                 ITEMS_JSON_PATH, Content, inventory);
 
+            songManager = new SongManager();
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
                 ROOMS_JSON_PATH, Content, items, songManager);
         }
