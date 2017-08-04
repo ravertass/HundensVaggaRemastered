@@ -35,8 +35,6 @@ namespace HundensVagga {
             this.exitRoomName = exitRoomName;
 
             xMax = panorama.Width - SCREEN_X;
-
-            GoTo();
         }
 
         public override void GoTo() {

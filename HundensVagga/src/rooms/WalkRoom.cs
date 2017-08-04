@@ -14,7 +14,7 @@ namespace HundensVagga {
 
         private int backgroundIndex;
         private double elapsedTime;
-        private static readonly double TIME_STEP = 1.5;
+        private double timeStep;
 
         private String exitRoomName;
         public String ExitRoomName {
@@ -22,12 +22,12 @@ namespace HundensVagga {
         }
 
         public WalkRoom(string name, Song song, float volume, List<Texture2D> backgrounds, 
-            String exitRoomName, Type specialStateType) 
+            String exitRoomName, double time, Type specialStateType) 
             : base(name, song, volume, GetFirstBackground(backgrounds), new List<Exit>(), 
                 new List<Interactable>(), specialStateType) {
             this.backgrounds = backgrounds;
             this.exitRoomName = exitRoomName;
-            GoTo();
+            this.timeStep = time;
         }
 
         public override void GoTo() {
@@ -45,8 +45,8 @@ namespace HundensVagga {
             double delta = gameTime.ElapsedGameTime.TotalSeconds;
             elapsedTime += delta;
 
-            while (elapsedTime >= TIME_STEP) {
-                elapsedTime -= TIME_STEP;
+            while (elapsedTime >= timeStep) {
+                elapsedTime -= timeStep;
                 AdvanceBackground();
             }
 

@@ -16,7 +16,7 @@ namespace HundensVagga {
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            mainGameState.CursorManager.SetToDirection(Direction.up);
+            mainGameState.CursorManager.SetToDefault();
 
             if (mainGameState.CurrentRoom is ICutsceneRoom room) {
                 room.Update(gameTime);

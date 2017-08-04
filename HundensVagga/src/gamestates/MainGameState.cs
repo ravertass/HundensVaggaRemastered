@@ -16,7 +16,7 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class MainGameState : IGameState {
-        private const string START_ROOM_NAME = "front";
+        private const string START_ROOM_NAME = "phone_conversation";
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
 
@@ -96,7 +96,7 @@ namespace HundensVagga {
             songManager.NewRoom(CurrentRoom);
         }
 
-        private void ChangeRoom(string roomName) {
+        public void ChangeRoom(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
             CurrentRoom.GoTo();
             if (CurrentRoom.HasSpecialState())

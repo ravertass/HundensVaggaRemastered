@@ -22,6 +22,7 @@ namespace HundensVagga {
         public const string CURSORS_DIR = "cursors";
         public const string MISC_DIR = "misc";
         public const string LETTERS_DIR = "letters";
+        public const string DIALOG_DIR = "dialog";
 
         public const string ROOMS_JSON_PATH = "rooms.json";
         public const string ITEMS_JSON_PATH = "items.json";

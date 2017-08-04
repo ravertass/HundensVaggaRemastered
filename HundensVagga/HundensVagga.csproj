@@ -61,8 +61,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\FadeOutBox.cs" />
+    <Compile Include="src\FadeInBox.cs" />
     <Compile Include="src\CursorManager.cs" />
     <Compile Include="src\ExitGameManager.cs" />
+    <Compile Include="src\rooms\DialogRoom.cs" />
+    <Compile Include="src\rooms\FadeInRoom.cs" />
     <Compile Include="src\gamestates\EndOfIntroState.cs" />
     <Compile Include="src\ingamestates\FadeInState.cs" />
     <Compile Include="src\gamestates\IntroState.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="src\MiscContent.cs" />
     <Compile Include="src\rooms\Effect.cs" />
     <Compile Include="src\json\EffectJson.cs" />
+    <Compile Include="src\rooms\FadeOutRoom.cs" />
     <Compile Include="src\rooms\ICutsceneRoom.cs" />
     <Compile Include="src\rooms\IEffect.cs" />
     <Compile Include="src\json\ItemEffectJson.cs" />

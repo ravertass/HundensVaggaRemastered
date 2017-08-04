@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class TelephoneExploreState : ExploreState {
+        private static readonly string EXIT_ROOM_NAME = "phone_conversation";
+
         private static readonly IList<int> CORRECT_NUMBER = new ReadOnlyCollection<int>(
             new List<int> {6, 5, 8, 2, 3, 1}
          );
@@ -55,9 +57,11 @@ namespace HundensVagga {
         }
 
         private void MakePhoneCall() {
-            if (numbersPressed.Equals(CORRECT_NUMBER)) { mainGameState.Win(); }
-            //mainGameState.InGameStateManager.CurrentState = new ...TODO
-            else {
+            numbersPressed.ToList().ForEach(Console.WriteLine);
+            if (numbersPressed.SequenceEqual(CORRECT_NUMBER)) {
+                idleSound.Stop();
+                mainGameState.ChangeRoom(EXIT_ROOM_NAME);
+            } else {
                 idleSound.Stop();
                 wrongNumberSound.Play();
                 numbersPressed.Clear();

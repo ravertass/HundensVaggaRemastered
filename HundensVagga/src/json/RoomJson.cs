@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal enum SpecialRoomTypeEnum {
-        walk, panorama
+        walk, panorama, dialog, fadein, fadeout
     }
 
     /// <summary>
@@ -53,6 +53,12 @@ namespace HundensVagga {
         [JsonProperty("exit")]
         public string Exit { get; set; }
 
+        [JsonProperty("time")]
+        public double Time { get; set; }
+
+        [JsonProperty("sound")]
+        public string Sound { get; set; }
+
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
                 Items items, Songs songs, SongManager songManager) {
             Song song = GetSong(songs);
@@ -71,16 +77,36 @@ namespace HundensVagga {
             SpecialRoomTypeEnum type =
                 (SpecialRoomTypeEnum)Enum.Parse(typeof(SpecialRoomTypeEnum), RoomType);
 
+            Texture2D background;
             switch (type) {
                 case SpecialRoomTypeEnum.walk:
                     List<Texture2D> backgrounds = GetBackgrounds(content);
-                    return new WalkRoom(Name, song, volume, backgrounds, Exit, stateType);
+                    double time = Time != 0.0 ? Time : 1.5;
+                    return new WalkRoom(Name, song, volume, backgrounds, Exit, Time, stateType);
                 case SpecialRoomTypeEnum.panorama:
-                    Texture2D background = GetBackground(content, Background);
+                    background = GetBackground(content, Background);
                     return new PanoramaRoom(Name, song, volume, background, Exit, stateType);
+                case SpecialRoomTypeEnum.fadein:
+                    background = GetBackground(content, Background);
+                    return new FadeInRoom(Name, song, volume, background, Exit, Time, stateType);
+                case SpecialRoomTypeEnum.fadeout:
+                    background = GetBackground(content, Background);
+                    return new FadeOutRoom(Name, song, volume, background, Exit, Time, stateType);
+                case SpecialRoomTypeEnum.dialog:
+                    background = GetBackground(content, Background);
+                    SoundEffectInstance sound = GetSoundEffect(content);
+                    return new DialogRoom(Name, song, volume, background, Exit, sound, stateType);
                 default:
                     throw new TypeLoadException("No such room: " + RoomType);
             }
+        }
+
+        private SoundEffectInstance GetSoundEffect(ContentManager content) {
+            if (Sound != null)
+                return content.Load<SoundEffect>(Main.DIALOG_DIR
+                    + Path.DirectorySeparatorChar + Sound).CreateInstance();
+
+            return null;
         }
 
         private List<Texture2D> GetBackgrounds(ContentManager content) {
