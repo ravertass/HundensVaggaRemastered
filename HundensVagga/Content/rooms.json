@@ -1793,4 +1793,32 @@
               "item": "musicbox"}
     }
   ]
+},
+// End of game
+{
+  "name": "phone_conversation",
+  "song": "inside",
+  "background": "telephone_open",
+  "type": "dialog",
+  "sound": "phone_conversation",
+  "exit": "phone_fade",
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "phone_fadeout",
+  "song": "inside",
+  "background": "telephone_open",
+  "type": "fadeout",
+  "time": 3000,
+  "exit": "credits_fadein",
+  "state": "HundensVagga.CutsceneState"
+},
+// Credits
+{
+  "name": "credits_fadein",
+  "song": "credits",
+  "type": "fadein",
+  "time": 3000,
+  "exit": "credits_fadein",
+  "state": "HundensVagga.CutsceneState"
 }]
