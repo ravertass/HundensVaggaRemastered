@@ -3,5 +3,7 @@
         string ExitRoomName { get; }
 
         bool ShouldGoToExit();
+
+        void Stop();
     }
 }

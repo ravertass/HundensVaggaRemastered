@@ -63,5 +63,9 @@ namespace HundensVagga {
         public bool ShouldGoToExit() {
             return backgroundIndex == backgrounds.Count();
         }
+
+        public void Stop() {
+            // do nothing
+        }
     }
 }

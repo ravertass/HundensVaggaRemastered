@@ -43,5 +43,9 @@ namespace HundensVagga {
         public bool ShouldGoToExit() {
             return fadeInBox.IsDone();
         }
+
+        public void Stop() {
+            // do nothing
+        }
     }
 }

@@ -32,5 +32,9 @@ namespace HundensVagga {
         public bool ShouldGoToExit() {
             return timer.IsDone();
         }
+
+        public void Stop() {
+            // do nothing
+        }
     }
 }

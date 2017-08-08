@@ -21,6 +21,7 @@ namespace HundensVagga {
             if (mainGameState.CurrentRoom is ICutsceneRoom room) {
                 room.Update(gameTime);
                 if (room.ShouldGoToExit() || inputManager.IsLeftButtonPressed())
+                    room.Stop();
                     mainGameState.GoToRoom(room.ExitRoomName);
             } else {
                 throw new Exception("At cutscene state without cutscene room.");

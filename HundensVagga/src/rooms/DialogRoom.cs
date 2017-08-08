@@ -33,5 +33,9 @@ namespace HundensVagga {
         public bool ShouldGoToExit() {
             return sound.State == SoundState.Stopped;
         }
+
+        public void Stop() {
+            sound.Stop();
+        }
     }
 }

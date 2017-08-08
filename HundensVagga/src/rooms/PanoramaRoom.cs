@@ -73,5 +73,9 @@ namespace HundensVagga {
         public bool ShouldGoToExit() {
             return x <= 0 && dx < 0;
         }
+
+        public void Stop() {
+            // do nothing
+        }
     }
 }
