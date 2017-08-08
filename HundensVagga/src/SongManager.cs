@@ -10,8 +10,12 @@ namespace HundensVagga {
         public ISongManagerState State { get; set; }
         public Song CurrentSong { get; set; }
 
+        public float MaxVolume;
+        private const float MAX_VOLUME = 1f;
+
         public SongManager() {
             MediaPlayer.IsRepeating = true;
+            SetVolume(MAX_VOLUME);
             State = new SongManagerIdle();
             CurrentSong = null;
         }
@@ -23,7 +27,12 @@ namespace HundensVagga {
         public void NewRoom(Room room) {
             if (room.Song != CurrentSong)
                 FadeOutThenIntoSong(room.Song);
-            MediaPlayer.Volume = room.Volume;
+            SetVolume(room.Volume);
+        }
+
+        private void SetVolume(float volume) {
+            MediaPlayer.Volume = volume;
+            MaxVolume = volume;
         }
 
         public void FadeOutThenIntoSong(Song song) {

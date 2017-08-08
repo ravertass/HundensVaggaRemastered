@@ -1798,6 +1798,7 @@
 {
   "name": "phone_conversation",
   "song": "inside",
+  "volume": 0.3,
   "background": "telephone_open",
   "type": "dialog",
   "sound": "ending",
@@ -1807,9 +1808,10 @@
 {
   "name": "phone_fadeout",
   "song": "inside",
+  "volume": 0.3,
   "background": "telephone_open",
   "type": "fadeout",
-  "time": 3,
+  "time": 5,
   "exit": "credits_fadein",
   "state": "HundensVagga.CutsceneState"
 },
@@ -1819,7 +1821,7 @@
   "song": "credits",
   "background": "credits/1",
   "type": "fadein",
-  "time": 3,
+  "time": 5,
   "exit": "credits",
   "state": "HundensVagga.CutsceneState"
 },
@@ -1828,8 +1830,39 @@
   "song": "credits",
   "type": "walk",
   "backgrounds_dir": "credits",
-  "time": 5,
+  "time": 10,
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-  "exit": "front",
+  "exit": "end_of_credits",
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "end_of_credits",
+  "song": "credits",
+  "type": "timed",
+  "background": "credits/9",
+  "time": 30,
+  "exit": "credits_fadeout",
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "credits_fadeout",
+  "background": "credits/9",
+  "type": "fadeout",
+  "time": 5,
+  "exit": "end_perhaps",
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "end_perhaps",
+  "type": "timed",
+  "time": 30,
+  "exit": "end",
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "end",
+  "type": "dialog",
+  "sound": "last_song",
+  "exit": "QUIT_GAME",
   "state": "HundensVagga.CutsceneState"
 }]

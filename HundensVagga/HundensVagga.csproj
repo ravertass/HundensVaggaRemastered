@@ -111,6 +111,7 @@
     <Compile Include="src\rooms\PanoramaRoom.cs" />
     <Compile Include="src\rooms\Songs.cs" />
     <Compile Include="src\rooms\TelephoneInteractable.cs" />
+    <Compile Include="src\rooms\TimedRoom.cs" />
     <Compile Include="src\rooms\VarVal.cs" />
     <Compile Include="src\json\VarValJson.cs" />
     <Compile Include="src\Program.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="src\rooms\WorldStateVariable.cs" />
     <Compile Include="src\SongManager.cs" />
     <Compile Include="src\SongManagerState.cs" />
+    <Compile Include="src\SpecialRoomNames.cs" />
+    <Compile Include="src\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

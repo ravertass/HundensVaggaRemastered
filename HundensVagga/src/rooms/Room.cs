@@ -81,8 +81,13 @@ namespace HundensVagga {
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(background, new Vector2(0f, 0f), Color.White);
+            DrawBackground(spriteBatch);
             DrawInteractables(spriteBatch);
+        }
+
+        private void DrawBackground(SpriteBatch spriteBatch) {
+            if (background != null)
+                spriteBatch.Draw(background, new Vector2(0f, 0f), Color.White);
         }
 
         private void DrawInteractables(SpriteBatch spriteBatch) {

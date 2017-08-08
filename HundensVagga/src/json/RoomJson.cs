@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal enum SpecialRoomTypeEnum {
-        walk, panorama, dialog, fadein, fadeout
+        walk, panorama, dialog, fadein, fadeout, timed
     }
 
     /// <summary>
@@ -24,13 +24,13 @@ namespace HundensVagga {
         public string Name { get; set; }
 
         [JsonProperty("song")]
-        public string Song { get; set; }
+        public String Song { get; set; }
 
         [JsonProperty("volume")]
         public float Volume { get; set; }
 
         [JsonProperty("background")]
-        public string Background { get; set; }
+        public String Background { get; set; }
 
         [JsonProperty("exits")]
         public List<ExitJson> Exits { get; set; }
@@ -96,6 +96,9 @@ namespace HundensVagga {
                     background = GetBackground(content, Background);
                     SoundEffectInstance sound = GetSoundEffect(content);
                     return new DialogRoom(Name, song, volume, background, Exit, sound, stateType);
+                case SpecialRoomTypeEnum.timed:
+                    background = GetBackground(content, Background);
+                    return new TimedRoom(Name, song, volume, background, Exit, Time, stateType);
                 default:
                     throw new TypeLoadException("No such room: " + RoomType);
             }
@@ -150,15 +153,15 @@ namespace HundensVagga {
         }
 
         private Song GetSong(Songs songs) {
-            return songs.GetSong(Song);
+            return Song == null ? null : songs.GetSong(Song);
         }
 
         private float GetVolume() {
             return (Volume == 0.0f) ? 1.0f : Volume;
         }
 
-        private Texture2D GetBackground(ContentManager content, string backgroundName) {
-            return content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
+        private Texture2D GetBackground(ContentManager content, String backgroundName) {
+            return backgroundName == null ? null : content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
                 Path.DirectorySeparatorChar + backgroundName);
         }
 

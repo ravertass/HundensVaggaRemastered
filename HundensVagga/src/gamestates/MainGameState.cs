@@ -19,7 +19,6 @@ namespace HundensVagga {
         private const string START_ROOM_NAME = "phone_conversation";
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
-
         private ExitGameManager exitGameManager;
         private StateManager stateManager;
 
@@ -97,6 +96,29 @@ namespace HundensVagga {
         }
 
         public void ChangeRoom(string roomName) {
+            if (IsSpecialRoomName(roomName))
+                HandleSpecialRoomName(roomName);
+            else
+                HandleRoomChange(roomName);
+        }
+
+        private bool IsSpecialRoomName(string roomName) {
+            return Enum.IsDefined(typeof(SpecialRoomNames), roomName);
+        }
+
+        private void HandleSpecialRoomName(string roomName) {
+            SpecialRoomNames name =
+                (SpecialRoomNames)Enum.Parse(typeof(SpecialRoomNames), roomName);
+            switch (name) {
+                case SpecialRoomNames.QUIT_GAME:
+                    ExitGame();
+                    return;
+                default:
+                    throw new InvalidOperationException("Unknown special room name: " + roomName);
+            }
+        }
+
+        private void HandleRoomChange(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
             CurrentRoom.GoTo();
             if (CurrentRoom.HasSpecialState())
@@ -109,11 +131,6 @@ namespace HundensVagga {
 
         public void ExitGame() {
             exitGameManager.Exit();
-        }
-
-        public void Win() {
-            // TODO go to win state
-            Console.WriteLine("Tired of winning");
         }
     }
 }

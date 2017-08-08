@@ -12,7 +12,6 @@ namespace HundensVagga {
     internal abstract class ISongManagerState {
         protected const float VOLUME_SPEED = 0.025f;
         protected const float MIN_VOLUME = 0f;
-        protected const float MAX_VOLUME = 1f;
 
         abstract public void Update(SongManager songManager);
     }
@@ -27,14 +26,14 @@ namespace HundensVagga {
         private Song nextSong; 
 
         public SongManagerFadeOut(Song nextSong) {
-            MediaPlayer.Volume = MAX_VOLUME;
             this.nextSong = nextSong;
         }
 
         public override void Update(SongManager songManager) {
             MediaPlayer.Volume -= VOLUME_SPEED;
 
-            if (MediaPlayer.Volume == MIN_VOLUME) {
+            if (MediaPlayer.Volume <= MIN_VOLUME) {
+                MediaPlayer.Volume = MIN_VOLUME;
                 if (nextSong != null)
                     NextSong(songManager);
                 else
@@ -56,13 +55,14 @@ namespace HundensVagga {
     internal class SongManagerFadeIn : ISongManagerState {
         public SongManagerFadeIn(Song song) {
             MediaPlayer.Volume = MIN_VOLUME;
-            MediaPlayer.Play(song);
+            if (song != null)
+                MediaPlayer.Play(song);
         }
 
         public override void Update(SongManager songManager) {
             MediaPlayer.Volume += VOLUME_SPEED;
 
-            if (MediaPlayer.Volume == MAX_VOLUME)
+            if (MediaPlayer.Volume >= songManager.MaxVolume)
                 songManager.State = new SongManagerIdle();
         }
     }

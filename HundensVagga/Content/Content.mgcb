@@ -1567,12 +1567,6 @@
 /processorParam:Quality=Best
 /build:songs/intro1.ogg
 
-#begin songs/last_song.ogg
-/importer:OggImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:songs/last_song.ogg
-
 #begin songs/menu.ogg
 /importer:OggImporter
 /processor:SongProcessor
@@ -2208,4 +2202,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:backgrounds/credits/9.jpg
+
+#begin dialog/last_song.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:dialog/last_song.ogg
 
