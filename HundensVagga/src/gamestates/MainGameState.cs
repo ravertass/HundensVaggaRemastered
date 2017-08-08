@@ -16,7 +16,7 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class MainGameState : IGameState {
-        private const string START_ROOM_NAME = "phone_conversation";
+        private const string START_ROOM_NAME = "front";
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
         private ExitGameManager exitGameManager;

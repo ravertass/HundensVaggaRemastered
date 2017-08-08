@@ -82,7 +82,7 @@ namespace HundensVagga {
                 case SpecialRoomTypeEnum.walk:
                     List<Texture2D> backgrounds = GetBackgrounds(content);
                     double time = Time != 0.0 ? Time : 1.5;
-                    return new WalkRoom(Name, song, volume, backgrounds, Exit, Time, stateType);
+                    return new WalkRoom(Name, song, volume, backgrounds, Exit, time, stateType);
                 case SpecialRoomTypeEnum.panorama:
                     background = GetBackground(content, Background);
                     return new PanoramaRoom(Name, song, volume, background, Exit, stateType);
