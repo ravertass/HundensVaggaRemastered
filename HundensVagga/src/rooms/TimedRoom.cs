@@ -17,9 +17,9 @@ namespace HundensVagga {
         private Timer timer;
 
         public TimedRoom(String name, Song song, float volume, Texture2D background,
-            String exitRoomName, double time, Type specialStateType)
+            String exitRoomName, double time, Type specialStateType, bool withInventory)
             : base(name, song, volume, background, new List<Exit>(), new List<Interactable>(),
-                  specialStateType) {
+                  specialStateType, withInventory) {
             this.exitRoomName = exitRoomName;
             timer = new Timer(time);
         }

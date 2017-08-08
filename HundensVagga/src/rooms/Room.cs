@@ -31,12 +31,17 @@ namespace HundensVagga {
             get { return specialStateType; }
         }
 
+        private readonly bool withInventory;
+        public bool WithInventory {
+            get { return withInventory; }
+        }
+
         protected Texture2D background;
         private readonly List<Exit> exits;
         private readonly List<Interactable> interactables;
 
         public Room(string name, Song song, float volume, Texture2D background, List<Exit> exits, 
-                List<Interactable> interactables, Type specialStateType) {
+                List<Interactable> interactables, Type specialStateType, bool withInventory = true) {
             this.name = name;
             this.song = song;
             this.volume = volume;
@@ -44,6 +49,7 @@ namespace HundensVagga {
             this.exits = exits;
             this.interactables = interactables;
             this.specialStateType = specialStateType;
+            this.withInventory = withInventory;
         }
 
         private List<Interactable> ActiveInteractables() {

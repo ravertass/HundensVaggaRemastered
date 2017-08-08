@@ -1823,6 +1823,7 @@
   "type": "fadein",
   "time": 5,
   "exit": "credits",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 },
 {
@@ -1833,6 +1834,7 @@
   "time": 10,
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
   "exit": "end_of_credits",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 },
 {
@@ -1842,6 +1844,7 @@
   "background": "credits/9",
   "time": 30,
   "exit": "credits_fadeout",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 },
 {
@@ -1850,6 +1853,7 @@
   "type": "fadeout",
   "time": 5,
   "exit": "end_perhaps",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 },
 {
@@ -1857,6 +1861,7 @@
   "type": "timed",
   "time": 30,
   "exit": "end",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 },
 {
@@ -1864,5 +1869,6 @@
   "type": "dialog",
   "sound": "last_song",
   "exit": "QUIT_GAME",
+  "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
 }]

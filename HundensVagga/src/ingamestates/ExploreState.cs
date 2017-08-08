@@ -20,9 +20,8 @@ namespace HundensVagga {
         }
 
         public virtual void Update(InputManager inputManager, GameTime gameTime) {
-
             // inventory has priority over exits and interactables
-            if (CheckInventoryBag(inputManager))
+            if (mainGameState.CurrentRoom.WithInventory && CheckInventoryBag(inputManager))
                 return;
 
             // exits have priority over interactables

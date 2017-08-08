@@ -72,7 +72,8 @@ namespace HundensVagga {
         public void Update(InputManager inputManager, GameTime gameTime) {
             UpdateCurrentPlayingLookSound();
             cursorManager.SetToDefault();
-            inventory.Update(inputManager);
+            if (CurrentRoom.WithInventory)
+                inventory.Update(inputManager);
             inGameStateManager.CurrentState.Update(inputManager, gameTime);
             CurrentRoom.Update(gameTime);
             songManager.Update();
@@ -86,7 +87,8 @@ namespace HundensVagga {
 
         public void Draw(SpriteBatch spriteBatch) {
             CurrentRoom.Draw(spriteBatch);
-            inventory.Draw(spriteBatch);
+            if (CurrentRoom.WithInventory)
+                inventory.Draw(spriteBatch);
             inGameStateManager.CurrentState.Draw(spriteBatch);
         }
 

@@ -59,6 +59,9 @@ namespace HundensVagga {
         [JsonProperty("sound")]
         public string Sound { get; set; }
 
+        [JsonProperty("without_inventory")]
+        public bool WithoutInventory { get; set; }
+
         public Room GetRoomInstance(ContentManager content, StateOfTheWorld worldState, 
                 Items items, Songs songs, SongManager songManager) {
             Song song = GetSong(songs);
@@ -82,23 +85,29 @@ namespace HundensVagga {
                 case SpecialRoomTypeEnum.walk:
                     List<Texture2D> backgrounds = GetBackgrounds(content);
                     double time = Time != 0.0 ? Time : 1.5;
-                    return new WalkRoom(Name, song, volume, backgrounds, Exit, time, stateType);
+                    return new WalkRoom(Name, song, volume, backgrounds, Exit, time, stateType,
+                        !WithoutInventory);
                 case SpecialRoomTypeEnum.panorama:
                     background = GetBackground(content, Background);
-                    return new PanoramaRoom(Name, song, volume, background, Exit, stateType);
+                    return new PanoramaRoom(Name, song, volume, background, Exit, stateType,
+                        !WithoutInventory);
                 case SpecialRoomTypeEnum.fadein:
                     background = GetBackground(content, Background);
-                    return new FadeInRoom(Name, song, volume, background, Exit, Time, stateType);
+                    return new FadeInRoom(Name, song, volume, background, Exit, Time, stateType,
+                        !WithoutInventory);
                 case SpecialRoomTypeEnum.fadeout:
                     background = GetBackground(content, Background);
-                    return new FadeOutRoom(Name, song, volume, background, Exit, Time, stateType);
+                    return new FadeOutRoom(Name, song, volume, background, Exit, Time, stateType,
+                        !WithoutInventory);
                 case SpecialRoomTypeEnum.dialog:
                     background = GetBackground(content, Background);
                     SoundEffectInstance sound = GetSoundEffect(content);
-                    return new DialogRoom(Name, song, volume, background, Exit, sound, stateType);
+                    return new DialogRoom(Name, song, volume, background, Exit, sound, stateType,
+                        !WithoutInventory);
                 case SpecialRoomTypeEnum.timed:
                     background = GetBackground(content, Background);
-                    return new TimedRoom(Name, song, volume, background, Exit, Time, stateType);
+                    return new TimedRoom(Name, song, volume, background, Exit, Time, stateType,
+                        !WithoutInventory);
                 default:
                     throw new TypeLoadException("No such room: " + RoomType);
             }
@@ -128,7 +137,8 @@ namespace HundensVagga {
                 songs, songManager);
             Texture2D background = GetBackground(content, Background);
 
-            return new Room(Name, song, volume, background, exits, interactables, stateType);
+            return new Room(Name, song, volume, background, exits, interactables, stateType,
+                        !WithoutInventory);
         }
 
         private List<Exit> GetExits(ContentManager content, StateOfTheWorld worldState) {

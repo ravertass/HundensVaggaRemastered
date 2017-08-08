@@ -18,9 +18,9 @@ namespace HundensVagga {
         }
 
         public FadeInRoom(String name, Song song, float volume, Texture2D background,
-            String exitRoomName, double time, Type specialStateType)
+            String exitRoomName, double time, Type specialStateType, bool withInventory)
             : base(name, song, volume, background, new List<Exit>(), new List<Interactable>(),
-                  specialStateType) {
+                  specialStateType, withInventory) {
             this.exitRoomName = exitRoomName;
             this.time = time;
         }

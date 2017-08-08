@@ -18,9 +18,10 @@ namespace HundensVagga {
         }
 
         public DialogRoom(string name, Song song, float volume, Texture2D background,
-            String exitRoomName, SoundEffectInstance sound, Type specialStateType) 
+            String exitRoomName, SoundEffectInstance sound, Type specialStateType,
+            bool withInventory) 
             : base(name, song, volume, background, new List<Exit>(), new List<Interactable>(),
-                  specialStateType) {
+                  specialStateType, withInventory) {
             this.sound = sound;
             this.exitRoomName = exitRoomName;
         }

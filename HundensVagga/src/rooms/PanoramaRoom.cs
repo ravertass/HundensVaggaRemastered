@@ -28,9 +28,9 @@ namespace HundensVagga {
         }
 
         public PanoramaRoom(string name, Song song, float volume, Texture2D panorama,
-            String exitRoomName, Type specialStateType) 
+            String exitRoomName, Type specialStateType, bool withInventory) 
             : base(name, song, volume, panorama, new List<Exit>(), new List<Interactable>(), 
-                  specialStateType) {
+                  specialStateType, withInventory) {
             this.panorama = panorama;
             this.exitRoomName = exitRoomName;
 
