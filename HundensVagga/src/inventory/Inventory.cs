@@ -64,6 +64,15 @@ namespace HundensVagga {
                 && IsCursorOnBag(inputManager);
         }
 
+        public bool IsOutsideOfInventoryClicked(InputManager inputManager) {
+            return inputManager.IsLeftButtonPressed()
+                && IsCursorOutsideOfInventory(inputManager);
+        }
+
+        private bool IsCursorOutsideOfInventory(InputManager inputManager) {
+            return !ui.InventoryRectangle().Contains(inputManager.GetMousePosition());
+        }
+
         public bool IsCursorOnBag(InputManager inputManager) {
             return ui.BagRectangle().Contains(inputManager.GetMousePosition());
         }

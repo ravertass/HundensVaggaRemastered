@@ -41,6 +41,10 @@ namespace HundensVagga {
             return new Rectangle(X, Y + BAG_Y_OFFSET, bagTexture.Width, bagTexture.Height);
         }
 
+        public Rectangle InventoryRectangle() {
+            return new Rectangle(X, Y, backgroundTexture.Width, backgroundTexture.Height);
+        }
+
         public Rectangle ExitIconRectangle() {
             return new Rectangle(Inventory.EXIT_ICON_X, 
                 Y + (BAG_Y_OFFSET - exitIconTexture.Height)/2,

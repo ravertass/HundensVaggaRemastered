@@ -18,7 +18,7 @@ namespace HundensVagga {
 
             inventory.SetItemCoords();
             CheckExitIcon(inputManager, inventory);
-            CheckInventoryBag(inputManager, inventory);
+            CheckOutsideOfInventory(inputManager, inventory);
             CheckItems(inputManager, inventory);
         }
 
@@ -28,8 +28,9 @@ namespace HundensVagga {
             }
         }
 
-        private void CheckInventoryBag(InputManager inputManager, Inventory inventory) {
-            if (mainGameState.Inventory.IsBagClicked(inputManager)) {
+        private void CheckOutsideOfInventory(InputManager inputManager, Inventory inventory) {
+            // TODO: Make it possible to simply click outside inventory
+            if (mainGameState.Inventory.IsOutsideOfInventoryClicked(inputManager)) {
                 inventory.GoUp();
                 mainGameState.InGameStateManager.PopState();
             }
