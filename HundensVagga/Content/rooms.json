@@ -1148,6 +1148,7 @@
 {
   "name": "telephone_open",
   "song": "inside",
+  "volume": 0.3,
   "background": "telephone_open",
   "state": "HundensVagga.TelephoneExploreState",
   "exits": [
@@ -1811,17 +1812,16 @@
   "volume": 0.3,
   "background": "telephone_open",
   "type": "fadeout",
-  "time": 5,
+  "time": 10,
   "exit": "credits_fadein",
   "state": "HundensVagga.CutsceneState"
 },
 // Credits
 {
   "name": "credits_fadein",
-  "song": "credits",
   "background": "credits/1",
   "type": "fadein",
-  "time": 5,
+  "time": 10,
   "exit": "credits",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
@@ -1831,7 +1831,7 @@
   "song": "credits",
   "type": "walk",
   "backgrounds_dir": "credits",
-  "time": 10,
+  "time": 20,
   "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
   "exit": "end_of_credits",
   "without_inventory": true,
@@ -1842,7 +1842,7 @@
   "song": "credits",
   "type": "timed",
   "background": "credits/9",
-  "time": 30,
+  "time": 20,
   "exit": "credits_fadeout",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
@@ -1851,7 +1851,7 @@
   "name": "credits_fadeout",
   "background": "credits/9",
   "type": "fadeout",
-  "time": 5,
+  "time": 10,
   "exit": "end_perhaps",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState"

@@ -41,7 +41,7 @@ namespace HundensVagga {
         private readonly List<Interactable> interactables;
 
         public Room(string name, Song song, float volume, Texture2D background, List<Exit> exits, 
-                List<Interactable> interactables, Type specialStateType, bool withInventory = true) {
+                List<Interactable> interactables, Type specialStateType, bool withInventory) {
             this.name = name;
             this.song = song;
             this.volume = volume;
