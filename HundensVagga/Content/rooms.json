@@ -1,4 +1,14 @@
-[// Main menu
+[//Logos
+{
+  "name": "logos",
+  "type": "logo",
+  "logos": ["sfabian", "flyingmen"],
+  "time": 4,
+  "exit": "menu_fadein",
+  "without_inventory": true,
+  "state": "HundensVagga.CutsceneState",
+},
+// Main menu
 {
   "name": "menu_fadein",
   "type": "fadein",

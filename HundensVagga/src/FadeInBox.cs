@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    internal class FadeInBox {
+    internal class FadeInBox : IFadeBox {
         private double elapsedTime;
         private static readonly double TIME_STEP = 0.01;
 

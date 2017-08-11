@@ -20,7 +20,7 @@ namespace HundensVagga {
         }
 
         public void GoToStartState() {
-            GoToLogoState();
+            GoToMainGameState();
         }
 
         public void UpdateCurrentState(InputManager inputManager, GameTime gameTime) {

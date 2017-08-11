@@ -22,7 +22,7 @@ namespace HundensVagga {
         }
 
         public WalkRoom(string name, Song song, float volume, List<Texture2D> backgrounds, 
-            String exitRoomName, double time, Type specialStateType, bool withInventory) 
+                String exitRoomName, double time, Type specialStateType, bool withInventory) 
             : base(name, song, volume, GetFirstBackground(backgrounds), new List<Exit>(), 
                 new List<Interactable>(), specialStateType, withInventory) {
             this.backgrounds = backgrounds;

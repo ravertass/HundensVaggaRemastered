@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal enum SpecialRoomTypeEnum {
-        walk, panorama, dialog, fadein, fadeout, timed
+        walk, panorama, dialog, fadein, fadeout, timed, logo
     }
 
     /// <summary>
@@ -49,6 +49,9 @@ namespace HundensVagga {
 
         [JsonProperty("backgrounds")]
         public List<string> Backgrounds { get; set; }
+
+        [JsonProperty("logos")]
+        public List<string> Logos { get; set; }
 
         [JsonProperty("exit")]
         public string Exit { get; set; }
@@ -109,11 +112,19 @@ namespace HundensVagga {
                 case SpecialRoomTypeEnum.dialog:
                     background = GetBackground(content, Background);
                     SoundEffectInstance sound = GetSoundEffect(content);
-                    return new DialogRoom(Name, song, volume, background, Exit, sound, stateType,
-                        !WithoutInventory);
+                    interactables = GetInteractables(content, worldState, items,
+                        songs, songManager);
+                    return new DialogRoom(Name, song, volume, background, Exit, sound,
+                        interactables, stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.timed:
                     background = GetBackground(content, Background);
-                    return new TimedRoom(Name, song, volume, background, Exit, Time, stateType,
+                    interactables = GetInteractables(content, worldState, items,
+                        songs, songManager);
+                    return new TimedRoom(Name, song, volume, background, Exit, Time, interactables,
+                        stateType, !WithoutInventory);
+                case SpecialRoomTypeEnum.logo:
+                    IList<Texture2D> logos = GetLogos(content);
+                    return new LogoRoom(Name, song, volume, logos, Exit, Time, stateType,
                         !WithoutInventory);
                 default:
                     throw new TypeLoadException("No such room: " + RoomType);
@@ -182,6 +193,16 @@ namespace HundensVagga {
         private Texture2D GetBackground(ContentManager content, String backgroundName) {
             return backgroundName == null ? null : content.Load<Texture2D>(Main.BACKGROUNDS_DIR + 
                 Path.DirectorySeparatorChar + backgroundName);
+        }
+
+        private IList<Texture2D> GetLogos(ContentManager content) {
+            IList<Texture2D> logos = new List<Texture2D>();
+
+            foreach (string logoName in Logos)
+                logos.Add(content.Load<Texture2D>(Main.LOGOS_DIR +
+                    Path.DirectorySeparatorChar + logoName));
+
+            return logos;
         }
 
         private Type GetStateType() {
