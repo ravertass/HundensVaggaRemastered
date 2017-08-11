@@ -1,4 +1,38 @@
-[{
+[// Intro
+{
+  "name": "intro_talk",
+  "song": "intro1",
+  "type": "dialog",
+  "sound": "intro_talk",
+  "exit": "intro_piano",
+  "without_inventory": true,
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "intro_piano",
+  "type": "dialog",
+  "sound": "intro_piano",
+  "exit": "front_fadein",
+  "without_inventory": true,
+  "state": "HundensVagga.CutsceneState"
+},
+{
+  "name": "front_fadein",
+  "type": "fadein",
+  "background": "front",
+  "time": 10,
+  "exit": "front",
+  "state": "HundensVagga.CutsceneState",
+  "interactables": [
+    {
+      "x": 175,
+      "y": 297,
+      "image": "frozen_front",
+      "prereqs": [{"var": "st_frozen_melted", "val": false}],
+    },
+  ]
+},
+{
   "name": "front",
   "song": "outside",
   "background": "front",

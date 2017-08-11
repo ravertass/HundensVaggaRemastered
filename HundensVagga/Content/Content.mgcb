@@ -2209,3 +2209,15 @@
 /processorParam:Quality=Best
 /build:dialog/last_song.ogg
 
+#begin dialog/intro_piano.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:dialog/intro_piano.ogg
+
+#begin dialog/intro_talk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:dialog/intro_talk.wav
+

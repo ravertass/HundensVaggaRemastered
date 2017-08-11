@@ -26,7 +26,10 @@ namespace HundensVagga {
 
         public void NewRoom(Room room) {
             if (room.Song != CurrentSong)
-                FadeOutThenIntoSong(room.Song);
+                if (CurrentSong == null)
+                    FadeIntoSong(room.Song);
+                else
+                    FadeOutThenIntoSong(room.Song);
             SetVolume(room.Volume);
         }
 
@@ -41,6 +44,7 @@ namespace HundensVagga {
 
         public void FadeOut() {
             State = new SongManagerFadeOut(null);
+            CurrentSong = null;
         }
 
         public void FadeIntoSong(Song song) {

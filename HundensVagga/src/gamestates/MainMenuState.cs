@@ -49,7 +49,7 @@ namespace HundensVagga {
         }
 
         private void FinishState() {
-            stateManager.GoToIntroState();
+            stateManager.GoToMainGameState();
         }
 
         private void ExitGame() {

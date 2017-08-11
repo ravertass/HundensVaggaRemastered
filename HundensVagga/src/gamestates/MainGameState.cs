@@ -16,7 +16,7 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class MainGameState : IGameState {
-        private const string START_ROOM_NAME = "credits_fadein";
+        private const string START_ROOM_NAME = "intro_talk";
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
         private ExitGameManager exitGameManager;
@@ -63,8 +63,8 @@ namespace HundensVagga {
             miscContent = main.MiscContent;
             inGameStateManager = new InGameStateManager();
 
+            inGameStateManager.CurrentState = new ExploreState(this);
             GoToRoom(START_ROOM_NAME);
-            inGameStateManager.CurrentState = new FadeInState(this);
 
             inventory.AddItem(main.Items.GetItem("letter"));
         }
