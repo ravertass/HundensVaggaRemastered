@@ -23,7 +23,7 @@ namespace HundensVagga {
         private SoundEffectInstance idleSound;
         private SoundEffectInstance wrongNumberSound;
 
-        public TelephoneExploreState(MainGameState mainGameState) : base(mainGameState) {
+        public TelephoneExploreState(GameManager mainGameState) : base(mainGameState) {
             numbersPressed = new List<int>();
             idleSound = mainGameState.Content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR +
                     Path.DirectorySeparatorChar + IDLE_SOUND_PATH).CreateInstance();

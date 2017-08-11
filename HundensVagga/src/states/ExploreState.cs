@@ -12,10 +12,10 @@ namespace HundensVagga {
     /// The in-game state when the player can interact with interactables in the room, 
     /// or move between rooms.
     /// </summary>
-    internal class ExploreState : IInGameState {
-        protected MainGameState mainGameState;
+    internal class ExploreState : IGameState {
+        protected GameManager mainGameState;
 
-        public ExploreState(MainGameState mainGameState) {
+        public ExploreState(GameManager mainGameState) {
             this.mainGameState = mainGameState;
         }
 
@@ -109,8 +109,8 @@ namespace HundensVagga {
 
         private bool CheckInventoryBag(InputManager inputManager) {
             if (mainGameState.Inventory.IsBagClicked(inputManager)) {
-                mainGameState.InGameStateManager.PushState();
-                mainGameState.InGameStateManager.CurrentState = new InventoryState(mainGameState);
+                mainGameState.GameStateManager.PushState();
+                mainGameState.GameStateManager.CurrentState = new InventoryState(mainGameState);
                 mainGameState.Inventory.GoDown();
                 return true;
             } else if (mainGameState.Inventory.IsCursorOnBag(inputManager)) {

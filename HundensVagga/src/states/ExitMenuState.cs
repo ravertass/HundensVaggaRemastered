@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HundensVagga {
-    internal class ExitMenuState : IInGameState {
-        private MainGameState mainGameState;
+    internal class ExitMenuState : IGameState {
+        private GameManager mainGameState;
         private Texture2D menuImage;
 
         private Rectangle yesRectangle;
         private Rectangle noRectangle;
 
-        public ExitMenuState(MainGameState mainGameState) {
+        public ExitMenuState(GameManager mainGameState) {
             this.mainGameState = mainGameState;
             menuImage = mainGameState.MiscContent.ExitMenuImage;
 
@@ -35,7 +35,7 @@ namespace HundensVagga {
             if (inputManager.IsLeftButtonPressed()
                     && noRectangle.Contains(inputManager.GetMousePosition())) {
                 mainGameState.Inventory.GoUp();
-                mainGameState.InGameStateManager.PopState();
+                mainGameState.GameStateManager.PopState();
             }
 
             if (inputManager.IsLeftButtonPressed()

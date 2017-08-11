@@ -6,10 +6,10 @@ namespace HundensVagga {
     /// <summary>
     /// The in-game state when the player can pick among the items in the inventory.
     /// </summary>
-    internal class InventoryState : IInGameState {
-        private MainGameState mainGameState;
+    internal class InventoryState : IGameState {
+        private GameManager mainGameState;
 
-        public InventoryState(MainGameState mainGameState) {
+        public InventoryState(GameManager mainGameState) {
             this.mainGameState = mainGameState;
         }
 
@@ -24,7 +24,7 @@ namespace HundensVagga {
 
         private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
             if (mainGameState.Inventory.IsExitIconClicked(inputManager)) {
-                mainGameState.InGameStateManager.CurrentState = new ExitMenuState(mainGameState);
+                mainGameState.GameStateManager.CurrentState = new ExitMenuState(mainGameState);
             }
         }
 
@@ -32,7 +32,7 @@ namespace HundensVagga {
             // TODO: Make it possible to simply click outside inventory
             if (mainGameState.Inventory.IsOutsideOfInventoryClicked(inputManager)) {
                 inventory.GoUp();
-                mainGameState.InGameStateManager.PopState();
+                mainGameState.GameStateManager.PopState();
             }
         }
 
@@ -48,13 +48,13 @@ namespace HundensVagga {
             if (clickedItem.HasEffect()) {
                 clickedItem.PerformEffect();
 
-                IInGameState itemState = clickedItem.GetItemState(mainGameState);
+                IGameState itemState = clickedItem.GetItemState(mainGameState);
                 if (itemState != null)
-                    mainGameState.InGameStateManager.CurrentState = itemState;
+                    mainGameState.GameStateManager.CurrentState = itemState;
                 else
-                    mainGameState.InGameStateManager.PopState();
+                    mainGameState.GameStateManager.PopState();
             } else
-                mainGameState.InGameStateManager.CurrentState =
+                mainGameState.GameStateManager.CurrentState =
                     new UseItemState(mainGameState, clickedItem);
         }
 

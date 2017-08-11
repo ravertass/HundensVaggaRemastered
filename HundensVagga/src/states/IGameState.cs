@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     /// <summary>
-    /// An in-game state (e.g. using inventory, exploring) that MainGameState delegates work to.
+    /// An in-game state (e.g. using inventory, exploring) that GameManager delegates work to.
     /// </summary>
-    public interface IInGameState {
+    public interface IGameState {
         void Update(InputManager inputManager, GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
     }

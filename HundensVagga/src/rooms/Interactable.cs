@@ -66,11 +66,11 @@ namespace HundensVagga {
             return useEffect != null;
         }
 
-        public void ClickAt(MainGameState mainGameState) {
+        public void ClickAt(GameManager mainGameState) {
             clickEffect.Perform(mainGameState);
         }
 
-        public void Use(MainGameState mainGameState) {
+        public void Use(GameManager mainGameState) {
             useEffect.Perform(mainGameState);
         }
 
@@ -78,7 +78,7 @@ namespace HundensVagga {
             return itemEffects.ContainsKey(item.Name);
         }
 
-        public void UseItem(IItem item, MainGameState mainGameState) {
+        public void UseItem(IItem item, GameManager mainGameState) {
             itemEffects[item.Name].Perform(mainGameState);
         }
 

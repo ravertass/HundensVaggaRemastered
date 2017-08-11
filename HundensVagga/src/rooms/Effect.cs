@@ -32,7 +32,7 @@ namespace HundensVagga {
             this.exit = exit;
         }
 
-        public void Perform(MainGameState mainGameState) {
+        public void Perform(GameManager mainGameState) {
             SetVarVals();
             PlaySound();
             AddItemToInventory();
@@ -66,7 +66,7 @@ namespace HundensVagga {
                 songManager.FadeIntoSong(song);
         }
 
-        private void GoToExit(MainGameState mainGameState) {
+        private void GoToExit(GameManager mainGameState) {
             if (exit != null)
                 mainGameState.GoToRoom(exit);
         }

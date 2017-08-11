@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
-    internal class CutsceneState : IInGameState {
+    internal class CutsceneState : IGameState {
 
-        private MainGameState mainGameState;
+        private GameManager mainGameState;
 
-        public CutsceneState(MainGameState mainGameState) {
+        public CutsceneState(GameManager mainGameState) {
             this.mainGameState = mainGameState;
         }
 

@@ -208,7 +208,7 @@ namespace HundensVagga {
         private Type GetStateType() {
             if (State != null) {
                 Type stateType = Type.GetType(State);
-                if (!stateType.GetInterfaces().Contains(typeof(IInGameState)))
+                if (!stateType.GetInterfaces().Contains(typeof(IGameState)))
                     throw new Exception("Non-existing state type: " + State);
                 return stateType;
             } else

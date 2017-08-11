@@ -18,7 +18,7 @@ namespace HundensVagga {
             return true;
         }
 
-        public override IInGameState GetItemState(MainGameState mainGameState) {
+        public override IGameState GetItemState(GameManager mainGameState) {
             return new LetterItemState(mainGameState, letterImage);
         }
     }

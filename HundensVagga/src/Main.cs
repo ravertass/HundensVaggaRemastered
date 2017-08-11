@@ -53,9 +53,9 @@ namespace HundensVagga {
             get { return inventory; }
         }
 
-        private StateManager stateManager;
-        internal StateManager StateManager {
-            get { return stateManager; }
+        private GameManager gameManager;
+        internal GameManager GameManager {
+            get { return gameManager; }
         }
 
         private ExitGameManager exitGameManager;
@@ -112,9 +112,8 @@ namespace HundensVagga {
             cursorManager = new CursorManager(Content, inputManager);
 
             exitGameManager = new ExitGameManager(this);
-            stateManager = new StateManager(this);
 
-            stateManager.GoToStartState();
+            gameManager = new GameManager(this);
         }
 
         private void SetFullScreenResolution() {
@@ -124,25 +123,22 @@ namespace HundensVagga {
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
-        /// all of your content...
-        /// 
-        /// ... according to prewritten MonoGame comments. I have not put any content
-        /// loading here, and I don't know if I should. TODO!
+        /// all of your content.
         /// </summary>
         protected override void LoadContent() {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            miscContent = new MiscContent(CONTENT_DIR + Path.DirectorySeparatorChar +
-                MISC_CONTENT_JSON_PATH, Content);
+            miscContent = new MiscContent(
+                CONTENT_DIR + Path.DirectorySeparatorChar + MISC_CONTENT_JSON_PATH, 
+                Content);
 
             inventory = new Inventory(miscContent);
-            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar +
-                ITEMS_JSON_PATH, Content, inventory);
+            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar + ITEMS_JSON_PATH,
+                Content, inventory);
 
             songManager = new SongManager();
-            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar +
-                ROOMS_JSON_PATH, Content, items, songManager);
+            rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
+                Content, items, songManager);
         }
 
         /// <summary>
@@ -161,7 +157,7 @@ namespace HundensVagga {
         protected override void Update(GameTime gameTime) {
             // Delegate most update work to the current game state
             // (e.g. if we're in a menu or in the main game)
-            stateManager.UpdateCurrentState(inputManager, gameTime);
+            gameManager.Update(inputManager, gameTime);
             // But always keep track of input
             inputManager.Update();
 
@@ -189,13 +185,8 @@ namespace HundensVagga {
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-
-            // Delegate most draw work to the current game state
-            // (e.g. if we're in a menu or in the main game)
-            stateManager.DrawCurrentState(spriteBatch);
-            // But always draw the cursor (TODO: for now?)
+            gameManager.Draw(spriteBatch);
             cursorManager.Draw(spriteBatch);
-
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);

@@ -11,12 +11,12 @@ namespace HundensVagga {
     /// <summary>
     /// The in-game state when the player can use an item picked from the inventory.
     /// </summary>
-    internal class UseItemState : IInGameState {
-        private MainGameState mainGameState;
+    internal class UseItemState : IGameState {
+        private GameManager mainGameState;
         private IItem currentItem;
         private SoundEffectInstance failSound;
 
-        public UseItemState(MainGameState mainGameState, IItem currentItem) {
+        public UseItemState(GameManager mainGameState, IItem currentItem) {
             this.mainGameState = mainGameState;
             this.currentItem = currentItem;
             this.failSound = mainGameState.MiscContent.ItemFailSound;
@@ -36,7 +36,7 @@ namespace HundensVagga {
                 } else {
                     failSound.Play();
                 }
-                mainGameState.InGameStateManager.PopState();
+                mainGameState.GameStateManager.PopState();
             }
         }
 

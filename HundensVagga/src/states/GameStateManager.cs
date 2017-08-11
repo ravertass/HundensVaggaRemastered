@@ -4,9 +4,9 @@
     /// the current state. This is used because there are special explore states, and we 
     /// want to return to the correct explore state after using the inventory.
     /// </summary>
-    internal class InGameStateManager {
-        private IInGameState pushedState;
-        public IInGameState CurrentState { get; set; }
+    internal class GameStateManager {
+        private IGameState pushedState;
+        public IGameState CurrentState { get; set; }
 
         public void PushState() {
             pushedState = CurrentState;

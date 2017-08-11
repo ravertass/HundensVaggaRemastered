@@ -42,7 +42,7 @@ namespace HundensVagga {
             return false;
         }
 
-        public virtual IInGameState GetItemState(MainGameState mainGameState) {
+        public virtual IGameState GetItemState(GameManager mainGameState) {
             return null;
         }
     }

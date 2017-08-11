@@ -10,6 +10,6 @@ namespace HundensVagga {
 
         bool HasEffect();
         void PerformEffect();
-        IInGameState GetItemState(MainGameState mainGameState);
+        IGameState GetItemState(GameManager mainGameState);
     }
 }
