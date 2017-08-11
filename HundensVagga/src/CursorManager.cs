@@ -12,6 +12,7 @@ namespace HundensVagga {
         private const string USE_ONLY = "0_1";
         private const string LOOK_ONLY = "1_0";
         private const string USE_LOOK = "1_1";
+        private const string CLICK = "click";
 
         private const string UP = "up";
         private const string DOWN = "down";
@@ -44,6 +45,10 @@ namespace HundensVagga {
 
         public void SetToDefault() {
             SetTo(DEFAULT);
+        }
+
+        public void SetToClick() {
+            SetTo(CLICK);
         }
 
         public void SetToUseOnly() {

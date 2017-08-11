@@ -21,17 +21,19 @@ namespace HundensVagga {
         }
 
         private readonly IEffect useEffect;
+        private readonly IEffect clickEffect;
         private IDictionary<string, IEffect> itemEffects;
 
         private IList<VarVal> prereqs;
         private readonly Texture2D texture;
 
         public Interactable(Rectangle rectangle, SoundEffectInstance lookSound, 
-                IEffect useEffect, IDictionary<string, IEffect> itemEffects,
+                IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
                 IList<VarVal> prereqs, Texture2D texture = null) {
             this.rectangle = rectangle;
             this.lookSound = lookSound;
             this.useEffect = useEffect;
+            this.clickEffect = clickEffect;
             this.itemEffects = itemEffects;
             this.prereqs = prereqs;
             this.texture = texture;
@@ -45,7 +47,11 @@ namespace HundensVagga {
         }
 
         public bool IsInteractive() {
-            return IsLookable() || IsUsable() || itemEffects.Count > 0;
+            return IsClickable() || IsLookable() || IsUsable() || itemEffects.Count > 0;
+        }
+
+        public bool IsClickable() {
+            return clickEffect != null;
         }
 
         public bool IsLookable() {
@@ -58,6 +64,10 @@ namespace HundensVagga {
 
         public virtual bool IsUsable() {
             return useEffect != null;
+        }
+
+        public void ClickAt(MainGameState mainGameState) {
+            clickEffect.Perform(mainGameState);
         }
 
         public void Use(MainGameState mainGameState) {

@@ -67,7 +67,9 @@ namespace HundensVagga {
         }
 
         private void ChangeCursorInteractable(Interactable interactable) {
-            if (interactable.IsLookable() && interactable.IsUsable())
+            if (interactable.IsClickable())
+                mainGameState.CursorManager.SetToClick();
+            else if (interactable.IsLookable() && interactable.IsUsable())
                 mainGameState.CursorManager.SetToUseLook();
             else if (interactable.IsLookable())
                 mainGameState.CursorManager.SetToLookOnly();
@@ -77,10 +79,17 @@ namespace HundensVagga {
 
         private void HandleClicksInteractable(InputManager inputManager,
                 Interactable interactable) {
-            if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
+            if ((inputManager.IsLeftButtonPressed() || inputManager.IsRightButtonPressed())
+                && interactable.IsClickable())
+                ClickAt(interactable);
+            else if (inputManager.IsLeftButtonPressed() && interactable.IsLookable())
                 LookAt(interactable);
-            if (inputManager.IsRightButtonPressed() && interactable.IsUsable())
+            else if (inputManager.IsRightButtonPressed() && interactable.IsUsable())
                 UseInteractable(interactable);
+        }
+
+        protected virtual void ClickAt(Interactable interactable) {
+            interactable.ClickAt(mainGameState);
         }
 
         private void LookAt(Interactable interactable) {

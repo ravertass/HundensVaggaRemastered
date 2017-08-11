@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using System.Collections;
+using System.Diagnostics;
 
 namespace HundensVagga {
     internal enum SpecialInteractableEnum {
@@ -38,6 +39,9 @@ namespace HundensVagga {
         [JsonProperty("use")]
         public EffectJson Use { get; set; }
 
+        [JsonProperty("click")]
+        public EffectJson Click { get; set; }
+
         [JsonProperty("items")]
         public List<ItemEffectJson> ItemEffects { get; set; }
 
@@ -53,14 +57,20 @@ namespace HundensVagga {
         public Interactable GetInteractableInstance(ContentManager content, 
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             SoundEffectInstance lookSound = GetLookSoundEffect(content);
-            IEffect useEffect = GetUseEffect(content, worldState, items, songs, songManager);
+            IEffect useEffect = GetEffect(Use, content, worldState, items, songs, songManager);
+            IEffect clickEffect = GetEffect(Click, content, worldState, items, songs, songManager);
+
+            Trace.Assert(!(clickEffect != null && (lookSound != null || useEffect != null)),
+                "click effect cannot coexist with look sounds or use effects");
+
             IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items,
                 songs, songManager);
             IList<VarVal> prereqs = GetPrereqs(worldState);
             Texture2D texture = GetTexture(content);
             Rectangle rect = GetRectangle(texture);
 
-            return GetInteractable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+            return GetInteractable(rect, lookSound, useEffect, clickEffect, itemEffects, prereqs,
+                texture);
         }
 
         private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
@@ -71,10 +81,10 @@ namespace HundensVagga {
             return null;
         }
 
-        private IEffect GetUseEffect(ContentManager content, StateOfTheWorld worldState, 
-                Items items, Songs songs, SongManager songManager) {
-            if (Use != null)
-                return Use.GetEffectInstance(content, worldState, items, songs, songManager);
+        private IEffect GetEffect(EffectJson effect, ContentManager content,
+                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
+            if (effect != null)
+                return effect.GetEffectInstance(content, worldState, items, songs, songManager);
 
             return null;
         }
@@ -116,25 +126,26 @@ namespace HundensVagga {
         }
 
         private Interactable GetInteractable(Rectangle rect, SoundEffectInstance lookSound,
-            IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
-            Texture2D texture) {
+            IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
+            IList<VarVal> prereqs, Texture2D texture) {
             if (SpecialType != null)
-                return GetSpecialInteractable(rect, lookSound, useEffect, itemEffects, prereqs,
-                                              texture);
+                return GetSpecialInteractable(rect, lookSound, useEffect, clickEffect, itemEffects,
+                                              prereqs, texture);
 
-            return new Interactable(rect, lookSound, useEffect, itemEffects, prereqs, texture);
+            return new Interactable(rect, lookSound, useEffect, clickEffect, itemEffects, prereqs,
+                texture);
         }
 
         private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound,
-                IEffect useEffect, IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
-                Texture2D texture) {
+                IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
+                IList<VarVal> prereqs, Texture2D texture) {
             SpecialInteractableEnum type = 
                 (SpecialInteractableEnum)Enum.Parse(typeof(SpecialInteractableEnum), SpecialType);
 
             switch (type) {
                 case SpecialInteractableEnum.telephone:
-                    return new TelephoneInteractable(rect, lookSound, useEffect, itemEffects,
-                                                     prereqs, Number, texture);
+                    return new TelephoneInteractable(rect, lookSound, useEffect, clickEffect, 
+                                                     itemEffects, prereqs, Number, texture);
                 default:
                     throw new TypeLoadException("No such interactable: " + SpecialType);
             }

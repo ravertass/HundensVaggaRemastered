@@ -151,8 +151,9 @@ namespace HundensVagga {
         private List<Exit> GetExits(ContentManager content, StateOfTheWorld worldState) {
             List<Exit> exits = new List<Exit>();
 
-            foreach (ExitJson exitJson in Exits)
-                exits.Add(exitJson.GetExitInstance(content, worldState));
+            if (Exits != null)
+                foreach (ExitJson exitJson in Exits)
+                    exits.Add(exitJson.GetExitInstance(content, worldState));
 
             return exits;
         }

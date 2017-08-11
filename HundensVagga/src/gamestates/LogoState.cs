@@ -83,7 +83,7 @@ namespace HundensVagga {
         }
 
         private void FinishState() {
-            stateManager.GoToMainMenuFadeInState();
+            stateManager.GoToMainGameState();
         }
     }
 }

@@ -28,6 +28,10 @@ namespace HundensVagga {
         public void Update(InputManager inputManager, GameTime gameTime) {
             mainGameState.CursorManager.SetToDefault();
 
+            if (noRectangle.Contains(inputManager.GetMousePosition())
+                || yesRectangle.Contains(inputManager.GetMousePosition()))
+                mainGameState.CursorManager.SetToClick();
+
             if (inputManager.IsLeftButtonPressed()
                     && noRectangle.Contains(inputManager.GetMousePosition())) {
                 mainGameState.Inventory.GoUp();

@@ -1,4 +1,36 @@
-[// Intro
+[// Main menu
+{
+  "name": "menu_fadein",
+  "type": "fadein",
+  "background": "menu",
+  "time": 5,
+  "exit": "menu",
+  "without_inventory": true,
+  "state": "HundensVagga.CutsceneState",
+},
+{
+  "name": "menu",
+  "song": "menu",
+  "background": "menu",
+  "without_inventory": true,
+  "interactables": [
+    {
+      "x": 185,
+      "y": 170,
+      "width": 395,
+      "height": 65,
+      "click": {"exit": "intro_talk"},
+    },
+    {
+      "x": 250,
+      "y": 360,
+      "width": 270,
+      "height": 65,
+      "click": {"exit": "QUIT_GAME"},
+    }
+  ]
+},
+// Intro
 {
   "name": "intro_talk",
   "song": "intro1",
@@ -32,6 +64,7 @@
     },
   ]
 },
+// Actual game
 {
   "name": "front",
   "song": "outside",
