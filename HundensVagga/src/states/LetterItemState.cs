@@ -17,7 +17,7 @@ namespace HundensVagga {
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            gameManager.CursorManager.SetToDirection(Direction.down);
+            gameManager.CursorManager.SetToClick();
 
             if (inputManager.IsLeftButtonPressed())
                 gameManager.GameStateManager.PopState();
