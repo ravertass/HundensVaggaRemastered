@@ -1,5 +1,5 @@
 ﻿namespace HundensVagga {
     internal interface IEffect {
-        void Perform(GameManager mainGameState);
+        void Perform(GameManager gameManager);
     }
 }

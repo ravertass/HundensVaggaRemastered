@@ -37,10 +37,10 @@ namespace HundensVagga {
             xMax = panorama.Width - SCREEN_X;
         }
 
-        public override void GoTo() {
+        public override void GoTo(GameManager gameManager) {
             x = 0;
             dx = 1;
-            base.GoTo();
+            base.GoTo(gameManager);
         }
 
         public override void Update(GameTime gameTime) {

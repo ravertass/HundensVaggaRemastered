@@ -26,9 +26,9 @@ namespace HundensVagga {
             this.time = time;
         }
 
-        public override void GoTo() {
+        public override void GoTo(GameManager gameManager) {
             fadeInBox = new FadeInBox(time);
-            base.GoTo();
+            base.GoTo(gameManager);
         }
 
         public override void Update(GameTime gameTime) {

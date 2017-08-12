@@ -13,7 +13,7 @@ namespace HundensVagga {
         void Draw(SpriteBatch spriteBatch);
         Exit GetExitAt(Vector2 coords);
         Interactable GetInteractableAt(Vector2 coords);
-        void GoTo();
+        void GoTo(GameManager gameManager);
         bool HasSpecialState();
         void Update(GameTime gameTime);
     }

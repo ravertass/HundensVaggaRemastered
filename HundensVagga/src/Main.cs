@@ -195,7 +195,6 @@ namespace HundensVagga {
 
             spriteBatch.Begin();
             gameManager.Draw(spriteBatch);
-            cursorManager.Draw(spriteBatch);
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);

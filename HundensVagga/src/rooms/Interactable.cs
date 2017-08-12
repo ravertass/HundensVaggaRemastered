@@ -78,8 +78,8 @@ namespace HundensVagga {
             return itemEffects.ContainsKey(item.Name);
         }
 
-        public void UseItem(IItem item, GameManager mainGameState) {
-            itemEffects[item.Name].Perform(mainGameState);
+        public void UseItem(IItem item, GameManager gameManager) {
+            itemEffects[item.Name].Perform(gameManager);
         }
 
         public void Draw(SpriteBatch spriteBatch) {

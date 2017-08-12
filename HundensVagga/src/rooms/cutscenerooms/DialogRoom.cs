@@ -26,9 +26,9 @@ namespace HundensVagga {
             this.exitRoomName = exitRoomName;
         }
 
-        public override void GoTo() {
-            sound.Play();
-            base.GoTo();
+        public override void GoTo(GameManager gameManager) {
+            gameManager.SoundAndSubtitleManager.PlayAndPrint(sound, "this is dialog");
+            base.GoTo(gameManager);
         }
 
         public bool ShouldGoToExit() {

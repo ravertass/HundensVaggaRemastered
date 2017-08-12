@@ -29,13 +29,12 @@ namespace HundensVagga {
             this.exitRoomName = exitRoomName;
             this.time = time;
             this.logos = logos;
-            GoTo();
         }
 
-        public override void GoTo() {
+        public override void GoTo(GameManager gameManager) {
             currentLogoIndex = -1;
             AdvanceLogoIndex();
-            base.GoTo();
+            base.GoTo(gameManager);
         }
 
         public override void Update(GameTime gameTime) {

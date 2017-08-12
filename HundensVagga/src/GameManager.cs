@@ -93,6 +93,7 @@ namespace HundensVagga {
             if (CurrentRoom.WithInventory)
                 inventory.Draw(spriteBatch);
             gameStateManager.CurrentState.Draw(spriteBatch);
+            cursorManager.Draw(spriteBatch);
             subtitleManager.Draw(spriteBatch);
         }
 
@@ -126,7 +127,7 @@ namespace HundensVagga {
 
         private void HandleRoomChange(string roomName) {
             CurrentRoom = rooms.GetRoom(roomName);
-            CurrentRoom.GoTo();
+            CurrentRoom.GoTo(this);
             if (CurrentRoom.HasSpecialState())
                 gameStateManager.CurrentState = (IGameState)Activator.CreateInstance(
                     CurrentRoom.SpecialStateType, this);

@@ -14,6 +14,8 @@ namespace HundensVagga {
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
+            gameManager.CursorManager.SetToDefault();
+
             Inventory inventory = gameManager.Inventory;
 
             inventory.SetItemCoords();
@@ -23,13 +25,15 @@ namespace HundensVagga {
         }
 
         private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
-            if (gameManager.Inventory.IsExitIconClicked(inputManager)) {
+            if (gameManager.Inventory.IsCursorOnExitIcon(inputManager))
+                gameManager.CursorManager.SetToClick();
+            if (gameManager.Inventory.IsExitIconClicked(inputManager))
                 gameManager.GameStateManager.CurrentState = new ExitMenuState(gameManager);
-            }
         }
 
         private void CheckOutsideOfInventory(InputManager inputManager, Inventory inventory) {
-            // TODO: Make it possible to simply click outside inventory
+            if (gameManager.Inventory.IsCursorOnBag(inputManager))
+                gameManager.CursorManager.SetToClick();
             if (gameManager.Inventory.IsOutsideOfInventoryClicked(inputManager)) {
                 inventory.GoUp();
                 gameManager.GameStateManager.PopState();
@@ -38,9 +42,13 @@ namespace HundensVagga {
 
         private void CheckItems(InputManager inputManager, Inventory inventory) {
             IItem clickedItem = inventory.GetItemAt(inputManager.GetMousePosition());
-            if (inputManager.IsLeftButtonPressed() && clickedItem != null) {
-                inventory.GoUp();
-                HandleItem(clickedItem);
+            if (clickedItem != null) {
+                gameManager.CursorManager.SetToClick();
+
+                if (inputManager.IsLeftButtonPressed()) {
+                    inventory.GoUp();
+                    HandleItem(clickedItem);
+                }
             }
         }
 

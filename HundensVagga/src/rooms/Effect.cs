@@ -32,13 +32,13 @@ namespace HundensVagga {
             this.exit = exit;
         }
 
-        public void Perform(GameManager mainGameState) {
+        public void Perform(GameManager gameManager) {
             SetVarVals();
-            PlaySound();
+            PlaySound(gameManager.SoundAndSubtitleManager);
             AddItemToInventory();
             RemoveItemFromInventory();
             ChangeSong();
-            GoToExit(mainGameState);
+            GoToExit(gameManager);
         }
 
         private void SetVarVals() {
@@ -46,9 +46,9 @@ namespace HundensVagga {
                 varVal.Set();
         }
 
-        private void PlaySound() {
+        private void PlaySound(SoundAndSubtitleManager soundAndSubtitleManager) {
             if (sound != null)
-                sound.Play();
+                soundAndSubtitleManager.PlayAndPrint(sound, "my dudes"); //TODO
         }
 
         private void AddItemToInventory() {

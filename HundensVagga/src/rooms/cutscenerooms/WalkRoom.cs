@@ -30,11 +30,11 @@ namespace HundensVagga {
             this.timeStep = time;
         }
 
-        public override void GoTo() {
+        public override void GoTo(GameManager gameManager) {
             elapsedTime = 0;
             background = backgrounds[0];
             backgroundIndex = 1;
-            base.GoTo();
+            base.GoTo(gameManager);
         }
 
         private static Texture2D GetFirstBackground(List<Texture2D> backgrounds) {

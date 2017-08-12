@@ -102,7 +102,7 @@ namespace HundensVagga {
                     interactable.Draw(spriteBatch);
         }
 
-        public virtual void GoTo() {
+        public virtual void GoTo(GameManager gameManager) {
             // do nothing
         }
 

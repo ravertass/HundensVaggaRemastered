@@ -15,6 +15,7 @@ namespace HundensVagga {
         }
 
         private Timer timer;
+        private double time;
 
         public TimedRoom(String name, Song song, float volume, Texture2D background,
                 String exitRoomName, double time, List<Interactable> interactables,
@@ -22,7 +23,12 @@ namespace HundensVagga {
             : base(name, song, volume, background, new List<Exit>(), interactables,
                 specialStateType, withInventory) {
             this.exitRoomName = exitRoomName;
+            this.time = time;
+        }
+
+        public override void GoTo(GameManager gameManager) {
             timer = new Timer(time);
+            base.GoTo(gameManager);
         }
 
         public override void Update(GameTime gameTime) {

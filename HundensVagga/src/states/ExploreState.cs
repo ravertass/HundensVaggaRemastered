@@ -106,7 +106,7 @@ namespace HundensVagga {
                 gameManager.Inventory.GoDown();
                 return true;
             } else if (gameManager.Inventory.IsCursorOnBag(inputManager)) {
-                gameManager.CursorManager.SetToDefault();
+                gameManager.CursorManager.SetToClick();
                 return true;
             }
 
