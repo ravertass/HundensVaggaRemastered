@@ -23,5 +23,9 @@ namespace HundensVagga {
         public bool IsDone() {
             return elapsedTime >= maxTime;
         }
+
+        public void Stop() {
+            elapsedTime = maxTime;
+        }
     }
 }

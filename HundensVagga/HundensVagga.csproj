@@ -61,11 +61,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\rooms\cutscenerooms\util\FadeOutBox.cs" />
-    <Compile Include="src\rooms\cutscenerooms\util\FadeInBox.cs" />
+    <Compile Include="src\LookSoundManager.cs" />
+    <Compile Include="src\SoundAndSubtitleManager.cs" />
+    <Compile Include="src\util\FadeOutBox.cs" />
+    <Compile Include="src\util\FadeInBox.cs" />
     <Compile Include="src\CursorManager.cs" />
     <Compile Include="src\ExitGameManager.cs" />
-    <Compile Include="src\rooms\cutscenerooms\util\IFadeBox.cs" />
+    <Compile Include="src\util\IFadeBox.cs" />
     <Compile Include="src\rooms\cutscenerooms\DialogRoom.cs" />
     <Compile Include="src\rooms\cutscenerooms\FadeInRoom.cs" />
     <Compile Include="src\states\CutsceneState.cs" />
@@ -121,7 +123,8 @@
     <Compile Include="src\SongManager.cs" />
     <Compile Include="src\SongManagerState.cs" />
     <Compile Include="src\rooms\SpecialRoomNames.cs" />
-    <Compile Include="src\rooms\cutscenerooms\util\Timer.cs" />
+    <Compile Include="src\util\Timer.cs" />
+    <Compile Include="src\SubtitleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -145,6 +148,7 @@
     <Content Include="content\misc.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="content\subtitles.spritefont" />
     <None Include="packages.config" />
     <Content Include="content\rooms.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

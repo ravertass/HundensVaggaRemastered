@@ -17,7 +17,6 @@ namespace HundensVagga {
     /// </summary>
     internal class GameManager {
         private const string START_ROOM_NAME = "logos"; // TODO: Put in JSON
-        public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
         private ExitGameManager exitGameManager;
 
@@ -51,6 +50,16 @@ namespace HundensVagga {
             get { return miscContent; }
         }
 
+        private SubtitleManager subtitleManager;
+        public SubtitleManager SubtitleManager {
+            get { return subtitleManager; }
+        }
+
+        private SoundAndSubtitleManager soundAndSubtitleManager;
+        public SoundAndSubtitleManager SoundAndSubtitleManager {
+            get { return soundAndSubtitleManager; }
+        }
+
         public GameManager(Main main) {
             exitGameManager = main.ExitGameManager;
             content = main.Content;
@@ -59,7 +68,9 @@ namespace HundensVagga {
             inventory = main.Inventory;
             songManager = main.SongManager;
             miscContent = main.MiscContent;
+            subtitleManager = main.SubtitleManager;
             gameStateManager = new GameStateManager();
+            soundAndSubtitleManager = new SoundAndSubtitleManager(subtitleManager);
 
             gameStateManager.CurrentState = new ExploreState(this);
             GoToRoom(START_ROOM_NAME);
@@ -68,7 +79,7 @@ namespace HundensVagga {
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            UpdateCurrentPlayingLookSound();
+            soundAndSubtitleManager.Update(gameTime);
             cursorManager.SetToDefault();
             if (CurrentRoom.WithInventory)
                 inventory.Update(inputManager);
@@ -77,17 +88,12 @@ namespace HundensVagga {
             songManager.Update();
         }
 
-        private void UpdateCurrentPlayingLookSound() {
-            if (CurrentPlayingLookSound != null
-                && CurrentPlayingLookSound.State == SoundState.Stopped)
-                CurrentPlayingLookSound = null;
-        }
-
         public void Draw(SpriteBatch spriteBatch) {
             CurrentRoom.Draw(spriteBatch);
             if (CurrentRoom.WithInventory)
                 inventory.Draw(spriteBatch);
             gameStateManager.CurrentState.Draw(spriteBatch);
+            subtitleManager.Draw(spriteBatch);
         }
 
         public void GoToRoom(string roomName) {

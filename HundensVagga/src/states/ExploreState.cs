@@ -92,13 +92,7 @@ namespace HundensVagga {
         }
 
         private void LookAt(Interactable interactable) {
-            if (gameManager.CurrentPlayingLookSound != interactable.LookSound) {
-                if (gameManager.CurrentPlayingLookSound != null)
-                    gameManager.CurrentPlayingLookSound.Stop();
-
-                gameManager.CurrentPlayingLookSound = interactable.LookSound;
-                gameManager.CurrentPlayingLookSound.Play();
-            }
+            gameManager.SoundAndSubtitleManager.PlayAndPrint(interactable.LookSound, "hello there");
         }
 
         protected virtual void UseInteractable(Interactable interactable) {

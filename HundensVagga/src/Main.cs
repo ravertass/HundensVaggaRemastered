@@ -68,6 +68,11 @@ namespace HundensVagga {
             get { return inputManager; }
         }
 
+        private SubtitleManager subtitleManager;
+        internal SubtitleManager SubtitleManager {
+            get { return subtitleManager; }
+        }
+
         private CursorManager cursorManager;
         internal CursorManager CursorManager {
             get { return cursorManager; }
@@ -139,6 +144,10 @@ namespace HundensVagga {
             songManager = new SongManager();
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
                 Content, items, songManager);
+
+            // TODO: Think through how/where this is loaded
+            SpriteFont font = Content.Load<SpriteFont>("subtitles");
+            subtitleManager = new SubtitleManager(font, WINDOW_WIDTH, WINDOW_HEIGHT);
         }
 
         /// <summary>

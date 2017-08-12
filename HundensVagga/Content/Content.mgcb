@@ -2269,3 +2269,10 @@
 /processorParam:TextureFormat=Color
 /build:logos/sfabian.png
 
+#begin subtitles.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:subtitles.spritefont
+
