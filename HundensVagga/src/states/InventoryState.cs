@@ -7,14 +7,14 @@ namespace HundensVagga {
     /// The in-game state when the player can pick among the items in the inventory.
     /// </summary>
     internal class InventoryState : IGameState {
-        private GameManager mainGameState;
+        private GameManager gameManager;
 
-        public InventoryState(GameManager mainGameState) {
-            this.mainGameState = mainGameState;
+        public InventoryState(GameManager gameManager) {
+            this.gameManager = gameManager;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            Inventory inventory = mainGameState.Inventory;
+            Inventory inventory = gameManager.Inventory;
 
             inventory.SetItemCoords();
             CheckExitIcon(inputManager, inventory);
@@ -23,16 +23,16 @@ namespace HundensVagga {
         }
 
         private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
-            if (mainGameState.Inventory.IsExitIconClicked(inputManager)) {
-                mainGameState.GameStateManager.CurrentState = new ExitMenuState(mainGameState);
+            if (gameManager.Inventory.IsExitIconClicked(inputManager)) {
+                gameManager.GameStateManager.CurrentState = new ExitMenuState(gameManager);
             }
         }
 
         private void CheckOutsideOfInventory(InputManager inputManager, Inventory inventory) {
             // TODO: Make it possible to simply click outside inventory
-            if (mainGameState.Inventory.IsOutsideOfInventoryClicked(inputManager)) {
+            if (gameManager.Inventory.IsOutsideOfInventoryClicked(inputManager)) {
                 inventory.GoUp();
-                mainGameState.GameStateManager.PopState();
+                gameManager.GameStateManager.PopState();
             }
         }
 
@@ -48,14 +48,14 @@ namespace HundensVagga {
             if (clickedItem.HasEffect()) {
                 clickedItem.PerformEffect();
 
-                IGameState itemState = clickedItem.GetItemState(mainGameState);
+                IGameState itemState = clickedItem.GetItemState(gameManager);
                 if (itemState != null)
-                    mainGameState.GameStateManager.CurrentState = itemState;
+                    gameManager.GameStateManager.CurrentState = itemState;
                 else
-                    mainGameState.GameStateManager.PopState();
+                    gameManager.GameStateManager.PopState();
             } else
-                mainGameState.GameStateManager.CurrentState =
-                    new UseItemState(mainGameState, clickedItem);
+                gameManager.GameStateManager.CurrentState =
+                    new UseItemState(gameManager, clickedItem);
         }
 
         public void Draw(SpriteBatch spriteBatch) {

@@ -8,39 +8,39 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class ExitMenuState : IGameState {
-        private GameManager mainGameState;
+        private GameManager gameManager;
         private Texture2D menuImage;
 
         private Rectangle yesRectangle;
         private Rectangle noRectangle;
 
-        public ExitMenuState(GameManager mainGameState) {
-            this.mainGameState = mainGameState;
-            menuImage = mainGameState.MiscContent.ExitMenuImage;
+        public ExitMenuState(GameManager gameManager) {
+            this.gameManager = gameManager;
+            menuImage = gameManager.MiscContent.ExitMenuImage;
 
-            yesRectangle = mainGameState.MiscContent.ExitMenuYesRect;
+            yesRectangle = gameManager.MiscContent.ExitMenuYesRect;
             yesRectangle.Offset(MenuX(), MenuY());
 
-            noRectangle = mainGameState.MiscContent.ExitMenuNoRect;
+            noRectangle = gameManager.MiscContent.ExitMenuNoRect;
             noRectangle.Offset(MenuX(), MenuY());
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            mainGameState.CursorManager.SetToDefault();
+            gameManager.CursorManager.SetToDefault();
 
             if (noRectangle.Contains(inputManager.GetMousePosition())
                 || yesRectangle.Contains(inputManager.GetMousePosition()))
-                mainGameState.CursorManager.SetToClick();
+                gameManager.CursorManager.SetToClick();
 
             if (inputManager.IsLeftButtonPressed()
                     && noRectangle.Contains(inputManager.GetMousePosition())) {
-                mainGameState.Inventory.GoUp();
-                mainGameState.GameStateManager.PopState();
+                gameManager.Inventory.GoUp();
+                gameManager.GameStateManager.PopState();
             }
 
             if (inputManager.IsLeftButtonPressed()
                     && yesRectangle.Contains(inputManager.GetMousePosition()))
-                mainGameState.ExitGame();
+                gameManager.ExitGame();
         }
 
         public void Draw(SpriteBatch spriteBatch) {

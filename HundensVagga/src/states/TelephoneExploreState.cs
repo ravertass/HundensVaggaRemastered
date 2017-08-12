@@ -60,7 +60,7 @@ namespace HundensVagga {
             numbersPressed.ToList().ForEach(Console.WriteLine);
             if (numbersPressed.SequenceEqual(CORRECT_NUMBER)) {
                 idleSound.Stop();
-                mainGameState.ChangeRoom(EXIT_ROOM_NAME);
+                gameManager.ChangeRoom(EXIT_ROOM_NAME);
             } else {
                 idleSound.Stop();
                 wrongNumberSound.Play();

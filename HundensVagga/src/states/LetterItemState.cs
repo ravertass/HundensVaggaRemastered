@@ -8,19 +8,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HundensVagga {
     internal class LetterItemState : IGameState {
-        private GameManager mainGameState;
+        private GameManager gameManager;
         private Texture2D letterImage;
 
-        public LetterItemState(GameManager mainGameState, Texture2D letterImage) {
-            this.mainGameState = mainGameState;
+        public LetterItemState(GameManager gameManager, Texture2D letterImage) {
+            this.gameManager = gameManager;
             this.letterImage = letterImage;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            mainGameState.CursorManager.SetToDirection(Direction.down);
+            gameManager.CursorManager.SetToDirection(Direction.down);
 
             if (inputManager.IsLeftButtonPressed())
-                mainGameState.GameStateManager.PopState();
+                gameManager.GameStateManager.PopState();
         }
 
         public void Draw(SpriteBatch spriteBatch) {

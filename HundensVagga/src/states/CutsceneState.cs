@@ -9,20 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HundensVagga {
     internal class CutsceneState : IGameState {
 
-        private GameManager mainGameState;
+        private GameManager gameManager;
 
-        public CutsceneState(GameManager mainGameState) {
-            this.mainGameState = mainGameState;
+        public CutsceneState(GameManager gameManager) {
+            this.gameManager = gameManager;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            mainGameState.CursorManager.SetToDefault();
+            gameManager.CursorManager.SetToDefault();
 
-            if (mainGameState.CurrentRoom is ICutsceneRoom room) {
+            if (gameManager.CurrentRoom is ICutsceneRoom room) {
                 room.Update(gameTime);
                 if (room.ShouldGoToExit() || inputManager.IsLeftButtonPressed()) {
                     room.Stop();
-                    mainGameState.GoToRoom(room.ExitRoomName);
+                    gameManager.GoToRoom(room.ExitRoomName);
                 }
             } else {
                 throw new Exception("At cutscene state without cutscene room.");

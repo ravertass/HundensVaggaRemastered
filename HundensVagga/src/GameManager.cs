@@ -16,7 +16,7 @@ namespace HundensVagga {
     /// inventory, exploring rooms, etc.
     /// </summary>
     internal class GameManager {
-        private const string START_ROOM_NAME = "logos";
+        private const string START_ROOM_NAME = "logos"; // TODO: Put in JSON
         public SoundEffectInstance CurrentPlayingLookSound { get; set; }
 
         private ExitGameManager exitGameManager;
@@ -64,7 +64,7 @@ namespace HundensVagga {
             gameStateManager.CurrentState = new ExploreState(this);
             GoToRoom(START_ROOM_NAME);
 
-            inventory.AddItem(main.Items.GetItem("letter"));
+            inventory.AddItem(main.Items.GetItem("letter")); // TODO: Put in JSON
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {

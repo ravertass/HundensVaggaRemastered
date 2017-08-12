@@ -12,31 +12,31 @@ namespace HundensVagga {
     /// The in-game state when the player can use an item picked from the inventory.
     /// </summary>
     internal class UseItemState : IGameState {
-        private GameManager mainGameState;
+        private GameManager gameManager;
         private IItem currentItem;
         private SoundEffectInstance failSound;
 
-        public UseItemState(GameManager mainGameState, IItem currentItem) {
-            this.mainGameState = mainGameState;
+        public UseItemState(GameManager gameManager, IItem currentItem) {
+            this.gameManager = gameManager;
             this.currentItem = currentItem;
-            this.failSound = mainGameState.MiscContent.ItemFailSound;
+            this.failSound = gameManager.MiscContent.ItemFailSound;
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
-            mainGameState.CursorManager.SetToItem();
+            gameManager.CursorManager.SetToItem();
             CheckInteractables(inputManager);
         }
 
         private void CheckInteractables(InputManager inputManager) {
             Interactable interactable = 
-                mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
+                gameManager.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (inputManager.IsLeftButtonPressed()) {
                 if (interactable != null && interactable.IsItemUsable(currentItem)) {
-                    interactable.UseItem(currentItem, mainGameState);
+                    interactable.UseItem(currentItem, gameManager);
                 } else {
                     failSound.Play();
                 }
-                mainGameState.GameStateManager.PopState();
+                gameManager.GameStateManager.PopState();
             }
         }
 

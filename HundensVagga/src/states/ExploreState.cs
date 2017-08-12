@@ -13,15 +13,15 @@ namespace HundensVagga {
     /// or move between rooms.
     /// </summary>
     internal class ExploreState : IGameState {
-        protected GameManager mainGameState;
+        protected GameManager gameManager;
 
-        public ExploreState(GameManager mainGameState) {
-            this.mainGameState = mainGameState;
+        public ExploreState(GameManager gameManager) {
+            this.gameManager = gameManager;
         }
 
         public virtual void Update(InputManager inputManager, GameTime gameTime) {
             // inventory has priority over exits and interactables
-            if (mainGameState.CurrentRoom.WithInventory && CheckInventoryBag(inputManager))
+            if (gameManager.CurrentRoom.WithInventory && CheckInventoryBag(inputManager))
                 return;
 
             // exits have priority over interactables
@@ -32,7 +32,7 @@ namespace HundensVagga {
         }
 
         private bool CheckExits(InputManager inputManager) {
-            Exit exit = mainGameState.CurrentRoom.GetExitAt(inputManager.GetMousePosition());
+            Exit exit = gameManager.CurrentRoom.GetExitAt(inputManager.GetMousePosition());
             if (exit != null) {
                 ChangeCursorExit(exit);
                 HandleClicksExit(inputManager, exit);
@@ -43,7 +43,7 @@ namespace HundensVagga {
         }
 
         private void ChangeCursorExit(Exit exit) {
-            mainGameState.CursorManager.SetToDirection(exit.Direction);
+            gameManager.CursorManager.SetToDirection(exit.Direction);
         }
 
         private void HandleClicksExit(InputManager inputManager, Exit exit) {
@@ -53,13 +53,12 @@ namespace HundensVagga {
 
         protected virtual void UseExit(Exit exit) {
             exit.DoEffects();
-            mainGameState.GoToRoom(exit.RoomName);
+            gameManager.GoToRoom(exit.RoomName);
         }
-
 
         private void CheckInteractables(InputManager inputManager) {
             Interactable interactable =
-                mainGameState.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
+                gameManager.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (interactable != null) {
                 ChangeCursorInteractable(interactable);
                 HandleClicksInteractable(inputManager, interactable);
@@ -68,13 +67,13 @@ namespace HundensVagga {
 
         private void ChangeCursorInteractable(Interactable interactable) {
             if (interactable.IsClickable())
-                mainGameState.CursorManager.SetToClick();
+                gameManager.CursorManager.SetToClick();
             else if (interactable.IsLookable() && interactable.IsUsable())
-                mainGameState.CursorManager.SetToUseLook();
+                gameManager.CursorManager.SetToUseLook();
             else if (interactable.IsLookable())
-                mainGameState.CursorManager.SetToLookOnly();
+                gameManager.CursorManager.SetToLookOnly();
             else if (interactable.IsUsable())
-                mainGameState.CursorManager.SetToUseOnly();
+                gameManager.CursorManager.SetToUseOnly();
         }
 
         private void HandleClicksInteractable(InputManager inputManager,
@@ -89,32 +88,31 @@ namespace HundensVagga {
         }
 
         protected virtual void ClickAt(Interactable interactable) {
-            interactable.ClickAt(mainGameState);
+            interactable.ClickAt(gameManager);
         }
 
         private void LookAt(Interactable interactable) {
-            if (mainGameState.CurrentPlayingLookSound != interactable.LookSound) {
-                if (mainGameState.CurrentPlayingLookSound != null)
-                    mainGameState.CurrentPlayingLookSound.Stop();
+            if (gameManager.CurrentPlayingLookSound != interactable.LookSound) {
+                if (gameManager.CurrentPlayingLookSound != null)
+                    gameManager.CurrentPlayingLookSound.Stop();
 
-                mainGameState.CurrentPlayingLookSound = interactable.LookSound;
-                mainGameState.CurrentPlayingLookSound.Play();
+                gameManager.CurrentPlayingLookSound = interactable.LookSound;
+                gameManager.CurrentPlayingLookSound.Play();
             }
         }
 
         protected virtual void UseInteractable(Interactable interactable) {
-            interactable.Use(mainGameState);
+            interactable.Use(gameManager);
         }
 
-
         private bool CheckInventoryBag(InputManager inputManager) {
-            if (mainGameState.Inventory.IsBagClicked(inputManager)) {
-                mainGameState.GameStateManager.PushState();
-                mainGameState.GameStateManager.CurrentState = new InventoryState(mainGameState);
-                mainGameState.Inventory.GoDown();
+            if (gameManager.Inventory.IsBagClicked(inputManager)) {
+                gameManager.GameStateManager.PushState();
+                gameManager.GameStateManager.CurrentState = new InventoryState(gameManager);
+                gameManager.Inventory.GoDown();
                 return true;
-            } else if (mainGameState.Inventory.IsCursorOnBag(inputManager)) {
-                mainGameState.CursorManager.SetToDefault();
+            } else if (gameManager.Inventory.IsCursorOnBag(inputManager)) {
+                gameManager.CursorManager.SetToDefault();
                 return true;
             }
 
