@@ -30,7 +30,7 @@ namespace HundensVagga {
 
         public override void GoTo(GameManager gameManager) {
             soundAndSubtitleManager = gameManager.SoundAndSubtitleManager;
-            soundAndSubtitleManager.PlayAndPrint(sound, "this is dialog");
+            soundAndSubtitleManager.PlayAndPrint(sound, "A letter arrived in the mail: \"I know all about your experiments. Come to Clock Road 10. Come alone. Signed, Novikov.\" My experiments? I hadn't told anyone about my experiments. I decided to investigate further.");
             base.GoTo(gameManager);
         }
 
