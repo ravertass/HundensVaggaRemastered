@@ -15,8 +15,8 @@ namespace HundensVagga {
             get { return rectangle; }
         }
 
-        private readonly SoundEffectInstance lookSound;
-        public SoundEffectInstance LookSound {
+        private readonly SoundEffect lookSound;
+        public SoundEffect LookSound {
             get { return lookSound; }
         }
 
@@ -27,7 +27,7 @@ namespace HundensVagga {
         private IList<VarVal> prereqs;
         private readonly Texture2D texture;
 
-        public Interactable(Rectangle rectangle, SoundEffectInstance lookSound, 
+        public Interactable(Rectangle rectangle, SoundEffect lookSound, 
                 IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
                 IList<VarVal> prereqs, Texture2D texture = null) {
             this.rectangle = rectangle;

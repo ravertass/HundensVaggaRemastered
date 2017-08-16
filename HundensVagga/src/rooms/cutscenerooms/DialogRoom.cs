@@ -10,15 +10,17 @@ using Microsoft.Xna.Framework.Media;
 namespace HundensVagga {
     internal class DialogRoom : Room, ICutsceneRoom {
 
-        private SoundEffectInstance sound;
+        private SoundEffect sound;
 
         private String exitRoomName;
         public String ExitRoomName {
             get { return exitRoomName; }
         }
 
+        private SoundAndSubtitleManager soundAndSubtitleManager;
+
         public DialogRoom(string name, Song song, float volume, Texture2D background,
-                String exitRoomName, SoundEffectInstance sound, List<Interactable> interactables, 
+                String exitRoomName, SoundEffect sound, List<Interactable> interactables, 
                 Type specialStateType, bool withInventory) 
             : base(name, song, volume, background, new List<Exit>(), interactables,
                 specialStateType, withInventory) {
@@ -27,16 +29,17 @@ namespace HundensVagga {
         }
 
         public override void GoTo(GameManager gameManager) {
-            gameManager.SoundAndSubtitleManager.PlayAndPrint(sound, "this is dialog");
+            soundAndSubtitleManager = gameManager.SoundAndSubtitleManager;
+            soundAndSubtitleManager.PlayAndPrint(sound, "this is dialog");
             base.GoTo(gameManager);
         }
 
         public bool ShouldGoToExit() {
-            return sound.State == SoundState.Stopped;
+            return soundAndSubtitleManager.Stopped();
         }
 
         public void Stop() {
-            sound.Stop();
+            soundAndSubtitleManager.Stop();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HundensVagga {
             get { return number; }
         }
 
-        public TelephoneInteractable(Rectangle rectangle, SoundEffectInstance lookSound,
+        public TelephoneInteractable(Rectangle rectangle, SoundEffect lookSound,
                 IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
                 IList<VarVal> prereqs, int number, Texture2D texture = null)
                 : base(rectangle, lookSound, useEffect, clickEffect, itemEffects, prereqs, texture) {

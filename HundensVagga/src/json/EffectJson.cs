@@ -44,7 +44,7 @@ namespace HundensVagga {
 
         public IEffect GetEffectInstance(ContentManager content,
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundEffectInstance sound = GetSoundEffect(content);
+            SoundEffect sound = GetSoundEffect(content);
             IList<VarVal> varVals = GetVarVals(worldState);
             IItem item = GetItem(items, ItemName);
             IItem removeItem = GetItem(items, RemoveItemName);
@@ -60,10 +60,10 @@ namespace HundensVagga {
                    : null;
         }
 
-        private SoundEffectInstance GetSoundEffect(ContentManager content) {
+        private SoundEffect GetSoundEffect(ContentManager content) {
             return (Sound != null)
-                    ? content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
-                        + Path.DirectorySeparatorChar + Sound).CreateInstance()
+                    ? content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR 
+                        + Path.DirectorySeparatorChar + Sound)
                     : null;
         }
 

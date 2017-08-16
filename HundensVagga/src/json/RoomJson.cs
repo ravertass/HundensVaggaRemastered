@@ -111,7 +111,7 @@ namespace HundensVagga {
                         interactables, stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.dialog:
                     background = GetBackground(content, Background);
-                    SoundEffectInstance sound = GetSoundEffect(content);
+                    SoundEffect sound = GetSoundEffect(content);
                     interactables = GetInteractables(content, worldState, items,
                         songs, songManager);
                     return new DialogRoom(Name, song, volume, background, Exit, sound,
@@ -131,10 +131,10 @@ namespace HundensVagga {
             }
         }
 
-        private SoundEffectInstance GetSoundEffect(ContentManager content) {
+        private SoundEffect GetSoundEffect(ContentManager content) {
             if (Sound != null)
                 return content.Load<SoundEffect>(Main.DIALOG_DIR
-                    + Path.DirectorySeparatorChar + Sound).CreateInstance();
+                    + Path.DirectorySeparatorChar + Sound);
 
             return null;
         }

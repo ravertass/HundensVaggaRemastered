@@ -56,7 +56,7 @@ namespace HundensVagga {
 
         public Interactable GetInteractableInstance(ContentManager content, 
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundEffectInstance lookSound = GetLookSoundEffect(content);
+            SoundEffect lookSound = GetLookSoundEffect(content);
             IEffect useEffect = GetEffect(Use, content, worldState, items, songs, songManager);
             IEffect clickEffect = GetEffect(Click, content, worldState, items, songs, songManager);
 
@@ -73,10 +73,10 @@ namespace HundensVagga {
                 texture);
         }
 
-        private SoundEffectInstance GetLookSoundEffect(ContentManager content) {
+        private SoundEffect GetLookSoundEffect(ContentManager content) {
             if (Look != null)
                 return content.Load<SoundEffect>(Main.VOICE_DIR
-                    + Path.DirectorySeparatorChar + Look).CreateInstance();
+                    + Path.DirectorySeparatorChar + Look);
 
             return null;
         }
@@ -125,7 +125,7 @@ namespace HundensVagga {
             return new Rectangle(X, Y, Width, Height);
         }
 
-        private Interactable GetInteractable(Rectangle rect, SoundEffectInstance lookSound,
+        private Interactable GetInteractable(Rectangle rect, SoundEffect lookSound,
             IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
             IList<VarVal> prereqs, Texture2D texture) {
             if (SpecialType != null)
@@ -136,7 +136,7 @@ namespace HundensVagga {
                 texture);
         }
 
-        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffectInstance lookSound,
+        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffect lookSound,
                 IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
                 IList<VarVal> prereqs, Texture2D texture) {
             SpecialInteractableEnum type = 

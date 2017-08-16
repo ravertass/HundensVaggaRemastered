@@ -12,15 +12,14 @@ namespace HundensVagga {
         private Timer timer;
         private string text;
 
+        private static readonly double ADDITIONAL_TIME = 1;
+
         private readonly int windowWidth;
         private readonly int windowHeight;
-
-        private bool printing;
 
         public SubtitleManager(SpriteFont font, int windowWidth, int windowHeight) {
             this.font = font;
             timer = null;
-            printing = false;
 
             // It would be preferable if we instead got a reference to a "WindowManager"
             // or something similar, which in turn can give these. That way, it would
@@ -29,34 +28,26 @@ namespace HundensVagga {
             this.windowHeight = windowHeight;
         }
 
-        public void Print(string text) {
+        public void Print(string text, double time) {
             this.text = text;
-            printing = true;
-            timer = null;
+            timer = new Timer(time + ADDITIONAL_TIME);
         }
 
         public bool ShouldPrint() {
-            return printing;
+            return !Stopped();
         }
 
         public void Stop() {
-            printing = false;
             timer = null;
         }
 
-        public void SetTimer(double time) {
-            timer = new Timer(time);
+        public bool Stopped() {
+            return timer == null || timer.IsDone();
         }
 
         public void Update(GameTime gameTime) {
-            if (timer != null) {
+            if (timer != null)
                 timer.Update(gameTime);
-
-                if (timer.IsDone()) {
-                    printing = false;
-                    timer = null;
-                }
-            }
         }
         
         public void Draw(SpriteBatch spriteBatch) {

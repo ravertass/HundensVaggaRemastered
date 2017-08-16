@@ -12,7 +12,7 @@ namespace HundensVagga {
     /// </summary>
     internal class Effect : IEffect {
         private readonly IList<VarVal> varVals;
-        private readonly SoundEffectInstance sound;
+        private readonly SoundEffect sound;
         private readonly IItem item;
         private readonly IItem removeItem;
         private readonly Inventory inventory;
@@ -20,7 +20,7 @@ namespace HundensVagga {
         private readonly SongManager songManager;
         private readonly Song song;
 
-        public Effect(IList<VarVal> varVals, SoundEffectInstance sound, IItem item, IItem removeItem,
+        public Effect(IList<VarVal> varVals, SoundEffect sound, IItem item, IItem removeItem,
                 Inventory inventory, Song song, SongManager songManager, String exit) {
             this.varVals = varVals;
             this.sound = sound;

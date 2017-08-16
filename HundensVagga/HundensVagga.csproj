@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C2FD89AE-2328-4FA0-9758-18BCE5367260}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HundensVagga</RootNamespace>
     <AssemblyName>HundensVagga</AssemblyName>
@@ -61,7 +61,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\LookSoundManager.cs" />
+    <Compile Include="src\SoundEffectManager.cs" />
     <Compile Include="src\SoundAndSubtitleManager.cs" />
     <Compile Include="src\util\FadeOutBox.cs" />
     <Compile Include="src\util\FadeInBox.cs" />
@@ -148,6 +148,7 @@
     <Content Include="content\misc.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="content\english\subtitles.json" />
     <None Include="content\subtitles.spritefont" />
     <None Include="packages.config" />
     <Content Include="content\rooms.json">

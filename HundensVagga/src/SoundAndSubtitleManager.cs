@@ -8,31 +8,33 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal class SoundAndSubtitleManager {
-        private LookSoundManager lookSoundManager;
+        private SoundEffectManager soundEffectManager;
         private SubtitleManager subtitleManager;
-        private bool playing;
 
         public SoundAndSubtitleManager(SubtitleManager subtitleManager) {
-            playing = false;
-            lookSoundManager = new LookSoundManager();
+            soundEffectManager = new SoundEffectManager();
             this.subtitleManager = subtitleManager;
         }
 
         public void Update(GameTime gameTime) {
             subtitleManager.Update(gameTime);
-            lookSoundManager.Update();
-            if (playing && subtitleManager.ShouldPrint() && lookSoundManager.StoppedPlaying()) {
-                playing = false;
-                subtitleManager.SetTimer(1);
+            soundEffectManager.Update();
+        }
+
+        public void PlayAndPrint(SoundEffect sound, string text) {
+            if (soundEffectManager.CurrentPlayingSoundEffect != sound) {
+                soundEffectManager.Play(sound);
+                subtitleManager.Print(text, sound.Duration.TotalSeconds);
             }
         }
 
-        public void PlayAndPrint(SoundEffectInstance sound, string text) {
-            if (lookSoundManager.CurrentPlayingLookSound != sound) {
-                playing = true;
-                lookSoundManager.Play(sound);
-                subtitleManager.Print(text);
-            }
+        public void Stop() {
+            soundEffectManager.Stop();
+            subtitleManager.Stop();
+        }
+
+        public bool Stopped() {
+            return soundEffectManager.Stopped() || subtitleManager.Stopped();
         }
     }
 }
