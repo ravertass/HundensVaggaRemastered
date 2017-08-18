@@ -54,49 +54,56 @@ namespace HundensVagga {
         [JsonProperty("number")]
         public int Number { get; set; }
 
-        public Interactable GetInteractableInstance(ContentManager content, 
+        public Interactable GetInteractableInstance(ContentManager content, Subtitles subtitles,
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundEffect lookSound = GetLookSoundEffect(content);
-            IEffect useEffect = GetEffect(Use, content, worldState, items, songs, songManager);
-            IEffect clickEffect = GetEffect(Click, content, worldState, items, songs, songManager);
+            SoundAndSubtitle lookSoundAndSubtitle = GetLookSoundAndSubtitle(content, subtitles);
+            IEffect useEffect = GetEffect(Use, content, subtitles, worldState, items, songs,
+                songManager);
+            IEffect clickEffect = GetEffect(Click, content, subtitles, worldState, items, songs,
+                songManager);
 
-            Trace.Assert(!(clickEffect != null && (lookSound != null || useEffect != null)),
+            Trace.Assert(!(clickEffect != null &&
+                (lookSoundAndSubtitle != null || useEffect != null)),
                 "click effect cannot coexist with look sounds or use effects");
 
-            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, worldState, items,
-                songs, songManager);
+            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, subtitles,
+                worldState, items, songs, songManager);
             IList<VarVal> prereqs = GetPrereqs(worldState);
             Texture2D texture = GetTexture(content);
             Rectangle rect = GetRectangle(texture);
 
-            return GetInteractable(rect, lookSound, useEffect, clickEffect, itemEffects, prereqs,
-                texture);
+            return GetInteractable(rect, lookSoundAndSubtitle, useEffect, clickEffect, itemEffects,
+                prereqs, texture);
         }
 
-        private SoundEffect GetLookSoundEffect(ContentManager content) {
+        private SoundAndSubtitle GetLookSoundAndSubtitle(ContentManager content,
+                Subtitles subtitles) {
             if (Look != null)
-                return content.Load<SoundEffect>(Main.VOICE_DIR
-                    + Path.DirectorySeparatorChar + Look);
+                return new SoundAndSubtitle(
+                    content.Load<SoundEffect>(Main.VOICE_DIR + Path.DirectorySeparatorChar + Look),
+                    subtitles.GetSubtitle(Look));
 
             return null;
         }
 
-        private IEffect GetEffect(EffectJson effect, ContentManager content,
+        private IEffect GetEffect(EffectJson effect, ContentManager content, Subtitles subtitles,
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
             if (effect != null)
-                return effect.GetEffectInstance(content, worldState, items, songs, songManager);
+                return effect.GetEffectInstance(content, subtitles, worldState, items, songs,
+                    songManager);
 
             return null;
         }
 
-        private IDictionary<string, IEffect> GetItemEffects(ContentManager content, 
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
+        private IDictionary<string, IEffect> GetItemEffects(ContentManager content,
+                Subtitles subtitles, StateOfTheWorld worldState, Items items, Songs songs,
+                SongManager songManager) {
             Dictionary<string, IEffect> itemEffects = new Dictionary<string, IEffect>();
             if (ItemEffects != null)
                 foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
-                        itemEffectJson.Effect.GetEffectInstance(content, worldState, items,
-                            songs, songManager));
+                        itemEffectJson.Effect.GetEffectInstance(content, subtitles, worldState,
+                            items, songs, songManager));
 
             return itemEffects;
         }
@@ -125,27 +132,28 @@ namespace HundensVagga {
             return new Rectangle(X, Y, Width, Height);
         }
 
-        private Interactable GetInteractable(Rectangle rect, SoundEffect lookSound,
+        private Interactable GetInteractable(Rectangle rect, SoundAndSubtitle lookSoundAndSubtitle,
             IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
             IList<VarVal> prereqs, Texture2D texture) {
             if (SpecialType != null)
-                return GetSpecialInteractable(rect, lookSound, useEffect, clickEffect, itemEffects,
-                                              prereqs, texture);
+                return GetSpecialInteractable(rect, lookSoundAndSubtitle, useEffect, clickEffect,
+                    itemEffects, prereqs, texture);
 
-            return new Interactable(rect, lookSound, useEffect, clickEffect, itemEffects, prereqs,
-                texture);
+            return new Interactable(rect, lookSoundAndSubtitle, useEffect, clickEffect,
+                itemEffects, prereqs, texture);
         }
 
-        private Interactable GetSpecialInteractable(Rectangle rect, SoundEffect lookSound,
-                IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
-                IList<VarVal> prereqs, Texture2D texture) {
+        private Interactable GetSpecialInteractable(Rectangle rect,
+                SoundAndSubtitle lookSoundAndSubtitle, IEffect useEffect, IEffect clickEffect,
+                IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+                Texture2D texture) {
             SpecialInteractableEnum type = 
                 (SpecialInteractableEnum)Enum.Parse(typeof(SpecialInteractableEnum), SpecialType);
 
             switch (type) {
                 case SpecialInteractableEnum.telephone:
-                    return new TelephoneInteractable(rect, lookSound, useEffect, clickEffect, 
-                                                     itemEffects, prereqs, Number, texture);
+                    return new TelephoneInteractable(rect, lookSoundAndSubtitle, useEffect,
+                        clickEffect,  itemEffects, prereqs, Number, texture);
                 default:
                     throw new TypeLoadException("No such interactable: " + SpecialType);
             }

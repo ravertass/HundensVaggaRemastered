@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Media;
 namespace HundensVagga {
     internal class DialogRoom : Room, ICutsceneRoom {
 
-        private SoundEffect sound;
+        private SoundAndSubtitle soundAndSubtitle;
 
         private String exitRoomName;
         public String ExitRoomName {
@@ -20,17 +20,17 @@ namespace HundensVagga {
         private SoundAndSubtitleManager soundAndSubtitleManager;
 
         public DialogRoom(string name, Song song, float volume, Texture2D background,
-                String exitRoomName, SoundEffect sound, List<Interactable> interactables, 
-                Type specialStateType, bool withInventory) 
+                String exitRoomName, SoundAndSubtitle soundaAndSubtitle,
+                List<Interactable> interactables, Type specialStateType, bool withInventory)
             : base(name, song, volume, background, new List<Exit>(), interactables,
                 specialStateType, withInventory) {
-            this.sound = sound;
+            this.soundAndSubtitle = soundaAndSubtitle;
             this.exitRoomName = exitRoomName;
         }
 
         public override void GoTo(GameManager gameManager) {
             soundAndSubtitleManager = gameManager.SoundAndSubtitleManager;
-            soundAndSubtitleManager.PlayAndPrint(sound, "A letter arrived in the mail: \"I know all about your experiments. Come to Clock Road 10. Come alone. Signed, Novikov.\" My experiments? I hadn't told anyone about my experiments. I decided to investigate further.");
+            soundAndSubtitleManager.PlayAndPrint(soundAndSubtitle);
             base.GoTo(gameManager);
         }
 

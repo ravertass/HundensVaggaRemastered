@@ -42,15 +42,15 @@ namespace HundensVagga {
         [JsonProperty("exit")]
         public string Exit { get; set; }
 
-        public IEffect GetEffectInstance(ContentManager content,
+        public IEffect GetEffectInstance(ContentManager content, Subtitles subtitles,
                 StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundEffect sound = GetSoundEffect(content);
+            SoundAndSubtitle soundAndSubtitle = GetSoundAndSubtitle(content, subtitles);
             IList<VarVal> varVals = GetVarVals(worldState);
             IItem item = GetItem(items, ItemName);
             IItem removeItem = GetItem(items, RemoveItemName);
             Song song = GetSong(songs);
 
-            return new Effect(varVals, sound, item, removeItem, items.Inventory, song, 
+            return new Effect(varVals, soundAndSubtitle, item, removeItem, items.Inventory, song,
                 songManager, Exit);
         }
 
@@ -60,10 +60,12 @@ namespace HundensVagga {
                    : null;
         }
 
-        private SoundEffect GetSoundEffect(ContentManager content) {
+        private SoundAndSubtitle GetSoundAndSubtitle(ContentManager content, Subtitles subtitles) {
             return (Sound != null)
-                    ? content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR 
-                        + Path.DirectorySeparatorChar + Sound)
+                    ? new SoundAndSubtitle(
+                        content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
+                            + Path.DirectorySeparatorChar + Sound),
+                        subtitles.GetSubtitle(Sound))
                     : null;
         }
 

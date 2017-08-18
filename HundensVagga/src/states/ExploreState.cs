@@ -92,7 +92,7 @@ namespace HundensVagga {
         }
 
         private void LookAt(Interactable interactable) {
-            gameManager.SoundAndSubtitleManager.PlayAndPrint(interactable.LookSound, "knack, baby!");
+            gameManager.SoundAndSubtitleManager.PlayAndPrint(interactable.LookSoundAndSubtitle);
         }
 
         protected virtual void UseInteractable(Interactable interactable) {

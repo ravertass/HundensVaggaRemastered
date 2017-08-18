@@ -50,7 +50,7 @@ namespace HundensVagga {
         public void Update(GameTime gameTime) {
             if (timer != null) {
                 timer.Update(gameTime);
-                if (timer.IsDone() && pageIndex < subtitlePages.Count()) {
+                if (timer.IsDone() && pageIndex < subtitlePages.Count() - 1) {
                     TurnPage();
                 }
             }

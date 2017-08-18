@@ -21,10 +21,11 @@ namespace HundensVagga {
             soundEffectManager.Update();
         }
 
-        public void PlayAndPrint(SoundEffect sound, string text) {
-            if (soundEffectManager.CurrentPlayingSoundEffect != sound) {
-                soundEffectManager.Play(sound);
-                subtitleManager.Print(text, sound.Duration.TotalSeconds);
+        public void PlayAndPrint(SoundAndSubtitle soundAndSubtitle) {
+            if (soundEffectManager.CurrentPlayingSoundEffect != soundAndSubtitle.SoundEffect) {
+                soundEffectManager.Play(soundAndSubtitle.SoundEffect);
+                if (soundAndSubtitle.HasSubtitle())
+                    subtitleManager.Print(soundAndSubtitle.Subtitle, soundAndSubtitle.Duration);
             }
         }
 
@@ -34,7 +35,7 @@ namespace HundensVagga {
         }
 
         public bool Stopped() {
-            return soundEffectManager.Stopped() || subtitleManager.Stopped();
+            return soundEffectManager.Stopped();
         }
     }
 }

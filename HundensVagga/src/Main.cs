@@ -27,6 +27,8 @@ namespace HundensVagga {
 
         public const string ROOMS_JSON_PATH = "rooms.json";
         public const string ITEMS_JSON_PATH = "items.json";
+        public const string LANGUAGE_DIR = "english";
+        public const string SUBTITLES_JSON_PATH = "subtitles.json";
         public const string MISC_CONTENT_JSON_PATH = "misc.json";
 
         public const int WINDOW_WIDTH = 800;
@@ -46,6 +48,11 @@ namespace HundensVagga {
         private Items items;
         internal Items Items {
             get { return items; }
+        }
+
+        private Subtitles subtitles;
+        internal Subtitles Subtitles {
+            get { return subtitles; }
         }
 
         private Inventory inventory;
@@ -141,9 +148,14 @@ namespace HundensVagga {
             items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar + ITEMS_JSON_PATH,
                 Content, inventory);
 
+            subtitles = new Subtitles(
+                CONTENT_DIR + Path.DirectorySeparatorChar + LANGUAGE_DIR
+                    + Path.DirectorySeparatorChar + SUBTITLES_JSON_PATH,
+                Content);
+
             songManager = new SongManager();
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
-                Content, items, songManager);
+                Content, subtitles, items, songManager);
 
             // TODO: Think through how/where this is loaded
             SpriteFont font = Content.Load<SpriteFont>("subtitles");

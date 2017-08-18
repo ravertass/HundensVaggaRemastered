@@ -12,7 +12,7 @@ namespace HundensVagga {
     /// </summary>
     internal class Effect : IEffect {
         private readonly IList<VarVal> varVals;
-        private readonly SoundEffect sound;
+        private readonly SoundAndSubtitle soundAndSubtitle;
         private readonly IItem item;
         private readonly IItem removeItem;
         private readonly Inventory inventory;
@@ -20,10 +20,11 @@ namespace HundensVagga {
         private readonly SongManager songManager;
         private readonly Song song;
 
-        public Effect(IList<VarVal> varVals, SoundEffect sound, IItem item, IItem removeItem,
-                Inventory inventory, Song song, SongManager songManager, String exit) {
+        public Effect(IList<VarVal> varVals, SoundAndSubtitle soundAndSubtitle, IItem item,
+                IItem removeItem, Inventory inventory, Song song, SongManager songManager,
+                String exit) {
             this.varVals = varVals;
-            this.sound = sound;
+            this.soundAndSubtitle = soundAndSubtitle;
             this.item = item;
             this.removeItem = removeItem;
             this.inventory = inventory;
@@ -47,8 +48,8 @@ namespace HundensVagga {
         }
 
         private void PlaySound(SoundAndSubtitleManager soundAndSubtitleManager) {
-            if (sound != null)
-                soundAndSubtitleManager.PlayAndPrint(sound, "my dudes"); //TODO
+            if (soundAndSubtitle != null)
+                soundAndSubtitleManager.PlayAndPrint(soundAndSubtitle);
         }
 
         private void AddItemToInventory() {

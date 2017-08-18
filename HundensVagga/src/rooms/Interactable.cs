@@ -15,9 +15,9 @@ namespace HundensVagga {
             get { return rectangle; }
         }
 
-        private readonly SoundEffect lookSound;
-        public SoundEffect LookSound {
-            get { return lookSound; }
+        private readonly SoundAndSubtitle lookSoundAndSubtitle;
+        public SoundAndSubtitle LookSoundAndSubtitle {
+            get { return lookSoundAndSubtitle; }
         }
 
         private readonly IEffect useEffect;
@@ -27,11 +27,11 @@ namespace HundensVagga {
         private IList<VarVal> prereqs;
         private readonly Texture2D texture;
 
-        public Interactable(Rectangle rectangle, SoundEffect lookSound, 
+        public Interactable(Rectangle rectangle, SoundAndSubtitle lookSoundAndSubtitle,
                 IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
                 IList<VarVal> prereqs, Texture2D texture = null) {
             this.rectangle = rectangle;
-            this.lookSound = lookSound;
+            this.lookSoundAndSubtitle = lookSoundAndSubtitle;
             this.useEffect = useEffect;
             this.clickEffect = clickEffect;
             this.itemEffects = itemEffects;
@@ -55,11 +55,7 @@ namespace HundensVagga {
         }
 
         public bool IsLookable() {
-            return lookSound != null;
-        }
-
-        public void Look() {
-            lookSound.Play();
+            return lookSoundAndSubtitle != null;
         }
 
         public virtual bool IsUsable() {

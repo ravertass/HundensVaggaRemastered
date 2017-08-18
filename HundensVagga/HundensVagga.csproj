@@ -61,9 +61,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\SoundAndSubtitle.cs" />
     <Compile Include="src\SoundEffectManager.cs" />
     <Compile Include="src\SoundAndSubtitleManager.cs" />
     <Compile Include="src\SubtitlePage.cs" />
+    <Compile Include="src\Subtitles.cs" />
     <Compile Include="src\util\FadeOutBox.cs" />
     <Compile Include="src\util\FadeInBox.cs" />
     <Compile Include="src\CursorManager.cs" />
@@ -149,7 +151,9 @@
     <Content Include="content\misc.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="content\english\subtitles.json" />
+    <Content Include="content\english\subtitles.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="content\subtitles.spritefont" />
     <None Include="packages.config" />
     <Content Include="content\rooms.json">
