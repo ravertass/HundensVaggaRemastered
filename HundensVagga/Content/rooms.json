@@ -176,8 +176,8 @@
       "image": "frozen_outhouse",
       "prereqs": [{"var": "st_frozen_melted", "val": false}],
       "items": [{
-                 "item": "saucepan_hot", 
-                 "effect": {"var": "st_frozen_melted", 
+                 "item": "saucepan_hot",
+                 "effect": {"var": "st_frozen_melted",
                             "sound": "melt",
                             "remove_item": "saucepan_hot",
                             "item": "saucepan"}
@@ -305,7 +305,7 @@
       "look": "darkness",
       "items": [
                  {
-                   "item": "flashlight", 
+                   "item": "flashlight",
                    "effect": {"var": "st_crawlspace_illuminated"}
                  }
                ]
@@ -319,7 +319,7 @@
       "prereqs": [{"var": "st_crawlspace_illuminated", "val": true}],
       "items": [
                  {
-                    "item": "wrench", 
+                    "item": "wrench",
                     "effect": {"sound": "wrench",
                                "var": "st_water_running"}
                  }
@@ -431,7 +431,7 @@
   "name": "entrance",
   "song": "outside",
   "background": "entrance",
-  "exits": [ 
+  "exits": [
     {
       "x": 308,
       "y": 81,
@@ -491,8 +491,8 @@
       "look": "locked_door",
       "prereqs": [{"var": "st_maindoor_open", "val": false}],
       "items": [{
-                 "item": "mainkey", 
-                 "effect": {"var": "st_maindoor_open", 
+                 "item": "mainkey",
+                 "effect": {"var": "st_maindoor_open",
                             "sound": "unlock"}
                }]
     }
@@ -678,8 +678,8 @@
       "look": "locked_door",
       "prereqs": [{"var": "st_typewriter_room_open", "val": false}],
       "items": [{
-                 "item": "typewriterkey", 
-                 "effect": {"var": "st_typewriter_room_open", 
+                 "item": "typewriterkey",
+                 "effect": {"var": "st_typewriter_room_open",
                             "sound": "unlock"}
                }]
     },
@@ -692,7 +692,7 @@
       "prereqs": [{"var": "st_maps_open", "val": false}],
       "items": [{
                  "item": "handle",
-                 "effect": {"var": "st_maps_open", 
+                 "effect": {"var": "st_maps_open",
                             "sound": "unlock",
                             "remove_item": "handle"}
                }]
@@ -819,7 +819,6 @@
       "height": 241,
       "look": "maps",
       "items": [{
-                 "sound": "draw_map",
                  "item": "notebook",
                  "effect": {"item": "notebook_drawn",
                             "remove_item": "notebook",
@@ -967,7 +966,7 @@
       "look": "no_fuse",
       "prereqs": [{"var": "st_electricity_on", "val": false}],
       "items": [{
-                 "item": "fuse", 
+                 "item": "fuse",
                  "effect": {"var": "st_electricity_on",
                            "remove_item": "fuse"}
                }]
@@ -1410,7 +1409,7 @@
       "height": 57,
       "look": "tap_water",
       "prereqs": [{"var": "st_water_running", "val": true}],
-      "items": [{"item": "saucepan", 
+      "items": [{"item": "saucepan",
                  "effect": {"sound": "fill_saucepan",
                             "remove_item": "saucepan",
                             "item": "saucepan_filled"}}]
@@ -1430,7 +1429,7 @@
       "height": 91,
       "look": "stove_on",
       "prereqs": [{"var": "st_electricity_on", "val": true}],
-      "items": [{"item": "saucepan_filled", 
+      "items": [{"item": "saucepan_filled",
                  "effect": {"sound": "heat_water",
                             "remove_item": "saucepan_filled",
                             "item": "saucepan_hot"}}]
