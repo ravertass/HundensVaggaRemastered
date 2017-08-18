@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 namespace HundensVagga {
     internal class SubtitleManager {
         private readonly SpriteFont font;
-        private Timer timer;
-        private string text;
-        private IList<string> splitText;
 
-        private int noOfTextPieces;
-        private double timePerLine;
-        private int pieceIndex;
+        private IList<SubtitlePage> subtitlePages;
+        private int pageIndex;
+
+        private Timer timer;
 
         private static readonly double ADDITIONAL_TIME = 1;
 
@@ -33,17 +31,12 @@ namespace HundensVagga {
             this.windowHeight = windowHeight;
         }
 
-        public void Print(string text, double time) {
-            this.text = text;
-            splitText = SplitText(text);
-            noOfTextPieces = (splitText.Count() + 1) / 2;
-            timePerLine = time / (float) splitText.Count();
-            pieceIndex = 0;
-            timer = new Timer(PieceTime());
+        public void Print(string text, double duration) {
+            SetSubtitlePages(text, duration);
         }
 
         public bool ShouldPrint() {
-            return !Stopped() && pieceIndex < noOfTextPieces;
+            return !Stopped();
         }
 
         public void Stop() {
@@ -51,23 +44,16 @@ namespace HundensVagga {
         }
 
         public bool Stopped() {
-            return timer == null || (timer.IsDone() && pieceIndex == noOfTextPieces);
+            return timer == null || (timer.IsDone() && pageIndex == subtitlePages.Count() - 1);
         }
 
         public void Update(GameTime gameTime) {
             if (timer != null) {
                 timer.Update(gameTime);
-                if (timer.IsDone() && pieceIndex < noOfTextPieces) {
-                    pieceIndex++;
-                    timer = new Timer(PieceTime());
+                if (timer.IsDone() && pageIndex < subtitlePages.Count()) {
+                    TurnPage();
                 }
             }
-        }
-
-        private double PieceTime() {
-            return timePerLine
-                + (splitText.Count() > pieceIndex * 2 + 1 ? timePerLine : 0)
-                + (pieceIndex == noOfTextPieces - 1 ? ADDITIONAL_TIME : 0);
         }
         
         public void Draw(SpriteBatch spriteBatch) {
@@ -76,18 +62,16 @@ namespace HundensVagga {
         }
 
         private void PrintSubtitles(SpriteBatch spriteBatch) {
-            string upperTextPiece = splitText[pieceIndex * 2];
-            string lowerTextPiece = splitText.Count() > pieceIndex*2 + 1
-                ? splitText[pieceIndex * 2 + 1]
-                : null;
+            string upperLine = CurrentPage().UpperLine;
+            string lowerLine = CurrentPage().LowerLine;
 
-            DrawText(spriteBatch, upperTextPiece,
-                TextPos(upperTextPiece).X,
-                TextPos(upperTextPiece).Y);
-            if (lowerTextPiece != null) {
-                DrawText(spriteBatch, lowerTextPiece,
-                    TextPos(lowerTextPiece).X,
-                    TextPos(lowerTextPiece).Y + font.MeasureString(upperTextPiece).Y + 6);
+            DrawText(spriteBatch, upperLine,
+                TextPos(upperLine).X,
+                TextPos(upperLine).Y);
+            if (lowerLine != null) {
+                DrawText(spriteBatch, lowerLine,
+                    TextPos(lowerLine).X,
+                    TextPos(lowerLine).Y + font.MeasureString(upperLine).Y + 6);
             }
         }
 
@@ -96,6 +80,38 @@ namespace HundensVagga {
                 for (int yOffs = -1; yOffs <= 1; yOffs++)
                     DrawTextOnce(spriteBatch, text, x+xOffs, y+yOffs, Color.Black);
             DrawTextOnce(spriteBatch, text, x, y, Color.White);
+        }
+
+        private void TurnPage() {
+            pageIndex++;
+            timer = new Timer(CurrentPage().Duration);
+        }
+
+        private SubtitlePage CurrentPage() {
+            return subtitlePages[pageIndex];
+        }
+
+        private void SetSubtitlePages(string text, double duration) {
+            subtitlePages = new List<SubtitlePage>();
+
+            IList<string> lines = SplitText(text);
+            int nCharsTotal = text.Count();
+
+            for (int i = 0; i <= lines.Count(); i += 2) {
+                string upperLine = lines[i];
+                string lowerLine = (i == lines.Count() - 1) ? null : lines[i + 1];
+
+                int nCharsUpper = upperLine.Count();
+                int nCharsLower = (lowerLine == null) ? 0 : lowerLine.Count();
+
+                double pageDuration =
+                    duration * ((double) (nCharsUpper + nCharsLower) / nCharsTotal)
+                    + ((i == lines.Count() - 1) ? ADDITIONAL_TIME : 0);
+                subtitlePages.Add(new SubtitlePage(upperLine, lowerLine, pageDuration));
+            }
+
+            pageIndex = -1;
+            TurnPage();
         }
 
         private IList<string> SplitText(string text) {

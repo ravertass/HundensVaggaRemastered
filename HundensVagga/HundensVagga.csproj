@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="src\SoundEffectManager.cs" />
     <Compile Include="src\SoundAndSubtitleManager.cs" />
+    <Compile Include="src\SubtitlePage.cs" />
     <Compile Include="src\util\FadeOutBox.cs" />
     <Compile Include="src\util\FadeInBox.cs" />
     <Compile Include="src\CursorManager.cs" />
