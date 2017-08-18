@@ -120,6 +120,12 @@ namespace HundensVagga {
             StringBuilder line = new StringBuilder();
 
             foreach (string word in words) {
+                if (word == "\n") {
+                    lines.Add(line.ToString().Trim());
+                    line = new StringBuilder();
+                    continue;
+                }
+
                 StringBuilder tryLine = new StringBuilder();
                 tryLine.Append(line.ToString());
                 tryLine.Append(word);

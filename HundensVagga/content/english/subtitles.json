@@ -1,5 +1,6 @@
 ﻿{
-  "intro_talk": "A letter arrived in the mail: \"I know all about your experiments. Come to Clock Road 10. Come alone. Signed, Novikov.\" My experiments? I hadn't told anyone about my experiments. I decided to investigate further.",
+  "intro_talk": "A letter arrived in the mail: \n \"I know all about your experiments. Come to Clock Road 10. Come alone. Signed, Novikov.\" \n My experiments? I hadn't told anyone about my experiments. I decided to investigate further.",
+
   "footsteps": "There are footsteps in the snow.",
   "house": "Clock Road 10... Looks my summer house from when I was a child.",
   "frozen": "The door handle is frozen.",
@@ -40,5 +41,5 @@
   "treasure": "The sand is too hard.",
   "music_box": "Hm, a music box.",
 
-  "ending": "Hello? Well done. Come to Café Kant for further instructions. Hello...? Hello!?"
+  "ending": "– Hello? \n – Well done. Come to Café Kant for further instructions. \n – Hello...? Hello!?"
 }
