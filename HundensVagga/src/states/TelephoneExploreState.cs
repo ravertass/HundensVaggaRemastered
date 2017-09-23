@@ -36,7 +36,7 @@ namespace HundensVagga {
 
         public override void Update(InputManager inputManager, GameTime gameTime) {
             if (wrongNumberSound.State == SoundState.Stopped &&
-                idleSound.State == SoundState.Stopped)
+                    idleSound.State == SoundState.Stopped)
                 idleSound.Play();
 
             base.Update(inputManager, gameTime);
@@ -57,7 +57,6 @@ namespace HundensVagga {
         }
 
         private void MakePhoneCall() {
-            numbersPressed.ToList().ForEach(Console.WriteLine);
             if (numbersPressed.SequenceEqual(CORRECT_NUMBER)) {
                 idleSound.Stop();
                 gameManager.ChangeRoom(EXIT_ROOM_NAME);

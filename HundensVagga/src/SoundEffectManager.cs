@@ -16,8 +16,10 @@ namespace HundensVagga {
 
         public void Update() {
             if (currentPlayingSoundEffectInstance != null
-                && currentPlayingSoundEffectInstance.State == SoundState.Stopped)
+                && currentPlayingSoundEffectInstance.State == SoundState.Stopped) {
                 currentPlayingSoundEffectInstance = null;
+                currentPlayingSoundEffect = null;
+            }
         }
 
         public void Play(SoundEffect sound) {

@@ -22,11 +22,14 @@ namespace HundensVagga {
         }
 
         public void PlayAndPrint(SoundAndSubtitle soundAndSubtitle) {
-            if (soundEffectManager.CurrentPlayingSoundEffect != soundAndSubtitle.SoundEffect) {
-                soundEffectManager.Play(soundAndSubtitle.SoundEffect);
-                if (soundAndSubtitle.HasSubtitle())
-                    subtitleManager.Print(soundAndSubtitle.Subtitle, soundAndSubtitle.Duration);
-            }
+            // Add commented out code if you don't want it to be possible to replay the
+            // currently playing sound effect (e.g. looking at the same object twice in a row).
+
+            //if (soundEffectManager.CurrentPlayingSoundEffect != soundAndSubtitle.SoundEffect) {
+            soundEffectManager.Play(soundAndSubtitle.SoundEffect);
+            if (soundAndSubtitle.HasSubtitle())
+                subtitleManager.Print(soundAndSubtitle.Subtitle, soundAndSubtitle.Duration);
+            //}
         }
 
         public void Stop() {
