@@ -54,20 +54,18 @@ namespace HundensVagga {
         [JsonProperty("number")]
         public int Number { get; set; }
 
-        public Interactable GetInteractableInstance(ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundAndSubtitle lookSoundAndSubtitle = GetLookSoundAndSubtitle(content, subtitles);
-            IEffect useEffect = GetEffect(Use, content, subtitles, worldState, items, songs,
-                songManager);
-            IEffect clickEffect = GetEffect(Click, content, subtitles, worldState, items, songs,
-                songManager);
+        public Interactable GetInteractableInstance(ContentManager content, Assets assets,
+                StateOfTheWorld worldState, SongManager songManager) {
+            SoundAndSubtitle lookSoundAndSubtitle = GetLookSoundAndSubtitle(content, assets);
+            IEffect useEffect = GetEffect(Use, content, assets, worldState, songManager);
+            IEffect clickEffect = GetEffect(Click, content, assets, worldState, songManager);
 
             Trace.Assert(!(clickEffect != null &&
                 (lookSoundAndSubtitle != null || useEffect != null)),
                 "click effect cannot coexist with look sounds or use effects");
 
-            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, subtitles,
-                worldState, items, songs, songManager);
+            IDictionary<string, IEffect> itemEffects = GetItemEffects(content, assets, worldState, 
+                songManager);
             IList<VarVal> prereqs = GetPrereqs(worldState);
             Texture2D texture = GetTexture(content);
             Rectangle rect = GetRectangle(texture);
@@ -76,34 +74,29 @@ namespace HundensVagga {
                 prereqs, texture);
         }
 
-        private SoundAndSubtitle GetLookSoundAndSubtitle(ContentManager content,
-                Subtitles subtitles) {
+        private SoundAndSubtitle GetLookSoundAndSubtitle(ContentManager content, Assets assets) {
             if (Look != null)
-                return new SoundAndSubtitle(
-                    content.Load<SoundEffect>(Main.VOICE_DIR + Path.DirectorySeparatorChar + Look),
-                    subtitles.GetSubtitle(Look));
+                return assets.GetSoundAndSubtitle(content, Look);
 
             return null;
         }
 
-        private IEffect GetEffect(EffectJson effect, ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
+        private IEffect GetEffect(EffectJson effect, ContentManager content, Assets assets,
+                StateOfTheWorld worldState, SongManager songManager) {
             if (effect != null)
-                return effect.GetEffectInstance(content, subtitles, worldState, items, songs,
-                    songManager);
+                return effect.GetEffectInstance(content, assets, worldState, songManager);
 
             return null;
         }
 
         private IDictionary<string, IEffect> GetItemEffects(ContentManager content,
-                Subtitles subtitles, StateOfTheWorld worldState, Items items, Songs songs,
-                SongManager songManager) {
+                Assets assets, StateOfTheWorld worldState, SongManager songManager) {
             Dictionary<string, IEffect> itemEffects = new Dictionary<string, IEffect>();
             if (ItemEffects != null)
                 foreach (ItemEffectJson itemEffectJson in ItemEffects)
                     itemEffects.Add(itemEffectJson.ItemName,
-                        itemEffectJson.Effect.GetEffectInstance(content, subtitles, worldState,
-                            items, songs, songManager));
+                        itemEffectJson.Effect.GetEffectInstance(content, assets, worldState,
+                            songManager));
 
             return itemEffects;
         }

@@ -61,6 +61,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\Assets.cs" />
+    <Compile Include="src\SoundEffects.cs" />
     <Compile Include="src\sounds\SoundAndSubtitle.cs" />
     <Compile Include="src\sounds\SoundEffectManager.cs" />
     <Compile Include="src\sounds\SoundAndSubtitleManager.cs" />
@@ -109,7 +111,7 @@
     <Compile Include="src\rooms\IRoom.cs" />
     <Compile Include="src\rooms\cutscenerooms\LogoRoom.cs" />
     <Compile Include="src\rooms\cutscenerooms\PanoramaRoom.cs" />
-    <Compile Include="src\rooms\Songs.cs" />
+    <Compile Include="src\sounds\Songs.cs" />
     <Compile Include="src\rooms\TelephoneInteractable.cs" />
     <Compile Include="src\rooms\cutscenerooms\TimedRoom.cs" />
     <Compile Include="src\rooms\VarVal.cs" />

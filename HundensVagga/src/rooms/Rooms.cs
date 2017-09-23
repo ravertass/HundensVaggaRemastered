@@ -19,11 +19,9 @@ namespace HundensVagga {
     internal class Rooms {
         private readonly Dictionary<string, Room> roomsMap = new Dictionary<string, Room>();
 
-        public Rooms(string path, ContentManager content, Subtitles subtitles, Items items,
-                SongManager songManager) {
-            Songs songs = new Songs(content);
+        public Rooms(string path, ContentManager content, Assets assets, SongManager songManager) {
             List<RoomJson> roomsJson = DeserializeRoomsJson(path);
-            AddRoomsFromJsonToMap(content, subtitles, roomsJson, items, songs, songManager);
+            AddRoomsFromJsonToMap(content, roomsJson, assets, songManager);
         }
 
         private static List<RoomJson> DeserializeRoomsJson(string path) {
@@ -31,13 +29,12 @@ namespace HundensVagga {
             return JsonConvert.DeserializeObject<List<RoomJson>>(jsonString);
         }
 
-        private void AddRoomsFromJsonToMap(ContentManager content, Subtitles subtitles,
-                List<RoomJson> roomsJson, Items items, Songs songs, SongManager songManager) {
+        private void AddRoomsFromJsonToMap(ContentManager content, List<RoomJson> roomsJson,
+                Assets assets, SongManager songManager) {
             StateOfTheWorld worldState = new StateOfTheWorld();
             foreach (RoomJson roomJson in roomsJson)
                 roomsMap.Add(roomJson.Name, 
-                    roomJson.GetRoomInstance(content, subtitles, worldState, items, songs,
-                                             songManager));
+                    roomJson.GetRoomInstance(content, assets, worldState, songManager));
         }
 
         public Room GetRoom(string roomName) {

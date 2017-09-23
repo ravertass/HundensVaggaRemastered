@@ -42,16 +42,16 @@ namespace HundensVagga {
         [JsonProperty("exit")]
         public string Exit { get; set; }
 
-        public IEffect GetEffectInstance(ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            SoundAndSubtitle soundAndSubtitle = GetSoundAndSubtitle(content, subtitles);
+        public IEffect GetEffectInstance(ContentManager content, Assets assets,
+                StateOfTheWorld worldState, SongManager songManager) {
+            SoundAndSubtitle soundAndSubtitle = GetSoundAndSubtitle(content, assets);
             IList<VarVal> varVals = GetVarVals(worldState);
-            IItem item = GetItem(items, ItemName);
-            IItem removeItem = GetItem(items, RemoveItemName);
-            Song song = GetSong(songs);
+            IItem item = GetItem(assets.Items, ItemName);
+            IItem removeItem = GetItem(assets.Items, RemoveItemName);
+            Song song = GetSong(assets.Songs);
 
-            return new Effect(varVals, soundAndSubtitle, item, removeItem, items.Inventory, song,
-                songManager, Exit);
+            return new Effect(varVals, soundAndSubtitle, item, removeItem, assets.Items.Inventory,
+                song, songManager, Exit);
         }
 
         private Song GetSong(Songs songs) {
@@ -60,12 +60,9 @@ namespace HundensVagga {
                    : null;
         }
 
-        private SoundAndSubtitle GetSoundAndSubtitle(ContentManager content, Subtitles subtitles) {
+        private SoundAndSubtitle GetSoundAndSubtitle(ContentManager content, Assets assets) {
             return (Sound != null)
-                    ? new SoundAndSubtitle(
-                        content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR
-                            + Path.DirectorySeparatorChar + Sound),
-                        subtitles.GetSubtitle(Sound))
+                    ? assets.GetSoundAndSubtitle(content, Sound)
                     : null;
         }
 
@@ -81,10 +78,9 @@ namespace HundensVagga {
         }
 
         private IItem GetItem(Items items, string itemName) {
-            if (itemName != null)
-                return items.GetItem(itemName);
-            else
-                return null;
+            return (itemName != null)
+                   ? items.GetItem(itemName)
+                   : null;
         }
     }
 }

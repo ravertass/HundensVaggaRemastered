@@ -75,7 +75,7 @@ namespace HundensVagga {
             gameStateManager.CurrentState = new ExploreState(this);
             GoToRoom(START_ROOM_NAME);
 
-            inventory.AddItem(main.Items.GetItem("letter")); // TODO: Put in JSON
+            //inventory.AddItem(main.Items.GetItem("letter")); // TODO: Put in JSON
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {

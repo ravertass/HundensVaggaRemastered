@@ -45,16 +45,6 @@ namespace HundensVagga {
             get { return rooms; }
         }
 
-        private Items items;
-        internal Items Items {
-            get { return items; }
-        }
-
-        private Subtitles subtitles;
-        internal Subtitles Subtitles {
-            get { return subtitles; }
-        }
-
         private Inventory inventory;
         internal Inventory Inventory {
             get { return inventory; }
@@ -145,17 +135,21 @@ namespace HundensVagga {
                 Content);
 
             inventory = new Inventory(miscContent);
-            items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar + ITEMS_JSON_PATH,
-                Content, inventory);
 
-            subtitles = new Subtitles(
+            Subtitles subtitles = new Subtitles(
                 CONTENT_DIR + Path.DirectorySeparatorChar + LANGUAGE_DIR
                     + Path.DirectorySeparatorChar + SUBTITLES_JSON_PATH,
                 Content);
+            SoundEffects soundEffects = new SoundEffects();
+            Items items = new Items(CONTENT_DIR + Path.DirectorySeparatorChar + ITEMS_JSON_PATH,
+                Content, inventory);
+            Songs songs = new Songs(Content);
+            Assets assets = new Assets(subtitles, soundEffects, items, songs);
 
             songManager = new SongManager();
+
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
-                Content, subtitles, items, songManager);
+                Content, assets, songManager);
 
             // TODO: Think through how/where this is loaded
             SpriteFont font = Content.Load<SpriteFont>("subtitles");

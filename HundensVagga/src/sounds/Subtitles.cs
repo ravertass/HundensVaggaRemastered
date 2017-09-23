@@ -26,6 +26,7 @@ namespace HundensVagga {
             string jsonString = File.ReadAllText(path);
             subtitlesMap = JsonConvert.DeserializeObject<Dictionary<String,String>>(jsonString);
         }
+
         public String GetSubtitle(string soundName) {
             return (subtitlesMap.ContainsKey(soundName)) ? subtitlesMap[soundName] : null;
         }

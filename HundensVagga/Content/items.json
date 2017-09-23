@@ -28,7 +28,7 @@
   "name": "musicbox",
   "icon": "musicbox",
   "type": "sound",
-  "sound": "music_box"
+  "sound": "music_box_melody"
 },
 {
   "name": "notebook",

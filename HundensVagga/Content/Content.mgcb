@@ -13,24 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin voice/footsteps.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/footsteps.wav
-
-#begin voice/frozen.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/frozen.wav
-
-#begin voice/house.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/house.wav
-
 #begin interactables/frozen_front.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1195,24 +1177,6 @@
 /processorParam:TextureFormat=Color
 /build:inventory/wrench.png
 
-#begin voice/key1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/key1.wav
-
-#begin voice/key2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/key2.wav
-
-#begin voice/key3.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/key3.wav
-
 #begin sound_effects/unlock.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1237,12 +1201,6 @@
 /processorParam:Quality=Best
 /build:sound_effects/phone_button.wav
 
-#begin voice/no_handle.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/no_handle.wav
-
 #begin backgrounds/living_room.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1255,30 +1213,6 @@
 /processorParam:TextureFormat=Color
 /build:backgrounds/living_room.jpg
 
-#begin voice/darkness.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/darkness.wav
-
-#begin voice/pipes.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/pipes.wav
-
-#begin voice/hatch.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/hatch.wav
-
-#begin voice/broken_tap1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/broken_tap1.wav
-
 #begin interactables/crawlspace_darkness.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1290,174 +1224,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:interactables/crawlspace_darkness.jpg
-
-#begin voice/bookcase.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/bookcase.wav
-
-#begin voice/broken_door.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/broken_door.ogg
-
-#begin voice/broken_lock.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/broken_lock.wav
-
-#begin voice/broken_tap2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/broken_tap2.wav
-
-#begin voice/car.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/car.wav
-
-#begin voice/car_leave.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/car_leave.wav
-
-#begin voice/coffee.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/coffee.wav
-
-#begin voice/flashlight.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/flashlight.wav
-
-#begin voice/fuse.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/fuse.wav
-
-#begin voice/locked_door.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/locked_door.ogg
-
-#begin voice/maps.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/maps.wav
-
-#begin voice/mirror.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/mirror.wav
-
-#begin voice/mrtn.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/mrtn.wav
-
-#begin voice/music_box.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/music_box.wav
-
-#begin voice/no_fuse.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/no_fuse.wav
-
-#begin voice/pipes_on.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/pipes_on.wav
-
-#begin voice/rat_poison.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/rat_poison.wav
-
-#begin voice/sea.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/sea.wav
-
-#begin voice/shovel.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/shovel.wav
-
-#begin voice/stove_off.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/stove_off.wav
-
-#begin voice/stove_on.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/stove_on.wav
-
-#begin voice/tap_no_water.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/tap_no_water.wav
-
-#begin voice/tap_water.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/tap_water.wav
-
-#begin voice/toilet.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/toilet.wav
-
-#begin voice/toilet_lamp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/toilet_lamp.wav
-
-#begin voice/tool_box.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/tool_box.wav
-
-#begin voice/toys.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/toys.wav
-
-#begin voice/treasure.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/treasure.wav
 
 #begin sound_effects/door_close.wav
 /importer:WavImporter
@@ -1603,12 +1369,6 @@
 /processorParam:Quality=Best
 /build:sound_effects/phone_wrong_number.ogg
 
-#begin voice/wilhelm.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/wilhelm.wav
-
 #begin backgrounds/toilet.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1656,12 +1416,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:interactables/microwave_open.jpg
-
-#begin voice/notebook.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:voice/notebook.wav
 
 #begin backgrounds/typewriter_room.jpg
 /importer:TextureImporter
@@ -2071,23 +1825,11 @@
 /processorParam:TextureFormat=Color
 /build:misc/start_menu.jpg
 
-#begin sound_effects/intro.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sound_effects/intro.wav
-
 #begin sound_effects/intro_piano.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound_effects/intro_piano.ogg
-
-#begin dialog/ending.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:dialog/ending.wav
 
 #begin songs/credits.ogg
 /importer:OggImporter
@@ -2203,24 +1945,6 @@
 /processorParam:TextureFormat=Color
 /build:backgrounds/credits/9.jpg
 
-#begin dialog/last_song.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:dialog/last_song.ogg
-
-#begin dialog/intro_piano.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:dialog/intro_piano.ogg
-
-#begin dialog/intro_talk.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:dialog/intro_talk.wav
-
 #begin cursors/click.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2275,4 +1999,268 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:subtitles.spritefont
+
+#begin sound_effects/ending.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/ending.wav
+
+#begin sound_effects/intro_talk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/intro_talk.wav
+
+#begin sound_effects/last_song.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/last_song.ogg
+
+#begin sound_effects/bookcase.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/bookcase.wav
+
+#begin sound_effects/broken_door.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/broken_door.ogg
+
+#begin sound_effects/broken_lock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/broken_lock.wav
+
+#begin sound_effects/broken_tap1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/broken_tap1.wav
+
+#begin sound_effects/broken_tap2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/broken_tap2.wav
+
+#begin sound_effects/car.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/car.wav
+
+#begin sound_effects/car_leave.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/car_leave.wav
+
+#begin sound_effects/coffee.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/coffee.wav
+
+#begin sound_effects/darkness.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/darkness.wav
+
+#begin sound_effects/flashlight.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/flashlight.wav
+
+#begin sound_effects/footsteps.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/footsteps.wav
+
+#begin sound_effects/frozen.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/frozen.wav
+
+#begin sound_effects/fuse.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/fuse.wav
+
+#begin sound_effects/hatch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/hatch.wav
+
+#begin sound_effects/house.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/house.wav
+
+#begin sound_effects/key1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/key1.wav
+
+#begin sound_effects/key2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/key2.wav
+
+#begin sound_effects/key3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/key3.wav
+
+#begin sound_effects/locked_door.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/locked_door.ogg
+
+#begin sound_effects/maps.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/maps.wav
+
+#begin sound_effects/mirror.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/mirror.wav
+
+#begin sound_effects/mrtn.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/mrtn.wav
+
+#begin sound_effects/music_box_melody.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/music_box_melody.wav
+
+#begin sound_effects/no_fuse.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/no_fuse.wav
+
+#begin sound_effects/no_handle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/no_handle.wav
+
+#begin sound_effects/notebook.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/notebook.wav
+
+#begin sound_effects/pipes.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/pipes.wav
+
+#begin sound_effects/pipes_on.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/pipes_on.wav
+
+#begin sound_effects/rat_poison.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/rat_poison.wav
+
+#begin sound_effects/sea.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/sea.wav
+
+#begin sound_effects/shovel.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/shovel.wav
+
+#begin sound_effects/stove_off.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/stove_off.wav
+
+#begin sound_effects/stove_on.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/stove_on.wav
+
+#begin sound_effects/tap_no_water.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/tap_no_water.wav
+
+#begin sound_effects/tap_water.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/tap_water.wav
+
+#begin sound_effects/toilet.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/toilet.wav
+
+#begin sound_effects/toilet_lamp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/toilet_lamp.wav
+
+#begin sound_effects/tool_box.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/tool_box.wav
+
+#begin sound_effects/toys.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/toys.wav
+
+#begin sound_effects/treasure.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/treasure.wav
+
+#begin sound_effects/wilhelm.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound_effects/wilhelm.wav
 

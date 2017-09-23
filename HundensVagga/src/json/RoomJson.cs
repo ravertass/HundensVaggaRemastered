@@ -65,28 +65,29 @@ namespace HundensVagga {
         [JsonProperty("without_inventory")]
         public bool WithoutInventory { get; set; }
 
-        public Room GetRoomInstance(ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
-            Song song = GetSong(songs);
+        public Room GetRoomInstance(ContentManager content, Assets assets,
+                StateOfTheWorld worldState, SongManager songManager) {
+            Song song = GetSong(assets.Songs);
             float volume = GetVolume();
             Type stateType = GetStateType();
 
             if (RoomType == null)
-                return CreateRoom(content, subtitles, worldState, items, song, volume, stateType,
-                    songs, songManager);
+                return CreateRoom(content, assets, worldState, song, volume, stateType, 
+                    songManager);
 
-            return CreateSpecialRoom(content, subtitles, songs, songManager, worldState, items,
-                song, volume, stateType);
+            return CreateSpecialRoom(content, assets, songManager, worldState, song, volume,
+                stateType);
         }
 
-        private Room CreateSpecialRoom(ContentManager content, Subtitles subtitles, Songs songs,
-                SongManager songManager, StateOfTheWorld worldState, Items items, Song song,
-                float volume, Type stateType) {
+        private Room CreateSpecialRoom(ContentManager content, Assets assets, 
+                SongManager songManager, StateOfTheWorld worldState, Song song, float volume, 
+                Type stateType) {
             SpecialRoomTypeEnum type =
                 (SpecialRoomTypeEnum)Enum.Parse(typeof(SpecialRoomTypeEnum), RoomType);
 
             Texture2D background;
-            List<Interactable> interactables;
+            List<Interactable> interactables =
+                GetInteractables(content, assets, worldState, songManager);
             switch (type) {
                 case SpecialRoomTypeEnum.walk:
                     List<Texture2D> backgrounds = GetBackgrounds(content);
@@ -99,27 +100,19 @@ namespace HundensVagga {
                         !WithoutInventory);
                 case SpecialRoomTypeEnum.fadein:
                     background = GetBackground(content, Background);
-                    interactables = GetInteractables(content, subtitles, worldState, items,
-                        songs, songManager);
                     return new FadeInRoom(Name, song, volume, background, Exit, Time,
                         interactables, stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.fadeout:
                     background = GetBackground(content, Background);
-                    interactables = GetInteractables(content, subtitles, worldState, items,
-                        songs, songManager);
                     return new FadeOutRoom(Name, song, volume, background, Exit, Time,
                         interactables, stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.dialog:
                     background = GetBackground(content, Background);
-                    SoundAndSubtitle soundAndSubtitle = GetSoundAndSubtitle(content, subtitles);
-                    interactables = GetInteractables(content, subtitles, worldState, items,
-                        songs, songManager);
+                    SoundAndSubtitle soundAndSubtitle = GetSoundAndSubtitle(content, assets);
                     return new DialogRoom(Name, song, volume, background, Exit, soundAndSubtitle,
                         interactables, stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.timed:
                     background = GetBackground(content, Background);
-                    interactables = GetInteractables(content, subtitles, worldState, items,
-                        songs, songManager);
                     return new TimedRoom(Name, song, volume, background, Exit, Time, interactables,
                         stateType, !WithoutInventory);
                 case SpecialRoomTypeEnum.logo:
@@ -131,11 +124,9 @@ namespace HundensVagga {
             }
         }
 
-        private SoundAndSubtitle GetSoundAndSubtitle(ContentManager content, Subtitles subtitles) {
+        private SoundAndSubtitle GetSoundAndSubtitle(ContentManager content, Assets assets) {
             if (Sound != null)
-                return new SoundAndSubtitle(
-                    content.Load<SoundEffect>(Main.DIALOG_DIR + Path.DirectorySeparatorChar + Sound),
-                    subtitles.GetSubtitle(Sound));
+                return assets.GetSoundAndSubtitle(content, Sound);
 
             return null;
         }
@@ -148,12 +139,12 @@ namespace HundensVagga {
             return backgrounds;
         }
 
-        private Room CreateRoom(ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Song song, float volume, Type stateType,
-                Songs songs, SongManager songManager) {
+        private Room CreateRoom(ContentManager content, Assets assets,
+                StateOfTheWorld worldState, Song song, float volume, Type stateType,
+                SongManager songManager) {
             List<Exit> exits = GetExits(content, worldState);
-            List<Interactable> interactables = GetInteractables(content, subtitles, worldState,
-                items, songs, songManager);
+            List<Interactable> interactables = GetInteractables(content, assets, worldState,
+                songManager);
             Texture2D background = GetBackground(content, Background);
 
             return new Room(Name, song, volume, background, exits, interactables, stateType,
@@ -170,15 +161,15 @@ namespace HundensVagga {
             return exits;
         }
 
-        private List<Interactable> GetInteractables(ContentManager content, Subtitles subtitles,
-                StateOfTheWorld worldState, Items items, Songs songs, SongManager songManager) {
+        private List<Interactable> GetInteractables(ContentManager content, Assets assets,
+                StateOfTheWorld worldState, SongManager songManager) {
             List<Interactable> interactables = new List<Interactable>();
 
             if (Interactables != null)
                 foreach (InteractableJson interactableJson in Interactables)
                     interactables.Add(
-                        interactableJson.GetInteractableInstance(content, subtitles, worldState,
-                            items, songs, songManager));
+                        interactableJson.GetInteractableInstance(content, assets, worldState,
+                            songManager));
 
             return interactables;
         }
