@@ -62,7 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src\Assets.cs" />
-    <Compile Include="src\SoundEffects.cs" />
+    <Compile Include="src\sounds\SoundEffects.cs" />
     <Compile Include="src\sounds\SoundAndSubtitle.cs" />
     <Compile Include="src\sounds\SoundEffectManager.cs" />
     <Compile Include="src\sounds\SoundAndSubtitleManager.cs" />

@@ -1,5 +1,5 @@
 ﻿{
-  "intro_talk": "A letter arrived in the mail: \n \"I know all about your experiments. Come to Clock Road 10. Come alone. Signed, Novikov.\" \n My experiments? I hadn't told anyone about my experiments. I decided to investigate further.",
+  "intro_talk": "A letter arrived in the mail: \n \"I know all about your experiments. Come to Clock Road 10. Come alone. \n \"Signed, Novikov.\" \n My experiments? I hadn't told anyone about my experiments. I decided to investigate further.",
 
   "footsteps": "There are footsteps in the snow.",
   "house": "Clock Road 10... Looks my summer house from when I was a child.",
@@ -40,6 +40,14 @@
   "sea": "Ice... spring is yet to come.",
   "treasure": "The sand is too hard.",
   "music_box": "It seems to be a music box.",
+
+  "postcard": "Fuses are found in the brown cabinet in the big room, second middle drawer from the top.",
+  "underwear": "We all try to find our place in space, such as in time. Do you feel that the trousers of time are a bit too tight? Try turning them inside out, or find a whole new leg to put you toes through.",
+  "paper": "The king committed suicide.",
+  "diary_1": "March 27th \n I just moved into the house where I will complete my work. Now, my only company is myself. \n Perhaps it will be lonely?",
+  "diary_2": "July 16th \n A setback hit me today. The right flux engine broke down and started to leak. \n This will take time to fix.",
+  "diary_3": "September 12th \n The dreams here are usually peaceful and soon forgotten. Tonight, it was different. \n I dreamed that everything went wrong. In spite of all my preparations and calculations, the worst happened: Total self-erasure. \n Is this my subconscious's way of telling my I've gone soft?",
+  "diary_lost": "February 23rd \n The last screw is tightened, the last flow adjusted and the last matrix transposed. \n It has taken a long time, but now I will have all the time in the world. \n I still haven't told anyone about my experiments.",
 
   "ending": "– Hello? \n – Well done. Come to Café Kant for further instructions. \n – Hello...? Hello!?"
 }

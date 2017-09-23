@@ -11,6 +11,8 @@ namespace HundensVagga {
         private SoundEffectManager soundEffectManager;
         private SubtitleManager subtitleManager;
 
+        private bool currentHasSoundEffect;
+
         public SoundAndSubtitleManager(SubtitleManager subtitleManager) {
             soundEffectManager = new SoundEffectManager();
             this.subtitleManager = subtitleManager;
@@ -22,14 +24,12 @@ namespace HundensVagga {
         }
 
         public void PlayAndPrint(SoundAndSubtitle soundAndSubtitle) {
-            // Add commented out code if you don't want it to be possible to replay the
-            // currently playing sound effect (e.g. looking at the same object twice in a row).
+            currentHasSoundEffect = soundAndSubtitle.HasSoundEffect();
 
-            //if (soundEffectManager.CurrentPlayingSoundEffect != soundAndSubtitle.SoundEffect) {
-            soundEffectManager.Play(soundAndSubtitle.SoundEffect);
+            if (soundAndSubtitle.HasSoundEffect())
+                soundEffectManager.Play(soundAndSubtitle.SoundEffect);
             if (soundAndSubtitle.HasSubtitle())
                 subtitleManager.Print(soundAndSubtitle.Subtitle, soundAndSubtitle.Duration);
-            //}
         }
 
         public void Stop() {
@@ -38,7 +38,9 @@ namespace HundensVagga {
         }
 
         public bool Stopped() {
-            return soundEffectManager.Stopped();
+            return (currentHasSoundEffect)
+                   ? soundEffectManager.Stopped()
+                   : subtitleManager.Stopped();
         }
     }
 }

@@ -93,8 +93,8 @@ namespace HundensVagga {
             if (CurrentRoom.WithInventory)
                 inventory.Draw(spriteBatch);
             gameStateManager.CurrentState.Draw(spriteBatch);
-            cursorManager.Draw(spriteBatch);
             subtitleManager.Draw(spriteBatch);
+            cursorManager.Draw(spriteBatch);
         }
 
         public void GoToRoom(string roomName) {

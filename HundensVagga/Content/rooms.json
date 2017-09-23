@@ -794,6 +794,13 @@
     }
   ],
   "interactables": [
+    {
+      "x": 155,
+      "y": 220,
+      "width": 425,
+      "height": 120,
+      "look": "underwear"
+    }
   ]
 },
 {
@@ -927,14 +934,21 @@
   "exits": [
     {
       "x": 0,
-      "y": 32,
+      "y": 380,
       "width": 800,
-      "height": 536,
+      "height": 220,
       "room": "toilet",
       "dir": "down"
     }
   ],
   "interactables": [
+    {
+      "x": 205,
+      "y": 345,
+      "width": 385,
+      "height": 35,
+      "look": "paper"
+    }
   ]
 },
 {
@@ -986,14 +1000,21 @@
   "exits": [
     {
       "x": 0,
-      "y": 32,
+      "y": 450,
       "width": 800,
-      "height": 536,
+      "height": 150,
       "room": "fusebox",
       "dir": "down"
     }
   ],
   "interactables": [
+    {
+      "x": 200,
+      "y": 180,
+      "width": 300,
+      "height": 270,
+      "look": "postcard"
+    }
   ]
 },
 {
@@ -1080,6 +1101,13 @@
     }
   ],
   "interactables": [
+    {
+      "x": 140,
+      "y": 110,
+      "width": 230,
+      "height": 250,
+      "look": "diary_1"
+    }
   ]
 },
 {
@@ -1088,9 +1116,9 @@
   "background": "diary_2",
   "exits": [
     {
-      "x": 98,
+      "x": 5,
       "y": 81,
-      "width": 310,
+      "width": 130,
       "height": 440,
       "room": "diary_1",
       "dir": "left"
@@ -1113,6 +1141,13 @@
     }
   ],
   "interactables": [
+    {
+      "x": 135,
+      "y": 120,
+      "width": 235,
+      "height": 235,
+      "look": "diary_2"
+    }
   ]
 },
 {
@@ -1121,23 +1156,30 @@
   "background": "diary_3",
   "exits": [
     {
-      "x": 98,
+      "x": 5,
       "y": 81,
-      "width": 310,
+      "width": 140,
       "height": 440,
       "room": "diary_2",
       "dir": "left"
     },
     {
       "x": 93,
-      "y": 534,
+      "y": 530,
       "width": 621,
-      "height": 33,
+      "height": 37,
       "room": "living_room",
       "dir": "down"
     }
   ],
   "interactables": [
+    {
+      "x": 145,
+      "y": 120,
+      "width": 265,
+      "height": 400,
+      "look": "diary_3"
+    }
   ]
 },
 {
@@ -1625,14 +1667,21 @@
   "exits": [
     {
       "x": 0,
-      "y": 32,
+      "y": 420,
       "width": 800,
-      "height": 536,
+      "height": 180,
       "room": "toys",
       "dir": "down"
     }
   ],
   "interactables": [
+    {
+      "x": 280,
+      "y": 110,
+      "width": 275,
+      "height": 310,
+      "look": "diary_lost"
+    }
   ]
 },
 {

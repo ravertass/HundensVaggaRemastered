@@ -97,7 +97,7 @@ namespace HundensVagga {
             IList<string> lines = SplitText(text);
             int nCharsTotal = text.Count();
 
-            for (int i = 0; i <= lines.Count(); i += 2) {
+            for (int i = 0; i < lines.Count(); i += 2) {
                 string upperLine = lines[i];
                 string lowerLine = (i == lines.Count() - 1) ? null : lines[i + 1];
 
