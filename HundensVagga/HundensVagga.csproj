@@ -61,11 +61,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\SoundAndSubtitle.cs" />
-    <Compile Include="src\SoundEffectManager.cs" />
-    <Compile Include="src\SoundAndSubtitleManager.cs" />
-    <Compile Include="src\SubtitlePage.cs" />
-    <Compile Include="src\Subtitles.cs" />
+    <Compile Include="src\sounds\SoundAndSubtitle.cs" />
+    <Compile Include="src\sounds\SoundEffectManager.cs" />
+    <Compile Include="src\sounds\SoundAndSubtitleManager.cs" />
+    <Compile Include="src\sounds\SubtitlePage.cs" />
+    <Compile Include="src\sounds\Subtitles.cs" />
     <Compile Include="src\util\FadeOutBox.cs" />
     <Compile Include="src\util\FadeInBox.cs" />
     <Compile Include="src\CursorManager.cs" />
@@ -123,11 +123,11 @@
     <Compile Include="src\states\UseItemState.cs" />
     <Compile Include="src\rooms\cutscenerooms\WalkRoom.cs" />
     <Compile Include="src\rooms\WorldStateVariable.cs" />
-    <Compile Include="src\SongManager.cs" />
-    <Compile Include="src\SongManagerState.cs" />
+    <Compile Include="src\sounds\SongManager.cs" />
+    <Compile Include="src\sounds\SongManagerState.cs" />
     <Compile Include="src\rooms\SpecialRoomNames.cs" />
     <Compile Include="src\util\Timer.cs" />
-    <Compile Include="src\SubtitleManager.cs" />
+    <Compile Include="src\sounds\SubtitleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
