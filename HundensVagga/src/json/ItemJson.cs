@@ -30,6 +30,12 @@ namespace HundensVagga {
         [JsonProperty("sound")]
         public string SoundPath { get; set; }
 
+        [JsonProperty("at_start")]
+        public bool AtStart { get; set; }
+
+        [JsonProperty("text")]
+        public string LetterText { get; set; }
+
         public IItem GetItemInstance(ContentManager content) {
             return (Type == null)
                 ? new Item(Name, GetIcon(content))
@@ -41,7 +47,8 @@ namespace HundensVagga {
 
             switch (type) {
                 case SpecialItemEnum.letter:
-                    return new LetterItem(Name, GetIcon(content), GetLetterImage(content));
+                    return new LetterItem(Name, GetIcon(content), GetLetterImage(content),
+                        LetterText);
                 case SpecialItemEnum.sound:
                     return new SoundItem(Name, GetIcon(content), GetSoundEffect(content));
                 default:

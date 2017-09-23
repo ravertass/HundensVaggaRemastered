@@ -65,6 +65,9 @@ namespace HundensVagga {
         [JsonProperty("without_inventory")]
         public bool WithoutInventory { get; set; }
 
+        [JsonProperty("is_start_room")]
+        public bool IsStartRoom { get; set; }
+
         public Room GetRoomInstance(ContentManager content, Assets assets,
                 StateOfTheWorld worldState, SongManager songManager) {
             Song song = GetSong(assets.Songs);

@@ -9,9 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HundensVagga {
     internal class LetterItem : Item, IItem {
         private readonly Texture2D letterImage;
+        private readonly string letterText;
 
-        public LetterItem(string name, Texture2D icon, Texture2D letterImage) : base(name, icon) {
+        public LetterItem(string name, Texture2D icon, Texture2D letterImage, string letterText)
+                : base(name, icon) {
             this.letterImage = letterImage;
+            this.letterText = letterText;
         }
         
         public override bool HasEffect() {
@@ -19,7 +22,7 @@ namespace HundensVagga {
         }
 
         public override IGameState GetItemState(GameManager mainGameState) {
-            return new LetterItemState(mainGameState, letterImage);
+            return new LetterItemState(mainGameState, letterImage, letterText);
         }
     }
 }

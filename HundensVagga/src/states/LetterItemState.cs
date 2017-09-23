@@ -11,16 +11,27 @@ namespace HundensVagga {
         private GameManager gameManager;
         private Texture2D letterImage;
 
-        public LetterItemState(GameManager gameManager, Texture2D letterImage) {
+        private SoundAndSubtitleManager soundAndSubtitleManager;
+
+        public LetterItemState(GameManager gameManager, Texture2D letterImage, string letterText) {
             this.gameManager = gameManager;
             this.letterImage = letterImage;
+
+            soundAndSubtitleManager = gameManager.SoundAndSubtitleManager;
+            PrintText(letterText);
+        }
+
+        private void PrintText(string letterText) {
+            soundAndSubtitleManager.PlayAndPrint(new SoundAndSubtitle(null, letterText));
         }
 
         public void Update(InputManager inputManager, GameTime gameTime) {
             gameManager.CursorManager.SetToClick();
 
-            if (inputManager.IsLeftButtonPressed())
+            if (inputManager.IsLeftButtonPressed()) {
+                soundAndSubtitleManager.Stop();
                 gameManager.GameStateManager.PopState();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {

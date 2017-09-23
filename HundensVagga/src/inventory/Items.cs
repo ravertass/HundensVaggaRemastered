@@ -19,8 +19,9 @@ namespace HundensVagga {
 
         public Items(string path, ContentManager content, Inventory inventory) {
             List<ItemJson> itemsJson = DeserializeItemsJson(path);
-            AddRoomsFromJsonToMap(content, itemsJson);
+            AddItemsFromJsonToMap(content, itemsJson);
             this.inventory = inventory;
+            AddStartItemsToInventory(itemsJson);
         }
 
         private static List<ItemJson> DeserializeItemsJson(string path) {
@@ -28,7 +29,7 @@ namespace HundensVagga {
             return JsonConvert.DeserializeObject<List<ItemJson>>(jsonString);
         }
 
-        private void AddRoomsFromJsonToMap(ContentManager content, List<ItemJson> itemsJson) {
+        private void AddItemsFromJsonToMap(ContentManager content, List<ItemJson> itemsJson) {
             StateOfTheWorld worldState = new StateOfTheWorld();
             foreach (ItemJson itemJson in itemsJson) {
                 itemsMap.Add(itemJson.Name, itemJson.GetItemInstance(content));
@@ -39,5 +40,11 @@ namespace HundensVagga {
             return itemsMap[itemName];
         }
 
+        private void AddStartItemsToInventory(List<ItemJson> itemsJson) {
+            foreach (ItemJson itemJson in itemsJson) {
+                if (itemJson.AtStart)
+                    inventory.AddItem(itemsMap[itemJson.Name]);
+            }
+        }
     }
 }

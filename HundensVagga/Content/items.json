@@ -18,7 +18,9 @@
   "name": "letter",
   "icon": "letter",
   "type": "letter",
-  "image": "letter"
+  "image": "letter",
+  "text": "I know all about your experiments. \n Come to Clock Road 10. Come alone. \n Novikov.",
+  "at_start": true
 },
 {
   "name": "mainkey",

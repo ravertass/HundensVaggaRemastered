@@ -7,6 +7,7 @@
   "exit": "menu_fadein",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState",
+  "is_start_room": true
 },
 // Main menu
 {
