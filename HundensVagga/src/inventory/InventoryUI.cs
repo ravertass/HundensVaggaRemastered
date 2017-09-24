@@ -26,15 +26,24 @@ namespace HundensVagga {
 
         private Texture2D bagTexture;
         private Texture2D backgroundTexture;
-        private Texture2D exitIconTexture;
 
-        public InventoryUI(MiscContent miscContent) {
+        private Texture2D exitIconTexture;
+        private Texture2D subtitlesOnIconTexture;
+        private Texture2D subtitlesOffIconTexture;
+
+        private WorldStateVariable subtitlesOn;
+
+        public InventoryUI(MiscContent miscContent, WorldStateVariable subtitlesOn) {
+            this.subtitlesOn = subtitlesOn;
+
             Y = Y_MIN;
             State = new InventoryUIStill();
 
             bagTexture = miscContent.InventoryBagImage;
             backgroundTexture = miscContent.InventoryBackgroundImage;
             exitIconTexture = miscContent.ExitIconImage;
+            subtitlesOnIconTexture = miscContent.SubtitlesOnIconImage;
+            subtitlesOffIconTexture = miscContent.SubtitlesOffIconImage;
         }
 
         public Rectangle BagRectangle() {
@@ -46,9 +55,15 @@ namespace HundensVagga {
         }
 
         public Rectangle ExitIconRectangle() {
-            return new Rectangle(Inventory.EXIT_ICON_X, 
-                Y + (BAG_Y_OFFSET - exitIconTexture.Height)/2,
+            return new Rectangle(Inventory.ICON_X,
+                Y + ((int)(BAG_Y_OFFSET * 3/4) - exitIconTexture.Height)/2,
                 exitIconTexture.Width, exitIconTexture.Height);
+        }
+
+        public Rectangle SubtitlesIconRectangle() {
+            return new Rectangle(Inventory.ICON_X,
+                Y + ((int)(BAG_Y_OFFSET * 5/4) - subtitlesOnIconTexture.Height) / 2,
+                subtitlesOnIconTexture.Width, subtitlesOnIconTexture.Height);
         }
 
         public bool IsUp() {
@@ -76,6 +91,7 @@ namespace HundensVagga {
                 spriteBatch.Draw(backgroundTexture, new Vector2(X, Y), Color.White);
                 DrawItems(spriteBatch, items);
                 DrawExitIcon(spriteBatch);
+                DrawSubtitlesIcon(spriteBatch);
                 DrawUpperBorder(spriteBatch);
             }
             DrawBag(spriteBatch);
@@ -90,6 +106,13 @@ namespace HundensVagga {
 
         private void DrawExitIcon(SpriteBatch spriteBatch) {
             spriteBatch.Draw(exitIconTexture, ExitIconRectangle(), Color.White);
+        }
+
+        private void DrawSubtitlesIcon(SpriteBatch spriteBatch) {
+            Texture2D subtitlesIconTexture = (subtitlesOn.Value)
+                                             ? subtitlesOnIconTexture
+                                             : subtitlesOffIconTexture;
+            spriteBatch.Draw(subtitlesIconTexture, SubtitlesIconRectangle(), Color.White);
         }
 
         private void DrawUpperBorder(SpriteBatch spriteBatch) {

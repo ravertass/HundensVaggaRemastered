@@ -2,6 +2,8 @@
   "inventory_bag_image": "bag",
   "inventory_background_image": "inventory",
   "exit_icon_image": "exit_icon",
+  "subtitles_on_icon_image": "subtitles_on_icon",
+  "subtitles_off_icon_image": "subtitles_off_icon",
 
   "exit_menu_image": "exit_menu",
   "exit_menu_yes": {

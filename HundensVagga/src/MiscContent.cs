@@ -21,9 +21,20 @@ namespace HundensVagga {
         public Texture2D InventoryBackgroundImage {
             get { return inventoryBackgroundImage; }
         }
+
         private Texture2D exitIconImage;
         public Texture2D ExitIconImage {
             get { return exitIconImage; }
+        }
+
+        private Texture2D subtitlesOnIconImage;
+        public Texture2D SubtitlesOnIconImage {
+            get { return subtitlesOnIconImage; }
+        }
+
+        private Texture2D subtitlesOffIconImage;
+        public Texture2D SubtitlesOffIconImage {
+            get { return subtitlesOffIconImage; }
         }
 
         private Texture2D exitMenuImage;
@@ -57,7 +68,10 @@ namespace HundensVagga {
         private void InitializeData(MiscContentJson json, ContentManager content) {
             inventoryBagImage = json.GetInventoryBagImage(content);
             inventoryBackgroundImage = json.GetInventoryBackgroundImage(content);
+
             exitIconImage = json.GetExitIconImage(content);
+            subtitlesOnIconImage = json.GetSubtitlesOnIconImage(content);
+            subtitlesOffIconImage = json.GetSubtitlesOffIconImage(content);
 
             exitMenuImage = json.GetExitMenuImage(content);
             exitMenuYesRect = json.ExitMenuYesRect.GetInstance();

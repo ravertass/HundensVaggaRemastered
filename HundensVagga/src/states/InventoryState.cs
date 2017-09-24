@@ -25,10 +25,11 @@ namespace HundensVagga {
         }
 
         private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
-            if (gameManager.Inventory.IsCursorOnExitIcon(inputManager))
+            if (gameManager.Inventory.IsCursorOnAnIcon(inputManager))
                 gameManager.CursorManager.SetToClick();
             if (gameManager.Inventory.IsExitIconClicked(inputManager))
                 gameManager.GameStateManager.CurrentState = new ExitMenuState(gameManager);
+            gameManager.Inventory.HandleSubtitlesIconClicks(inputManager);
         }
 
         private void CheckOutsideOfInventory(InputManager inputManager, Inventory inventory) {

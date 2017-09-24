@@ -16,8 +16,13 @@ namespace HundensVagga {
         public string InventoryBagImagePath { get; set; }
         [JsonProperty("inventory_background_image")]
         public string InventoryBackgroundImagePath { get; set; }
+
         [JsonProperty("exit_icon_image")]
         public string ExitIconImagePath { get; set; }
+        [JsonProperty("subtitles_on_icon_image")]
+        public string SubtitlesOnIconImagePath { get; set; }
+        [JsonProperty("subtitles_off_icon_image")]
+        public string SubtitlesOffIconImagePath { get; set; }
 
         [JsonProperty("exit_menu_image")]
         public string ExitMenuImagePath { get; set; }
@@ -41,6 +46,14 @@ namespace HundensVagga {
             return GetImage(content, ExitIconImagePath);
         }
 
+        public Texture2D GetSubtitlesOnIconImage(ContentManager content) {
+            return GetImage(content, SubtitlesOnIconImagePath);
+        }
+
+        public Texture2D GetSubtitlesOffIconImage(ContentManager content) {
+            return GetImage(content, SubtitlesOffIconImagePath);
+        }
+
         public Texture2D GetExitMenuImage(ContentManager content) {
             return GetImage(content, ExitMenuImagePath);
         }
@@ -56,10 +69,6 @@ namespace HundensVagga {
         private SoundEffectInstance GetSoundEffect(ContentManager content, string soundPath) {
             return content.Load<SoundEffect>(Main.SOUND_EFFECTS_DIR + 
                 Path.DirectorySeparatorChar + soundPath).CreateInstance();
-        }
-
-        private Song GetSong(ContentManager content, string songPath) {
-            return content.Load<Song>(Main.SONGS_DIR + Path.DirectorySeparatorChar + songPath);
         }
     }
 }

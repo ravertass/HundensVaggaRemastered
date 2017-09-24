@@ -13,18 +13,21 @@ namespace HundensVagga {
     /// UI-related stuff to an InventoryUI instance.
     /// </summary>
     internal class Inventory {
-        public const int EXIT_ICON_X = 16;
+        public const int ICON_X = 10;
 
-        private const int ITEM_X_OFFSET = EXIT_ICON_X + 32;
+        private const int ITEM_X_OFFSET = ICON_X + 32;
         private const int ITEM_X_DIFF = 64;
         public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;
         private IList<IItem> items;
 
-        public Inventory(MiscContent miscContent) {
-            ui = new InventoryUI(miscContent);
+        private WorldStateVariable subtitlesOn;
+
+        public Inventory(MiscContent miscContent, WorldStateVariable subtitlesOn) {
+            ui = new InventoryUI(miscContent, subtitlesOn);
             items = new List<IItem>();
+            this.subtitlesOn = subtitlesOn;
         }
 
         public void AddItem(IItem item) {
@@ -82,8 +85,26 @@ namespace HundensVagga {
                 && IsCursorOnExitIcon(inputManager);
         }
 
+        internal void HandleSubtitlesIconClicks(InputManager inputManager) {
+            if (IsSubtitlesIconClicked(inputManager))
+                subtitlesOn.Value = !subtitlesOn.Value;
+        }
+
+        private bool IsSubtitlesIconClicked(InputManager inputManager) {
+            return ui.IsDown() && inputManager.IsLeftButtonPressed()
+                && IsCursorOnSubtitlesIcon(inputManager);
+        }
+
+        public bool IsCursorOnAnIcon(InputManager inputManager) {
+            return IsCursorOnExitIcon(inputManager) || IsCursorOnSubtitlesIcon(inputManager);
+        }
+
         public bool IsCursorOnExitIcon(InputManager inputManager) {
             return ui.ExitIconRectangle().Contains(inputManager.GetMousePosition());
+        }
+
+        public bool IsCursorOnSubtitlesIcon(InputManager inputManager) {
+            return ui.SubtitlesIconRectangle().Contains(inputManager.GetMousePosition());
         }
 
         public void GoUp() {
