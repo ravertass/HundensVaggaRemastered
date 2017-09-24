@@ -18,6 +18,20 @@
   "exit": "menu",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState",
+  "interactables": [
+    {
+      "x": 417,
+      "y": 461,
+      "image": "subtitles_on",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}],
+    },
+    {
+      "x": 417,
+      "y": 461,
+      "image": "subtitles_off",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": false}],
+    },
+  ]
 },
 {
   "name": "menu",
@@ -31,6 +45,7 @@
       "width": 395,
       "height": 65,
       "click": {"exit": "intro_talk"},
+      "hover": {"sound": "start_game"}
     },
     {
       "x": 250,
@@ -38,7 +53,46 @@
       "width": 270,
       "height": 65,
       "click": {"exit": "QUIT_GAME"},
-    }
+      "hover": {"sound": "exit_game"}
+    },
+    {
+      "x": 305,
+      "y": 455,
+      "width": 112,
+      "height": 35,
+      "click": {"vars": [{"var": "SUBTITLES_ON", "val": false}]},
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}],
+    },
+    {
+      "x": 305,
+      "y": 455,
+      "width": 112,
+      "height": 35,
+      "click": {"var": "SUBTITLES_ON"},
+      "prereqs": [{"var": "SUBTITLES_ON", "val": false}],
+    },
+    {
+      "x": 417,
+      "y": 461,
+      "image": "subtitles_on",
+      "click": {"vars": [{"var": "SUBTITLES_ON", "val": false}]},
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}],
+    },
+    {
+      "x": 417,
+      "y": 461,
+      "image": "subtitles_off",
+      "click": {"var": "SUBTITLES_ON"},
+      "prereqs": [{"var": "SUBTITLES_ON", "val": false}]
+    },
+    {
+      "x": 90,
+      "y": 520,
+      "width": 610,
+      "height": 40,
+      "hover": {"sound": "made_by"},
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
+    },
   ]
 },
 // Intro

@@ -26,6 +26,8 @@ namespace HundensVagga {
 
         [JsonProperty("exit_menu_image")]
         public string ExitMenuImagePath { get; set; }
+        [JsonProperty("exit_game_text")]
+        public RectJson ExitGameTextRect { get; set; }
         [JsonProperty("exit_menu_yes")]
         public RectJson ExitMenuYesRect { get; set; }
         [JsonProperty("exit_menu_no")]

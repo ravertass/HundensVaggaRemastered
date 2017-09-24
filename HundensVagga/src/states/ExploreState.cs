@@ -61,6 +61,7 @@ namespace HundensVagga {
                 gameManager.CurrentRoom.GetInteractableAt(inputManager.GetMousePosition());
             if (interactable != null) {
                 ChangeCursorInteractable(interactable);
+                Hover(interactable);
                 HandleClicksInteractable(inputManager, interactable);
             }
         }
@@ -89,6 +90,10 @@ namespace HundensVagga {
 
         protected virtual void ClickAt(Interactable interactable) {
             interactable.ClickAt(gameManager);
+        }
+
+        protected virtual void Hover(Interactable interactable) {
+            interactable.Hover(gameManager);
         }
 
         private void LookAt(Interactable interactable) {

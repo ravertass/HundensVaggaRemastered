@@ -22,18 +22,21 @@ namespace HundensVagga {
 
         private readonly IEffect useEffect;
         private readonly IEffect clickEffect;
+        private readonly IEffect hoverEffect;
         private IDictionary<string, IEffect> itemEffects;
 
         private IList<VarVal> prereqs;
         private readonly Texture2D texture;
 
         public Interactable(Rectangle rectangle, SoundAndSubtitle lookSoundAndSubtitle,
-                IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
-                IList<VarVal> prereqs, Texture2D texture = null) {
+                IEffect useEffect, IEffect clickEffect, IEffect hoverEffect,
+                IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+                Texture2D texture = null) {
             this.rectangle = rectangle;
             this.lookSoundAndSubtitle = lookSoundAndSubtitle;
             this.useEffect = useEffect;
             this.clickEffect = clickEffect;
+            this.hoverEffect = hoverEffect;
             this.itemEffects = itemEffects;
             this.prereqs = prereqs;
             this.texture = texture;
@@ -47,7 +50,12 @@ namespace HundensVagga {
         }
 
         public bool IsInteractive() {
-            return IsClickable() || IsLookable() || IsUsable() || itemEffects.Count > 0;
+            return IsHoverable() || IsClickable() || IsLookable() || IsUsable()
+                || itemEffects.Count > 0;
+        }
+
+        public bool IsHoverable() {
+            return hoverEffect != null;
         }
 
         public bool IsClickable() {
@@ -68,6 +76,11 @@ namespace HundensVagga {
 
         public void Use(GameManager mainGameState) {
             useEffect.Perform(mainGameState);
+        }
+
+        public void Hover(GameManager mainGameState) {
+            if (IsHoverable())
+                hoverEffect.Perform(mainGameState);
         }
 
         public bool IsItemUsable(IItem item) {

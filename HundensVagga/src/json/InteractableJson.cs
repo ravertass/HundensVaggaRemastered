@@ -42,6 +42,9 @@ namespace HundensVagga {
         [JsonProperty("click")]
         public EffectJson Click { get; set; }
 
+        [JsonProperty("hover")]
+        public EffectJson Hover { get; set; }
+
         [JsonProperty("items")]
         public List<ItemEffectJson> ItemEffects { get; set; }
 
@@ -59,6 +62,7 @@ namespace HundensVagga {
             SoundAndSubtitle lookSoundAndSubtitle = GetLookSoundAndSubtitle(content, assets);
             IEffect useEffect = GetEffect(Use, content, assets, worldState, songManager);
             IEffect clickEffect = GetEffect(Click, content, assets, worldState, songManager);
+            IEffect hoverEffect = GetEffect(Hover, content, assets, worldState, songManager);
 
             Trace.Assert(!(clickEffect != null &&
                 (lookSoundAndSubtitle != null || useEffect != null)),
@@ -70,8 +74,8 @@ namespace HundensVagga {
             Texture2D texture = GetTexture(content);
             Rectangle rect = GetRectangle(texture);
 
-            return GetInteractable(rect, lookSoundAndSubtitle, useEffect, clickEffect, itemEffects,
-                prereqs, texture);
+            return GetInteractable(rect, lookSoundAndSubtitle, useEffect, clickEffect, hoverEffect,
+                itemEffects, prereqs, texture);
         }
 
         private SoundAndSubtitle GetLookSoundAndSubtitle(ContentManager content, Assets assets) {
@@ -126,27 +130,28 @@ namespace HundensVagga {
         }
 
         private Interactable GetInteractable(Rectangle rect, SoundAndSubtitle lookSoundAndSubtitle,
-            IEffect useEffect, IEffect clickEffect, IDictionary<string, IEffect> itemEffects,
-            IList<VarVal> prereqs, Texture2D texture) {
+                IEffect useEffect, IEffect clickEffect, IEffect hoverEffect,
+                IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
+                Texture2D texture) {
             if (SpecialType != null)
                 return GetSpecialInteractable(rect, lookSoundAndSubtitle, useEffect, clickEffect,
-                    itemEffects, prereqs, texture);
+                    hoverEffect, itemEffects, prereqs, texture);
 
             return new Interactable(rect, lookSoundAndSubtitle, useEffect, clickEffect,
-                itemEffects, prereqs, texture);
+                hoverEffect, itemEffects, prereqs, texture);
         }
 
         private Interactable GetSpecialInteractable(Rectangle rect,
                 SoundAndSubtitle lookSoundAndSubtitle, IEffect useEffect, IEffect clickEffect,
-                IDictionary<string, IEffect> itemEffects, IList<VarVal> prereqs,
-                Texture2D texture) {
+                IEffect hoverEffect, IDictionary<string, IEffect> itemEffects,
+                IList<VarVal> prereqs, Texture2D texture) {
             SpecialInteractableEnum type = 
                 (SpecialInteractableEnum)Enum.Parse(typeof(SpecialInteractableEnum), SpecialType);
 
             switch (type) {
                 case SpecialInteractableEnum.telephone:
                     return new TelephoneInteractable(rect, lookSoundAndSubtitle, useEffect,
-                        clickEffect,  itemEffects, prereqs, Number, texture);
+                        clickEffect, hoverEffect, itemEffects, prereqs, Number, texture);
                 default:
                     throw new TypeLoadException("No such interactable: " + SpecialType);
             }

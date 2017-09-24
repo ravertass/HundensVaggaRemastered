@@ -41,6 +41,10 @@ namespace HundensVagga {
         public Texture2D ExitMenuImage {
             get { return exitMenuImage; }
         }
+        private Rectangle exitGameRect;
+        public Rectangle ExitGameTextRect {
+            get { return exitGameRect; }
+        }
         private Rectangle exitMenuYesRect;
         public Rectangle ExitMenuYesRect {
             get { return exitMenuYesRect; }
@@ -74,6 +78,7 @@ namespace HundensVagga {
             subtitlesOffIconImage = json.GetSubtitlesOffIconImage(content);
 
             exitMenuImage = json.GetExitMenuImage(content);
+            exitGameRect = json.ExitGameTextRect.GetInstance();
             exitMenuYesRect = json.ExitMenuYesRect.GetInstance();
             exitMenuNoRect = json.ExitMenuNoRect.GetInstance();
 

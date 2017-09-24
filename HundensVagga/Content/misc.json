@@ -6,6 +6,12 @@
   "subtitles_off_icon_image": "subtitles_off_icon",
 
   "exit_menu_image": "exit_menu",
+  "exit_game_text": {
+    "x": 90,
+    "y": 90,
+    "width": 240,
+    "height": 50
+  },
   "exit_menu_yes": {
     "x": 100,
     "y": 175,
