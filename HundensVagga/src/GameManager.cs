@@ -122,6 +122,9 @@ namespace HundensVagga {
                 case SpecialRoomNames.QUIT_GAME:
                     ExitGame();
                     return;
+                case SpecialRoomNames.LOAD_GAME:
+                    saveGameManager.LoadGame(this);
+                    return;
                 default:
                     throw new InvalidOperationException("Unknown special room name: " + roomName);
             }

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace HundensVagga {
     internal enum SpecialRoomNames {
-        QUIT_GAME
+        QUIT_GAME, LOAD_GAME
     }
 }

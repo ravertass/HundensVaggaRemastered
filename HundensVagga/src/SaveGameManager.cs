@@ -23,12 +23,40 @@ namespace HundensVagga {
             this.worldState = worldState;
         }
 
-        public void SaveGame(Room currentRoom) {
+        public void SaveGame(GameManager gameManager) {
             string saveFilePath = Path.Combine(Directory.GetCurrentDirectory(), SAVE_FILE_NAME);
-            File.WriteAllText(saveFilePath, SerializeGameState(currentRoom.Name));
+            File.WriteAllText(saveFilePath, SerializeGameState(gameManager.CurrentRoom.Name));
+
+            string gameSavedText =
+                    gameManager.SubtitleManager.SubtitlesOn.Value ? "Game saved!"
+                                                                  : "Spel sparat!";
+            gameManager.SubtitleManager.Print(gameSavedText, 5);
         }
 
         public LoadGameStatus LoadGame(GameManager gameManager) {
+            LoadGameStatus loadGameStatus = TryToLoadGame(gameManager);
+
+            if (loadGameStatus == LoadGameStatus.SUCCESS) {
+                string gameLoadedText =
+                    gameManager.SubtitleManager.SubtitlesOn.Value ? "Game loaded!"
+                                                                  : "Spel laddat!";
+                gameManager.SubtitleManager.Print(gameLoadedText, 5);
+            } else if (loadGameStatus == LoadGameStatus.NO_FILE) {
+                string noSaveGameText =
+                    gameManager.SubtitleManager.SubtitlesOn.Value ? "No saved game available!"
+                                                                  : "Ingen sparning tillgänglig!";
+                gameManager.SubtitleManager.Print(noSaveGameText, 5);
+            } else {
+                string failureText =
+                    gameManager.SubtitleManager.SubtitlesOn.Value ? "Loading saved game failed!"
+                                                                  : "Laddandet misslyckades!";
+                gameManager.SubtitleManager.Print(failureText, 5);
+            }
+
+            return loadGameStatus;
+        }
+
+        private LoadGameStatus TryToLoadGame(GameManager gameManager) {
             string saveFilePath = Path.Combine(Directory.GetCurrentDirectory(), SAVE_FILE_NAME);
             if (File.Exists(saveFilePath)) {
                 try {

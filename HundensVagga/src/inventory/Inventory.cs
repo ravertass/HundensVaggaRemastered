@@ -15,7 +15,7 @@ namespace HundensVagga {
     internal class Inventory {
         public const int ICON_X = 8;
 
-        private const int ITEM_X_OFFSET = ICON_X + 56;
+        private const int ITEM_X_OFFSET = ICON_X + 72;
         private const int ITEM_X_DIFF = 64;
         public const int ITEM_Y_OFFSET = 57;
 
