@@ -28,7 +28,7 @@ namespace HundensVagga {
 
             if (soundAndSubtitle.HasSoundEffect())
                 soundEffectManager.Play(soundAndSubtitle.SoundEffect);
-            if (soundAndSubtitle.HasSubtitle())
+            if (soundAndSubtitle.HasSubtitle() && subtitleManager.SubtitlesOn.Value)
                 subtitleManager.Print(soundAndSubtitle.Subtitle, soundAndSubtitle.Duration);
         }
 

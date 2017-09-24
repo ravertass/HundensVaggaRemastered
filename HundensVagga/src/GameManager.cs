@@ -42,6 +42,11 @@ namespace HundensVagga {
             get { return gameStateManager; }
         }
 
+        private SaveGameManager saveGameManager;
+        public SaveGameManager SaveGameManager {
+            get { return saveGameManager; }
+        }
+
         private MiscContent miscContent;
 
         public MiscContent MiscContent {
@@ -67,6 +72,7 @@ namespace HundensVagga {
             songManager = main.SongManager;
             miscContent = main.MiscContent;
             subtitleManager = main.SubtitleManager;
+            saveGameManager = main.SaveGameManager;
             gameStateManager = new GameStateManager();
             soundAndSubtitleManager = new SoundAndSubtitleManager(subtitleManager);
 

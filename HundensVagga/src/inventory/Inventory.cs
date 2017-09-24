@@ -20,42 +20,52 @@ namespace HundensVagga {
         public const int ITEM_Y_OFFSET = 57;
 
         private InventoryUI ui;
-        private IList<IItem> items;
+        public IList<IItem> Items;
 
         private WorldStateVariable subtitlesOn;
 
         public Inventory(MiscContent miscContent, WorldStateVariable subtitlesOn) {
             ui = new InventoryUI(miscContent, subtitlesOn);
-            items = new List<IItem>();
+            Items = new List<IItem>();
             this.subtitlesOn = subtitlesOn;
         }
 
         public void AddItem(IItem item) {
-            items.Add(item);
+            Items.Add(item);
         }
 
         public void RemoveItem(IItem item) {
-            items.Remove(item);
+            Items.Remove(item);
         }
 
         public void Update(InputManager inputManager) {
             ui.Update(inputManager);
         }
 
+        internal bool IsSaveGameIconClicked(InputManager inputManager) {
+            return ui.IsDown() && inputManager.IsLeftButtonPressed()
+                && IsCursorOnSaveGameIcon(inputManager);
+        }
+
+        internal bool IsLoadGameIconClicked(InputManager inputManager) {
+            return ui.IsDown() && inputManager.IsLeftButtonPressed()
+                && IsCursorOnLoadGameIcon(inputManager);
+        }
+
         public void Draw(SpriteBatch spriteBatch) {
-            ui.Draw(spriteBatch, items);
+            ui.Draw(spriteBatch, Items);
         }
 
         public void SetItemCoords() {
             int x = ITEM_X_OFFSET;
-            foreach (Item item in items) {
+            foreach (Item item in Items) {
                 item.Coords = new Vector2(x, ITEM_Y_OFFSET);
                 x += ITEM_X_DIFF;
             }
         }
 
         public IItem GetItemAt(Vector2 coords) {
-            foreach (IItem item in items)
+            foreach (IItem item in Items)
                 if (item.Rectangle.Contains(coords))
                     return item;
 
@@ -101,6 +111,14 @@ namespace HundensVagga {
 
         public bool IsCursorOnExitIcon(InputManager inputManager) {
             return ui.ExitIconRectangle().Contains(inputManager.GetMousePosition());
+        }
+
+        public bool IsCursorOnSaveGameIcon(InputManager inputManager) {
+            return ui.SaveGameIconRectangle().Contains(inputManager.GetMousePosition());
+        }
+
+        public bool IsCursorOnLoadGameIcon(InputManager inputManager) {
+            return ui.LoadGameIconRectangle().Contains(inputManager.GetMousePosition());
         }
 
         public bool IsCursorOnSubtitlesIcon(InputManager inputManager) {

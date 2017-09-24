@@ -19,16 +19,48 @@ namespace HundensVagga {
             Inventory inventory = gameManager.Inventory;
 
             inventory.SetItemCoords();
-            CheckExitIcon(inputManager, inventory);
+            CheckIcons(inputManager, inventory);
             CheckOutsideOfInventory(inputManager, inventory);
             CheckItems(inputManager, inventory);
         }
 
-        private void CheckExitIcon(InputManager inputManager, Inventory inventory) {
+        private void CheckIcons(InputManager inputManager, Inventory inventory) {
             if (gameManager.Inventory.IsCursorOnAnIcon(inputManager))
                 gameManager.CursorManager.SetToClick();
+
             if (gameManager.Inventory.IsExitIconClicked(inputManager))
                 gameManager.GameStateManager.CurrentState = new ExitMenuState(gameManager);
+
+            if (gameManager.Inventory.IsSaveGameIconClicked(inputManager)) {
+                gameManager.SaveGameManager.SaveGame(gameManager.CurrentRoom);
+                string gameSavedText =
+                        gameManager.SubtitleManager.SubtitlesOn.Value ? "Game saved!"
+                                                                      : "Spel sparat!";
+                gameManager.SubtitleManager.Print(gameSavedText, 5);
+            }
+
+            if (gameManager.Inventory.IsLoadGameIconClicked(inputManager)) {
+                LoadGameStatus loadGameStatus = gameManager.SaveGameManager.LoadGame(gameManager);
+                if (loadGameStatus == LoadGameStatus.SUCCESS) {
+                    string gameLoadedText =
+                        gameManager.SubtitleManager.SubtitlesOn.Value ? "Game loaded!"
+                                                                      : "Spel laddat!";
+                    gameManager.SubtitleManager.Print(gameLoadedText, 5);
+                    gameManager.GameStateManager.PushState();
+                    gameManager.GameStateManager.CurrentState = this;
+                } else if (loadGameStatus == LoadGameStatus.NO_FILE) {
+                    string noSaveGameText =
+                        gameManager.SubtitleManager.SubtitlesOn.Value ? "No saved game available!"
+                                                                      : "Ingen sparning tillgänglig!";
+                    gameManager.SubtitleManager.Print(noSaveGameText, 5);
+                } else {
+                    string failureText =
+                        gameManager.SubtitleManager.SubtitlesOn.Value ? "Loading saved game failed!"
+                                                                      : "Laddandet misslyckades!";
+                    gameManager.SubtitleManager.Print(failureText, 5);
+                }
+            }
+
             gameManager.Inventory.HandleSubtitlesIconClicks(inputManager);
         }
 

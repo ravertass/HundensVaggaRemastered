@@ -73,6 +73,11 @@ namespace HundensVagga {
             get { return cursorManager; }
         }
 
+        private SaveGameManager saveGameManager;
+        internal SaveGameManager SaveGameManager {
+            get { return saveGameManager; }
+        }
+
         private SongManager songManager;
         internal SongManager SongManager {
             get { return songManager; }
@@ -134,7 +139,6 @@ namespace HundensVagga {
 
             StateOfTheWorld worldState = new StateOfTheWorld();
             WorldStateVariable subtitlesOn = worldState.Get("SUBTITLES_ON");
-            subtitlesOn.Value = false;
 
             inventory = new Inventory(miscContent, subtitlesOn);
 
@@ -156,6 +160,8 @@ namespace HundensVagga {
             // TODO: Think through how/where this is loaded
             SpriteFont font = Content.Load<SpriteFont>("subtitles");
             subtitleManager = new SubtitleManager(font, subtitlesOn, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+            saveGameManager = new SaveGameManager(items, inventory, worldState);
         }
 
         /// <summary>

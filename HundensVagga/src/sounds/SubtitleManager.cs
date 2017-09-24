@@ -10,6 +10,9 @@ namespace HundensVagga {
     internal class SubtitleManager {
         private readonly SpriteFont font;
         private WorldStateVariable subtitlesOn;
+        public WorldStateVariable SubtitlesOn {
+            get { return subtitlesOn; }
+        }
 
         private IList<SubtitlePage> subtitlePages;
         private int pageIndex;
@@ -35,8 +38,7 @@ namespace HundensVagga {
         }
 
         public void Print(string text, double duration) {
-            if (subtitlesOn.Value)
-                SetSubtitlePages(text, duration);
+            SetSubtitlePages(text, duration);
         }
 
         public bool ShouldPrint() {

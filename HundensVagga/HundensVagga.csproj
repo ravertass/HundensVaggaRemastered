@@ -62,6 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src\Assets.cs" />
+    <Compile Include="src\SaveGameManager.cs" />
     <Compile Include="src\sounds\SoundEffects.cs" />
     <Compile Include="src\sounds\SoundAndSubtitle.cs" />
     <Compile Include="src\sounds\SoundEffectManager.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="src\StateOfTheWorld.cs" />
     <Compile Include="src\states\UseItemState.cs" />
     <Compile Include="src\rooms\cutscenerooms\WalkRoom.cs" />
-    <Compile Include="src\rooms\WorldStateVariable.cs" />
+    <Compile Include="src\WorldStateVariable.cs" />
     <Compile Include="src\sounds\SongManager.cs" />
     <Compile Include="src\sounds\SongManagerState.cs" />
     <Compile Include="src\rooms\SpecialRoomNames.cs" />

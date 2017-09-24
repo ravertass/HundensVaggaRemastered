@@ -11,6 +11,9 @@ namespace HundensVagga {
     /// </summary>
     internal class StateOfTheWorld {
         private IDictionary<string, WorldStateVariable> stateVariables;
+        public IDictionary<string, WorldStateVariable> StateVariables {
+            get { return stateVariables; }
+        }
 
         public StateOfTheWorld() {
             stateVariables = new Dictionary<string, WorldStateVariable>();
@@ -20,6 +23,18 @@ namespace HundensVagga {
             if (!stateVariables.ContainsKey(stateVariableName))
                 stateVariables[stateVariableName] = new WorldStateVariable();
             return stateVariables[stateVariableName];
+        }
+
+        public void Set(string stateVariableName, bool value) {
+            if (!stateVariables.ContainsKey(stateVariableName))
+                stateVariables[stateVariableName] = new WorldStateVariable();
+            stateVariables[stateVariableName].Value = value;
+        }
+
+        public void Replace(StateOfTheWorld other) {
+            foreach (KeyValuePair<string, WorldStateVariable> entry in other.StateVariables) {
+                stateVariables[entry.Key].Value = entry.Value.Value;
+            }
         }
     }
 }
