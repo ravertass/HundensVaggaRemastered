@@ -800,7 +800,8 @@
       "y": 220,
       "width": 425,
       "height": 120,
-      "look": "underwear"
+      "look": "underwear",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -948,7 +949,8 @@
       "y": 345,
       "width": 385,
       "height": 35,
-      "look": "paper"
+      "look": "paper",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -1014,7 +1016,8 @@
       "y": 180,
       "width": 300,
       "height": 270,
-      "look": "postcard"
+      "look": "postcard",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -1107,7 +1110,8 @@
       "y": 110,
       "width": 230,
       "height": 250,
-      "look": "diary_1"
+      "look": "diary_1",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -1147,7 +1151,8 @@
       "y": 120,
       "width": 235,
       "height": 235,
-      "look": "diary_2"
+      "look": "diary_2",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -1179,7 +1184,8 @@
       "y": 120,
       "width": 265,
       "height": 400,
-      "look": "diary_3"
+      "look": "diary_3",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },
@@ -1681,7 +1687,8 @@
       "y": 110,
       "width": 275,
       "height": 310,
-      "look": "diary_lost"
+      "look": "diary_lost",
+      "prereqs": [{"var": "SUBTITLES_ON", "val": true}]
     }
   ]
 },

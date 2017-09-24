@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace HundensVagga {
     internal class SubtitleManager {
         private readonly SpriteFont font;
+        private WorldStateVariable subtitlesOn;
 
         private IList<SubtitlePage> subtitlePages;
         private int pageIndex;
@@ -20,8 +21,10 @@ namespace HundensVagga {
         private readonly int windowWidth;
         private readonly int windowHeight;
 
-        public SubtitleManager(SpriteFont font, int windowWidth, int windowHeight) {
+        public SubtitleManager(SpriteFont font, WorldStateVariable subtitlesOn,
+                int windowWidth, int windowHeight) {
             this.font = font;
+            this.subtitlesOn = subtitlesOn;
             timer = null;
 
             // It would be preferable if we instead got a reference to a "WindowManager"
@@ -32,7 +35,8 @@ namespace HundensVagga {
         }
 
         public void Print(string text, double duration) {
-            SetSubtitlePages(text, duration);
+            if (subtitlesOn.Value)
+                SetSubtitlePages(text, duration);
         }
 
         public bool ShouldPrint() {

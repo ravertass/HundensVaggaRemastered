@@ -121,7 +121,7 @@
     <Compile Include="src\rooms\Room.cs" />
     <Compile Include="src\rooms\Rooms.cs" />
     <Compile Include="src\json\RoomJson.cs" />
-    <Compile Include="src\rooms\StateOfTheWorld.cs" />
+    <Compile Include="src\StateOfTheWorld.cs" />
     <Compile Include="src\states\UseItemState.cs" />
     <Compile Include="src\rooms\cutscenerooms\WalkRoom.cs" />
     <Compile Include="src\rooms\WorldStateVariable.cs" />

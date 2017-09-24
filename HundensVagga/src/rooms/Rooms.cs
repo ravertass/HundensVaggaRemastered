@@ -24,7 +24,11 @@ namespace HundensVagga {
             get { return startRoom; }
         }
 
-        public Rooms(string path, ContentManager content, Assets assets, SongManager songManager) {
+        private StateOfTheWorld worldState;
+
+        public Rooms(string path, ContentManager content, Assets assets, SongManager songManager,
+                StateOfTheWorld worldState) {
+            this.worldState = worldState;
             List<RoomJson> roomsJson = DeserializeRoomsJson(path);
             AddRoomsFromJsonToMap(content, roomsJson, assets, songManager);
             SetStartRoom(roomsJson);
@@ -37,7 +41,6 @@ namespace HundensVagga {
 
         private void AddRoomsFromJsonToMap(ContentManager content, List<RoomJson> roomsJson,
                 Assets assets, SongManager songManager) {
-            StateOfTheWorld worldState = new StateOfTheWorld();
             foreach (RoomJson roomJson in roomsJson)
                 roomsMap.Add(roomJson.Name,
                     roomJson.GetRoomInstance(content, assets, worldState, songManager));

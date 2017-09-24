@@ -17,12 +17,10 @@ namespace HundensVagga {
         public const string INVENTORY_DIR = "inventory";
         public const string INTERACTABLES_DIR = "interactables";
         public const string SONGS_DIR = "songs";
-        public const string VOICE_DIR = "voice";
         public const string SOUND_EFFECTS_DIR = "sound_effects";
         public const string CURSORS_DIR = "cursors";
         public const string MISC_DIR = "misc";
         public const string LETTERS_DIR = "letters";
-        public const string DIALOG_DIR = "dialog";
         public const string LOGOS_DIR = "logos";
 
         public const string ROOMS_JSON_PATH = "rooms.json";
@@ -148,12 +146,16 @@ namespace HundensVagga {
 
             songManager = new SongManager();
 
+            StateOfTheWorld worldState = new StateOfTheWorld();
+
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
-                Content, assets, songManager);
+                Content, assets, songManager, worldState);
 
             // TODO: Think through how/where this is loaded
             SpriteFont font = Content.Load<SpriteFont>("subtitles");
-            subtitleManager = new SubtitleManager(font, WINDOW_WIDTH, WINDOW_HEIGHT);
+            WorldStateVariable subtitlesOn = worldState.Get("SUBTITLES_ON");
+            subtitlesOn.Value = true;
+            subtitleManager = new SubtitleManager(font, subtitlesOn, WINDOW_WIDTH, WINDOW_HEIGHT);
         }
 
         /// <summary>
