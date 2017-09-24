@@ -26,15 +26,21 @@ namespace HundensVagga {
         public Texture2D ExitIconImage {
             get { return exitIconImage; }
         }
-
         private Texture2D subtitlesOnIconImage;
         public Texture2D SubtitlesOnIconImage {
             get { return subtitlesOnIconImage; }
         }
-
         private Texture2D subtitlesOffIconImage;
         public Texture2D SubtitlesOffIconImage {
             get { return subtitlesOffIconImage; }
+        }
+        private Texture2D saveGameIconImage;
+        public Texture2D SaveGameIconImage {
+            get { return saveGameIconImage; }
+        }
+        private Texture2D loadGameIconImage;
+        public Texture2D LoadGameIconImage {
+            get { return loadGameIconImage; }
         }
 
         private Texture2D exitMenuImage;
@@ -76,6 +82,8 @@ namespace HundensVagga {
             exitIconImage = json.GetExitIconImage(content);
             subtitlesOnIconImage = json.GetSubtitlesOnIconImage(content);
             subtitlesOffIconImage = json.GetSubtitlesOffIconImage(content);
+            saveGameIconImage = json.GetSaveGameIconImage(content);
+            loadGameIconImage = json.GetLoadGameIconImage(content);
 
             exitMenuImage = json.GetExitMenuImage(content);
             exitGameRect = json.ExitGameTextRect.GetInstance();

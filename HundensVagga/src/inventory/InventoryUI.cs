@@ -30,6 +30,8 @@ namespace HundensVagga {
         private Texture2D exitIconTexture;
         private Texture2D subtitlesOnIconTexture;
         private Texture2D subtitlesOffIconTexture;
+        private Texture2D saveGameIconTexture;
+        private Texture2D loadGameIconTexture;
 
         private WorldStateVariable subtitlesOn;
 
@@ -41,9 +43,12 @@ namespace HundensVagga {
 
             bagTexture = miscContent.InventoryBagImage;
             backgroundTexture = miscContent.InventoryBackgroundImage;
+
             exitIconTexture = miscContent.ExitIconImage;
             subtitlesOnIconTexture = miscContent.SubtitlesOnIconImage;
             subtitlesOffIconTexture = miscContent.SubtitlesOffIconImage;
+            saveGameIconTexture = miscContent.SaveGameIconImage;
+            loadGameIconTexture = miscContent.LoadGameIconImage;
         }
 
         public Rectangle BagRectangle() {
@@ -64,6 +69,18 @@ namespace HundensVagga {
             return new Rectangle(Inventory.ICON_X,
                 Y + ((int)(BAG_Y_OFFSET * 5/4) - subtitlesOnIconTexture.Height) / 2,
                 subtitlesOnIconTexture.Width, subtitlesOnIconTexture.Height);
+        }
+
+        public Rectangle SaveGameIconRectangle() {
+            return new Rectangle(Inventory.ICON_X + 24,
+                Y + ((int)(BAG_Y_OFFSET * 3/4) - saveGameIconTexture.Height) / 2,
+                saveGameIconTexture.Width, saveGameIconTexture.Height);
+        }
+
+        public Rectangle LoadGameIconRectangle() {
+            return new Rectangle(Inventory.ICON_X + 24,
+                Y + ((int)(BAG_Y_OFFSET * 5/4) - loadGameIconTexture.Height) / 2,
+                loadGameIconTexture.Width, loadGameIconTexture.Height);
         }
 
         public bool IsUp() {
@@ -90,8 +107,7 @@ namespace HundensVagga {
             if (!IsUp()) {
                 spriteBatch.Draw(backgroundTexture, new Vector2(X, Y), Color.White);
                 DrawItems(spriteBatch, items);
-                DrawExitIcon(spriteBatch);
-                DrawSubtitlesIcon(spriteBatch);
+                DrawIcons(spriteBatch);
                 DrawUpperBorder(spriteBatch);
             }
             DrawBag(spriteBatch);
@@ -104,6 +120,13 @@ namespace HundensVagga {
             }
         }
 
+        private void DrawIcons(SpriteBatch spriteBatch) {
+            DrawExitIcon(spriteBatch);
+            DrawSubtitlesIcon(spriteBatch);
+            DrawSaveGameIcon(spriteBatch);
+            DrawLoadGameIcon(spriteBatch);
+        }
+
         private void DrawExitIcon(SpriteBatch spriteBatch) {
             spriteBatch.Draw(exitIconTexture, ExitIconRectangle(), Color.White);
         }
@@ -113,6 +136,14 @@ namespace HundensVagga {
                                              ? subtitlesOnIconTexture
                                              : subtitlesOffIconTexture;
             spriteBatch.Draw(subtitlesIconTexture, SubtitlesIconRectangle(), Color.White);
+        }
+
+        private void DrawSaveGameIcon(SpriteBatch spriteBatch) {
+            spriteBatch.Draw(saveGameIconTexture, SaveGameIconRectangle(), Color.White);
+        }
+
+        private void DrawLoadGameIcon(SpriteBatch spriteBatch) {
+            spriteBatch.Draw(loadGameIconTexture, LoadGameIconRectangle(), Color.White);
         }
 
         private void DrawUpperBorder(SpriteBatch spriteBatch) {

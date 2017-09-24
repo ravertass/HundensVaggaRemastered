@@ -4,6 +4,8 @@
   "exit_icon_image": "exit_icon",
   "subtitles_on_icon_image": "subtitles_on_icon",
   "subtitles_off_icon_image": "subtitles_off_icon",
+  "save_game_icon_image": "save_game_icon",
+  "load_game_icon_image": "load_game_icon",
 
   "exit_menu_image": "exit_menu",
   "exit_game_text": {

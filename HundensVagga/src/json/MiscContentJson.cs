@@ -23,6 +23,10 @@ namespace HundensVagga {
         public string SubtitlesOnIconImagePath { get; set; }
         [JsonProperty("subtitles_off_icon_image")]
         public string SubtitlesOffIconImagePath { get; set; }
+        [JsonProperty("save_game_icon_image")]
+        public string SaveGameIconImagePath { get; set; }
+        [JsonProperty("load_game_icon_image")]
+        public string LoadGameIconImagePath { get; set; }
 
         [JsonProperty("exit_menu_image")]
         public string ExitMenuImagePath { get; set; }
@@ -54,6 +58,14 @@ namespace HundensVagga {
 
         public Texture2D GetSubtitlesOffIconImage(ContentManager content) {
             return GetImage(content, SubtitlesOffIconImagePath);
+        }
+
+        public Texture2D GetSaveGameIconImage(ContentManager content) {
+            return GetImage(content, SaveGameIconImagePath);
+        }
+
+        public Texture2D GetLoadGameIconImage(ContentManager content) {
+            return GetImage(content, LoadGameIconImagePath);
         }
 
         public Texture2D GetExitMenuImage(ContentManager content) {
