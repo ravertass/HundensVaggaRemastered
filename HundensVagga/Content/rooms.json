@@ -56,10 +56,10 @@
       "hover": {"sound": "exit_game"}
     },
     {
-      "x": 245,
-      "y": 270,
-      "width": 265,
-      "height": 45,
+      "x": 230,
+      "y": 260,
+      "width": 305,
+      "height": 60,
       "click": {"exit": "LOAD_GAME"},
       "hover": {"sound": "load_game"}
     },
