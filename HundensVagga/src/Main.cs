@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System;
 
@@ -11,6 +10,8 @@ namespace HundensVagga {
     /// (e.g. if we're in a menu or in the main game) in the stateManager.
     /// </summary>
     public class Main : Game {
+        private static readonly string ERROR_LOG_FILE_NAME = "errors.log";
+
         public const string CONTENT_DIR = "content";
 
         public const string BACKGROUNDS_DIR = "backgrounds";
@@ -157,7 +158,6 @@ namespace HundensVagga {
             rooms = new Rooms(CONTENT_DIR + Path.DirectorySeparatorChar + ROOMS_JSON_PATH,
                 Content, assets, songManager, worldState);
 
-            // TODO: Think through how/where this is loaded
             SpriteFont font = Content.Load<SpriteFont>("subtitles");
             subtitleManager = new SubtitleManager(font, subtitlesOn, WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -178,13 +178,20 @@ namespace HundensVagga {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            // Delegate most update work to the current game state
-            // (e.g. if we're in a menu or in the main game)
-            gameManager.Update(inputManager, gameTime);
-            // But always keep track of input
-            inputManager.Update();
+            try {
+                // Delegate most update work to the current game state
+                // (e.g. if we're in a menu or in the main game)
+                gameManager.Update(inputManager, gameTime);
+                // But always keep track of input
+                inputManager.Update();
 
-            base.Update(gameTime);
+                base.Update(gameTime);
+            } catch (Exception ex) {
+                string errorLogFilePath = Path.Combine(Directory.GetCurrentDirectory(),
+                    ERROR_LOG_FILE_NAME);
+                File.WriteAllText(errorLogFilePath, ex.ToString());
+                Exit();
+            }
         }
 
         /// <summary>
@@ -192,15 +199,22 @@ namespace HundensVagga {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            DrawToRenderTarget();
+            try {
+                DrawToRenderTarget();
 
-            GraphicsDevice.Clear(Color.Black);
+                GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw((Texture2D)renderTarget, renderTargetRect, Color.White);
-            spriteBatch.End();
+                spriteBatch.Begin();
+                spriteBatch.Draw((Texture2D)renderTarget, renderTargetRect, Color.White);
+                spriteBatch.End();
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
+            } catch (Exception ex) {
+                string errorLogFilePath = Path.Combine(Directory.GetCurrentDirectory(),
+                    ERROR_LOG_FILE_NAME);
+                File.WriteAllText(errorLogFilePath, ex.ToString());
+                Exit();
+            }
         }
 
         private void DrawToRenderTarget() {
