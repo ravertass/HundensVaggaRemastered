@@ -14,6 +14,7 @@ namespace HundensVagga {
     /// </summary>
     internal class ExploreState : IGameState {
         protected GameManager gameManager;
+        private Interactable interactableHoveredOver;
 
         public ExploreState(GameManager gameManager) {
             this.gameManager = gameManager;
@@ -93,7 +94,10 @@ namespace HundensVagga {
         }
 
         protected virtual void Hover(Interactable interactable) {
-            interactable.Hover(gameManager);
+            if (interactableHoveredOver != interactable) {
+                interactableHoveredOver = interactable;
+                interactable.Hover(gameManager);
+            }
         }
 
         private void LookAt(Interactable interactable) {
