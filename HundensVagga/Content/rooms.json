@@ -2027,7 +2027,7 @@
   "type": "walk",
   "backgrounds_dir": "credits",
   "time": 20,
-  "backgrounds": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  "backgrounds": ["1", "2", "3", "4", "5", "6", "6,5", "7", "8", "9"],
   "exit": "end_of_credits",
   "without_inventory": true,
   "state": "HundensVagga.CutsceneState"
