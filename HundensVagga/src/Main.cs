@@ -239,21 +239,19 @@ namespace HundensVagga {
             renderTargetRect = RenderTargetFullScreenRect();
             graphics.PreferredBackBufferWidth = fullScreenWidth;
             graphics.PreferredBackBufferHeight = fullScreenHeight;
+            graphics.ApplyChanges();
             Window.IsBorderless = true;
             Window.Position = new Point(0, 0);
-
-            graphics.ApplyChanges();
         }
 
         private void SetToWindowed() {
             renderTargetRect = RenderTargetWindowRect();
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.ApplyChanges();
             Window.IsBorderless = false;
             Window.Position = new Point((fullScreenWidth - WINDOW_WIDTH) / 2,
                                         (fullScreenHeight - WINDOW_HEIGHT) / 2);
-
-            graphics.ApplyChanges();
         }
 
         private Rectangle RenderTargetFullScreenRect() {
